@@ -6,8 +6,6 @@ spring:
       path: /h2-console
   datasource:
     url: jdbc:h2:file:~/testdb
-
-mybatis:
-  mapper-locations:
-    - classpath:mapper/*.xml
-    - classpath*:com/**/mapper/*.xml
+    username: sa
+    password:
+    driverClassName: org.h2.Driver

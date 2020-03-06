@@ -10,11 +10,11 @@ public interface BrandService {
 
     int createBrand(Brand brand);
 
-    int updateBrand(Long id, Brand brand);
+    int updateBrand(int id, Brand brand);
 
-    int deleteBrand(Long id);
+    void deleteBrand(int id);
 
     List<Brand> listBrand(int pageNum, int pageSize);
 
-    Brand getBrand(Long id);
+    Brand getBrand(int id);
 }

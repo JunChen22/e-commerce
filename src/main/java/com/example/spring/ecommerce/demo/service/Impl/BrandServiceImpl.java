@@ -1,31 +1,40 @@
 package com.example.spring.ecommerce.demo.service.Impl;
 
+import com.example.spring.ecommerce.demo.mapper.BrandMapper;
 import com.example.spring.ecommerce.demo.model.Brand;
 import com.example.spring.ecommerce.demo.service.BrandService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class BrandServiceImpl implements BrandService {
+
+    @Autowired
+    BrandMapper brandMapper;
+
     @Override
     public List<Brand> listAllBrand() {
-        return null;
+        return brandMapper.findAll();
     }
 
     @Override
     public int createBrand(Brand brand) {
-        return 0;
+        brandMapper.saveBrand(brand);
+        return 1;
     }
 
     @Override
-    public int updateBrand(Long id, Brand brand) {
-        return 0;
+    public int updateBrand(int id, Brand brand) {
+        brand.setId(id);
+        brandMapper.updateBrand(brand);
+        return 1;
     }
 
     @Override
-    public int deleteBrand(Long id) {
-        return 0;
+    public void deleteBrand(int id) {
+        brandMapper.deleteBrand(id);
     }
 
     @Override
@@ -34,7 +43,7 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public Brand getBrand(Long id) {
-        return null;
+    public Brand getBrand(int id) {
+        return brandMapper.findById(id);
     }
 }

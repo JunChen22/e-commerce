@@ -1,13 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.example.spring.ecommerce.demo.mapper.BrandMapper">
-    <resultMap id="BaseResultMap" type="com.example.spring.ecommerce.demo.model.Brand">
-        <id column="id" jdbcType="BIGINT" property="id" />
-        <result column="name" jdbcType="TEXT" property="name" />
-        <result column="category" jdbcType="TEXT" property="category" />
+
+    <resultMap type="brand" id="result">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="category" column="category" />
     </resultMap>
-    <insert id="insert" parameterType="com.macro.mall.tiny.mbg.model.PmsBrand">
-        insert into brand (name, category)
-        values (#{name,jdbcType=TEXT}, #{category,jdbcType=TEXT})
-    </insert>
+
+    <select id="findAll" resultType="brand" resultMap="result">
+        SELECT * FROM brand
+    </select>
+
+    <select id="findById" resultType="brand" resultMap="result">
+        SELECT * FROM brand WHERE id = #{id}
+    </select>
+
+    <select id="insert" resultType="brand" resultMap="result">
+        INSERT INTO brand(id, name, category)
+        VALUES (#{id}, #{name}, #{category});
+    </select>
+
+    <select id="update" resultType="brand" resultMap="result">
+        UPDATE brand SET name = #{name}, category = #{category}
+        WHERE id = #{id}
+    </select>
+
+    <select id="delete" resultType="brand" resultMap="result">
+        DELETE FROM brand WHERE id = #{id}
+    </select>
 </mapper>
