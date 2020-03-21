@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.spring.ecommerce.demo.springecommerce.mbg.mapper.ProductChangeLogMapper">
+  <resultMap id="BaseResultMap" type="com.example.spring.ecommerce.demo.springecommerce.mbg.model.ProductChangeLog">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="product_id" jdbcType="VARCHAR" property="productId" />
+    <result column="price_old" jdbcType="VARCHAR" property="priceOld" />
+    <result column="price_new" jdbcType="VARCHAR" property="priceNew" />
+    <result column="unit_old" jdbcType="VARCHAR" property="unitOld" />
+    <result column="unit_new" jdbcType="VARCHAR" property="unitNew" />
+    <result column="operate_man" jdbcType="VARCHAR" property="operateMan" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, product_id, price_old, price_new, unit_old, unit_new, operate_man, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.ProductChangeLogExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from product_change_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.ProductChangeLogExample">
+    delete from product_change_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.ProductChangeLog" useGeneratedKeys="true">
+    insert into product_change_log (product_id, price_old, price_new, 
+      unit_old, unit_new, operate_man, 
+      create_time)
+    values (#{productId,jdbcType=VARCHAR}, #{priceOld,jdbcType=VARCHAR}, #{priceNew,jdbcType=VARCHAR}, 
+      #{unitOld,jdbcType=VARCHAR}, #{unitNew,jdbcType=VARCHAR}, #{operateMan,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.ProductChangeLog" useGeneratedKeys="true">
+    insert into product_change_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="priceOld != null">
+        price_old,
+      </if>
+      <if test="priceNew != null">
+        price_new,
+      </if>
+      <if test="unitOld != null">
+        unit_old,
+      </if>
+      <if test="unitNew != null">
+        unit_new,
+      </if>
+      <if test="operateMan != null">
+        operate_man,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="priceOld != null">
+        #{priceOld,jdbcType=VARCHAR},
+      </if>
+      <if test="priceNew != null">
+        #{priceNew,jdbcType=VARCHAR},
+      </if>
+      <if test="unitOld != null">
+        #{unitOld,jdbcType=VARCHAR},
+      </if>
+      <if test="unitNew != null">
+        #{unitNew,jdbcType=VARCHAR},
+      </if>
+      <if test="operateMan != null">
+        #{operateMan,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.ProductChangeLogExample" resultType="java.lang.Long">
+    select count(*) from product_change_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update product_change_log
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productId != null">
+        product_id = #{record.productId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceOld != null">
+        price_old = #{record.priceOld,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priceNew != null">
+        price_new = #{record.priceNew,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitOld != null">
+        unit_old = #{record.unitOld,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitNew != null">
+        unit_new = #{record.unitNew,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operateMan != null">
+        operate_man = #{record.operateMan,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update product_change_log
+    set id = #{record.id,jdbcType=VARCHAR},
+      product_id = #{record.productId,jdbcType=VARCHAR},
+      price_old = #{record.priceOld,jdbcType=VARCHAR},
+      price_new = #{record.priceNew,jdbcType=VARCHAR},
+      unit_old = #{record.unitOld,jdbcType=VARCHAR},
+      unit_new = #{record.unitNew,jdbcType=VARCHAR},
+      operate_man = #{record.operateMan,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

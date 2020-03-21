@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.spring.ecommerce.demo.springecommerce.mbg.mapper.CommentMapper">
+  <resultMap id="BaseResultMap" type="com.example.spring.ecommerce.demo.springecommerce.mbg.model.Comment">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="product_id" jdbcType="VARCHAR" property="productId" />
+    <result column="member_name" jdbcType="VARCHAR" property="memberName" />
+    <result column="member_icon" jdbcType="VARCHAR" property="memberIcon" />
+    <result column="star" jdbcType="VARCHAR" property="star" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="tittle" jdbcType="VARCHAR" property="tittle" />
+    <result column="likes" jdbcType="VARCHAR" property="likes" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="pictures" jdbcType="VARCHAR" property="pictures" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, product_id, member_name, member_icon, star, create_time, tittle, likes, content, 
+    pictures
+  </sql>
+  <select id="selectByExample" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.CommentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from comment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.CommentExample">
+    delete from comment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.Comment" useGeneratedKeys="true">
+    insert into comment (product_id, member_name, member_icon, 
+      star, create_time, tittle, 
+      likes, content, pictures
+      )
+    values (#{productId,jdbcType=VARCHAR}, #{memberName,jdbcType=VARCHAR}, #{memberIcon,jdbcType=VARCHAR}, 
+      #{star,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{tittle,jdbcType=VARCHAR}, 
+      #{likes,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{pictures,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.Comment" useGeneratedKeys="true">
+    insert into comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="memberName != null">
+        member_name,
+      </if>
+      <if test="memberIcon != null">
+        member_icon,
+      </if>
+      <if test="star != null">
+        star,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="tittle != null">
+        tittle,
+      </if>
+      <if test="likes != null">
+        likes,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="pictures != null">
+        pictures,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="memberName != null">
+        #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberIcon != null">
+        #{memberIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="star != null">
+        #{star,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tittle != null">
+        #{tittle,jdbcType=VARCHAR},
+      </if>
+      <if test="likes != null">
+        #{likes,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="pictures != null">
+        #{pictures,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.CommentExample" resultType="java.lang.Long">
+    select count(*) from comment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update comment
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productId != null">
+        product_id = #{record.productId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberName != null">
+        member_name = #{record.memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberIcon != null">
+        member_icon = #{record.memberIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.star != null">
+        star = #{record.star,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tittle != null">
+        tittle = #{record.tittle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.likes != null">
+        likes = #{record.likes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pictures != null">
+        pictures = #{record.pictures,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update comment
+    set id = #{record.id,jdbcType=VARCHAR},
+      product_id = #{record.productId,jdbcType=VARCHAR},
+      member_name = #{record.memberName,jdbcType=VARCHAR},
+      member_icon = #{record.memberIcon,jdbcType=VARCHAR},
+      star = #{record.star,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      tittle = #{record.tittle,jdbcType=VARCHAR},
+      likes = #{record.likes,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=VARCHAR},
+      pictures = #{record.pictures,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
