@@ -1,0 +1,33 @@
+Fashion
+    - men's clothing
+    - women's clothing
+    - women's accessories
+
+Books, Movies & Music  
+    - DVDs
+    - Books
+    - instrucment
+
+Electronics 
+    - cellphones
+    - computers
+    - video games and consoles
+    - vehicle Electronics
+
+Home & Garden 
+    - power tools
+    - outdoor
+    - kitchen
+
+Sporting Goods
+    - outdoor sports
+    - team sports
+    - fitness
+
+Health & Beauty
+    - vitamins
+    - skin care
+    - health care products
+
+
+
