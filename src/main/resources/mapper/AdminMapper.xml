@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.spring.ecommerce.demo.springecommerce.mbg.mapper.BrandMapper">
-  <resultMap id="BaseResultMap" type="com.example.spring.ecommerce.demo.springecommerce.mbg.model.Brand">
+<mapper namespace="com.example.spring.ecommerce.demo.springecommerce.mbg.mapper.AdminMapper">
+  <resultMap id="BaseResultMap" type="com.example.spring.ecommerce.demo.springecommerce.mbg.model.Admin">
     <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="alphabet" jdbcType="VARCHAR" property="alphabet" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="last_login" jdbcType="TIMESTAMP" property="lastLogin" />
     <result column="status" jdbcType="VARCHAR" property="status" />
-    <result column="logo" jdbcType="VARCHAR" property="logo" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,15 +71,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, alphabet, status, logo
+    id, username, password, icon, email, name, create_time, last_login, status
   </sql>
-  <select id="selectByExample" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.BrandExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.AdminExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from brand
+    from admin
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -83,72 +87,110 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.BrandExample">
-    delete from brand
+  <delete id="deleteByExample" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.AdminExample">
+    delete from admin
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.Brand" useGeneratedKeys="true">
-    insert into brand (name, alphabet, status, 
-      logo)
-    values (#{name,jdbcType=VARCHAR}, #{alphabet,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
-      #{logo,jdbcType=VARCHAR})
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.Admin" useGeneratedKeys="true">
+    insert into admin (username, password, icon, 
+      email, name, create_time, 
+      last_login, status)
+    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lastLogin,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.Brand" useGeneratedKeys="true">
-    insert into brand
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.Admin" useGeneratedKeys="true">
+    insert into admin
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
       <if test="name != null">
         name,
       </if>
-      <if test="alphabet != null">
-        alphabet,
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="lastLogin != null">
+        last_login,
       </if>
       <if test="status != null">
         status,
       </if>
-      <if test="logo != null">
-        logo,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="alphabet != null">
-        #{alphabet,jdbcType=VARCHAR},
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLogin != null">
+        #{lastLogin,jdbcType=TIMESTAMP},
       </if>
       <if test="status != null">
         #{status,jdbcType=VARCHAR},
       </if>
-      <if test="logo != null">
-        #{logo,jdbcType=VARCHAR},
-      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.BrandExample" resultType="java.lang.Long">
-    select count(*) from brand
+  <select id="countByExample" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.AdminExample" resultType="java.lang.Long">
+    select count(*) from admin
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update brand
+    update admin
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.icon != null">
+        icon = #{record.icon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.alphabet != null">
-        alphabet = #{record.alphabet,jdbcType=VARCHAR},
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastLogin != null">
+        last_login = #{record.lastLogin,jdbcType=TIMESTAMP},
       </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=VARCHAR},
-      </if>
-      <if test="record.logo != null">
-        logo = #{record.logo,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -156,12 +198,16 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update brand
+    update admin
     set id = #{record.id,jdbcType=INTEGER},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      icon = #{record.icon,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
-      alphabet = #{record.alphabet,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=VARCHAR},
-      logo = #{record.logo,jdbcType=VARCHAR}
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      last_login = #{record.lastLogin,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

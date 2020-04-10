@@ -4,14 +4,14 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductCategoryExample {
+public class ProductAttributeExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public ProductCategoryExample() {
+    public ProductAttributeExample() {
         oredCriteria = new ArrayList<>();
     }
 
@@ -165,323 +165,263 @@ public class ProductCategoryExample {
             return (Criteria) this;
         }
 
-        public Criteria andNameIsNull() {
-            addCriterion("name is null");
+        public Criteria andProductIdIsNull() {
+            addCriterion("product_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andNameIsNotNull() {
-            addCriterion("name is not null");
+        public Criteria andProductIdIsNotNull() {
+            addCriterion("product_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andNameEqualTo(String value) {
-            addCriterion("name =", value, "name");
+        public Criteria andProductIdEqualTo(BigDecimal value) {
+            addCriterion("product_id =", value, "productId");
             return (Criteria) this;
         }
 
-        public Criteria andNameNotEqualTo(String value) {
-            addCriterion("name <>", value, "name");
+        public Criteria andProductIdNotEqualTo(BigDecimal value) {
+            addCriterion("product_id <>", value, "productId");
             return (Criteria) this;
         }
 
-        public Criteria andNameGreaterThan(String value) {
-            addCriterion("name >", value, "name");
+        public Criteria andProductIdGreaterThan(BigDecimal value) {
+            addCriterion("product_id >", value, "productId");
             return (Criteria) this;
         }
 
-        public Criteria andNameGreaterThanOrEqualTo(String value) {
-            addCriterion("name >=", value, "name");
+        public Criteria andProductIdGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("product_id >=", value, "productId");
             return (Criteria) this;
         }
 
-        public Criteria andNameLessThan(String value) {
-            addCriterion("name <", value, "name");
+        public Criteria andProductIdLessThan(BigDecimal value) {
+            addCriterion("product_id <", value, "productId");
             return (Criteria) this;
         }
 
-        public Criteria andNameLessThanOrEqualTo(String value) {
-            addCriterion("name <=", value, "name");
+        public Criteria andProductIdLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("product_id <=", value, "productId");
             return (Criteria) this;
         }
 
-        public Criteria andNameLike(String value) {
-            addCriterion("name like", value, "name");
+        public Criteria andProductIdIn(List<BigDecimal> values) {
+            addCriterion("product_id in", values, "productId");
             return (Criteria) this;
         }
 
-        public Criteria andNameNotLike(String value) {
-            addCriterion("name not like", value, "name");
+        public Criteria andProductIdNotIn(List<BigDecimal> values) {
+            addCriterion("product_id not in", values, "productId");
             return (Criteria) this;
         }
 
-        public Criteria andNameIn(List<String> values) {
-            addCriterion("name in", values, "name");
+        public Criteria andProductIdBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("product_id between", value1, value2, "productId");
             return (Criteria) this;
         }
 
-        public Criteria andNameNotIn(List<String> values) {
-            addCriterion("name not in", values, "name");
+        public Criteria andProductIdNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("product_id not between", value1, value2, "productId");
             return (Criteria) this;
         }
 
-        public Criteria andNameBetween(String value1, String value2) {
-            addCriterion("name between", value1, value2, "name");
+        public Criteria andAttributeTypeIdIsNull() {
+            addCriterion("attribute_type_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andNameNotBetween(String value1, String value2) {
-            addCriterion("name not between", value1, value2, "name");
+        public Criteria andAttributeTypeIdIsNotNull() {
+            addCriterion("attribute_type_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andProductCountIsNull() {
-            addCriterion("product_count is null");
+        public Criteria andAttributeTypeIdEqualTo(BigDecimal value) {
+            addCriterion("attribute_type_id =", value, "attributeTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andProductCountIsNotNull() {
-            addCriterion("product_count is not null");
+        public Criteria andAttributeTypeIdNotEqualTo(BigDecimal value) {
+            addCriterion("attribute_type_id <>", value, "attributeTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andProductCountEqualTo(BigDecimal value) {
-            addCriterion("product_count =", value, "productCount");
+        public Criteria andAttributeTypeIdGreaterThan(BigDecimal value) {
+            addCriterion("attribute_type_id >", value, "attributeTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andProductCountNotEqualTo(BigDecimal value) {
-            addCriterion("product_count <>", value, "productCount");
+        public Criteria andAttributeTypeIdGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("attribute_type_id >=", value, "attributeTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andProductCountGreaterThan(BigDecimal value) {
-            addCriterion("product_count >", value, "productCount");
+        public Criteria andAttributeTypeIdLessThan(BigDecimal value) {
+            addCriterion("attribute_type_id <", value, "attributeTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andProductCountGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("product_count >=", value, "productCount");
+        public Criteria andAttributeTypeIdLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("attribute_type_id <=", value, "attributeTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andProductCountLessThan(BigDecimal value) {
-            addCriterion("product_count <", value, "productCount");
+        public Criteria andAttributeTypeIdIn(List<BigDecimal> values) {
+            addCriterion("attribute_type_id in", values, "attributeTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andProductCountLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("product_count <=", value, "productCount");
+        public Criteria andAttributeTypeIdNotIn(List<BigDecimal> values) {
+            addCriterion("attribute_type_id not in", values, "attributeTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andProductCountIn(List<BigDecimal> values) {
-            addCriterion("product_count in", values, "productCount");
+        public Criteria andAttributeTypeIdBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("attribute_type_id between", value1, value2, "attributeTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andProductCountNotIn(List<BigDecimal> values) {
-            addCriterion("product_count not in", values, "productCount");
+        public Criteria andAttributeTypeIdNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("attribute_type_id not between", value1, value2, "attributeTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andProductCountBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("product_count between", value1, value2, "productCount");
+        public Criteria andAttributeValueIsNull() {
+            addCriterion("attribute_value is null");
             return (Criteria) this;
         }
 
-        public Criteria andProductCountNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("product_count not between", value1, value2, "productCount");
+        public Criteria andAttributeValueIsNotNull() {
+            addCriterion("attribute_value is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIconIsNull() {
-            addCriterion("icon is null");
+        public Criteria andAttributeValueEqualTo(String value) {
+            addCriterion("attribute_value =", value, "attributeValue");
             return (Criteria) this;
         }
 
-        public Criteria andIconIsNotNull() {
-            addCriterion("icon is not null");
+        public Criteria andAttributeValueNotEqualTo(String value) {
+            addCriterion("attribute_value <>", value, "attributeValue");
             return (Criteria) this;
         }
 
-        public Criteria andIconEqualTo(String value) {
-            addCriterion("icon =", value, "icon");
+        public Criteria andAttributeValueGreaterThan(String value) {
+            addCriterion("attribute_value >", value, "attributeValue");
             return (Criteria) this;
         }
 
-        public Criteria andIconNotEqualTo(String value) {
-            addCriterion("icon <>", value, "icon");
+        public Criteria andAttributeValueGreaterThanOrEqualTo(String value) {
+            addCriterion("attribute_value >=", value, "attributeValue");
             return (Criteria) this;
         }
 
-        public Criteria andIconGreaterThan(String value) {
-            addCriterion("icon >", value, "icon");
+        public Criteria andAttributeValueLessThan(String value) {
+            addCriterion("attribute_value <", value, "attributeValue");
             return (Criteria) this;
         }
 
-        public Criteria andIconGreaterThanOrEqualTo(String value) {
-            addCriterion("icon >=", value, "icon");
+        public Criteria andAttributeValueLessThanOrEqualTo(String value) {
+            addCriterion("attribute_value <=", value, "attributeValue");
             return (Criteria) this;
         }
 
-        public Criteria andIconLessThan(String value) {
-            addCriterion("icon <", value, "icon");
+        public Criteria andAttributeValueLike(String value) {
+            addCriterion("attribute_value like", value, "attributeValue");
             return (Criteria) this;
         }
 
-        public Criteria andIconLessThanOrEqualTo(String value) {
-            addCriterion("icon <=", value, "icon");
+        public Criteria andAttributeValueNotLike(String value) {
+            addCriterion("attribute_value not like", value, "attributeValue");
             return (Criteria) this;
         }
 
-        public Criteria andIconLike(String value) {
-            addCriterion("icon like", value, "icon");
+        public Criteria andAttributeValueIn(List<String> values) {
+            addCriterion("attribute_value in", values, "attributeValue");
             return (Criteria) this;
         }
 
-        public Criteria andIconNotLike(String value) {
-            addCriterion("icon not like", value, "icon");
+        public Criteria andAttributeValueNotIn(List<String> values) {
+            addCriterion("attribute_value not in", values, "attributeValue");
             return (Criteria) this;
         }
 
-        public Criteria andIconIn(List<String> values) {
-            addCriterion("icon in", values, "icon");
+        public Criteria andAttributeValueBetween(String value1, String value2) {
+            addCriterion("attribute_value between", value1, value2, "attributeValue");
             return (Criteria) this;
         }
 
-        public Criteria andIconNotIn(List<String> values) {
-            addCriterion("icon not in", values, "icon");
+        public Criteria andAttributeValueNotBetween(String value1, String value2) {
+            addCriterion("attribute_value not between", value1, value2, "attributeValue");
             return (Criteria) this;
         }
 
-        public Criteria andIconBetween(String value1, String value2) {
-            addCriterion("icon between", value1, value2, "icon");
+        public Criteria andAttributeUnitIsNull() {
+            addCriterion("attribute_unit is null");
             return (Criteria) this;
         }
 
-        public Criteria andIconNotBetween(String value1, String value2) {
-            addCriterion("icon not between", value1, value2, "icon");
+        public Criteria andAttributeUnitIsNotNull() {
+            addCriterion("attribute_unit is not null");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdIsNull() {
-            addCriterion("parent_id is null");
+        public Criteria andAttributeUnitEqualTo(String value) {
+            addCriterion("attribute_unit =", value, "attributeUnit");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdIsNotNull() {
-            addCriterion("parent_id is not null");
+        public Criteria andAttributeUnitNotEqualTo(String value) {
+            addCriterion("attribute_unit <>", value, "attributeUnit");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdEqualTo(BigDecimal value) {
-            addCriterion("parent_id =", value, "parentId");
+        public Criteria andAttributeUnitGreaterThan(String value) {
+            addCriterion("attribute_unit >", value, "attributeUnit");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdNotEqualTo(BigDecimal value) {
-            addCriterion("parent_id <>", value, "parentId");
+        public Criteria andAttributeUnitGreaterThanOrEqualTo(String value) {
+            addCriterion("attribute_unit >=", value, "attributeUnit");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdGreaterThan(BigDecimal value) {
-            addCriterion("parent_id >", value, "parentId");
+        public Criteria andAttributeUnitLessThan(String value) {
+            addCriterion("attribute_unit <", value, "attributeUnit");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("parent_id >=", value, "parentId");
+        public Criteria andAttributeUnitLessThanOrEqualTo(String value) {
+            addCriterion("attribute_unit <=", value, "attributeUnit");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdLessThan(BigDecimal value) {
-            addCriterion("parent_id <", value, "parentId");
+        public Criteria andAttributeUnitLike(String value) {
+            addCriterion("attribute_unit like", value, "attributeUnit");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("parent_id <=", value, "parentId");
+        public Criteria andAttributeUnitNotLike(String value) {
+            addCriterion("attribute_unit not like", value, "attributeUnit");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdIn(List<BigDecimal> values) {
-            addCriterion("parent_id in", values, "parentId");
+        public Criteria andAttributeUnitIn(List<String> values) {
+            addCriterion("attribute_unit in", values, "attributeUnit");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdNotIn(List<BigDecimal> values) {
-            addCriterion("parent_id not in", values, "parentId");
+        public Criteria andAttributeUnitNotIn(List<String> values) {
+            addCriterion("attribute_unit not in", values, "attributeUnit");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("parent_id between", value1, value2, "parentId");
+        public Criteria andAttributeUnitBetween(String value1, String value2) {
+            addCriterion("attribute_unit between", value1, value2, "attributeUnit");
             return (Criteria) this;
         }
 
-        public Criteria andParentIdNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("parent_id not between", value1, value2, "parentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andLevelIsNull() {
-            addCriterion("level is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLevelIsNotNull() {
-            addCriterion("level is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLevelEqualTo(BigDecimal value) {
-            addCriterion("level =", value, "level");
-            return (Criteria) this;
-        }
-
-        public Criteria andLevelNotEqualTo(BigDecimal value) {
-            addCriterion("level <>", value, "level");
-            return (Criteria) this;
-        }
-
-        public Criteria andLevelGreaterThan(BigDecimal value) {
-            addCriterion("level >", value, "level");
-            return (Criteria) this;
-        }
-
-        public Criteria andLevelGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("level >=", value, "level");
-            return (Criteria) this;
-        }
-
-        public Criteria andLevelLessThan(BigDecimal value) {
-            addCriterion("level <", value, "level");
-            return (Criteria) this;
-        }
-
-        public Criteria andLevelLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("level <=", value, "level");
-            return (Criteria) this;
-        }
-
-        public Criteria andLevelIn(List<BigDecimal> values) {
-            addCriterion("level in", values, "level");
-            return (Criteria) this;
-        }
-
-        public Criteria andLevelNotIn(List<BigDecimal> values) {
-            addCriterion("level not in", values, "level");
-            return (Criteria) this;
-        }
-
-        public Criteria andLevelBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("level between", value1, value2, "level");
-            return (Criteria) this;
-        }
-
-        public Criteria andLevelNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("level not between", value1, value2, "level");
+        public Criteria andAttributeUnitNotBetween(String value1, String value2) {
+            addCriterion("attribute_unit not between", value1, value2, "attributeUnit");
             return (Criteria) this;
         }
     }

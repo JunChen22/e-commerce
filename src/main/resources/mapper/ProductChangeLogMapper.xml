@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.spring.ecommerce.demo.springecommerce.mbg.mapper.ProductChangeLogMapper">
   <resultMap id="BaseResultMap" type="com.example.spring.ecommerce.demo.springecommerce.mbg.model.ProductChangeLog">
-    <result column="id" jdbcType="VARCHAR" property="id" />
-    <result column="product_id" jdbcType="VARCHAR" property="productId" />
-    <result column="price_old" jdbcType="VARCHAR" property="priceOld" />
-    <result column="price_new" jdbcType="VARCHAR" property="priceNew" />
-    <result column="unit_old" jdbcType="VARCHAR" property="unitOld" />
-    <result column="unit_new" jdbcType="VARCHAR" property="unitNew" />
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="product_id" jdbcType="NUMERIC" property="productId" />
+    <result column="price_old" jdbcType="NUMERIC" property="priceOld" />
+    <result column="price_new" jdbcType="NUMERIC" property="priceNew" />
+    <result column="unit_old" jdbcType="NUMERIC" property="unitOld" />
+    <result column="unit_new" jdbcType="NUMERIC" property="unitNew" />
     <result column="operate_man" jdbcType="VARCHAR" property="operateMan" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
@@ -96,8 +96,8 @@
     insert into product_change_log (product_id, price_old, price_new, 
       unit_old, unit_new, operate_man, 
       create_time)
-    values (#{productId,jdbcType=VARCHAR}, #{priceOld,jdbcType=VARCHAR}, #{priceNew,jdbcType=VARCHAR}, 
-      #{unitOld,jdbcType=VARCHAR}, #{unitNew,jdbcType=VARCHAR}, #{operateMan,jdbcType=VARCHAR}, 
+    values (#{productId,jdbcType=NUMERIC}, #{priceOld,jdbcType=NUMERIC}, #{priceNew,jdbcType=NUMERIC}, 
+      #{unitOld,jdbcType=NUMERIC}, #{unitNew,jdbcType=NUMERIC}, #{operateMan,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.ProductChangeLog" useGeneratedKeys="true">
@@ -127,19 +127,19 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="productId != null">
-        #{productId,jdbcType=VARCHAR},
+        #{productId,jdbcType=NUMERIC},
       </if>
       <if test="priceOld != null">
-        #{priceOld,jdbcType=VARCHAR},
+        #{priceOld,jdbcType=NUMERIC},
       </if>
       <if test="priceNew != null">
-        #{priceNew,jdbcType=VARCHAR},
+        #{priceNew,jdbcType=NUMERIC},
       </if>
       <if test="unitOld != null">
-        #{unitOld,jdbcType=VARCHAR},
+        #{unitOld,jdbcType=NUMERIC},
       </if>
       <if test="unitNew != null">
-        #{unitNew,jdbcType=VARCHAR},
+        #{unitNew,jdbcType=NUMERIC},
       </if>
       <if test="operateMan != null">
         #{operateMan,jdbcType=VARCHAR},
@@ -159,22 +159,22 @@
     update product_change_log
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=VARCHAR},
+        id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.productId != null">
-        product_id = #{record.productId,jdbcType=VARCHAR},
+        product_id = #{record.productId,jdbcType=NUMERIC},
       </if>
       <if test="record.priceOld != null">
-        price_old = #{record.priceOld,jdbcType=VARCHAR},
+        price_old = #{record.priceOld,jdbcType=NUMERIC},
       </if>
       <if test="record.priceNew != null">
-        price_new = #{record.priceNew,jdbcType=VARCHAR},
+        price_new = #{record.priceNew,jdbcType=NUMERIC},
       </if>
       <if test="record.unitOld != null">
-        unit_old = #{record.unitOld,jdbcType=VARCHAR},
+        unit_old = #{record.unitOld,jdbcType=NUMERIC},
       </if>
       <if test="record.unitNew != null">
-        unit_new = #{record.unitNew,jdbcType=VARCHAR},
+        unit_new = #{record.unitNew,jdbcType=NUMERIC},
       </if>
       <if test="record.operateMan != null">
         operate_man = #{record.operateMan,jdbcType=VARCHAR},
@@ -189,12 +189,12 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update product_change_log
-    set id = #{record.id,jdbcType=VARCHAR},
-      product_id = #{record.productId,jdbcType=VARCHAR},
-      price_old = #{record.priceOld,jdbcType=VARCHAR},
-      price_new = #{record.priceNew,jdbcType=VARCHAR},
-      unit_old = #{record.unitOld,jdbcType=VARCHAR},
-      unit_new = #{record.unitNew,jdbcType=VARCHAR},
+    set id = #{record.id,jdbcType=INTEGER},
+      product_id = #{record.productId,jdbcType=NUMERIC},
+      price_old = #{record.priceOld,jdbcType=NUMERIC},
+      price_new = #{record.priceNew,jdbcType=NUMERIC},
+      unit_old = #{record.unitOld,jdbcType=NUMERIC},
+      unit_new = #{record.unitNew,jdbcType=NUMERIC},
       operate_man = #{record.operateMan,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">

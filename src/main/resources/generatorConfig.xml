@@ -32,16 +32,50 @@
         <table tableName= "brand">
             <generatedKey column="id" sqlStatement="JDBC" />
         </table>
-        <table tableName= "comment">
+
+
+
+
+        <table tableName= "product_category">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+        <table tableName= "product_attribute_category">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+        <table tableName= "product_attribute_type">
             <generatedKey column="id" sqlStatement="JDBC" />
         </table>
         <table tableName= "product">
             <generatedKey column="id" sqlStatement="JDBC" />
         </table>
-        <table tableName= "product_category">
+        <table tableName= "product_attribute">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+        <table tableName= "comment">
             <generatedKey column="id" sqlStatement="JDBC" />
         </table>
         <table tableName= "product_change_log">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+        <table tableName= "member">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+        <table tableName= "receive_address">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+        <table tableName= "member_login_log">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+        <table tableName= "admin">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+        <table tableName= "admin_login_log">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+        <table tableName= "roles">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+        <table tableName= "admin_role_relation">
             <generatedKey column="id" sqlStatement="JDBC" />
         </table>
     </context>

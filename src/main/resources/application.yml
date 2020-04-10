@@ -19,6 +19,7 @@ spring:
     username: postgres
     password: postgres
     driverClassName: org.postgresql.Driver
+    initialization-mode: always
 
 # tells spring mybatis mapper's xml(sql) located
 mybatis:

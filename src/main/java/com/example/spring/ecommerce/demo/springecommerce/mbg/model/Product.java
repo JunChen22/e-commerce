@@ -1,17 +1,13 @@
 package com.example.spring.ecommerce.demo.springecommerce.mbg.model;
 
+import java.math.BigDecimal;
+
 public class Product {
-    private String id;
+    private Integer id;
 
-    private String brandId;
+    private BigDecimal brandId;
 
-    private String serialNumber;
-
-    private String brandName;
-
-    private String categoryId;
-
-    private String categoryName;
+    private BigDecimal categoryId;
 
     private String name;
 
@@ -19,62 +15,38 @@ public class Product {
 
     private String description;
 
-    private String price;
+    private BigDecimal price;
 
-    private String salePrice;
+    private BigDecimal salePrice;
 
-    private String stock;
+    private BigDecimal stock;
 
     private String descriptionAlbum;
 
     private String status;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getBrandId() {
+    public BigDecimal getBrandId() {
         return brandId;
     }
 
-    public void setBrandId(String brandId) {
+    public void setBrandId(BigDecimal brandId) {
         this.brandId = brandId;
     }
 
-    public String getSerialNumber() {
-        return serialNumber;
-    }
-
-    public void setSerialNumber(String serialNumber) {
-        this.serialNumber = serialNumber;
-    }
-
-    public String getBrandName() {
-        return brandName;
-    }
-
-    public void setBrandName(String brandName) {
-        this.brandName = brandName;
-    }
-
-    public String getCategoryId() {
+    public BigDecimal getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(String categoryId) {
+    public void setCategoryId(BigDecimal categoryId) {
         this.categoryId = categoryId;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
     }
 
     public String getName() {
@@ -101,27 +73,27 @@ public class Product {
         this.description = description;
     }
 
-    public String getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public String getSalePrice() {
+    public BigDecimal getSalePrice() {
         return salePrice;
     }
 
-    public void setSalePrice(String salePrice) {
+    public void setSalePrice(BigDecimal salePrice) {
         this.salePrice = salePrice;
     }
 
-    public String getStock() {
+    public BigDecimal getStock() {
         return stock;
     }
 
-    public void setStock(String stock) {
+    public void setStock(BigDecimal stock) {
         this.stock = stock;
     }
 

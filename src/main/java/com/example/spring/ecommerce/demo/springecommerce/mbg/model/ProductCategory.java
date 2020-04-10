@@ -1,32 +1,26 @@
 package com.example.spring.ecommerce.demo.springecommerce.mbg.model;
 
-public class ProductCategory {
-    private String id;
+import java.math.BigDecimal;
 
-    private String alphabet;
+public class ProductCategory {
+    private Integer id;
 
     private String name;
 
+    private BigDecimal productCount;
+
     private String icon;
 
-    private String parentId;
+    private BigDecimal parentId;
 
-    private String level;
+    private BigDecimal level;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getAlphabet() {
-        return alphabet;
-    }
-
-    public void setAlphabet(String alphabet) {
-        this.alphabet = alphabet;
     }
 
     public String getName() {
@@ -37,6 +31,14 @@ public class ProductCategory {
         this.name = name;
     }
 
+    public BigDecimal getProductCount() {
+        return productCount;
+    }
+
+    public void setProductCount(BigDecimal productCount) {
+        this.productCount = productCount;
+    }
+
     public String getIcon() {
         return icon;
     }
@@ -45,19 +47,19 @@ public class ProductCategory {
         this.icon = icon;
     }
 
-    public String getParentId() {
+    public BigDecimal getParentId() {
         return parentId;
     }
 
-    public void setParentId(String parentId) {
+    public void setParentId(BigDecimal parentId) {
         this.parentId = parentId;
     }
 
-    public String getLevel() {
+    public BigDecimal getLevel() {
         return level;
     }
 
-    public void setLevel(String level) {
+    public void setLevel(BigDecimal level) {
         this.level = level;
     }
 }

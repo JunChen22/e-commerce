@@ -1,69 +1,70 @@
 package com.example.spring.ecommerce.demo.springecommerce.mbg.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class ProductChangeLog {
-    private String id;
+    private Integer id;
 
-    private String productId;
+    private BigDecimal productId;
 
-    private String priceOld;
+    private BigDecimal priceOld;
 
-    private String priceNew;
+    private BigDecimal priceNew;
 
-    private String unitOld;
+    private BigDecimal unitOld;
 
-    private String unitNew;
+    private BigDecimal unitNew;
 
     private String operateMan;
 
     private Date createTime;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getProductId() {
+    public BigDecimal getProductId() {
         return productId;
     }
 
-    public void setProductId(String productId) {
+    public void setProductId(BigDecimal productId) {
         this.productId = productId;
     }
 
-    public String getPriceOld() {
+    public BigDecimal getPriceOld() {
         return priceOld;
     }
 
-    public void setPriceOld(String priceOld) {
+    public void setPriceOld(BigDecimal priceOld) {
         this.priceOld = priceOld;
     }
 
-    public String getPriceNew() {
+    public BigDecimal getPriceNew() {
         return priceNew;
     }
 
-    public void setPriceNew(String priceNew) {
+    public void setPriceNew(BigDecimal priceNew) {
         this.priceNew = priceNew;
     }
 
-    public String getUnitOld() {
+    public BigDecimal getUnitOld() {
         return unitOld;
     }
 
-    public void setUnitOld(String unitOld) {
+    public void setUnitOld(BigDecimal unitOld) {
         this.unitOld = unitOld;
     }
 
-    public String getUnitNew() {
+    public BigDecimal getUnitNew() {
         return unitNew;
     }
 
-    public void setUnitNew(String unitNew) {
+    public void setUnitNew(BigDecimal unitNew) {
         this.unitNew = unitNew;
     }
 

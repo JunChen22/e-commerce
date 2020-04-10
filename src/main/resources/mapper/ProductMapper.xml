@@ -2,18 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.spring.ecommerce.demo.springecommerce.mbg.mapper.ProductMapper">
   <resultMap id="BaseResultMap" type="com.example.spring.ecommerce.demo.springecommerce.mbg.model.Product">
-    <result column="id" jdbcType="VARCHAR" property="id" />
-    <result column="brand_id" jdbcType="VARCHAR" property="brandId" />
-    <result column="serial_number" jdbcType="VARCHAR" property="serialNumber" />
-    <result column="brand_name" jdbcType="VARCHAR" property="brandName" />
-    <result column="category_id" jdbcType="VARCHAR" property="categoryId" />
-    <result column="category_name" jdbcType="VARCHAR" property="categoryName" />
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="brand_id" jdbcType="NUMERIC" property="brandId" />
+    <result column="category_id" jdbcType="NUMERIC" property="categoryId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="picture" jdbcType="VARCHAR" property="picture" />
     <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="price" jdbcType="VARCHAR" property="price" />
-    <result column="sale_price" jdbcType="VARCHAR" property="salePrice" />
-    <result column="stock" jdbcType="VARCHAR" property="stock" />
+    <result column="price" jdbcType="NUMERIC" property="price" />
+    <result column="sale_price" jdbcType="NUMERIC" property="salePrice" />
+    <result column="stock" jdbcType="NUMERIC" property="stock" />
     <result column="description_album" jdbcType="VARCHAR" property="descriptionAlbum" />
     <result column="status" jdbcType="VARCHAR" property="status" />
   </resultMap>
@@ -76,8 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, brand_id, serial_number, brand_name, category_id, category_name, name, picture, 
-    description, price, sale_price, stock, description_album, status
+    id, brand_id, category_id, name, picture, description, price, sale_price, stock, 
+    description_album, status
   </sql>
   <select id="selectByExample" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.ProductExample" resultMap="BaseResultMap">
     select
@@ -100,15 +97,13 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.Product" useGeneratedKeys="true">
-    insert into product (brand_id, serial_number, brand_name, 
-      category_id, category_name, name, 
+    insert into product (brand_id, category_id, name, 
       picture, description, price, 
       sale_price, stock, description_album, 
       status)
-    values (#{brandId,jdbcType=VARCHAR}, #{serialNumber,jdbcType=VARCHAR}, #{brandName,jdbcType=VARCHAR}, 
-      #{categoryId,jdbcType=VARCHAR}, #{categoryName,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{picture,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, 
-      #{salePrice,jdbcType=VARCHAR}, #{stock,jdbcType=VARCHAR}, #{descriptionAlbum,jdbcType=VARCHAR}, 
+    values (#{brandId,jdbcType=NUMERIC}, #{categoryId,jdbcType=NUMERIC}, #{name,jdbcType=VARCHAR}, 
+      #{picture,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{price,jdbcType=NUMERIC}, 
+      #{salePrice,jdbcType=NUMERIC}, #{stock,jdbcType=NUMERIC}, #{descriptionAlbum,jdbcType=VARCHAR}, 
       #{status,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.Product" useGeneratedKeys="true">
@@ -117,17 +112,8 @@
       <if test="brandId != null">
         brand_id,
       </if>
-      <if test="serialNumber != null">
-        serial_number,
-      </if>
-      <if test="brandName != null">
-        brand_name,
-      </if>
       <if test="categoryId != null">
         category_id,
-      </if>
-      <if test="categoryName != null">
-        category_name,
       </if>
       <if test="name != null">
         name,
@@ -156,19 +142,10 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="brandId != null">
-        #{brandId,jdbcType=VARCHAR},
-      </if>
-      <if test="serialNumber != null">
-        #{serialNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="brandName != null">
-        #{brandName,jdbcType=VARCHAR},
+        #{brandId,jdbcType=NUMERIC},
       </if>
       <if test="categoryId != null">
-        #{categoryId,jdbcType=VARCHAR},
-      </if>
-      <if test="categoryName != null">
-        #{categoryName,jdbcType=VARCHAR},
+        #{categoryId,jdbcType=NUMERIC},
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
@@ -180,13 +157,13 @@
         #{description,jdbcType=VARCHAR},
       </if>
       <if test="price != null">
-        #{price,jdbcType=VARCHAR},
+        #{price,jdbcType=NUMERIC},
       </if>
       <if test="salePrice != null">
-        #{salePrice,jdbcType=VARCHAR},
+        #{salePrice,jdbcType=NUMERIC},
       </if>
       <if test="stock != null">
-        #{stock,jdbcType=VARCHAR},
+        #{stock,jdbcType=NUMERIC},
       </if>
       <if test="descriptionAlbum != null">
         #{descriptionAlbum,jdbcType=VARCHAR},
@@ -206,22 +183,13 @@
     update product
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=VARCHAR},
+        id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.brandId != null">
-        brand_id = #{record.brandId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.serialNumber != null">
-        serial_number = #{record.serialNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="record.brandName != null">
-        brand_name = #{record.brandName,jdbcType=VARCHAR},
+        brand_id = #{record.brandId,jdbcType=NUMERIC},
       </if>
       <if test="record.categoryId != null">
-        category_id = #{record.categoryId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.categoryName != null">
-        category_name = #{record.categoryName,jdbcType=VARCHAR},
+        category_id = #{record.categoryId,jdbcType=NUMERIC},
       </if>
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
@@ -233,13 +201,13 @@
         description = #{record.description,jdbcType=VARCHAR},
       </if>
       <if test="record.price != null">
-        price = #{record.price,jdbcType=VARCHAR},
+        price = #{record.price,jdbcType=NUMERIC},
       </if>
       <if test="record.salePrice != null">
-        sale_price = #{record.salePrice,jdbcType=VARCHAR},
+        sale_price = #{record.salePrice,jdbcType=NUMERIC},
       </if>
       <if test="record.stock != null">
-        stock = #{record.stock,jdbcType=VARCHAR},
+        stock = #{record.stock,jdbcType=NUMERIC},
       </if>
       <if test="record.descriptionAlbum != null">
         description_album = #{record.descriptionAlbum,jdbcType=VARCHAR},
@@ -254,18 +222,15 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update product
-    set id = #{record.id,jdbcType=VARCHAR},
-      brand_id = #{record.brandId,jdbcType=VARCHAR},
-      serial_number = #{record.serialNumber,jdbcType=VARCHAR},
-      brand_name = #{record.brandName,jdbcType=VARCHAR},
-      category_id = #{record.categoryId,jdbcType=VARCHAR},
-      category_name = #{record.categoryName,jdbcType=VARCHAR},
+    set id = #{record.id,jdbcType=INTEGER},
+      brand_id = #{record.brandId,jdbcType=NUMERIC},
+      category_id = #{record.categoryId,jdbcType=NUMERIC},
       name = #{record.name,jdbcType=VARCHAR},
       picture = #{record.picture,jdbcType=VARCHAR},
       description = #{record.description,jdbcType=VARCHAR},
-      price = #{record.price,jdbcType=VARCHAR},
-      sale_price = #{record.salePrice,jdbcType=VARCHAR},
-      stock = #{record.stock,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=NUMERIC},
+      sale_price = #{record.salePrice,jdbcType=NUMERIC},
+      stock = #{record.stock,jdbcType=NUMERIC},
       description_album = #{record.descriptionAlbum,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=VARCHAR}
     <if test="_parameter != null">

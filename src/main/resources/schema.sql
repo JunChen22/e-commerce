@@ -3,71 +3,99 @@ DROP TABLE IF EXISTS brand;
 
 CREATE TABLE brand
   (
-     id       SERIAL  PRIMARY KEY ,
+     id       SERIAL,
      name     TEXT,
      alphabet TEXT,
      status   TEXT,
      logo     TEXT
   );
 
-DROP TABLE IF EXISTS comment;
+DROP TABLE IF EXISTS product_category;
 
-CREATE TABLE comment
+CREATE TABLE product_category
   (
-     id          TEXT,
-     product_id  TEXT,
-     member_name TEXT,
-     member_icon TEXT,
-     star        TEXT,
-     create_time TIMESTAMP,
-     tittle      TEXT,
-     likes       TEXT,
-     content     TEXT,
-     pictures    TEXT
+     id        SERIAL  PRIMARY KEY,
+     name      TEXT,
+     product_count NUMERIC ,
+     icon      TEXT,
+     parent_id NUMERIC,-- sub category
+     level     NUMERIC
+  );
+
+DROP TABLE IF EXISTS product_attribute_category;
+
+CREATE TABLE product_attribute_category
+  (
+     id        SERIAL,
+     name TEXT,
+     attribute_amount           NUMERIC
+  );
+
+DROP TABLE IF EXISTS product_attribute_type;
+
+CREATE TABLE product_attribute_type
+  (
+     id        SERIAL,
+     attribute_category_id NUMERIC,
+     name           TEXT
   );
 
 DROP TABLE IF EXISTS product;
 
 CREATE TABLE product
   (
-     id                TEXT,
-     brand_id          TEXT,
-     serial_number     TEXT,
-     brand_name         TEXT,
-     category_id       TEXT,
-     category_name     TEXT,
+     id                SERIAL,
+     brand_id          NUMERIC,
+     category_id       NUMERIC,
      name              TEXT,
      picture           TEXT,
      description       TEXT,
-     price             TEXT,
-     sale_price        TEXT,
-     stock             TEXT,
+     price             NUMERIC,
+     sale_price        NUMERIC,
+     stock             NUMERIC,
      description_album TEXT,
      status            TEXT
   );
 
-DROP TABLE IF EXISTS product_category;
 
-CREATE TABLE product_category
+DROP TABLE IF EXISTS product_attribute;
+
+CREATE TABLE product_attribute
   (
-     id        TEXT,
-     alphabet  TEXT,
-     name      TEXT,
-     icon      TEXT,
-     parent_id TEXT,-- sub category
-     level     TEXT
+     id SERIAL,
+     product_id NUMERIC,
+     attribute_type_id NUMERIC,
+     attribute_value TEXT,
+     attribute_unit TEXT
+  );
+
+
+DROP TABLE IF EXISTS comment;
+
+CREATE TABLE comment
+  (
+     id          SERIAL,
+     product_id  NUMERIC,
+     member_name TEXT,
+     member_icon TEXT,
+     star        NUMERIC,
+     create_time TIMESTAMP,
+     tittle      TEXT,
+     likes       NUMERIC,
+     content     TEXT,
+     pictures    TEXT
   );
 
 DROP TABLE IF EXISTS product_change_log;
 
 CREATE TABLE product_change_log
   (
-     id          TEXT,
-     product_id  TEXT,
-     price_old   TEXT,
-     price_new   TEXT,
-     unit_old    TEXT,
-     unit_new    TEXT,
+     id          SERIAL,
+     product_id  NUMERIC,
+     price_old   NUMERIC,
+     price_new   NUMERIC,
+     unit_old    NUMERIC,
+     unit_new    NUMERIC,
      operate_man TEXT,
      create_time TIMESTAMP
   );
@@ -77,13 +105,13 @@ DROP TABLE IF EXISTS member;
 
 CREATE TABLE member
   (
-     id           TEXT,
+     id           SERIAL ,
      username     TEXT,
      password     TEXT,
      phone_number TEXT,
      status       TEXT,
      create_time  TIMESTAMP,
-     last_login   TEXT,
+     last_login   TIMESTAMP,
      source_type  TEXT,
      icon         TEXT
   );
@@ -91,8 +119,8 @@ CREATE TABLE member
 DROP TABLE IF EXISTS receive_address;
 
 CREATE TABLE receive_address
-  (
-     member_id    TEXT,
+  (  id         SERIAL,
+     member_id    NUMERIC,
      phone_number TEXT,
      street       TEXT,
      city         TEXT,
@@ -105,8 +133,8 @@ DROP TABLE IF EXISTS member_login_log;
 
 CREATE TABLE member_login_log
   (
-     id         TEXT,
-     member_id  TEXT,
+     id         SERIAL,
+     member_id  NUMERIC,
      login_time TIMESTAMP,
      ip_address TEXT,
      login_type TEXT -- 0/1/2 pc TEXT, ios TEXT, android
@@ -117,14 +145,14 @@ DROP TABLE IF EXISTS admin;
 
 CREATE TABLE admin
   (
-     id          TEXT,
+     id          SERIAL,
      username    TEXT,
      password    TEXT,
      icon        TEXT,
      email       TEXT,
      name        TEXT,
      create_time TIMESTAMP,
-     last_login  TEXT,
+     last_login  TIMESTAMP,
      status      TEXT
   );
 
@@ -132,8 +160,8 @@ DROP TABLE IF EXISTS admin_login_log;
 
 CREATE TABLE admin_login_log
   (
-     id         TEXT,
-     admin_id   TEXT,
+     id         SERIAL,
+     admin_id   NUMERIC,
      login_time TIMESTAMP,
      ip_address TEXT,
      user_agent TEXT -- type of browser
@@ -143,7 +171,7 @@ DROP TABLE IF EXISTS roles;
 
 CREATE TABLE roles
   (
-     id          TEXT,
+     id          SERIAL,
      name        TEXT,
      description TEXT,
      create_time TIMESTAMP,
@@ -154,8 +182,8 @@ DROP TABLE IF EXISTS admin_role_relation;
 
 CREATE TABLE admin_role_relation
   (
-     id       TEXT,
-     admin_id TEXT,
-     role_id  TEXT
+     id       SERIAL,
+     admin_id NUMERIC,
+     role_id  NUMERIC
   );
 ---------Order related-------

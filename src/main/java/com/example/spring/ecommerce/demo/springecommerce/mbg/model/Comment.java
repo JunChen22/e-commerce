@@ -1,41 +1,42 @@
 package com.example.spring.ecommerce.demo.springecommerce.mbg.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Comment {
-    private String id;
+    private Integer id;
 
-    private String productId;
+    private BigDecimal productId;
 
     private String memberName;
 
     private String memberIcon;
 
-    private String star;
+    private BigDecimal star;
 
     private Date createTime;
 
     private String tittle;
 
-    private String likes;
+    private BigDecimal likes;
 
     private String content;
 
     private String pictures;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getProductId() {
+    public BigDecimal getProductId() {
         return productId;
     }
 
-    public void setProductId(String productId) {
+    public void setProductId(BigDecimal productId) {
         this.productId = productId;
     }
 
@@ -55,11 +56,11 @@ public class Comment {
         this.memberIcon = memberIcon;
     }
 
-    public String getStar() {
+    public BigDecimal getStar() {
         return star;
     }
 
-    public void setStar(String star) {
+    public void setStar(BigDecimal star) {
         this.star = star;
     }
 
@@ -79,11 +80,11 @@ public class Comment {
         this.tittle = tittle;
     }
 
-    public String getLikes() {
+    public BigDecimal getLikes() {
         return likes;
     }
 
-    public void setLikes(String likes) {
+    public void setLikes(BigDecimal likes) {
         this.likes = likes;
     }
 

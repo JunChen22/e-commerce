@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.spring.ecommerce.demo.springecommerce.mbg.mapper.BrandMapper">
-  <resultMap id="BaseResultMap" type="com.example.spring.ecommerce.demo.springecommerce.mbg.model.Brand">
+<mapper namespace="com.example.spring.ecommerce.demo.springecommerce.mbg.mapper.MemberLoginLogMapper">
+  <resultMap id="BaseResultMap" type="com.example.spring.ecommerce.demo.springecommerce.mbg.model.MemberLoginLog">
     <result column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="alphabet" jdbcType="VARCHAR" property="alphabet" />
-    <result column="status" jdbcType="VARCHAR" property="status" />
-    <result column="logo" jdbcType="VARCHAR" property="logo" />
+    <result column="member_id" jdbcType="NUMERIC" property="memberId" />
+    <result column="login_time" jdbcType="TIMESTAMP" property="loginTime" />
+    <result column="ip_address" jdbcType="VARCHAR" property="ipAddress" />
+    <result column="login_type" jdbcType="VARCHAR" property="loginType" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,15 +67,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, alphabet, status, logo
+    id, member_id, login_time, ip_address, login_type
   </sql>
-  <select id="selectByExample" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.BrandExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.MemberLoginLogExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from brand
+    from member_login_log
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -83,72 +83,72 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.BrandExample">
-    delete from brand
+  <delete id="deleteByExample" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.MemberLoginLogExample">
+    delete from member_login_log
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.Brand" useGeneratedKeys="true">
-    insert into brand (name, alphabet, status, 
-      logo)
-    values (#{name,jdbcType=VARCHAR}, #{alphabet,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
-      #{logo,jdbcType=VARCHAR})
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.MemberLoginLog" useGeneratedKeys="true">
+    insert into member_login_log (member_id, login_time, ip_address, 
+      login_type)
+    values (#{memberId,jdbcType=NUMERIC}, #{loginTime,jdbcType=TIMESTAMP}, #{ipAddress,jdbcType=VARCHAR}, 
+      #{loginType,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.Brand" useGeneratedKeys="true">
-    insert into brand
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.MemberLoginLog" useGeneratedKeys="true">
+    insert into member_login_log
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="name != null">
-        name,
+      <if test="memberId != null">
+        member_id,
       </if>
-      <if test="alphabet != null">
-        alphabet,
+      <if test="loginTime != null">
+        login_time,
       </if>
-      <if test="status != null">
-        status,
+      <if test="ipAddress != null">
+        ip_address,
       </if>
-      <if test="logo != null">
-        logo,
+      <if test="loginType != null">
+        login_type,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="memberId != null">
+        #{memberId,jdbcType=NUMERIC},
       </if>
-      <if test="alphabet != null">
-        #{alphabet,jdbcType=VARCHAR},
+      <if test="loginTime != null">
+        #{loginTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="status != null">
-        #{status,jdbcType=VARCHAR},
+      <if test="ipAddress != null">
+        #{ipAddress,jdbcType=VARCHAR},
       </if>
-      <if test="logo != null">
-        #{logo,jdbcType=VARCHAR},
+      <if test="loginType != null">
+        #{loginType,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.BrandExample" resultType="java.lang.Long">
-    select count(*) from brand
+  <select id="countByExample" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.MemberLoginLogExample" resultType="java.lang.Long">
+    select count(*) from member_login_log
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update brand
+    update member_login_log
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.memberId != null">
+        member_id = #{record.memberId,jdbcType=NUMERIC},
       </if>
-      <if test="record.alphabet != null">
-        alphabet = #{record.alphabet,jdbcType=VARCHAR},
+      <if test="record.loginTime != null">
+        login_time = #{record.loginTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.status != null">
-        status = #{record.status,jdbcType=VARCHAR},
+      <if test="record.ipAddress != null">
+        ip_address = #{record.ipAddress,jdbcType=VARCHAR},
       </if>
-      <if test="record.logo != null">
-        logo = #{record.logo,jdbcType=VARCHAR},
+      <if test="record.loginType != null">
+        login_type = #{record.loginType,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -156,12 +156,12 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update brand
+    update member_login_log
     set id = #{record.id,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=VARCHAR},
-      alphabet = #{record.alphabet,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=VARCHAR},
-      logo = #{record.logo,jdbcType=VARCHAR}
+      member_id = #{record.memberId,jdbcType=NUMERIC},
+      login_time = #{record.loginTime,jdbcType=TIMESTAMP},
+      ip_address = #{record.ipAddress,jdbcType=VARCHAR},
+      login_type = #{record.loginType,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

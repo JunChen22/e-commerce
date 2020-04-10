@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.spring.ecommerce.demo.springecommerce.mbg.mapper.BrandMapper">
-  <resultMap id="BaseResultMap" type="com.example.spring.ecommerce.demo.springecommerce.mbg.model.Brand">
+<mapper namespace="com.example.spring.ecommerce.demo.springecommerce.mbg.mapper.ProductAttributeMapper">
+  <resultMap id="BaseResultMap" type="com.example.spring.ecommerce.demo.springecommerce.mbg.model.ProductAttribute">
     <result column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="alphabet" jdbcType="VARCHAR" property="alphabet" />
-    <result column="status" jdbcType="VARCHAR" property="status" />
-    <result column="logo" jdbcType="VARCHAR" property="logo" />
+    <result column="product_id" jdbcType="NUMERIC" property="productId" />
+    <result column="attribute_type_id" jdbcType="NUMERIC" property="attributeTypeId" />
+    <result column="attribute_value" jdbcType="VARCHAR" property="attributeValue" />
+    <result column="attribute_unit" jdbcType="VARCHAR" property="attributeUnit" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,15 +67,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, alphabet, status, logo
+    id, product_id, attribute_type_id, attribute_value, attribute_unit
   </sql>
-  <select id="selectByExample" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.BrandExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.ProductAttributeExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from brand
+    from product_attribute
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -83,72 +83,72 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.BrandExample">
-    delete from brand
+  <delete id="deleteByExample" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.ProductAttributeExample">
+    delete from product_attribute
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.Brand" useGeneratedKeys="true">
-    insert into brand (name, alphabet, status, 
-      logo)
-    values (#{name,jdbcType=VARCHAR}, #{alphabet,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
-      #{logo,jdbcType=VARCHAR})
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.ProductAttribute" useGeneratedKeys="true">
+    insert into product_attribute (product_id, attribute_type_id, attribute_value, 
+      attribute_unit)
+    values (#{productId,jdbcType=NUMERIC}, #{attributeTypeId,jdbcType=NUMERIC}, #{attributeValue,jdbcType=VARCHAR}, 
+      #{attributeUnit,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.Brand" useGeneratedKeys="true">
-    insert into brand
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.ProductAttribute" useGeneratedKeys="true">
+    insert into product_attribute
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="name != null">
-        name,
+      <if test="productId != null">
+        product_id,
       </if>
-      <if test="alphabet != null">
-        alphabet,
+      <if test="attributeTypeId != null">
+        attribute_type_id,
       </if>
-      <if test="status != null">
-        status,
+      <if test="attributeValue != null">
+        attribute_value,
       </if>
-      <if test="logo != null">
-        logo,
+      <if test="attributeUnit != null">
+        attribute_unit,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="productId != null">
+        #{productId,jdbcType=NUMERIC},
       </if>
-      <if test="alphabet != null">
-        #{alphabet,jdbcType=VARCHAR},
+      <if test="attributeTypeId != null">
+        #{attributeTypeId,jdbcType=NUMERIC},
       </if>
-      <if test="status != null">
-        #{status,jdbcType=VARCHAR},
+      <if test="attributeValue != null">
+        #{attributeValue,jdbcType=VARCHAR},
       </if>
-      <if test="logo != null">
-        #{logo,jdbcType=VARCHAR},
+      <if test="attributeUnit != null">
+        #{attributeUnit,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.BrandExample" resultType="java.lang.Long">
-    select count(*) from brand
+  <select id="countByExample" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.ProductAttributeExample" resultType="java.lang.Long">
+    select count(*) from product_attribute
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update brand
+    update product_attribute
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.productId != null">
+        product_id = #{record.productId,jdbcType=NUMERIC},
       </if>
-      <if test="record.alphabet != null">
-        alphabet = #{record.alphabet,jdbcType=VARCHAR},
+      <if test="record.attributeTypeId != null">
+        attribute_type_id = #{record.attributeTypeId,jdbcType=NUMERIC},
       </if>
-      <if test="record.status != null">
-        status = #{record.status,jdbcType=VARCHAR},
+      <if test="record.attributeValue != null">
+        attribute_value = #{record.attributeValue,jdbcType=VARCHAR},
       </if>
-      <if test="record.logo != null">
-        logo = #{record.logo,jdbcType=VARCHAR},
+      <if test="record.attributeUnit != null">
+        attribute_unit = #{record.attributeUnit,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -156,12 +156,12 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update brand
+    update product_attribute
     set id = #{record.id,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=VARCHAR},
-      alphabet = #{record.alphabet,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=VARCHAR},
-      logo = #{record.logo,jdbcType=VARCHAR}
+      product_id = #{record.productId,jdbcType=NUMERIC},
+      attribute_type_id = #{record.attributeTypeId,jdbcType=NUMERIC},
+      attribute_value = #{record.attributeValue,jdbcType=VARCHAR},
+      attribute_unit = #{record.attributeUnit,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
