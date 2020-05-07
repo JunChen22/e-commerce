@@ -10,13 +10,21 @@ public interface ProductChangeLogMapper {
 
     int deleteByExample(ProductChangeLogExample example);
 
+    int deleteByPrimaryKey(Integer id);
+
     int insert(ProductChangeLog record);
 
     int insertSelective(ProductChangeLog record);
 
     List<ProductChangeLog> selectByExample(ProductChangeLogExample example);
 
+    ProductChangeLog selectByPrimaryKey(Integer id);
+
     int updateByExampleSelective(@Param("record") ProductChangeLog record, @Param("example") ProductChangeLogExample example);
 
     int updateByExample(@Param("record") ProductChangeLog record, @Param("example") ProductChangeLogExample example);
+
+    int updateByPrimaryKeySelective(ProductChangeLog record);
+
+    int updateByPrimaryKey(ProductChangeLog record);
 }

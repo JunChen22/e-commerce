@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.spring.ecommerce.demo.springecommerce.mbg.mapper.ProductChangeLogMapper">
   <resultMap id="BaseResultMap" type="com.example.spring.ecommerce.demo.springecommerce.mbg.model.ProductChangeLog">
-    <result column="id" jdbcType="INTEGER" property="id" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="product_id" jdbcType="NUMERIC" property="productId" />
     <result column="price_old" jdbcType="NUMERIC" property="priceOld" />
     <result column="price_new" jdbcType="NUMERIC" property="priceNew" />
@@ -86,6 +86,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product_change_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from product_change_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.ProductChangeLogExample">
     delete from product_change_log
     <if test="_parameter != null">
@@ -200,5 +210,43 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.ProductChangeLog">
+    update product_change_log
+    <set>
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=NUMERIC},
+      </if>
+      <if test="priceOld != null">
+        price_old = #{priceOld,jdbcType=NUMERIC},
+      </if>
+      <if test="priceNew != null">
+        price_new = #{priceNew,jdbcType=NUMERIC},
+      </if>
+      <if test="unitOld != null">
+        unit_old = #{unitOld,jdbcType=NUMERIC},
+      </if>
+      <if test="unitNew != null">
+        unit_new = #{unitNew,jdbcType=NUMERIC},
+      </if>
+      <if test="operateMan != null">
+        operate_man = #{operateMan,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.ProductChangeLog">
+    update product_change_log
+    set product_id = #{productId,jdbcType=NUMERIC},
+      price_old = #{priceOld,jdbcType=NUMERIC},
+      price_new = #{priceNew,jdbcType=NUMERIC},
+      unit_old = #{unitOld,jdbcType=NUMERIC},
+      unit_new = #{unitNew,jdbcType=NUMERIC},
+      operate_man = #{operateMan,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

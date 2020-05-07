@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.spring.ecommerce.demo.springecommerce.mbg.mapper.ProductAttributeCategoryMapper">
   <resultMap id="BaseResultMap" type="com.example.spring.ecommerce.demo.springecommerce.mbg.model.ProductAttributeCategory">
-    <result column="id" jdbcType="INTEGER" property="id" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="attribute_amount" jdbcType="NUMERIC" property="attributeAmount" />
   </resultMap>
@@ -81,6 +81,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product_attribute_category
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from product_attribute_category
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.ProductAttributeCategoryExample">
     delete from product_attribute_category
     <if test="_parameter != null">
@@ -141,5 +151,23 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.ProductAttributeCategory">
+    update product_attribute_category
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="attributeAmount != null">
+        attribute_amount = #{attributeAmount,jdbcType=NUMERIC},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.ProductAttributeCategory">
+    update product_attribute_category
+    set name = #{name,jdbcType=VARCHAR},
+      attribute_amount = #{attributeAmount,jdbcType=NUMERIC}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

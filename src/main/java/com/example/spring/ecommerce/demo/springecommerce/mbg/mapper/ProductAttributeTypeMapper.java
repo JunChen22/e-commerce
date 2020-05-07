@@ -10,13 +10,21 @@ public interface ProductAttributeTypeMapper {
 
     int deleteByExample(ProductAttributeTypeExample example);
 
+    int deleteByPrimaryKey(Integer id);
+
     int insert(ProductAttributeType record);
 
     int insertSelective(ProductAttributeType record);
 
     List<ProductAttributeType> selectByExample(ProductAttributeTypeExample example);
 
+    ProductAttributeType selectByPrimaryKey(Integer id);
+
     int updateByExampleSelective(@Param("record") ProductAttributeType record, @Param("example") ProductAttributeTypeExample example);
 
     int updateByExample(@Param("record") ProductAttributeType record, @Param("example") ProductAttributeTypeExample example);
+
+    int updateByPrimaryKeySelective(ProductAttributeType record);
+
+    int updateByPrimaryKey(ProductAttributeType record);
 }

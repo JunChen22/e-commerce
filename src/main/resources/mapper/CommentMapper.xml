@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.spring.ecommerce.demo.springecommerce.mbg.mapper.CommentMapper">
   <resultMap id="BaseResultMap" type="com.example.spring.ecommerce.demo.springecommerce.mbg.model.Comment">
-    <result column="id" jdbcType="INTEGER" property="id" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="product_id" jdbcType="NUMERIC" property="productId" />
     <result column="member_name" jdbcType="VARCHAR" property="memberName" />
     <result column="member_icon" jdbcType="VARCHAR" property="memberIcon" />
@@ -89,6 +89,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from comment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from comment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.CommentExample">
     delete from comment
     <if test="_parameter != null">
@@ -225,5 +235,51 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.Comment">
+    update comment
+    <set>
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=NUMERIC},
+      </if>
+      <if test="memberName != null">
+        member_name = #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberIcon != null">
+        member_icon = #{memberIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="star != null">
+        star = #{star,jdbcType=NUMERIC},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tittle != null">
+        tittle = #{tittle,jdbcType=VARCHAR},
+      </if>
+      <if test="likes != null">
+        likes = #{likes,jdbcType=NUMERIC},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="pictures != null">
+        pictures = #{pictures,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.spring.ecommerce.demo.springecommerce.mbg.model.Comment">
+    update comment
+    set product_id = #{productId,jdbcType=NUMERIC},
+      member_name = #{memberName,jdbcType=VARCHAR},
+      member_icon = #{memberIcon,jdbcType=VARCHAR},
+      star = #{star,jdbcType=NUMERIC},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      tittle = #{tittle,jdbcType=VARCHAR},
+      likes = #{likes,jdbcType=NUMERIC},
+      content = #{content,jdbcType=VARCHAR},
+      pictures = #{pictures,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

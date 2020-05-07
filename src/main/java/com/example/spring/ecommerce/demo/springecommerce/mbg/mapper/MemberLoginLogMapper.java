@@ -10,13 +10,21 @@ public interface MemberLoginLogMapper {
 
     int deleteByExample(MemberLoginLogExample example);
 
+    int deleteByPrimaryKey(Integer id);
+
     int insert(MemberLoginLog record);
 
     int insertSelective(MemberLoginLog record);
 
     List<MemberLoginLog> selectByExample(MemberLoginLogExample example);
 
+    MemberLoginLog selectByPrimaryKey(Integer id);
+
     int updateByExampleSelective(@Param("record") MemberLoginLog record, @Param("example") MemberLoginLogExample example);
 
     int updateByExample(@Param("record") MemberLoginLog record, @Param("example") MemberLoginLogExample example);
+
+    int updateByPrimaryKeySelective(MemberLoginLog record);
+
+    int updateByPrimaryKey(MemberLoginLog record);
 }

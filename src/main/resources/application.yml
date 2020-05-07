@@ -13,6 +13,9 @@
 # material used
 # https://blog.csdn.net/m0_37524586/article/details/88351833
 # https://v.qq.com/x/page/l0891rocdcm.html
+server:
+  port: 8080
+
 spring:
   datasource:
     url: jdbc:postgresql://localhost/springecommerece
@@ -26,3 +29,11 @@ mybatis:
   mapper-locations:
     - classpath:mapper/*.xml
     - classpath*:com/**/mapper/*.xml
+
+jwt:
+  HEADER_STRING: Authorization
+  tokenPrefix: Bearer
+  secretKey: JunChen522
+  expirationTimeMinute: 15
+
+pizza: pepperonis

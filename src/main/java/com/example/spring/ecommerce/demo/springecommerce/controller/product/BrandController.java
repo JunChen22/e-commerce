@@ -1,4 +1,4 @@
-package com.example.spring.ecommerce.demo.springecommerce.controller;
+package com.example.spring.ecommerce.demo.springecommerce.controller.product;
 
 import com.example.spring.ecommerce.demo.springecommerce.Service.impl.BrandServiceImpl;
 import com.example.spring.ecommerce.demo.springecommerce.mbg.model.Brand;
@@ -21,9 +21,15 @@ public class BrandController {
         this.brandService = brandService;
     }
 
-    @GetMapping("/all")
+    @GetMapping("/listAll")
     @ApiOperation(value = "Get all brands")
     public List<Brand> getAllBrand(){
+        return brandService.listAllBrand();
+    }
+
+    @GetMapping("/list")
+    @ApiOperation(value = "Get all brands")
+    public List<Brand> getBrand(){
         return brandService.listAllBrand();
     }
 
@@ -36,6 +42,19 @@ public class BrandController {
     @PostMapping("/create")
     @ApiOperation(value = "Create a brand")
     public Brand createBrand(@RequestBody Brand brand){
+        brandService.createBrand(brand);
+        return brand;
+    }
+
+    @PostMapping("/update")
+    @ApiOperation(value = "update a brand")
+    public Brand updateBrand(@RequestBody Brand brand){
+        brandService.createBrand(brand);
+        return brand;
+    }
+    @PostMapping("/delete")
+    @ApiOperation(value = "delete a brand")
+    public Brand deleteBrand(@RequestBody Brand brand){
         brandService.createBrand(brand);
         return brand;
     }
