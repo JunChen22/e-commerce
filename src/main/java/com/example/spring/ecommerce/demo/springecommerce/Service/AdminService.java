@@ -5,7 +5,7 @@ import com.example.spring.ecommerce.demo.springecommerce.mbg.model.Member;
 
 public interface AdminService {
     String login(String username, String password);
-    String register();
+    String register(Admin admin);
     Admin getAdminByUsername(String username);
     // getPermissions
 }

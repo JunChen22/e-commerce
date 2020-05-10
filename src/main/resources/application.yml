@@ -34,6 +34,6 @@ jwt:
   HEADER_STRING: Authorization
   tokenPrefix: Bearer
   secretKey: JunChen522
-  expirationTimeMinute: 15
+  expirationTimeMinute: 1
 
 pizza: pepperonis

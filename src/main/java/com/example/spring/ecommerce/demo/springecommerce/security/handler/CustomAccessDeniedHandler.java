@@ -18,7 +18,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
                        AccessDeniedException e) throws IOException, ServletException {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
-        response.getWriter().println("404 not found");
+        response.getWriter().println("You don't have required role to perform this action");
         response.getWriter().flush();
     }
 }

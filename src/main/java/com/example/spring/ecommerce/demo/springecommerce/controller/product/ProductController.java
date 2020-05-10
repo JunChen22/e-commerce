@@ -1,18 +1,17 @@
 package com.example.spring.ecommerce.demo.springecommerce.controller.product;
 
-import com.example.spring.ecommerce.demo.springecommerce.Service.impl.AdminServiceImpl;
 import com.example.spring.ecommerce.demo.springecommerce.Service.impl.ProductServiceImpl;
 import com.example.spring.ecommerce.demo.springecommerce.mbg.model.Product;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/product")
+@Api(tags = "Product related")
 public class ProductController {
 
     private final ProductServiceImpl productService;
@@ -22,9 +21,44 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/getall")
-    public List<Product> getAllproduct(){
-        List<Product> products = productService.getAllProduct();
-        return products;
+    @GetMapping("/listAll")
+    @ApiOperation(value = "Get all product")
+    public List<Product> listAllProduct(){
+        List<Product> productList = productService.listAllProduct();
+        return productList;
+    }
+
+    @GetMapping("/list")
+    @ApiOperation(value = "Get product with page and size")
+    public List<Product> listAllProduct(@RequestParam(value = "page", defaultValue = "1") int pageNum,
+                                        @RequestParam(value = "size", defaultValue = "3") int pageSize){
+        return productService.listProduct(pageNum, pageSize);
+    }
+
+    @GetMapping("/{id}")
+    @ApiOperation(value = "Get product by id")
+    public Product listProduct(@PathVariable int id){
+        return productService.getProduct(id);
+    }
+
+    @PostMapping("/create")
+    @ApiOperation(value = "Create a product")
+    public Product createProduct(@RequestBody Product product){
+        productService.createProduct(product);
+        return product;
+    }
+
+    @PostMapping("/update/{id}")
+    @ApiOperation(value = "Update a product")
+    public Product updateProduct(@PathVariable int id, Product product){
+        productService.updateProduct(id, product);
+        return product;
+    }
+
+    @DeleteMapping("/delete/{id}")
+    @ApiOperation(value = "Delete a product")
+    public String deleteProduct(int id){
+        productService.deleteProduct(id);
+        return "deleted";
     }
 }

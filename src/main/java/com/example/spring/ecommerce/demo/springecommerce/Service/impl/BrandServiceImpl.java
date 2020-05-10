@@ -4,6 +4,8 @@ import com.example.spring.ecommerce.demo.springecommerce.Service.BrandService;
 import com.example.spring.ecommerce.demo.springecommerce.mbg.mapper.BrandMapper;
 import com.example.spring.ecommerce.demo.springecommerce.mbg.model.Brand;
 import com.example.spring.ecommerce.demo.springecommerce.mbg.model.BrandExample;
+import com.example.spring.ecommerce.demo.springecommerce.mbg.model.ProductExample;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,12 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
+    public List<Brand> listBrand(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        return brandMapper.selectByExample(new BrandExample());
+    }
+
+    @Override
     public Brand getBrand(int id) {
         return brandMapper.selectByPrimaryKey(id);
     }
@@ -36,12 +44,15 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public boolean updateBrand(Brand brand) {
-        return false;
+    public boolean updateBrand(int id, Brand brand) {
+        brand.setId(id);
+        brandMapper.updateByPrimaryKeySelective(brand);
+        return true;
     }
 
     @Override
     public boolean deleteBrand(int id) {
-        return false;
+        brandMapper.deleteByPrimaryKey(id);
+        return true;
     }
 }

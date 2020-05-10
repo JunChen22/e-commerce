@@ -15,11 +15,14 @@
             <property name="addRemarkComments" value="true"/>
         </commentGenerator>
 
+        <!--  database driver-->
         <jdbcConnection driverClass="org.postgresql.Driver"
                     connectionURL="jdbc:postgresql://localhost/springecommerece"
                     userId="postgres"
                     password="postgres">
         </jdbcConnection>
+
+        <!-- location of model and mapper will be generated -->
         <javaModelGenerator targetPackage="com.example.spring.ecommerce.demo.springecommerce.mbg.model"
                         targetProject="src/main/java"/>
         <sqlMapGenerator targetPackage="mapper"
@@ -32,10 +35,6 @@
         <table tableName= "brand">
             <generatedKey column="id" sqlStatement="JDBC" />
         </table>
-
-
-
-
         <table tableName= "product_category">
             <generatedKey column="id" sqlStatement="JDBC" />
         </table>

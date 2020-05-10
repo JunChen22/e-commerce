@@ -20,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -54,8 +55,15 @@ public class AdminServiceImpl implements UserDetailsService, AdminService {
     }
 
     @Override
-    public String register() {
-        //TODO: register
+    public String register(Admin newAdmin) {
+        newAdmin.setCreateTime(new Date());
+        newAdmin.setStatus("active");
+        AdminExample example = new AdminExample();
+        example.createCriteria().andUsernameEqualTo(newAdmin.getUsername());
+        List<Admin> existing = adminMapper.selectByExample(example);
+        if(!existing.isEmpty()) return null;
+        newAdmin.setPassword(passwordEncoder().encode(newAdmin.getPassword()));
+        adminMapper.insert(newAdmin);
         return null;
     }
 

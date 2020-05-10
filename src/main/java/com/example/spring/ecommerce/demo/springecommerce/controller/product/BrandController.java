@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/brand")
-@Api(value = " title", tags = {"brands", " GET and POST"})
+@RequestMapping("/brand")
+@Api(tags = "Product related", description = "product management")
 public class BrandController {
 
     private final BrandServiceImpl brandService;
@@ -28,9 +28,10 @@ public class BrandController {
     }
 
     @GetMapping("/list")
-    @ApiOperation(value = "Get all brands")
-    public List<Brand> getBrand(){
-        return brandService.listAllBrand();
+    @ApiOperation(value = "Get brands with page and size")
+    public List<Brand> getAllBrand(@RequestParam(value = "page", defaultValue = "1") int pageNum,
+                                   @RequestParam(value = "size", defaultValue = "3") int pageSize){
+        return brandService.listBrand(pageNum, pageSize);
     }
 
     @GetMapping("{id}")
@@ -46,16 +47,17 @@ public class BrandController {
         return brand;
     }
 
-    @PostMapping("/update")
-    @ApiOperation(value = "update a brand")
-    public Brand updateBrand(@RequestBody Brand brand){
-        brandService.createBrand(brand);
+    @PostMapping("/update/{id}")
+    @ApiOperation(value = "Update a brand")
+    public Brand updateBrand(@PathVariable int id, @RequestBody Brand brand){
+        brandService.updateBrand(id, brand);
         return brand;
     }
-    @PostMapping("/delete")
-    @ApiOperation(value = "delete a brand")
-    public Brand deleteBrand(@RequestBody Brand brand){
-        brandService.createBrand(brand);
-        return brand;
+
+    @DeleteMapping("/delete/{id}")
+    @ApiOperation(value = "Delete a brand")
+    public String deleteBrand(@PathVariable int id){
+        brandService.deleteBrand(id);
+        return "deleted";
     }
 }

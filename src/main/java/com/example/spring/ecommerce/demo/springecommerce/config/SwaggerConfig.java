@@ -26,10 +26,9 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("SwaggerUI demo")
+                .title("api for spring e-commerce")
                 .description("api for spring e-commerce")
                 .version("1.0")
                 .build();
     }
-
 }
