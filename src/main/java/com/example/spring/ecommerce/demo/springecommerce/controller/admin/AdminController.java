@@ -24,10 +24,12 @@ public class AdminController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request){
+        System.out.println("at login page");
         String token = adminService.login(request.getUsername(), request.getPassword());
         if(token.isEmpty()){
             return new ResponseEntity<>(new LoginResponse(false, token), HttpStatus.NOT_FOUND);
         }
+        adminService.getPermissionList(0);
         return new ResponseEntity<>(new LoginResponse(true, token),HttpStatus.OK);
     }
 

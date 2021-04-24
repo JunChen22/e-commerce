@@ -5,6 +5,7 @@ import com.example.spring.ecommerce.demo.springecommerce.mbg.model.Product;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/product")
 @Api(tags = "Product related")
+@PreAuthorize("isAuthenticated()")
 public class ProductController {
 
     private final ProductServiceImpl productService;
@@ -31,7 +33,7 @@ public class ProductController {
     @GetMapping("/list")
     @ApiOperation(value = "Get product with page and size")
     public List<Product> listAllProduct(@RequestParam(value = "page", defaultValue = "1") int pageNum,
-                                        @RequestParam(value = "size", defaultValue = "3") int pageSize){
+                                        @RequestParam(value = "size", defaultValue = "5") int pageSize){
         return productService.listProduct(pageNum, pageSize);
     }
 
@@ -43,6 +45,7 @@ public class ProductController {
 
     @PostMapping("/create")
     @ApiOperation(value = "Create a product")
+    @PreAuthorize("hasAuthority('product:create')")
     public Product createProduct(@RequestBody Product product){
         productService.createProduct(product);
         return product;
@@ -50,6 +53,7 @@ public class ProductController {
 
     @PostMapping("/update/{id}")
     @ApiOperation(value = "Update a product")
+    @PreAuthorize("hasAuthority('product:update')")
     public Product updateProduct(@PathVariable int id, Product product){
         productService.updateProduct(id, product);
         return product;
@@ -57,7 +61,8 @@ public class ProductController {
 
     @DeleteMapping("/delete/{id}")
     @ApiOperation(value = "Delete a product")
-    public String deleteProduct(int id){
+    @PreAuthorize("hasAuthority('product:delete')")
+    public String deleteProduct(@PathVariable int id){
         productService.deleteProduct(id);
         return "deleted";
     }

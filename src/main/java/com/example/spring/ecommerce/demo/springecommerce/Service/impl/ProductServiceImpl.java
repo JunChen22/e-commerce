@@ -2,7 +2,6 @@ package com.example.spring.ecommerce.demo.springecommerce.Service.impl;
 
 import com.example.spring.ecommerce.demo.springecommerce.Service.ProductService;
 import com.example.spring.ecommerce.demo.springecommerce.mbg.mapper.ProductMapper;
-import com.example.spring.ecommerce.demo.springecommerce.mbg.model.Brand;
 import com.example.spring.ecommerce.demo.springecommerce.mbg.model.Product;
 import com.example.spring.ecommerce.demo.springecommerce.mbg.model.ProductExample;
 import com.github.pagehelper.PageHelper;

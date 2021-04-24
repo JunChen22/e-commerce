@@ -15,6 +15,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException, ServletException {
         response.getWriter().println("Unauthorize, you need to login first in order to perform this action.");
+        response.sendRedirect("/admin/login");
         response.getWriter().flush();
     }
 }

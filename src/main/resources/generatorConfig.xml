@@ -77,5 +77,11 @@
         <table tableName= "admin_role_relation">
             <generatedKey column="id" sqlStatement="JDBC" />
         </table>
+        <table tableName= "permission">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+        <table tableName= "role_permission_relation">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
     </context>
 </generatorConfiguration>

@@ -1,8 +1,6 @@
 package com.example.spring.ecommerce.demo.springecommerce.security.jwt;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -31,8 +29,22 @@ public class JwtTokenUtil {
     }
 
     public boolean validateToken(String token, UserDetails userDetails){
-        String tokenUsername = getUsernameFromToken(token);
-        return userDetails.getUsername().equals(tokenUsername) && !isTokenExpired(token);
+        try {
+            String tokenUsername = getUsernameFromToken(token);
+            Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
+            return userDetails.getUsername().equals(tokenUsername) && !isTokenExpired(token);
+        } catch (SignatureException ex) {
+            System.out.println("Invalid JWT Signature");
+        } catch (MalformedJwtException ex) {
+            System.out.println("Invalid JWT Token");
+        } catch (ExpiredJwtException ex) {
+            System.out.println("Expired JWT token");
+        } catch (UnsupportedJwtException ex) {
+            System.out.println("Unsupported JWT token");
+        } catch (IllegalArgumentException ex) {
+            System.out.println("JWT claims string is empty");
+        }
+        return false;
     }
 
     private boolean isTokenExpired(String token){

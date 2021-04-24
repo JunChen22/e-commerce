@@ -1,8 +1,12 @@
 package com.example.spring.ecommerce.demo.springecommerce.security;
 
+import javax.validation.constraints.NotEmpty;
+
 public class LoginRequest {
 
+    //@NotEmpty(message = "username can not be empty")
     String username;
+    //@NotEmpty(message = "password can not be empty")
     String password;
 
     public LoginRequest(String username, String password) {

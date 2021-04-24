@@ -19,6 +19,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
         response.getWriter().println("You don't have required role to perform this action");
+        response.sendRedirect("/admin/login");
         response.getWriter().flush();
     }
 }

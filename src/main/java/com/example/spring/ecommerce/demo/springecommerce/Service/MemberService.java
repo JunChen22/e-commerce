@@ -4,5 +4,7 @@ import com.example.spring.ecommerce.demo.springecommerce.mbg.model.Member;
 
 public interface MemberService {
 
-    public Member getMemberByUserName(String username);
+    String generateAuthCode(String telephone);
+
+    String verifyAuthCode(String telephone, String authCode);
 }

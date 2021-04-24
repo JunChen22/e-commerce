@@ -1,13 +1,14 @@
 package com.example.spring.ecommerce.demo.springecommerce.Service.impl;
 
 import com.example.spring.ecommerce.demo.springecommerce.Service.AdminService;
+import com.example.spring.ecommerce.demo.springecommerce.dao.AdminPermissionDao;
 import com.example.spring.ecommerce.demo.springecommerce.dto.CustomUserDetail;
 import com.example.spring.ecommerce.demo.springecommerce.mbg.mapper.AdminMapper;
 import com.example.spring.ecommerce.demo.springecommerce.mbg.model.Admin;
 import com.example.spring.ecommerce.demo.springecommerce.mbg.model.AdminExample;
+import com.example.spring.ecommerce.demo.springecommerce.mbg.model.Permission;
 import com.example.spring.ecommerce.demo.springecommerce.security.jwt.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -28,11 +29,13 @@ public class AdminServiceImpl implements UserDetailsService, AdminService {
 
     private final AdminMapper adminMapper;
     private final JwtTokenUtil jwtTokenUtil;
+    private final AdminPermissionDao adminPermissionDao;
 
     @Autowired
-    public AdminServiceImpl(AdminMapper adminMapper, JwtTokenUtil jwtTokenUtil) {
+    public AdminServiceImpl(AdminMapper adminMapper, JwtTokenUtil jwtTokenUtil, AdminPermissionDao adminPermissionDao) {
         this.adminMapper = adminMapper;
         this.jwtTokenUtil = jwtTokenUtil;
+        this.adminPermissionDao = adminPermissionDao;
     }
 
     @Override
@@ -79,11 +82,16 @@ public class AdminServiceImpl implements UserDetailsService, AdminService {
     }
 
     @Override
+    public List<Permission> getPermissionList(int id) {
+        return adminPermissionDao.getPermissionList(id);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Admin admin = getAdminByUsername(username);
         if(admin != null){
-            // TODO: empty permission for now
-            return new CustomUserDetail(admin, Collections.emptyList());
+            List<Permission> permissions = getPermissionList(admin.getId());
+            return new CustomUserDetail(admin, permissions);
         }
         throw new UsernameNotFoundException("Username not found");
     }
