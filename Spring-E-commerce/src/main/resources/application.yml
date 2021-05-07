@@ -44,10 +44,19 @@ spring:
         max-idle: 8
         min-idle: 0
     timeout: 3000ms
+  rabbitmq:
+    host: localhost
+    port: 5672
+    virtual-host: /product
+    username: product
+    password: product
+    publisher-confirms: true
 
   elasticsearch:
     rest:
       uris: http://localhost:9200
+
+
 
 # tells spring mybatis mapper's xml(sql) located
 mybatis:

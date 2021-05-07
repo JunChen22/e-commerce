@@ -56,6 +56,7 @@ Tech used:
 - https://www.youtube.com/watch?v=EpYBP7EZ8Y4
 - https://www.youtube.com/watch?v=-PcU6uf-p3g&list=PLA7e3zmT6XQUNzbNoTb-8c-VTa_i_w5-y
 
+
 JWT:
 - https://auth0.com/blog/implementing-jwt-authentication-on-spring-boot/
 - https://dzone.com/articles/spring-boot-security-json-web-tokenjwt-hello-world

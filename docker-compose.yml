@@ -35,7 +35,7 @@ services:
     image: docker.elastic.co/kibana/kibana:7.11.1
     container_name: kibana
     depends_on:
-      - elasticsearch #kibana在elasticsearch启动之后再启动
+      - elasticsearch
     environment:
       - "ELASTICSEARCH_HOSTS=http://elasticsearch:9200"
     ports:

@@ -73,6 +73,11 @@
             <version>2.3.10.RELEASE</version>
         </dependency>
 
+        <!-- rabbitmq -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
 
         <!-- mongodb -->
         <dependency>
