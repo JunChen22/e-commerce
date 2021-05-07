@@ -1,0 +1,25 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost/springecommerece # need to change localhost for docker-compose
+    #url: jdbc:postgresql://db:5432/springecommerece
+    username: postgres
+    password: password
+    driverClassName: org.postgresql.Driver
+    #initialization-mode: always
+  data:
+    elasticsearch:
+      repositories:
+        enabled: true
+  elasticsearch:
+    rest:
+      uris: http://localhost:9200
+
+# tells spring mybatis mapper's xml(sql) located
+mybatis:
+  mapper-locations:
+    - classpath:mapper/*.xml
+    - classpath:dao/*.xml
+

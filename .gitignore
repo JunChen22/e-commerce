@@ -97,7 +97,6 @@ yarn-error.log*
 # .attach_pid files
 .attach_pid*
 
-.directory
 
 # mac files
 .DS_Store
