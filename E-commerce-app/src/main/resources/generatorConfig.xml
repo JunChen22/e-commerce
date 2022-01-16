@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- driver or class path error , need to specify the path-->
+    <!-- don't need this line if generator plug in have dependecy driver -->
+    <!-- classPathEntry location="/home/jun/.m2/repository/org/postgresql/postgresql/42.2.8/postgresql-42.2.8.jar" / -->
+    <context id="MySqlContext" targetRuntime="MyBatis3" defaultModelType="flat">
+        <!--newly generated mapper will update existing one-->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
+        <!-- congifuration for generated code comments, default is false ,generic comment -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+            <property name="addRemarkComments" value="true"/>
+        </commentGenerator>
+
+        <!--  database driver-->
+        <jdbcConnection driverClass="org.postgresql.Driver"
+                    connectionURL="jdbc:postgresql://localhost/springecommerece"
+                    userId="postgres"
+                    password="password">
+        </jdbcConnection>
+
+        <!-- location of model and mapper will be generated -->
+        <javaModelGenerator targetPackage="com.example.spring.ecommerce.demo.springecommerce.mbg.model"
+                        targetProject="src/main/java"/>
+        <sqlMapGenerator targetPackage="mapper"
+                     targetProject="src/main/resources"/>
+        <javaClientGenerator targetPackage="com.example.spring.ecommerce.demo.springecommerce.mbg.mapper"
+                         targetProject="src/main/java"
+                         type="XMLMAPPER"/>
+
+        <!-- generate the table needed -->
+        <table tableName= "brand">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+        <table tableName= "product_category">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+        <table tableName= "product_attribute_category">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+        <table tableName= "product_attribute_type">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+        <table tableName= "product">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+        <table tableName= "product_attribute">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+        <table tableName= "comment">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+        <table tableName= "product_change_log">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+        <table tableName= "member">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+        <table tableName= "receive_address">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+        <table tableName= "member_login_log">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+        <table tableName= "admin">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+        <table tableName= "admin_login_log">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+        <table tableName= "roles">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+        <table tableName= "admin_role_relation">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+        <table tableName= "permission">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+        <table tableName= "role_permission_relation">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+    </context>
+</generatorConfiguration>

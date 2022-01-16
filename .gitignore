@@ -1,6 +1,8 @@
 HELP.md
 /target/
 !.mvn/wrapper/maven-wrapper.jar
+.directory
+*/.directory
 
 ### STS ###
 .apt_generated
@@ -57,6 +59,7 @@ hs_err_pid*
 # Maven
 log/
 target/
+*/target
 
 # Eclipse
 .classpath
@@ -106,6 +109,8 @@ TODO.txt
 
 # Mac
 .DS_Store
+
+.directory
 
 #maven script
 /mvnw

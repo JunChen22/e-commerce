@@ -3,5 +3,12 @@ language: java
 jdk:
   - openjdk8
 
+services:
+  - elasticsearch
+  - mongodb
+  - redis-server
+  - rabbitmq
+  - postgresql
+
 script:
   - mvn test
