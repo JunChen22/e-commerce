@@ -3,12 +3,17 @@
 
 This project was based on mall by macrozheng on github.
 
+``` lua
+E-commerece 
+├── E-commerece-app  -- main application
+├── E-commerece-search  -- searching related module
+├── E-commerece-common  -- shared common module
+├── E-commerece-mbg  -- shared mybatist module
+└── E-commerece-security -- shared security module
+```
 
 API calls
-
  - go to http://localhost:8080/swagger-ui.html
-
-
 
 
 Set up/installation:
@@ -22,34 +27,44 @@ Set up/installation:
         # ALTER USER postgres PASSWORD 'password';
         # \q
     	```
-
-
-
-
     	Docker:
             https://docs.docker.com/engine/install/ubuntu/
     	Elastic search:
             https://www.elastic.co/guide/en/elasticsearch/reference/current/deb.html#install-deb
 
 
-Start:
-- run the program
-    ```
-     $ mvn spring-boot::run
-    ```
 
-Tech used:
-- Ubuntu: OS
-- SpringBoot
-- SpringSecurity
-- MyBatis - ORM
-- Postgres - database
-- Swagger-UI - documentation
-- AWS S3 API - file storage
-- Docker - container
-- Stripe API - Payment Gateway/processor
-- Elasticsearch - search engine 
-- RabbitMq - message queue
+### Tech stack 
+| Tech                | role                                 | version  | documentation                                  |
+|---------------------|--------------------------------------|----------|------------------------------------------------|
+| SpringBoot          | MVC framework                        |          | https://spring.io/projects/spring-boot         |
+| SpringSecurity      | Security                             |          | https://spring.io/projects/spring-security     |
+| PostgreSQL          | SQL database                         |          | https://www.postgresql.org/                    |
+| MyBatis             | ORM framework                        |          | http://www.mybatis.org/mybatis-3/zh/index.html |
+| MyBatisGenerator    | Sourcecode generator                 |          | http://www.mybatis.org/generator/index.html    |
+| Elasticsearch       | Search engine                        |          | https://github.com/elastic/elasticsearch       |
+| RabbitMQ            | Message queue                        |          | https://www.rabbitmq.com/                      |
+| Redis               | Cache mechanism                      |          | https://redis.io/                              |
+| MongoDB             | NoSql database                       |          | https://www.mongodb.com                        |
+| LogStash            | Logging Service                      |          | https://github.com/elastic/logstash            |
+| Kibina              | Elasticsearch LogStash visualization |          | https://github.com/elastic/kibana              |
+| Nginx               | Webserver                            |          | https://www.nginx.com/                         |
+| Docker              | Containerization                     |          | https://www.docker.com                         |
+| Kubernetes          | Container Orchestration              |          | https://kubernetes.io/                         |
+| JWT                 | Encryption tool                      |          | https://github.com/jwtk/jjwt                   |
+| Lombok              | minimize boilerplate                 |          | https://github.com/rzwitserloot/lombok         |
+| PageHelper          | MyBatis pagination helper            |          | http://git.oschina.net/free/Mybatis_PageHelper |
+| Swagger-UI          | Documentation tool                   |          | https://github.com/swagger-api/swagger-ui      |
+| Hibernate-Validator | Validation                           |          | http://hibernate.org/validator                 |
+| PayPal              | Payment Gateway                      |          | https://developer.paypal.com/home              |
+| Google Pay          | Payment Gateway                      |          | https://developers.google.com/pay/api          |
+| Ubuntu              | OS                                   |          | https://ubuntu.com/                            |
+| AWS S3              | File storage                         |          |                                                |
+
+
+
+
+
 
 ###Material used:
 - https://github.com/macrozheng/mall
