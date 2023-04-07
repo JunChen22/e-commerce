@@ -1,5 +1,8 @@
 #### Spring E-Commerce 
-[![Build Status](https://travis-ci.com/JunChen22/Spring-E-commerce.svg?branch=master)](https://travis-ci.com/JunChen22/Spring-E-commerce)
+
+[![Java CI with Maven](https://github.com/JunChen22/E-commerce/actions/workflows/maven.yml/badge.svg)](https://github.com/JunChen22/E-commerce/actions/workflows/maven.yml) <a href="https://github.com/JunChen22/E-commerce-React"><img src="https://img.shields.io/badge/frontend-React-green"></a>
+
+
 
 This project was based on mall by macrozheng on github.
 
