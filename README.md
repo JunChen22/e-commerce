@@ -1,8 +1,6 @@
 #### Spring E-Commerce 
 
-[![Java CI with Maven](https://github.com/JunChen22/E-commerce/actions/workflows/maven.yml/badge.svg)](https://github.com/JunChen22/E-commerce/actions/workflows/maven.yml) <a href="https://github.com/JunChen22/E-commerce-React"><img src="https://img.shields.io/badge/frontend-React-green"></a>
-
-
+[![Java CI with Maven](https://github.com/JunChen22/E-commerce/actions/workflows/maven.yml/badge.svg)](https://github.com/JunChen22/E-commerce/actions/workflows/maven.yml) <a href="https://github.com/JunChen22/E-commerce-React"><img src="https://img.shields.io/badge/Frontend-React-green"></a> <a href="https://github.com/JunChen22/E-commerce-microservice"><img src="https://img.shields.io/badge/Miscroservice-version-green"></a> <a href="TBD"><img src="https://img.shields.io/badge/Demo-running-green"></a>
 
 This project was based on mall by macrozheng on github.
 
@@ -63,6 +61,28 @@ Set up/installation:
 | Google Pay          | Payment Gateway                      |          | https://developers.google.com/pay/api          |
 | Ubuntu              | OS                                   |          | https://ubuntu.com/                            |
 | AWS S3              | File storage                         |          |                                                |
+
+
+
+Categories of the shop
+
+- Product management system(PMS)
+- Order management system(OMS)
+- Sales management system(SMS)
+- Content management system(CMS)
+- User management system(UMS)
+
+Product Management System: A software application that helps businesses manage their product catalog, including product data, pricing, and inventory.
+
+Content Management System: A software application that allows users to create, manage, and publish digital content, such as text, images, and multimedia, on websites or other digital platforms.
+
+Order Management System: A software application that helps businesses manage their order processing, inventory, shipping, and other fulfillment-related tasks.
+
+Sales Management System: A software application that helps businesses manage their sales processes, including lead generation, customer relationship management, and sales analytics.
+
+User Management System: A software application that helps businesses manage user accounts and permissions, including authentication, authorization, and access control.
+
+
 
 
 
