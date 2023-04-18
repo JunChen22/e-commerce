@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itsthatjun.spring.ecommerce.mbg.mapper.ProductMapper">
+  <resultMap id="BaseResultMap" type="com.itsthatjun.spring.ecommerce.mbg.model.Product">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="brand_id" jdbcType="NUMERIC" property="brandId" />
+    <result column="brand_name" jdbcType="VARCHAR" property="brandName" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="category_id" jdbcType="NUMERIC" property="categoryId" />
+    <result column="category_name" jdbcType="VARCHAR" property="categoryName" />
+    <result column="attribute_category_id" jdbcType="NUMERIC" property="attributeCategoryId" />
+    <result column="sn" jdbcType="NUMERIC" property="sn" />
+    <result column="delete_status" jdbcType="NUMERIC" property="deleteStatus" />
+    <result column="publish_status" jdbcType="NUMERIC" property="publishStatus" />
+    <result column="new_status" jdbcType="NUMERIC" property="newStatus" />
+    <result column="recommend_status" jdbcType="NUMERIC" property="recommendStatus" />
+    <result column="verify_status" jdbcType="NUMERIC" property="verifyStatus" />
+    <result column="sub_title" jdbcType="VARCHAR" property="subTitle" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="original_price" jdbcType="NUMERIC" property="originalPrice" />
+    <result column="on_sale_status" jdbcType="NUMERIC" property="onSaleStatus" />
+    <result column="sale_price" jdbcType="NUMERIC" property="salePrice" />
+    <result column="stock" jdbcType="NUMERIC" property="stock" />
+    <result column="low_stock" jdbcType="NUMERIC" property="lowStock" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="weight" jdbcType="NUMERIC" property="weight" />
+    <result column="promotion_start_time" jdbcType="DATE" property="promotionStartTime" />
+    <result column="promotion_end_time" jdbcType="DATE" property="promotionEndTime" />
+    <result column="promotion_per_limit" jdbcType="NUMERIC" property="promotionPerLimit" />
+    <result column="promotion_type" jdbcType="NUMERIC" property="promotionType" />
+    <result column="keywords" jdbcType="VARCHAR" property="keywords" />
+    <result column="description_album" jdbcType="VARCHAR" property="descriptionAlbum" />
+    <result column="album_pics" jdbcType="VARCHAR" property="albumPics" />
+    <result column="detail_title" jdbcType="VARCHAR" property="detailTitle" />
+    <result column="detail_desc" jdbcType="VARCHAR" property="detailDesc" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, brand_id, brand_name, name, category_id, category_name, attribute_category_id, 
+    sn, delete_status, publish_status, new_status, recommend_status, verify_status, sub_title, 
+    picture, description, original_price, on_sale_status, sale_price, stock, low_stock, 
+    unit, weight, promotion_start_time, promotion_end_time, promotion_per_limit, promotion_type, 
+    keywords, description_album, album_pics, detail_title, detail_desc, note
+  </sql>
+  <select id="selectByExample" parameterType="com.itsthatjun.spring.ecommerce.mbg.model.ProductExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from product
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itsthatjun.spring.ecommerce.mbg.model.ProductExample">
+    delete from product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.spring.ecommerce.mbg.model.Product" useGeneratedKeys="true">
+    insert into product (brand_id, brand_name, name, 
+      category_id, category_name, attribute_category_id, 
+      sn, delete_status, publish_status, 
+      new_status, recommend_status, verify_status, 
+      sub_title, picture, description, 
+      original_price, on_sale_status, sale_price, 
+      stock, low_stock, unit, 
+      weight, promotion_start_time, promotion_end_time, 
+      promotion_per_limit, promotion_type, keywords, 
+      description_album, album_pics, detail_title, 
+      detail_desc, note)
+    values (#{brandId,jdbcType=NUMERIC}, #{brandName,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{categoryId,jdbcType=NUMERIC}, #{categoryName,jdbcType=VARCHAR}, #{attributeCategoryId,jdbcType=NUMERIC}, 
+      #{sn,jdbcType=NUMERIC}, #{deleteStatus,jdbcType=NUMERIC}, #{publishStatus,jdbcType=NUMERIC}, 
+      #{newStatus,jdbcType=NUMERIC}, #{recommendStatus,jdbcType=NUMERIC}, #{verifyStatus,jdbcType=NUMERIC}, 
+      #{subTitle,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{originalPrice,jdbcType=NUMERIC}, #{onSaleStatus,jdbcType=NUMERIC}, #{salePrice,jdbcType=NUMERIC}, 
+      #{stock,jdbcType=NUMERIC}, #{lowStock,jdbcType=NUMERIC}, #{unit,jdbcType=VARCHAR}, 
+      #{weight,jdbcType=NUMERIC}, #{promotionStartTime,jdbcType=DATE}, #{promotionEndTime,jdbcType=DATE}, 
+      #{promotionPerLimit,jdbcType=NUMERIC}, #{promotionType,jdbcType=NUMERIC}, #{keywords,jdbcType=VARCHAR}, 
+      #{descriptionAlbum,jdbcType=VARCHAR}, #{albumPics,jdbcType=VARCHAR}, #{detailTitle,jdbcType=VARCHAR}, 
+      #{detailDesc,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.spring.ecommerce.mbg.model.Product" useGeneratedKeys="true">
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="brandId != null">
+        brand_id,
+      </if>
+      <if test="brandName != null">
+        brand_name,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="categoryName != null">
+        category_name,
+      </if>
+      <if test="attributeCategoryId != null">
+        attribute_category_id,
+      </if>
+      <if test="sn != null">
+        sn,
+      </if>
+      <if test="deleteStatus != null">
+        delete_status,
+      </if>
+      <if test="publishStatus != null">
+        publish_status,
+      </if>
+      <if test="newStatus != null">
+        new_status,
+      </if>
+      <if test="recommendStatus != null">
+        recommend_status,
+      </if>
+      <if test="verifyStatus != null">
+        verify_status,
+      </if>
+      <if test="subTitle != null">
+        sub_title,
+      </if>
+      <if test="picture != null">
+        picture,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="originalPrice != null">
+        original_price,
+      </if>
+      <if test="onSaleStatus != null">
+        on_sale_status,
+      </if>
+      <if test="salePrice != null">
+        sale_price,
+      </if>
+      <if test="stock != null">
+        stock,
+      </if>
+      <if test="lowStock != null">
+        low_stock,
+      </if>
+      <if test="unit != null">
+        unit,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="promotionStartTime != null">
+        promotion_start_time,
+      </if>
+      <if test="promotionEndTime != null">
+        promotion_end_time,
+      </if>
+      <if test="promotionPerLimit != null">
+        promotion_per_limit,
+      </if>
+      <if test="promotionType != null">
+        promotion_type,
+      </if>
+      <if test="keywords != null">
+        keywords,
+      </if>
+      <if test="descriptionAlbum != null">
+        description_album,
+      </if>
+      <if test="albumPics != null">
+        album_pics,
+      </if>
+      <if test="detailTitle != null">
+        detail_title,
+      </if>
+      <if test="detailDesc != null">
+        detail_desc,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="brandId != null">
+        #{brandId,jdbcType=NUMERIC},
+      </if>
+      <if test="brandName != null">
+        #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=NUMERIC},
+      </if>
+      <if test="categoryName != null">
+        #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="attributeCategoryId != null">
+        #{attributeCategoryId,jdbcType=NUMERIC},
+      </if>
+      <if test="sn != null">
+        #{sn,jdbcType=NUMERIC},
+      </if>
+      <if test="deleteStatus != null">
+        #{deleteStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="publishStatus != null">
+        #{publishStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="newStatus != null">
+        #{newStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="recommendStatus != null">
+        #{recommendStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="verifyStatus != null">
+        #{verifyStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="subTitle != null">
+        #{subTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null">
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="originalPrice != null">
+        #{originalPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="onSaleStatus != null">
+        #{onSaleStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="salePrice != null">
+        #{salePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="stock != null">
+        #{stock,jdbcType=NUMERIC},
+      </if>
+      <if test="lowStock != null">
+        #{lowStock,jdbcType=NUMERIC},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=NUMERIC},
+      </if>
+      <if test="promotionStartTime != null">
+        #{promotionStartTime,jdbcType=DATE},
+      </if>
+      <if test="promotionEndTime != null">
+        #{promotionEndTime,jdbcType=DATE},
+      </if>
+      <if test="promotionPerLimit != null">
+        #{promotionPerLimit,jdbcType=NUMERIC},
+      </if>
+      <if test="promotionType != null">
+        #{promotionType,jdbcType=NUMERIC},
+      </if>
+      <if test="keywords != null">
+        #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="descriptionAlbum != null">
+        #{descriptionAlbum,jdbcType=VARCHAR},
+      </if>
+      <if test="albumPics != null">
+        #{albumPics,jdbcType=VARCHAR},
+      </if>
+      <if test="detailTitle != null">
+        #{detailTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="detailDesc != null">
+        #{detailDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itsthatjun.spring.ecommerce.mbg.model.ProductExample" resultType="java.lang.Long">
+    select count(*) from product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update product
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.brandId != null">
+        brand_id = #{record.brandId,jdbcType=NUMERIC},
+      </if>
+      <if test="record.brandName != null">
+        brand_name = #{record.brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryId != null">
+        category_id = #{record.categoryId,jdbcType=NUMERIC},
+      </if>
+      <if test="record.categoryName != null">
+        category_name = #{record.categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attributeCategoryId != null">
+        attribute_category_id = #{record.attributeCategoryId,jdbcType=NUMERIC},
+      </if>
+      <if test="record.sn != null">
+        sn = #{record.sn,jdbcType=NUMERIC},
+      </if>
+      <if test="record.deleteStatus != null">
+        delete_status = #{record.deleteStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="record.publishStatus != null">
+        publish_status = #{record.publishStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="record.newStatus != null">
+        new_status = #{record.newStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="record.recommendStatus != null">
+        recommend_status = #{record.recommendStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="record.verifyStatus != null">
+        verify_status = #{record.verifyStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="record.subTitle != null">
+        sub_title = #{record.subTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picture != null">
+        picture = #{record.picture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originalPrice != null">
+        original_price = #{record.originalPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.onSaleStatus != null">
+        on_sale_status = #{record.onSaleStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="record.salePrice != null">
+        sale_price = #{record.salePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="record.stock != null">
+        stock = #{record.stock,jdbcType=NUMERIC},
+      </if>
+      <if test="record.lowStock != null">
+        low_stock = #{record.lowStock,jdbcType=NUMERIC},
+      </if>
+      <if test="record.unit != null">
+        unit = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weight != null">
+        weight = #{record.weight,jdbcType=NUMERIC},
+      </if>
+      <if test="record.promotionStartTime != null">
+        promotion_start_time = #{record.promotionStartTime,jdbcType=DATE},
+      </if>
+      <if test="record.promotionEndTime != null">
+        promotion_end_time = #{record.promotionEndTime,jdbcType=DATE},
+      </if>
+      <if test="record.promotionPerLimit != null">
+        promotion_per_limit = #{record.promotionPerLimit,jdbcType=NUMERIC},
+      </if>
+      <if test="record.promotionType != null">
+        promotion_type = #{record.promotionType,jdbcType=NUMERIC},
+      </if>
+      <if test="record.keywords != null">
+        keywords = #{record.keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="record.descriptionAlbum != null">
+        description_album = #{record.descriptionAlbum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.albumPics != null">
+        album_pics = #{record.albumPics,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detailTitle != null">
+        detail_title = #{record.detailTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detailDesc != null">
+        detail_desc = #{record.detailDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null">
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update product
+    set id = #{record.id,jdbcType=INTEGER},
+      brand_id = #{record.brandId,jdbcType=NUMERIC},
+      brand_name = #{record.brandName,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      category_id = #{record.categoryId,jdbcType=NUMERIC},
+      category_name = #{record.categoryName,jdbcType=VARCHAR},
+      attribute_category_id = #{record.attributeCategoryId,jdbcType=NUMERIC},
+      sn = #{record.sn,jdbcType=NUMERIC},
+      delete_status = #{record.deleteStatus,jdbcType=NUMERIC},
+      publish_status = #{record.publishStatus,jdbcType=NUMERIC},
+      new_status = #{record.newStatus,jdbcType=NUMERIC},
+      recommend_status = #{record.recommendStatus,jdbcType=NUMERIC},
+      verify_status = #{record.verifyStatus,jdbcType=NUMERIC},
+      sub_title = #{record.subTitle,jdbcType=VARCHAR},
+      picture = #{record.picture,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      original_price = #{record.originalPrice,jdbcType=NUMERIC},
+      on_sale_status = #{record.onSaleStatus,jdbcType=NUMERIC},
+      sale_price = #{record.salePrice,jdbcType=NUMERIC},
+      stock = #{record.stock,jdbcType=NUMERIC},
+      low_stock = #{record.lowStock,jdbcType=NUMERIC},
+      unit = #{record.unit,jdbcType=VARCHAR},
+      weight = #{record.weight,jdbcType=NUMERIC},
+      promotion_start_time = #{record.promotionStartTime,jdbcType=DATE},
+      promotion_end_time = #{record.promotionEndTime,jdbcType=DATE},
+      promotion_per_limit = #{record.promotionPerLimit,jdbcType=NUMERIC},
+      promotion_type = #{record.promotionType,jdbcType=NUMERIC},
+      keywords = #{record.keywords,jdbcType=VARCHAR},
+      description_album = #{record.descriptionAlbum,jdbcType=VARCHAR},
+      album_pics = #{record.albumPics,jdbcType=VARCHAR},
+      detail_title = #{record.detailTitle,jdbcType=VARCHAR},
+      detail_desc = #{record.detailDesc,jdbcType=VARCHAR},
+      note = #{record.note,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itsthatjun.spring.ecommerce.mbg.model.Product">
+    update product
+    <set>
+      <if test="brandId != null">
+        brand_id = #{brandId,jdbcType=NUMERIC},
+      </if>
+      <if test="brandName != null">
+        brand_name = #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=NUMERIC},
+      </if>
+      <if test="categoryName != null">
+        category_name = #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="attributeCategoryId != null">
+        attribute_category_id = #{attributeCategoryId,jdbcType=NUMERIC},
+      </if>
+      <if test="sn != null">
+        sn = #{sn,jdbcType=NUMERIC},
+      </if>
+      <if test="deleteStatus != null">
+        delete_status = #{deleteStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="publishStatus != null">
+        publish_status = #{publishStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="newStatus != null">
+        new_status = #{newStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="recommendStatus != null">
+        recommend_status = #{recommendStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="verifyStatus != null">
+        verify_status = #{verifyStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="subTitle != null">
+        sub_title = #{subTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null">
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="originalPrice != null">
+        original_price = #{originalPrice,jdbcType=NUMERIC},
+      </if>
+      <if test="onSaleStatus != null">
+        on_sale_status = #{onSaleStatus,jdbcType=NUMERIC},
+      </if>
+      <if test="salePrice != null">
+        sale_price = #{salePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="stock != null">
+        stock = #{stock,jdbcType=NUMERIC},
+      </if>
+      <if test="lowStock != null">
+        low_stock = #{lowStock,jdbcType=NUMERIC},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=NUMERIC},
+      </if>
+      <if test="promotionStartTime != null">
+        promotion_start_time = #{promotionStartTime,jdbcType=DATE},
+      </if>
+      <if test="promotionEndTime != null">
+        promotion_end_time = #{promotionEndTime,jdbcType=DATE},
+      </if>
+      <if test="promotionPerLimit != null">
+        promotion_per_limit = #{promotionPerLimit,jdbcType=NUMERIC},
+      </if>
+      <if test="promotionType != null">
+        promotion_type = #{promotionType,jdbcType=NUMERIC},
+      </if>
+      <if test="keywords != null">
+        keywords = #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="descriptionAlbum != null">
+        description_album = #{descriptionAlbum,jdbcType=VARCHAR},
+      </if>
+      <if test="albumPics != null">
+        album_pics = #{albumPics,jdbcType=VARCHAR},
+      </if>
+      <if test="detailTitle != null">
+        detail_title = #{detailTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="detailDesc != null">
+        detail_desc = #{detailDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itsthatjun.spring.ecommerce.mbg.model.Product">
+    update product
+    set brand_id = #{brandId,jdbcType=NUMERIC},
+      brand_name = #{brandName,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      category_id = #{categoryId,jdbcType=NUMERIC},
+      category_name = #{categoryName,jdbcType=VARCHAR},
+      attribute_category_id = #{attributeCategoryId,jdbcType=NUMERIC},
+      sn = #{sn,jdbcType=NUMERIC},
+      delete_status = #{deleteStatus,jdbcType=NUMERIC},
+      publish_status = #{publishStatus,jdbcType=NUMERIC},
+      new_status = #{newStatus,jdbcType=NUMERIC},
+      recommend_status = #{recommendStatus,jdbcType=NUMERIC},
+      verify_status = #{verifyStatus,jdbcType=NUMERIC},
+      sub_title = #{subTitle,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      original_price = #{originalPrice,jdbcType=NUMERIC},
+      on_sale_status = #{onSaleStatus,jdbcType=NUMERIC},
+      sale_price = #{salePrice,jdbcType=NUMERIC},
+      stock = #{stock,jdbcType=NUMERIC},
+      low_stock = #{lowStock,jdbcType=NUMERIC},
+      unit = #{unit,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=NUMERIC},
+      promotion_start_time = #{promotionStartTime,jdbcType=DATE},
+      promotion_end_time = #{promotionEndTime,jdbcType=DATE},
+      promotion_per_limit = #{promotionPerLimit,jdbcType=NUMERIC},
+      promotion_type = #{promotionType,jdbcType=NUMERIC},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      description_album = #{descriptionAlbum,jdbcType=VARCHAR},
+      album_pics = #{albumPics,jdbcType=VARCHAR},
+      detail_title = #{detailTitle,jdbcType=VARCHAR},
+      detail_desc = #{detailDesc,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

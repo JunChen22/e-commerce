@@ -413,11 +413,11 @@ INSERT INTO comment(id, product_id, member_name, member_icon,star, create_time, 
 
 -- data manipulation will be change by service later
 INSERT INTO product_change_log(id, product_id, price_old, price_new, unit_old, unit_new, operate_man, create_time) VALUES (1,4,120,99,20,20,'jun','2020-03-18 16:18:25');
-UPDATE product SET price = 99 WHERE id = 4;
+UPDATE product SET original_price = 99 WHERE id = 4;
 INSERT INTO product_change_log(id, product_id, price_old, price_new, unit_old, unit_new, operate_man, create_time) VALUES (2,2,499,299,15,15,'jun','2020-03-18 16:18:25');
-UPDATE product SET price = 299 WHERE id = 2;
+UPDATE product SET original_price = 299 WHERE id = 2;
 INSERT INTO product_change_log(id, product_id, price_old, price_new, unit_old, unit_new, operate_man, create_time) VALUES (3,1,1000,899,22,22,'jun','2020-03-18 16:18:25');
-UPDATE product SET price = 999 WHERE id = 1;
+UPDATE product SET original_price = 999 WHERE id = 1;
 INSERT INTO product_change_log(id, product_id, price_old, price_new, unit_old, unit_new, operate_man, create_time) VALUES (4,1,899,899,22,20,'jun','2020-03-18 16:18:25');
 UPDATE product SET stock = 20 WHERE id = 1;
 

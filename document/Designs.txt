@@ -1,0 +1,60 @@
+
+Categories of the shop
+
+- Product management system(PMS)
+- Order management system(OMS)
+- Sales management system(SMS)
+- Content management system(CMS)
+- User management system(UMS)
+
+Product Management System: A software application that helps businesses manage their product catalog, including product data, pricing, and inventory.
+
+Content Management System: A software application that allows users to create, manage, and publish digital content, such as text, images, and multimedia, on websites or other digital platforms.
+
+Order Management System: A software application that helps businesses manage their order processing, inventory, shipping, and other fulfillment-related tasks.
+
+Sales Management System: A software application that helps businesses manage their sales processes, including lead generation, customer relationship management, and sales analytics.
+
+User Management System: A software application that helps businesses manage user accounts and permissions, including authentication, authorization, and access control.
+
+
+
+
+
+Product mamangement system(PMS)
+- product management
+	-
+- product setting
+
+
+
+
+Order management system(OMS)
+- order management
+- return/refund
+- shipping
+
+
+
+
+
+Sales management system(SMS)
+Content management system(CMS)
+
+
+User management system(UMS)
+- User management system
+
+
+
+
+
+
+
+
+
+
+
+
+
+

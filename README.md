@@ -2,38 +2,47 @@
 
 [![Java CI with Maven](https://github.com/JunChen22/E-commerce/actions/workflows/maven.yml/badge.svg)](https://github.com/JunChen22/E-commerce/actions/workflows/maven.yml) <a href="https://github.com/JunChen22/E-commerce-React"><img src="https://img.shields.io/badge/Frontend-React-green"></a> <a href="https://github.com/JunChen22/E-commerce-microservice"><img src="https://img.shields.io/badge/Miscroservice-version-green"></a> <a href="TBD"><img src="https://img.shields.io/badge/Demo-running-green"></a>
 
-This project was based on mall by macrozheng on github.
+This project was based on mall by macrozheng on github. 
 
 ``` lua
 E-commerece 
-├── E-commerece-app  -- main application
-├── E-commerece-search  -- searching related module
-├── E-commerece-common  -- shared common module
-├── E-commerece-mbg  -- shared mybatist module
+├── E-commerece-admin    -- the admin(owner) used to manage the e-commerece and users
+├── E-commerece-app      -- main application, process the requests.
+├── E-commerece-search   -- searching related module, in-memory imported in data for fast search
+├── E-commerece-common   -- shared common module
+├── E-commerece-mbg      -- shared mybatist module
 └── E-commerece-security -- shared security module
+
+The .env file stores login infos for easier change. Gets read in during run time by docker.
 ```
 
-API calls
+MyBatis is more of a build around the database. Using MyBatis Generator to generate java boilerplate code of the database.
+And can create custom DAO and write custom SQL for it in resources/dao. Kind of opposite of Hibernate approach. 
+Write java code to then it will create custom table.
+
+
+
+API calls and documentations
+ - get the whole landscape running then
  - go to http://localhost:8080/swagger-ui.html
 
 
 Set up/installation:
 
+```
+Database and mybatis generator
 
-	Database:
+  Generate mybatis files
+ $ docker-compose up postgres
+ $ cd ECom-app
+ $ mvn mybatis-generator:generate -Dmybatis.generator.overwrite=true // generate DAO, mapper and java clasees
+ $ docker-compose down
 
-		$ sudo apt-get install postgres
-     	$ sudo -u postgres psql
-     	# CREATE DATABASE springecommerece;
-        # ALTER USER postgres PASSWORD 'password';
-        # \q
-    	```
-    	Docker:
-            https://docs.docker.com/engine/install/ubuntu/
-    	Elastic search:
-            https://www.elastic.co/guide/en/elasticsearch/reference/current/deb.html#install-deb
-
-
+  Start whole landscape
+ $ mvn package
+ $ docker-compose build
+ $ docker-compose up
+```
 
 ### Tech stack 
 | Tech                | role                                 | version  | documentation                                  |
@@ -63,7 +72,6 @@ Set up/installation:
 | AWS S3              | File storage                         |          |                                                |
 
 
-
 Categories of the shop
 
 - Product management system(PMS)
@@ -83,17 +91,16 @@ Sales Management System: A software application that helps businesses manage the
 User Management System: A software application that helps businesses manage user accounts and permissions, including authentication, authorization, and access control.
 
 
+Docker:
+- https://docs.docker.com/engine/install/ubuntu/
 
+Elastic search:
+- https://www.elastic.co/guide/en/elasticsearch/reference/current/deb.html#install-deb
 
-
-
-
-
-###Material used:
+### Material used:
 - https://github.com/macrozheng/mall
 - https://www.youtube.com/watch?v=EpYBP7EZ8Y4
 - https://www.youtube.com/watch?v=-PcU6uf-p3g&list=PLA7e3zmT6XQUNzbNoTb-8c-VTa_i_w5-y
-
 
 JWT:
 - https://auth0.com/blog/implementing-jwt-authentication-on-spring-boot/

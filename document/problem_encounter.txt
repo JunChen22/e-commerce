@@ -1,0 +1,23 @@
+Q: Cannot resolve classpath entry: ~/E-commerce/src/main/resources when using plugin -> mybatis generator: generate
+A: In MyBatisConfig, mapper and dao wasn't set in the right location.
+
+
+Q: docker-compose postgres not initiating data.
+A: it's a docker volume related problem. delete the existing volume.
+    $ docker exec -it ECom-db psql -U postgres
+
+
+Q: pagingation loop/cycle error, The dependencies of some of the beans in the application context form a cycle: "com.github.pagehelper.autoconfigure.PageHelperAutoConfiguration"
+A: update the version from 1.2.10 to 1.4.5
+
+
+Q: documentationPluginsBootstrapper caused by swagger. "Failed to start bean 'documentationPluginsBootstrapper'; nested exception is java.lang.NullPointerException"
+A:turns out to be version compatibility issue. This issues also applies to Spring cloud and spring cloud version. Spring boot version and dependencies need to be matching. springfox swagger needs java 1.8 + , I was using java 11.
+  https://github.com/springfox/springfox/releases
+
+
+
+
+
+
+

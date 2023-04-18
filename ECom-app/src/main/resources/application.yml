@@ -1,0 +1,89 @@
+# Enabling H2 Console, http://localhost:8080/h2-console
+#spring:
+#  h2:
+#    console:
+#      enabled: true
+#      path: /h2-console
+#  datasource:
+#    url: jdbc:h2:file:~/testdb
+#    username: sa
+#    password:
+#    driverClassName: org.h2.Driver
+
+# material used
+# https://blog.csdn.net/m0_37524586/article/details/88351833
+# https://v.qq.com/x/page/l0891rocdcm.html
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost/springecommerece # need to change localhost for docker-compose
+    #url: jdbc:postgresql://db:5432/springecommerece
+    username: postgres
+    password: password
+    driverClassName: org.postgresql.Driver
+    #initialization-mode: always
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: springecommerece
+  redis:
+    host: localhost
+    database: 0
+    port: 6379
+    password:
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 0
+    timeout: 3000ms
+  rabbitmq:
+    host: localhost
+    port: 5672
+    virtual-host: /
+    username: guest
+    password: guest
+    publisher-confirms: true
+
+# tells spring mybatis mapper's xml(sql) located
+mybatis:
+  mapper-locations:
+    - classpath:mapper/*.xml
+    - classpath:dao/*.xml
+
+redis:
+  key:
+    prefix:
+      authCode: "authCode:"
+    expire:
+      authCode: 120
+
+jwt:
+  HEADER_STRING: Authorization
+  tokenPrefix: Bearer
+  secretKey: JunChen522
+  expirationTimeMinute: 15
+
+---
+
+spring.config.activate.on-profile: docker
+
+spring:
+  datasource.url: jdbc:postgresql://postgres/springecommerece
+  data:
+    mongodb:
+      host: mongodb
+      port: 27017
+      database: springecommerece
+  redis:
+    host: redis
+    port: 6379
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    virtual-host: /
+    addresses: rabbitmq:5672

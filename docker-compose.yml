@@ -1,0 +1,152 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:9.6.10
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: springecommerece
+    ports:
+      - 5432:5432
+    #volumes:
+      # - /home/jun/Desktop/data/db/pg:/var/lib/postgresql/data # data file
+      # - /home/jun/Desktop/data/db/log:/var/log/postgresql # log files
+      # - /mydata/mysql/data/conf:/etc/mysql/conf.d # config files
+      # use docker-entrypoint-initdb.d to read sql file
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./document/data.sql:/docker-entrypoint-initdb.d/data.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      retries: 5
+
+  mongodb:
+    image: mongo:5.0.0
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USR}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PWD}
+    command: mongod
+    healthcheck:
+      test: "mongo --eval 'db.stats().ok'"
+      interval: 5s
+      timeout: 2s
+      retries: 60
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  rabbitmq:
+    image: rabbitmq:3.8.11-management
+    restart: always
+    mem_limit: 512m
+    ports:
+      - 5672:5672
+      - 15672:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_USR}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PWD}
+    healthcheck:
+      test: [ "CMD", "rabbitmqctl", "status" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+
+  elasticsearch:
+    image: elasticsearch:7.12.0
+    environment:
+      - "cluster.name=elasticsearch"
+      - "discovery.type=single-node"
+      - "ES_JAVA_OPTS=-Xms512m -Xmx1024m"
+    #volumes:
+    #  - /home/jun/Desktop/data/ELK/es:/usr/share/elasticsearch/data # data
+    ports:
+      - 9200:9200
+      - 9300:9300
+
+  logstash:
+    image: logstash:7.12.0
+    ports:
+      - 4560:4560
+      - 4561:4561
+      - 4562:4562
+      - 4563:4563
+    depends_on:
+      - elasticsearch
+
+  kibana:
+    image: kibana:7.12.0
+    environment:
+      - "ELASTICSEARCH_HOSTS=http://elasticsearch:9200"
+    ports:
+      - 5601:5601
+    depends_on:
+      - elasticsearch
+
+  nginx:
+    image: nginx:1.22
+    ports:
+      - 80:80
+
+  app:
+    build: ECom-app
+    container_name: ECom-app
+    ports:
+      - 8080:8080
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_USERNAME=${POSTGRES_USR}
+      - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PWD}
+      - SPRING_RABBITMQ_USERNAME=${RABBITMQ_USR}
+      - SPRING_RABBITMQ_PASSWORD=${RABBITMQ_PWD}
+      - SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE=admin
+      - SPRING_DATA_MONGODB_USERNAME=${MONGODB_USR}
+      - SPRING_DATA_MONGODB_PASSWORD=${MONGODB_PWD}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  search:
+    build: ECom-search
+    container_name: ECom-search
+    ports:
+      - 8081:8081
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_USERNAME=${POSTGRES_USR}
+      - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PWD}
+    depends_on:
+      - kibana
+      - logstash
+      - elasticsearch
+      - postgres
+
+  admin:
+    build: ECom-admin
+    container_name: ECom-admin
+    ports:
+      - 8082:8082
+    depends_on:
+      - postgres
+
+volumes:
+  db-data:
