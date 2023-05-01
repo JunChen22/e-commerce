@@ -1,0 +1,46 @@
+Use ChatGPT to explain the code
+
+Maven
+- sub-module structure
+   - dependencies management
+   - dependencies
+   - other module dependencies(ECom-Security, ECom-mbg, and ECom-common)
+- Spring boot and dependencies version compatibility.
+  For example, Spring boot 2.5.2 must have their dependencies version matching. Same
+  for Spring Cloud.
+
+MyBatis and MyBatis generator
+- SQL ( SELECT, UPDATE, INSERT, DELETE, LEFT JOIN and etc)
+- create your database first
+- MyBatis generator is used in the 'beginning' to create the boiler plate java code
+  like getter and setting for all the colum of each table in your database.
+  Model and mapper.java.
+- While generator generates basic functions(mappers.java), you can create your own custom
+  ones located in dao package. Both the actual implementation is location in resources folder.
+  The Mapper.xml is generated and provide basic function. The dao one are custom ones you writes.
+  And the domain model is a complex data type you create for your need. For example, a product with
+  a lot of attribute, create a productDetail domain model.
+- Understand Result map and dynamic SQL in dao.xml
+- Basic example is controller/TestProductController, domainmodel/ProductDetail , mbg/model/product, dao/ProductDao,
+  resources/dao/ProductDao.xml. Basic CRUD api and SQL queries.
+  I didn't create a service but that's depend on your need.
+
+- Things to learn about in dao.xml.
+    - foreach
+    - separator
+    - passing parameter #{}
+    - open/close
+    - WHEN/THEN
+
+- https://mybatis.org/mybatis-3/dynamic-sql.html
+
+
+Docker/Docker-compose
+- volume for data.sql to load in initial datas.
+- docker-compose file
+
+
+
+
+
+

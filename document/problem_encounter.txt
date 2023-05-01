@@ -7,7 +7,7 @@ A: it's a docker volume related problem. delete the existing volume.
     $ docker exec -it ECom-db psql -U postgres
 
 
-Q: pagingation loop/cycle error, The dependencies of some of the beans in the application context form a cycle: "com.github.pagehelper.autoconfigure.PageHelperAutoConfiguration"
+Q: pagination loop/cycle error, The dependencies of some of the beans in the application context form a cycle: "com.github.pagehelper.autoconfigure.PageHelperAutoConfiguration"
 A: update the version from 1.2.10 to 1.4.5
 
 
@@ -20,4 +20,23 @@ A:turns out to be version compatibility issue. This issues also applies to Sprin
 
 
 
+Q: even hitting the api it return 404 after I removed security and mbg
+A: package scan not in correct place in EComAppApplication
+
+
+Q: not able to package mbg when separated and unable to package app since mbg is separated.
+
+even security is not here there's still security problem
+I'm suspecting that since i moved the mbg , it couldn't find the mapper
+turns out to be package scan caused the 404 error
+but now mbg can't be compiled
+Unable to find main class
+pom package and jar package
+jar packaging will cause "Unable to find main class error"
+java: JDK isn't specified for module '
+https://stackoverflow.com/questions/12132003/getting-cannot-find-symbol-in-java-project-in-intellij
+was it because of lombok
+java version 1.8 and 11  jdk setting been messing with me?
+and spring boot version?
+intellij cleaning/restart/rebuild
 
