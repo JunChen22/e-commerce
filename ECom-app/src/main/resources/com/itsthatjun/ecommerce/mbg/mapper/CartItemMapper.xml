@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itsthatjun.ecommerce.mbg.mapper.CartItemMapper">
+  <resultMap id="BaseResultMap" type="com.itsthatjun.ecommerce.mbg.model.CartItem">
+    <result column="id" jdbcType="BIGINT" property="id" />
+    <result column="product_id" jdbcType="BIGINT" property="productId" />
+    <result column="product_sku_id" jdbcType="BIGINT" property="productSkuId" />
+    <result column="member_id" jdbcType="BIGINT" property="memberId" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="price" jdbcType="NUMERIC" property="price" />
+    <result column="product_pic" jdbcType="VARCHAR" property="productPic" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="product_sub_title" jdbcType="VARCHAR" property="productSubTitle" />
+    <result column="product_sku_code" jdbcType="VARCHAR" property="productSkuCode" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="modify_date" jdbcType="TIMESTAMP" property="modifyDate" />
+    <result column="delete_status" jdbcType="INTEGER" property="deleteStatus" />
+    <result column="product_category_id" jdbcType="BIGINT" property="productCategoryId" />
+    <result column="product_brand" jdbcType="VARCHAR" property="productBrand" />
+    <result column="product_sn" jdbcType="VARCHAR" property="productSn" />
+    <result column="product_attr" jdbcType="VARCHAR" property="productAttr" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, product_id, product_sku_id, member_id, quantity, price, product_pic, product_name, 
+    product_sub_title, product_sku_code, create_date, modify_date, delete_status, product_category_id, 
+    product_brand, product_sn, product_attr
+  </sql>
+  <select id="selectByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.CartItemExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cart_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.CartItemExample">
+    delete from cart_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.CartItem" useGeneratedKeys="true">
+    insert into cart_item (product_id, product_sku_id, member_id, 
+      quantity, price, product_pic, 
+      product_name, product_sub_title, product_sku_code, 
+      create_date, modify_date, delete_status, 
+      product_category_id, product_brand, product_sn, 
+      product_attr)
+    values (#{productId,jdbcType=BIGINT}, #{productSkuId,jdbcType=BIGINT}, #{memberId,jdbcType=BIGINT}, 
+      #{quantity,jdbcType=INTEGER}, #{price,jdbcType=NUMERIC}, #{productPic,jdbcType=VARCHAR}, 
+      #{productName,jdbcType=VARCHAR}, #{productSubTitle,jdbcType=VARCHAR}, #{productSkuCode,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{modifyDate,jdbcType=TIMESTAMP}, #{deleteStatus,jdbcType=INTEGER}, 
+      #{productCategoryId,jdbcType=BIGINT}, #{productBrand,jdbcType=VARCHAR}, #{productSn,jdbcType=VARCHAR}, 
+      #{productAttr,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.CartItem" useGeneratedKeys="true">
+    insert into cart_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="productSkuId != null">
+        product_sku_id,
+      </if>
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="productPic != null">
+        product_pic,
+      </if>
+      <if test="productName != null">
+        product_name,
+      </if>
+      <if test="productSubTitle != null">
+        product_sub_title,
+      </if>
+      <if test="productSkuCode != null">
+        product_sku_code,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="modifyDate != null">
+        modify_date,
+      </if>
+      <if test="deleteStatus != null">
+        delete_status,
+      </if>
+      <if test="productCategoryId != null">
+        product_category_id,
+      </if>
+      <if test="productBrand != null">
+        product_brand,
+      </if>
+      <if test="productSn != null">
+        product_sn,
+      </if>
+      <if test="productAttr != null">
+        product_attr,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="productSkuId != null">
+        #{productSkuId,jdbcType=BIGINT},
+      </if>
+      <if test="memberId != null">
+        #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=NUMERIC},
+      </if>
+      <if test="productPic != null">
+        #{productPic,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productSubTitle != null">
+        #{productSubTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="productSkuCode != null">
+        #{productSkuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyDate != null">
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteStatus != null">
+        #{deleteStatus,jdbcType=INTEGER},
+      </if>
+      <if test="productCategoryId != null">
+        #{productCategoryId,jdbcType=BIGINT},
+      </if>
+      <if test="productBrand != null">
+        #{productBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="productSn != null">
+        #{productSn,jdbcType=VARCHAR},
+      </if>
+      <if test="productAttr != null">
+        #{productAttr,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.CartItemExample" resultType="java.lang.Long">
+    select count(*) from cart_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update cart_item
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.productId != null">
+        product_id = #{record.productId,jdbcType=BIGINT},
+      </if>
+      <if test="record.productSkuId != null">
+        product_sku_id = #{record.productSkuId,jdbcType=BIGINT},
+      </if>
+      <if test="record.memberId != null">
+        member_id = #{record.memberId,jdbcType=BIGINT},
+      </if>
+      <if test="record.quantity != null">
+        quantity = #{record.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=NUMERIC},
+      </if>
+      <if test="record.productPic != null">
+        product_pic = #{record.productPic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productName != null">
+        product_name = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productSubTitle != null">
+        product_sub_title = #{record.productSubTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productSkuCode != null">
+        product_sku_code = #{record.productSkuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyDate != null">
+        modify_date = #{record.modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleteStatus != null">
+        delete_status = #{record.deleteStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.productCategoryId != null">
+        product_category_id = #{record.productCategoryId,jdbcType=BIGINT},
+      </if>
+      <if test="record.productBrand != null">
+        product_brand = #{record.productBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productSn != null">
+        product_sn = #{record.productSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productAttr != null">
+        product_attr = #{record.productAttr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update cart_item
+    set id = #{record.id,jdbcType=BIGINT},
+      product_id = #{record.productId,jdbcType=BIGINT},
+      product_sku_id = #{record.productSkuId,jdbcType=BIGINT},
+      member_id = #{record.memberId,jdbcType=BIGINT},
+      quantity = #{record.quantity,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=NUMERIC},
+      product_pic = #{record.productPic,jdbcType=VARCHAR},
+      product_name = #{record.productName,jdbcType=VARCHAR},
+      product_sub_title = #{record.productSubTitle,jdbcType=VARCHAR},
+      product_sku_code = #{record.productSkuCode,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      modify_date = #{record.modifyDate,jdbcType=TIMESTAMP},
+      delete_status = #{record.deleteStatus,jdbcType=INTEGER},
+      product_category_id = #{record.productCategoryId,jdbcType=BIGINT},
+      product_brand = #{record.productBrand,jdbcType=VARCHAR},
+      product_sn = #{record.productSn,jdbcType=VARCHAR},
+      product_attr = #{record.productAttr,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

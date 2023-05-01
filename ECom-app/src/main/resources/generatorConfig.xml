@@ -5,7 +5,7 @@
     <!-- driver or class path error , need to specify the path-->
     <!-- don't need this line if generator plug in have dependecy driver -->
     <!-- classPathEntry location="/home/jun/.m2/repository/org/postgresql/postgresql/42.2.8/postgresql-42.2.8.jar" / -->
-    <context id="MySqlContext" targetRuntime="MyBatis3" defaultModelType="flat">
+    <context id="PostgresContext" targetRuntime="MyBatis3" defaultModelType="flat">
         <!--newly generated mapper will update existing one-->
         <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
         <!-- congifuration for generated code comments, default is false ,generic comment -->
@@ -23,15 +23,15 @@
         </jdbcConnection>
 
         <!-- location of model and mapper will be generated -->
-        <javaModelGenerator targetPackage="com.itsthatjun.spring.ecommerce.mbg.model"
+        <javaModelGenerator targetPackage="com.itsthatjun.ecommerce.mbg.model"
                             targetProject="src/main/java"/>
 
         <!-- Generated XML mappers -->
-        <sqlMapGenerator targetPackage="com.itsthatjun.spring.ecommerce.mbg.mapper"
+        <sqlMapGenerator targetPackage="com.itsthatjun.ecommerce.mbg.mapper"
                          targetProject="src/main/resources"/>
 
         <!-- Generated Java mapper interfaces -->
-        <javaClientGenerator targetPackage="com.itsthatjun.spring.ecommerce.mbg.mapper"
+        <javaClientGenerator targetPackage="com.itsthatjun.ecommerce.mbg.mapper"
                          targetProject="src/main/java"
                          type="XMLMAPPER"/>
 
@@ -87,5 +87,39 @@
         <table tableName= "role_permission_relation">
             <generatedKey column="id" sqlStatement="JDBC" />
         </table>
+
+        <table tableName="cart_item">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+
+        <table tableName="coupon">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+
+        <table tableName="orders">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+
+        <table tableName="order_item">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+
+        <table tableName="company_address">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+
+        <table tableName="order_return_reason">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+
+        <table tableName="order_return_apply">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+
+        <table tableName="order_change_history">
+            <generatedKey column="id" sqlStatement="JDBC" />
+        </table>
+
+
     </context>
 </generatorConfiguration>
