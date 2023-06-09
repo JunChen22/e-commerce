@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itsthatjun.ecommerce.dao.PMS.ProductDao">
+
+    <resultMap id="productMap" type="com.itsthatjun.ecommerce.mbg.model.Product" autoMapping="true">
+        <id column="id" property="id" />
+    </resultMap>
+
+    <resultMap id="productListMap" type="com.itsthatjun.ecommerce.mbg.model.Product" autoMapping="true">
+        <id column="id" property="id" />
+        <result property="name" column="name"/>
+        <result property="originalPrice" column="original_price" />
+    </resultMap>
+
+    <resultMap id="productWithAtrributeMap" type="com.itsthatjun.ecommerce.dto.PMS.ProductDetail" autoMapping="true">
+        <result property="product.id" column="id"/>
+        <result property="brand.name" column="brandName"/>
+        <result property="product.name" column="name" />
+        <result property="product.originalPrice" column="price" />
+        <collection property="productAttributeList" ofType="com.itsthatjun.ecommerce.mbg.model.ProductAttribute">
+            <id column="attr_id" property="id" jdbcType="BIGINT"/>
+            <result property="attributeTypeId" column="attr_type"/>
+            <result property="attributeValue" column="attr_value"/>
+            <result property="attributeUnit" column="attr_unit"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="productWithListAtrributeMap" type="com.itsthatjun.ecommerce.dto.PMS.ProductDetail" autoMapping="true">
+        <result property="product.id" column="id"/>
+        <result property="brand.name" column="brandName"/>
+        <result property="product.name" column="name" />
+        <result property="product.originalPrice" column="price" />
+        <collection property="productAttributeList" ofType="com.itsthatjun.ecommerce.mbg.model.ProductAttribute">
+            <id column="attr_id" property="id" jdbcType="BIGINT"/>
+            <result property="attributeTypeId" column="attr_type"/>
+            <result property="attributeValue" column="attr_value"/>
+            <result property="attributeUnit" column="attr_unit"/>
+        </collection>
+    </resultMap>
+
+    <!-- need the coloum name match the object name to use auto map -->
+    <select id="getProduct" resultMap="productMap">
+        SELECT name, id, original_Price as originalPrice, brand_name as brandName
+        FROM product
+        WHERE id = #{id}
+    </select>
+
+    <select id="getAllProduct" resultMap="productListMap">
+        SELECT id, name, original_price
+        FROM product
+        WHERE original_price > 200
+    </select>
+
+    <select id="getProductWithAtrribute" resultMap="productWithAtrributeMap">
+        SELECT
+            p.id id,
+            p.name,
+            p.brand_name brandName,
+            p.original_price price,
+            pa.id attr_id,
+            pa.attribute_type_id attr_type,
+            pa.attribute_value attr_value,
+            pa.attribute_unit attr_unit
+        FROM product p
+        LEFT JOIN product_attribute pa on p.id = pa.product_id
+        WHERE delete_status = 0 AND publish_status = 1 AND p.id = #{id};
+    </select>
+
+    <select id="getProductListWithAtrribute" resultMap="productWithListAtrributeMap">
+        SELECT
+            p.id id,
+            p.name,
+            p.brand_name brandName,
+            p.original_price price,
+            pa.id attr_id,
+            pa.attribute_type_id attr_type,
+            pa.attribute_value attr_value,
+            pa.attribute_unit attr_unit
+        FROM product p
+        LEFT JOIN product_attribute pa on p.id = pa.product_id
+        WHERE delete_status = 0 AND publish_status = 1;
+    </select>
+
+    <!-- update stock -->
+    <update id="updateProduct">
+        UPDATE product
+        SET stock = #{stock}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateProductList">
+        <foreach collection="productList" item="product" separator=";">
+            UPDATE product
+            set stock = 5
+            WHERE id = #{product.id}
+        </foreach>
+    </update>
+
+    <insert id="insertProduct">
+        INSERT INTO product(id, name, stock)
+        VALUES (#{product.id}, #{product.name}, #{product.stock})
+    </insert>
+
+    <insert id="insertProductList">
+        <foreach collection="productList" separator=";" item="product">
+            INSERT INTO product(id, name, stock)
+            VALUES (#{product.id}, #{product.name}, #{product.stock})
+        </foreach>
+    </insert>
+
+    <delete id="deleteProduct">
+        DELETE FROM product
+        WHERE id = #{id};
+    </delete>
+
+    <delete id="deleteProductList">
+        <foreach collection="productList" item="product" separator=";">
+            DELETE FROM product
+            WHERE id = #{product.id};
+        </foreach>
+    </delete>
+</mapper>

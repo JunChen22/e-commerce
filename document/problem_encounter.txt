@@ -40,3 +40,152 @@ java version 1.8 and 11  jdk setting been messing with me?
 and spring boot version?
 intellij cleaning/restart/rebuild
 
+
+Q: getting java.lang.ClassNotFoundException: javax.xml.bind.DatatypeConverter error when generating token at login
+A:
+need a dependecy
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+ Java 9 and later versions, the JAXB APIs were removed from the default classpath, and you need to include the
+ javax.xml.bind module explicitly as a dependency. By adding the dependency javax.xml.bind:jaxb-api:2.3.1, you are
+ providing the necessary JAXB classes for the io.jsonwebtoken library to function correctly.
+
+
+Q: 403 error code with error "Forbidden".
+
+A: either the account don't have the role or permission. Or the request is send wrong.
+
+curl -X GET -H "THE_LONG_JWT_TOKEN" localhost:8082/admin/logs/2
+instead of with the right prefix it will cause code 403.
+curl -X GET -H "Authorization: Bearer THE_LONG_JWT_TOKEN" localhost:8082/admin/logs/2
+
+
+
+
+
+
+Q: when inserting, id keep getting duplicate error, need to insert till current id to insert new one.
+For example, article already have 3 in colum already.
+
+ "article": {
+      "title": "new article",
+      "body": "some thing something"
+ }
+
+I have to send request 4 times to insert it and have id = 4.
+
+A: restart database(postgres a few times)  it will generate a gap in id like 20ish. or insert a lot of times.
+   still need to find a better way.
+   If you manually insert values into a SERIAL column, it can interfere with the automatic generation of IDs by the sequence associated with that column.
+
+   To avoid this issue, you should exclude the id column from your INSERT statement, allowing the SERIAL column to generate the ID automatically.
+
+   Or alter the sequence, it's used in PostgreSQL internal to keep track of id that's been set to use serial.
+
+   -- Modify the starting value of the sequence
+   ALTER SEQUENCE article_id_seq RESTART WITH 10000;
+
+   -- Modify the increment value of the sequence
+   ALTER SEQUENCE article_id_seq INCREMENT BY 2;
+
+   -- Modify the minimum value of the sequence
+   ALTER SEQUENCE article_id_seq MINVALUE 100;
+
+   -- Modify the maximum value of the sequence
+   ALTER SEQUENCE article_id_seq MAXVALUE 999999;
+
+   -- Modify the cache size of the sequence
+   ALTER SEQUENCE article_id_seq CACHE 100;
+
+another way is to change in data.sql
+
+CREATE TABLE article (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  body TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT NULL
+);
+INSERT INTO article (id, title, body) VALUES
+(1, 'Buyer''s guide', 'This article provides a comprehensive guide for buyers.'),
+(2, 'Product Comparison', 'This article compares different products and their features.'),
+(3, 'How to Choose the Right Product', 'This article provides tips on how to choose the right product for your needs.');
+
+DROP TABLE IF EXISTS article_QA;
+CREATE TABLE article_QA (
+    id SERIAL PRIMARY KEY,
+    article_id bigint ,
+    question TEXT NOT NULL,
+    answer TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT NULL
+);
+
+INSERT INTO article_QA (id, article_id, question, answer) VALUES
+(1, 1, 'What is a buyer''s guide?', 'A buyer''s guide is a document or article that provides information about a particular product or service to help potential buyers make informed decisions.'),
+(2, 1, 'What should I look for in a buyer''s guide?', 'A good buyer''s guide should provide detailed information about the product or service, including its features, benefits, and drawbacks, as well as pricing and purchasing options.'),
+(3, 2, 'Which product is the best?', 'It depends on your needs and preferences. This article provides a comparison of different products and their features to help you make an informed decision.'),
+(4, 2, 'What are the key features to look for in a product?', 'The key features to look for in a product depend on what you plan to use it for. This article provides a comparison of different products and their features to help you make an informed decision.'),
+(5, 3, 'How can I choose the right product?', 'Choosing the right product depends on your needs, preferences, and budget. This article provides tips on how to choose the right product for your needs.');
+
+
+check it see if they work together then remove the id.
+
+CREATE TABLE article (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  body TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT NULL
+);
+INSERT INTO article (title, body) VALUES
+('Buyer''s guide', 'This article provides a comprehensive guide for buyers.'),
+('Product Comparison', 'This article compares different products and their features.'),
+('How to Choose the Right Product', 'This article provides tips on how to choose the right product for your needs.');
+
+CREATE TABLE article_QA (
+    id SERIAL PRIMARY KEY,
+    article_id bigint ,
+    question TEXT NOT NULL,
+    answer TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT NULL
+);
+
+INSERT INTO article_QA (article_id, question, answer) VALUES
+(1, 'What is a buyer''s guide?', 'A buyer''s guide is a document or article that provides information about a particular product or service to help potential buyers make informed decisions.'),
+(1, 'What should I look for in a buyer''s guide?', 'A good buyer''s guide should provide detailed information about the product or service, including its features, benefits, and drawbacks, as well as pricing and purchasing options.'),
+(2, 'Which product is the best?', 'It depends on your needs and preferences. This article provides a comparison of different products and their features to help you make an informed decision.'),
+(2, 'What are the key features to look for in a product?', 'The key features to look for in a product depend on what you plan to use it for. This article provides a comparison of different products and their features to help you make an informed decision.'),
+(3, 'How can I choose the right product?', 'Choosing the right product depends on your needs, preferences, and budget. This article provides tips on how to choose the right product for your needs.');
+
+so this way the id sequence is all done by PostgreSQL there won't be issues when inserting with Java.
+The id is automatically generated.
+
+
+Q: similar to automatically generate id.
+   have to do with mapper.xml
+   if not provided, it inserts default null into PostgreSQL.
+   If not it will automatically generate the date but that does count as insert something so it
+   won't generate a date.
+
+A: just add it manually
+    Date currentDate = new Date();
+    article.getArticle().setCreatedAt(currentDate);
+
+    or exclude it in generatorConfig.xml
+    <ignoreColumn column="created_at" />
+    but it will cause other error because it straight up exclude it in everything.
+
+    or exclude it in mapper.xml  insert to remove created_at
+     insert into article (title, body, created_at,
+          updated_at)
+        values (#{title,jdbcType=VARCHAR}, #{body,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP},
+          #{updatedAt,jdbcType=TIMESTAMP})
+
+     but mybatis generator don't offer a generic way to remove it for all the mapper. Only manually remove.
+
+

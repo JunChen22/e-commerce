@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itsthatjun.ecommerce.dao.OMS.OrderDao">
+    <resultMap id="orderDetailMap" type="com.itsthatjun.ecommerce.dto.OMS.OrderDetail"
+               extends="com.itsthatjun.ecommerce.mbg.mapper.OrdersMapper.BaseResultMap">
+        <collection property="orderItemList" columnPrefix="oi_"
+                    resultMap="com.itsthatjun.ecommerce.mbg.mapper.OrderItemMapper.BaseResultMap">
+        </collection>
+    </resultMap>
+
+    <select id="getDetail" resultMap="orderDetailMap">
+        SELECT
+        o.id,
+        o.order_sn,
+        o.member_id,
+        oi.id oi_id,
+        oi.product_name oi_product_name,
+        oi.product_sku_id oi_product_sku_id,
+        oi.product_sku_code oi_product_sku_code,
+        oi.product_quantity oi_product_quantity
+        FROM orders o
+        LEFT JOIN order_item oi ON o.id = oi.order_id
+        WHERE o.id = #{orderId}
+    </select>
+
+
+    <update id="updateSkuStock">
+        UPDATE pms_sku_stock
+        SET
+        stock = CASE id
+        <foreach collection="itemList" item="item">
+            WHEN #{item.productSkuId} THEN stock - #{item.productQuantity}
+        </foreach>
+        END,
+        lock_stock = CASE id
+        <foreach collection="itemList" item="item">
+            WHEN #{item.productSkuId} THEN lock_stock - #{item.productQuantity}
+        </foreach>
+        END
+        WHERE
+        id IN
+        <foreach collection="itemList" item="item" separator="," open="(" close=")">
+            #{item.productSkuId}
+        </foreach>
+    </update>
+
+    <update id="updateOrderStatus">
+        update oms_order
+        set status=#{status}
+        where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <update id="releaseSkuStockLock">
+        UPDATE pms_sku_stock
+        SET
+        lock_stock = CASE id
+        <foreach collection="itemList" item="item">
+            WHEN #{item.productSkuId} THEN lock_stock - #{item.productQuantity}
+        </foreach>
+        END
+        WHERE
+        id IN
+        <foreach collection="itemList" item="item" separator="," open="(" close=")">
+            #{item.productSkuId}
+        </foreach>
+    </update>
+
+</mapper>

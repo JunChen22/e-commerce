@@ -1,0 +1,113 @@
+{
+	"info": {
+		"_postman_id": "28e70022-4e0d-493a-a1eb-a2f6f51060a3",
+		"name": "E-commerece",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6779692"
+	},
+	"item": [
+		{
+			"name": "CMS",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PMS",
+			"item": [
+				{
+					"name": "Get All prodcut  with token",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJjcmVhdGVkYXRlIjoxNTg4NzI5Mjk2MjE4LCJleHAiOjE1ODg3MzAxOTYsImlhdCI6MTU4ODcyOTI5NiwidXNlcm5hbWUiOiJkZXZhY2N0In0.BxGzQO2i4n5KE-iZ6eKldcFtbn0x0HNdgrf-3CWzdhitxlI7OPSb1hpsimXpMcwNBS5hyPihSD-jS1QBhMBKqQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/order/getall",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"order",
+								"getall"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OMS",
+			"item": []
+		},
+		{
+			"name": "SMS",
+			"item": []
+		},
+		{
+			"name": "UMS",
+			"item": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\" :\"devacct\",\n\t\"password\": \"devpass\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/admin/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register acct",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/brand/listAll",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"brand",
+						"listAll"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,6 +1,6 @@
 package com.itsthatjun.ecommerce.component;
 
-import com.itsthatjun.ecommerce.Service.impl.OrderServiceImpl;
+import com.itsthatjun.ecommerce.service.impl.OrderServiceImpl;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;

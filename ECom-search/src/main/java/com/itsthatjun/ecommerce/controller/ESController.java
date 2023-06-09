@@ -1,7 +1,7 @@
 package com.itsthatjun.ecommerce.controller;
 
 import com.itsthatjun.ecommerce.elasticsearch.document.EsProduct;
-import com.itsthatjun.ecommerce.Service.EsProductService;
+import com.itsthatjun.ecommerce.service.EsProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
