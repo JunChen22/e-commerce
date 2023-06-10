@@ -1,4 +1,4 @@
-package com.itsthatjun.ecommerce.controller;
+package com.itsthatjun.ecommerce.controller.PMS;
 
 import com.itsthatjun.ecommerce.dao.PMS.ProductDao;
 import com.itsthatjun.ecommerce.dto.PMS.ProductDetail;

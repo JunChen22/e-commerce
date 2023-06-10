@@ -22,13 +22,31 @@ public class OrderController {
         this.orderService = orderService;
     }
 
+    @GetMapping("/payment")
+    @ApiOperation(value = "List all orders that need to be paid")
+    public List<Orders> listAllOrdersWaitForPayment(){
+        return orderService.getAllWaitingForPayment();
+    }
+
     @GetMapping("/fulfill")
     @ApiOperation(value = "List all orders that need to be fulfill/open")
-    public List<Orders> listALlFulfullingOrders(){
+    public List<Orders> listAllFulfullingOrders(){
         return orderService.getAllFulfulling();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/send")
+    @ApiOperation(value = "List all orders that are send")
+    public List<Orders> listAllSendOrders(){
+        return orderService.getAllInSend();
+    }
+
+    @GetMapping("/complete")
+    @ApiOperation(value = "List all orders that are delivered")
+    public List<Orders> listAl(){
+        return orderService.getAllCompleteOrder();
+    }
+
+    @GetMapping("/user/{id}")
     @ApiOperation(value = "get all orders made by user")
     public List<Orders> getUserOrders(@PathVariable int id){
         return orderService.getUserOrders(id);

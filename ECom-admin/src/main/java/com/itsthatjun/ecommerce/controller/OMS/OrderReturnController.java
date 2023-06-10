@@ -50,14 +50,14 @@ public class OrderReturnController {
 
     @GetMapping("/{serialNumber}")
     @ApiOperation(value = "return a return request detail")
-    public OrderReturnApply listAllProduct(@PathVariable int serialNumber){
+    public OrderReturnApply getReturnRequest(@PathVariable int serialNumber){
         return returnOrderService.getOrderReturnDetail(serialNumber);
     }
 
     /* TODO: combine these two update/approve/rejected
     @PostMapping("/")
     @ApiOperation(value = "")
-    public OrderReturnApply listAllProduct(){
+    public OrderReturnApply approvereturn(){
         // returnOrderService.approveReturnRequest()
         // returnOrderService.rejectReturnRequest()
     }

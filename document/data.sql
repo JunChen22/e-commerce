@@ -5,7 +5,7 @@ CREATE TABLE brand
      id SERIAL PRIMARY KEY,
      name     TEXT,
      alphabet TEXT,
-     status   TEXT,
+     status   TEXT DEFAULT 'active',
      logo     TEXT
   );
 
@@ -90,8 +90,31 @@ CREATE TABLE product_attribute
      attribute_unit TEXT
   );
 
-DROP TABLE IF EXISTS review;
+DROP TABLE IF EXISTS product_pictures;
+CREATE TABLE product_pictures
+  (
+     id SERIAL PRIMARY KEY,
+     product_id  NUMERIC,
+     filename VARCHAR(255),
+     create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  );
 
+
+INSERT INTO product_pictures (product_id, filename)
+VALUES
+(1, 'https://i.imgur.com/hFS4omM.png'),
+(1, 'https://i.imgur.com/1CwQZDS.jpeg'),
+(2, 'https://i.imgur.com/tCUq2GJ.jpeg'),
+(3, 'https://i.imgur.com/kZPEccB.jpeg'),
+(4, 'https://i.imgur.com/ZBk3W8l.jpeg'),
+(5, 'https://i.imgur.com/XULiMJ5.jpeg'),
+(6, 'https://i.imgur.com/e5LvUqr.jpeg'),
+(7, 'https://i.imgur.com/T7ghiT8.jpeg'),
+(8, 'https://i.imgur.com/aiw2EfU.jpeg'),
+(9, 'https://i.imgur.com/AaevbdO.png');
+
+
+DROP TABLE IF EXISTS review;
 CREATE TABLE review
   (
      id SERIAL PRIMARY KEY,
@@ -103,10 +126,29 @@ CREATE TABLE review
      create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
      updated_time TIMESTAMP DEFAULT NULL,
      tittle      TEXT,
-     likes       NUMERIC,
+     likes       NUMERIC DEFAULT 1,
      content     TEXT,
      pictures    TEXT
   );
+
+
+DROP TABLE IF EXISTS review_pictures;
+CREATE TABLE review_pictures
+  (
+     id SERIAL PRIMARY KEY,
+     review_id  NUMERIC,
+     filename VARCHAR(255),
+     create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  );
+
+INSERT INTO review_pictures (review_id, filename)
+VALUES
+(1, 'https://i.imgur.com/rzocQcD.jpeg'),
+(1, 'https://i.imgur.com/LUszOiA.jpeg'),
+(2, 'https://i.imgur.com/IQAzB6P.jpeg'),
+(3, 'https://i.imgur.com/Kz8xPFg.png'),
+(4, 'https://i.imgur.com/detILKk.png');
+
 
 DROP TABLE IF EXISTS product_change_log;
 
@@ -308,11 +350,11 @@ INSERT INTO product_attribute_category (name, attribute_amount) VALUES ('book', 
 INSERT INTO product_attribute_category (name, attribute_amount) VALUES ('tshirt', 2);
 
 INSERT INTO product(brand_id, category_id, attribute_category_id, brand_name, name, picture, description, original_price, sale_price, stock, description_album, keywords)
-            VALUES (2, 15, 1, 'apple', 'Iphone-10', ' ', 'phone desc' , 1000, 999, 22, '', 'smart phone');
+            VALUES (2, 15, 1, 'Apple', 'Iphone-10', ' ', 'phone desc' , 1000, 999, 22, '', 'smart phone');
 INSERT INTO product(brand_id, category_id, attribute_category_id, brand_name, name, picture, description, original_price, sale_price, stock, description_album, keywords)
-            VALUES (3,  15, 1, 'samsung','note 10', ' ', 'phone desc' , 1000, 999, 17, '', 'smart phone');
+            VALUES (3,  15, 1, 'Samsung','note 10', ' ', 'phone desc' , 1000, 999, 17, '', 'smart phone');
 INSERT INTO product(brand_id, category_id, attribute_category_id, brand_name, name, picture, description, original_price, sale_price, stock, description_album, keywords)
-            VALUES (7,  15, 1, 'oneplus', 'oneplus 8p', ' ', 'phone desc' , 499, 480, 15, '', 'smart phone');
+            VALUES (7,  15, 1, 'Oneplus', 'Oneplus 8p', ' ', 'phone desc' , 499, 480, 15, '', 'smart phone');
 
 INSERT INTO product(brand_id, category_id, name, picture, description, original_price, sale_price, stock, description_album)
             VALUES (8,  8, 'Air jordon', ' ', 'shoes desc' , 120, 115, 20, '');
@@ -639,7 +681,7 @@ CREATE TABLE coupon (
   publish_count integer NULL DEFAULT NULL,  -- number of send/publish coupons to users
   used_count integer NULL DEFAULT NULL,      -- number of used coupons
   code varchar(64) NULL DEFAULT NULL,
-  status integer NULL DEFAULT NULL          -- is the coupon active or disable ,  0 -> disable, 1 -> active
+  status integer NULL DEFAULT 1          -- is the coupon active or disable ,  0 -> disable, 1 -> active
 );
 
 INSERT INTO coupon(type, name, amount, start_time, end_time, count, publish_count, used_count, code, status)
@@ -668,10 +710,10 @@ CREATE TABLE coupon_history (
 
 INSERT INTO coupon_history (coupon_id, member_id, order_id, order_sn, used_time, code)
 VALUES
-(1, 1, 1, '20230425-1001', '2023-04-25 08:45:00', '15OFF'),
-(2, 2, 2, 'ORDER-987654', '2023-03-25 08:45:00', '15OFF'),
-(3, 1, 3, 'ORD-00003', '2023-02-25 08:45:00', '50OFF'),
-(1, 3, 4, 'ORD-00004', '2022-01-11 10:00:00', 'FREE');
+(1, 1, 1, 20230425-1001, '2023-04-25 08:45:00', '15OFF'),
+(2, 2, 2, 987654, '2023-03-25 08:45:00', '15OFF'),
+(3, 1, 3, ORD-00003, '2023-02-25 08:45:00', '50OFF'),
+(1, 3, 4, ORD-00004, '2022-01-11 10:00:00', 'FREE');
 
 
 
@@ -683,8 +725,7 @@ CREATE TABLE orders (   -- have to called orders instead of order, or else confl
    id SERIAL PRIMARY KEY,
    member_id BIGINT NOT NULL,
    coupon_id BIGINT,
-   order_sn VARCHAR(64),
-   create_time TIMESTAMP,
+   order_sn INTEGER,
    member_email VARCHAR(64),
    total_amount NUMERIC(10,2),
    pay_amount NUMERIC(10,2),
@@ -694,7 +735,7 @@ CREATE TABLE orders (   -- have to called orders instead of order, or else confl
    discount_amount NUMERIC(10,2),
    pay_type INTEGER,              -- not paid -> 0, paypal -> 1, google pay ->
    source_type INTEGER,           -- pc -> 0 , mobile -> 1
-   status INTEGER,                -- waiting for payment 0 , fulfilling 1,  send 2 , complete(received) 3, closed(out of return period) 4 ,invalid 5
+   status INTEGER DEFAULT 0,                -- waiting for payment 0 , fulfilling 1,  send 2 , complete(received) 3, closed(out of return period) 4 ,invalid 5
    delivery_company VARCHAR(64),
    delivery_tracking_number VARCHAR(64),
    promotion_info VARCHAR(100),           -- buy one get one free, buy x amount get y % discount, free shipping, etc
@@ -707,28 +748,29 @@ CREATE TABLE orders (   -- have to called orders instead of order, or else confl
    receiver_city VARCHAR(32),
    receiver_zip_code VARCHAR(32),
    receiver_detail_address VARCHAR(200),
-   note VARCHAR(500),       -- note left by previous admin stating what's happening
-   confirm_status INTEGER,
+   confirm_status INTEGER,                      --
    delete_status INTEGER NOT NULL DEFAULT 0,
    payment_time TIMESTAMP,
    delivery_time TIMESTAMP,
-   receive_time TIMESTAMP,
-   comment varchar(200),        -- comment left customer like "leave the package under the rug"
+   receive_time TIMESTAMP DEFAULT NULL,
+   comment varchar(200) DEFAULT NULL,        -- comment left customer like "leave the package under the rug"
+   note VARCHAR(500) DEFAULT NULL,       -- note left by previous admin stating what's happening
    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-   modify_time TIMESTAMP
+   modify_time TIMESTAMP DEFAULT NULL
 );
 
-INSERT INTO orders (member_id, coupon_id, order_sn, create_time, member_email, total_amount, pay_amount, shipping_cost, promotion_amount, coupon_amount, discount_amount, pay_type, source_type, status, delivery_company, delivery_tracking_number, promotion_info, invoice_content, invoice_receiver_phone, invoice_receiver_email, receiver_name, receiver_phone, receiver_state, receiver_city, receiver_zip_code, receiver_detail_address, note, confirm_status, delete_status, payment_time, delivery_time, receive_time, comment, modify_time)
+INSERT INTO orders (member_id, coupon_id, order_sn, member_email, total_amount, pay_amount, shipping_cost, promotion_amount, coupon_amount, discount_amount, pay_type, source_type, status, delivery_company, delivery_tracking_number, promotion_info, invoice_content, invoice_receiver_phone, invoice_receiver_email, receiver_name, receiver_phone, receiver_state, receiver_city, receiver_zip_code, receiver_detail_address,  confirm_status, delete_status, payment_time, delivery_time, receive_time, comment, note, created_at, modify_time)
 VALUES
-(1, 11, '20230425-1001', '2023-04-25 08:30:00', 'john@example.com', 150.50, 150.50, 0.00, 0.00, 0.00, 0.00, 1, 0, 0, 'UPS', '1234567890', 'Free shipping on orders over $100', 'T-shirt, socks, shoes', '123-456-7890', 'jane@example.com', 'Jane Doe', '555-555-5555', 'California', 'San Francisco', '12345', '123 Main St', 'This order is a gift', 1, 0, '2023-04-25 08:30:00', '2023-04-26 09:30:00', '2023-04-28 12:30:00', 'Please include stickers', '2023-04-30 11:30:00'),
+(1, 11, 1001, 'john@example.com', 150.50, 150.50, 0.00, 0.00, 0.00, 0.00, 1, 0, 1, 'UPS', '1234567890', 'Free shipping on orders over $100', 'T-shirt, socks, shoes', '123-456-7890', 'jane@example.com', 'Jane Doe', '555-555-5555', 'California', 'San Francisco', '12345', '123 Main St', 1, 0, '2023-04-25 08:30:00', '2023-04-26 09:30:00', '2023-04-28 12:30:00', 'Please include stickers', 'admin note', '2023-04-25 08:30:00', '2023-04-30 11:30:00'),
 
-(2, 22, 'ORDER-987654', '2023-04-24 09:12:34', 'janedoe@example.com', 50.00, 50.00, 0.00, 0.00, 0.00, 0.00, 0, 1, 3, 'USPS', '9876543210', 'free shipping', 'Product B', '555-999-8888', 'janedoe@example.com', 'Jane Doe', '555-123-4567', 'CA', 'San Francisco', '94102', '456 Market St', NULL, 1, 0, '2023-04-24 09:15:00', '2023-04-25 14:00:00', '2023-04-28 09:00:00', 'no comments', '2023-04-30 11:00:00'),
+(2, 22, 1002, 'janedoe@example.com', 50.00, 50.00, 0.00, 0.00, 0.00, 0.00, 0, 1, 2, 'UPS', '9876543210', 'free shipping', 'Product B', '555-999-8888', 'janedoe@example.com', 'Jane Doe', '555-123-4567', 'CA', 'San Francisco', '94102', '456 Market St', 1, 0, '2023-04-24 09:15:00', '2023-04-25 14:00:00', '2023-04-28 09:00:00', 'no comments', null ,'2023-04-24 09:12:34', '2023-04-30 11:00:00'),
 
-(1, 33, 'ORD-00005', '2022-01-07 12:30:00', 'jane_doe@example.com', 78.50, 78.50, 0.00, 0.00, 0.00, 0.00, 1, 0, 3, 'DHL', '123456789', 'Free shipping on orders over $50', 'Product invoice', '555-123-4567', 'jane_doe@example.com', 'Jane Doe', '555-123-4567', 'New York', 'New York City', '10001', '123 Main St, Apt 4B', 'Please deliver to front desk', 1, 0, '2022-01-08 08:30:00', '2022-01-09 10:45:00', '2022-01-12 14:15:00', 'I order it with other item, please ship it together', '2022-01-12 14:15:00'),
+(1, 33, 1003, 'jane_doe@example.com', 78.50, 78.50, 0.00, 0.00, 0.00, 0.00, 1, 0, 3, 'UPS', '123456789', 'Free shipping on orders over $50', 'Product invoice', '555-123-4567', 'jane_doe@example.com', 'Jane Doe', '555-123-4567', 'New York', 'New York City', '10001', '123 Main St, Apt 4B', 1, 0, '2022-01-08 08:30:00', '2022-01-09 10:45:00', '2022-01-12 14:15:00', 'I order it with other item, please ship it together', 'admin note', '2022-01-07 12:30:00','2022-01-12 14:15:00'),
 
-(3, 11, 'ORD-00006', '2022-01-11 09:45:00', 'john_smith@example.com', 110.00, 98.00, 12.00, 0.00, 5.00, 7.00, 1, 1, 2, 'USPS', '987654321', 'Buy $100 get $10 off', 'Tax invoice', '555-987-6543', 'john_smith@example.com', 'John Smith', '555-987-6543', 'California', 'Los Angeles', '90001', '456 Oak St, Apt 12C', NULL, 1, 0, '2022-01-12 11:15:00', '2022-01-13 16:30:00', NULL, 'Hello', '2022-01-13 16:30:00'),
+(3, 11, 1004, 'john_smith@example.com', 110.00, 98.00, 12.00, 0.00, 5.00, 7.00, 1, 1, 4, 'UPS', '987654321', 'Buy $100 get $10 off', 'Tax invoice', '555-987-6543', 'john_smith@example.com', 'John Smith', '555-987-6543', 'California', 'Los Angeles', '90001', '456 Oak St, Apt 12C', 1, 0, '2022-01-12 11:15:00', '2022-01-13 16:30:00', NULL, 'Hello', null,'2022-01-11 09:45:00', '2022-01-13 16:30:00'),
 
-(3, NULL, 'ORD-00006', '2022-01-11 09:45:00', 'john_smith@example.com', 110.00, 98.00, 12.00, 0.00, 5.00, 7.00, 1, 1, 2, 'USPS', '987654321', 'Buy $100 get $10 off', 'Tax invoice', '555-987-6543', 'john_smith@example.com', 'John Smith', '555-987-6543', 'California', 'Los Angeles', '90001', '456 Oak St, Apt 12C', NULL, 1, 0, '2022-01-12 11:15:00', '2022-01-13 16:30:00', NULL, NULL, '2022-01-13 16:30:00');
+(3, NULL, 1005, 'john_smith@example.com', 110.00, 98.00, 12.00, 0.00, 5.00, 7.00, 1, 1, 0, 'USPS', '987654321', 'Buy $100 get $10 off', 'Tax invoice', '555-987-6543', 'john_smith@example.com', 'John Smith', '555-987-6543', 'California', 'Los Angeles', '90001', '456 Oak St, Apt 12C', 1, 0, '2022-01-12 11:15:00', '2022-01-13 16:30:00', NULL, NULL, NULL, '2022-01-11 09:45:00','2022-01-13 16:30:00');
+
 
 
 
@@ -758,12 +800,12 @@ CREATE TABLE order_item (
 INSERT INTO
   order_item (order_id, order_sn, product_id, product_pic, product_name, product_brand, product_sn, product_price, product_quantity,product_sku_id,product_sku_code,product_category_id,promotion_name,promotion_amount,coupon_amount,real_amount,product_attr)
 VALUES
-  (1,'ORDER-1001',101,'https://example.com/products/101.jpg','Product 101','Brand A','PSN-101',19.99,2,1001,'SKU-1001',10,'20% OFF',4.00,2.00,27.98,'{"Color": "Red", "Size": "M"}'),
-  (1,'ORDER-1001',102,'https://example.com/products/102.jpg','Product 102','Brand B','PSN-102',29.99,1,1002,'SKU-1002',10,'50% OFF',15.00,0.00,14.99,'{"Color": "Blue", "Size": "L"}'),
-  (2,'ORDER-1001',102,'https://example.com/products/102.jpg','Product 102','Brand B','PSN-102',29.99,1,1002,'SKU-1002',10,'50% OFF',15.00,0.00,14.99,'{"Color": "Blue", "Size": "L"}'),
-  (3,'ORDER-1002',103,'https://example.com/products/103.jpg','Product 103','Brand C','PSN-103',9.99,3,1003,'SKU-1003',10,NULL,0.00,0.00,29.97,'{"Color": "Black", "Size": "S"}'),
-  (4,'ORDER-1002',104,'https://example.com/products/104.jpg','Product 104','Brand D','PSN-104',49.99,2,1004,'SKU-1004',12,'15% OFF',7.50,0.00,92.48,'{"Color": "Green", "Size": "M"}'),
-  (5,'ORDER-1003',105,'https://example.com/products/105.jpg','Product 105','Brand E','PSN-105',99.99,1,1005,'SKU-1005',11,'10% OFF',10.00,5.00,89.99,'{"Color": "White", "Size": "XL"}');
+  (1, 1001, 1,'https://example.com/products/101.jpg','Product 101','Brand A','PSN-101',19.99,2,1001,'SKU-1001',10,'20% OFF',4.00,2.00,27.98,'{"Color": "Red", "Size": "M"}'),
+  (1, 1001, 2,'https://example.com/products/102.jpg','Product 102','Brand B','PSN-102',29.99,1,1002,'SKU-1002',10,'50% OFF',15.00,0.00,14.99,'{"Color": "Blue", "Size": "L"}'),
+  (2, 1001, 2,'https://example.com/products/102.jpg','Product 102','Brand B','PSN-102',29.99,1,1002,'SKU-1002',10,'50% OFF',15.00,0.00,14.99,'{"Color": "Blue", "Size": "L"}'),
+  (3, 1002, 3,'https://example.com/products/103.jpg','Product 103','Brand C','PSN-103',9.99,3,1003,'SKU-1003',10,NULL,0.00,0.00,29.97,'{"Color": "Black", "Size": "S"}'),
+  (4, 1002, 4,'https://example.com/products/104.jpg','Product 104','Brand D','PSN-104',49.99,2,1004,'SKU-1004',12,'15% OFF',7.50,0.00,92.48,'{"Color": "Green", "Size": "M"}'),
+  (5, 1003, 5,'https://example.com/products/105.jpg','Product 105','Brand E','PSN-105',99.99,1,1005,'SKU-1005',11,'10% OFF',10.00,5.00,89.99,'{"Color": "White", "Size": "XL"}');
 
 
 
@@ -793,11 +835,7 @@ INSERT INTO company_address(address_name, send_status, receive_status, receiver_
 
 
 
-
-
 ---------- OMS - return orders  --------------
-
-
 
 DROP TABLE IF EXISTS order_return_reason;
 CREATE TABLE order_return_reason (
@@ -819,25 +857,48 @@ INSERT INTO order_return_reason (order_id, reason, description, status, created_
 VALUES (3, 'other', 'Received wrong item', 1, '2022-02-03 15:00:00');
 
 INSERT INTO order_return_reason (order_id, reason, description, status, created_at)
-VALUES (4, 'new return', 'Size didn''t fit', 0, '2022-02-04 14:00:00');
+VALUES (4, 'new return', 'Size didn''t fit', 1, '2022-02-04 14:00:00');
 
 INSERT INTO order_return_reason (order_id, reason, description, status, created_at)
-VALUES (5, 'malfunction', 'Item stopped working after 3 days', 1, '2022-02-05 09:00:00');
+VALUES (5, 'malfunction', 'Item stopped working after 3 days', 0, '2022-02-05 09:00:00');
 
+DROP TABLE IF EXISTS order_return_reason_files;
+CREATE TABLE order_return_reason_files (
+  id SERIAL PRIMARY KEY,
+  order_return_reason_id BIGINT NOT NULL,
+  filename VARCHAR(255),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
+INSERT INTO order_return_reason_files (order_return_reason_id, filename, created_at)
+VALUES (1, 'https://i.imgur.com/zNGBoLk.jpeg', '2022-02-01 10:00:00');
+
+INSERT INTO order_return_reason_files (order_return_reason_id, filename, created_at)
+VALUES (1, 'https://i.imgur.com/DebpKZa.png', '2022-02-01 10:00:00');
+
+INSERT INTO order_return_reason_files (order_return_reason_id, filename, created_at)
+VALUES (2, 'https://i.imgur.com/UJSZE08.jpeg', '2022-02-02 12:00:00');
+
+INSERT INTO order_return_reason_files (order_return_reason_id, filename, created_at)
+VALUES (3, 'https://i.imgur.com/DCtQmc2.png', '2022-02-03 15:00:00');
+
+INSERT INTO order_return_reason_files (order_return_reason_id, filename, created_at)
+VALUES (4, 'https://i.imgur.com/UHgW2D8.jpeg', '2022-02-04 14:00:00');
+
+--- when admin/operator determined if the product can be return
 DROP TABLE IF EXISTS order_return_apply;
 CREATE TABLE order_return_apply  (
   id SERIAL PRIMARY KEY,
   order_id bigint ,
   company_address_id bigint ,                   -- return to you(owner), return center or warehouse
   product_id bigint  ,
-  order_sn varchar(64) ,
+  order_sn INTEGER ,
   create_time timestamp,
   member_username varchar(64) ,
   return_amount decimal(10, 2)  ,
   return_name varchar(100) ,
   return_phone varchar(100) ,
-  status int NULL DEFAULT NULL ,                -- return status,  waiting to process 0 , returning(sending) 1, complete 2, rejected(not matching reason) 3
+  status int,                -- return status,  waiting to process 0 , returning(sending) 1, complete 2, rejected(not matching reason) 3
   handle_time timestamp,                        -- how long did this return took
   product_pic varchar(500) ,
   product_name varchar(200) ,
@@ -859,15 +920,15 @@ CREATE TABLE order_return_apply  (
 INSERT INTO order_return_apply (order_id, company_address_id, product_id, order_sn, create_time, member_username, return_amount, return_name, return_phone, status, handle_time, product_pic, product_name, product_brand, product_attr, product_count, product_price, product_real_price, reason, description, proof_pics, handle_note, handle_operator, receive_operator, receive_time, receive_note)
 VALUES
 
-(1, 2001, 3001, 'ORD-001', '2023-04-01 10:00:00', 'JohnDoe', 50.00, 'John Doe', '555-123-4567', 0, '2023-04-03 10:00:00', 'https://example.com/product1.jpg', 'Product 1', 'Brand 1', 'Color: Red, Size: L', 1, 100.00, 90.00, 'Wrong size', 'Received size L, ordered size M', 'https://example.com/proof1.jpg, https://example.com/proof2.jpg', 'Handled successfully', 'JaneSmith', 'JohnDoe', '2023-04-04 10:00:00', 'Received item in good condition'),
+(1, 1, 1, 1001, '2023-04-01 10:00:00', 'JohnDoe', 50.00, 'John Doe', '555-123-4567', 0, '2023-04-03 10:00:00', 'https://example.com/product1.jpg', 'Product 1', 'Brand 1', 'Color: Red, Size: L', 1, 100.00, 90.00, 'Wrong size', 'Received size L, ordered size M', 'https://example.com/proof1.jpg, https://example.com/proof2.jpg', 'Handled successfully', 'JaneSmith', 'JohnDoe', '2023-04-04 10:00:00', 'Received item in good condition'),
 
-(2, 2002, 3002, 'ORD-002', '2023-04-02 14:00:00', 'JaneSmith', 75.00, 'Jane Smith', '555-987-6543', 1, NULL, 'https://example.com/product2.jpg', 'Product 2', 'Brand 2', 'Color: Blue, Size: M', 2, 50.00, 45.00, 'Defective product', 'Product arrived damaged', 'https://example.com/proof3.jpg', 'Awaiting handling', NULL, NULL, NULL, NULL),
+(2, 1, 2, 1002, '2023-04-02 14:00:00', 'JaneSmith', 75.00, 'Jane Smith', '555-987-6543', 0, NULL, 'https://example.com/product2.jpg', 'Product 2', 'Brand 2', 'Color: Blue, Size: M', 2, 50.00, 45.00, 'Defective product', 'Product arrived damaged', 'https://example.com/proof3.jpg', 'Awaiting handling', NULL, NULL, NULL, NULL),
 
-(3, 2003, 3003, 'ORD-003', '2023-04-03 09:30:00', 'BobJohnson', 25.00, 'Bob Johnson', '555-555-1212', 0, '2023-04-05 09:30:00', 'https://example.com/product3.jpg', 'Product 3', 'Brand 3', 'Color: Green, Size: XL', 1, 75.00, 70.00, 'Wrong item', 'Received wrong product', 'https://example.com/proof4.jpg', 'Item rejected', 'MikeBrown', NULL, NULL, NULL),
+(3, 2, 3, 1003, '2023-04-03 09:30:00', 'BobJohnson', 25.00, 'Bob Johnson', '555-555-1212', 1, '2023-04-05 09:30:00', 'https://example.com/product3.jpg', 'Product 3', 'Brand 3', 'Color: Green, Size: XL', 1, 75.00, 70.00, 'Wrong item', 'Received wrong product', 'https://example.com/proof4.jpg', 'Item rejected', 'MikeBrown', NULL, NULL, NULL),
 
-(4, 2001, 3004, 'ORD-004', '2023-04-04 12:00:00', 'SarahLee', 20.00, 'Sarah Lee', '555-555-5555', 0, NULL, 'https://example.com/product4.jpg', 'Product 4', 'Brand 4', 'Color: Black, Size: S', 1, 30.00, 25.00, 'Changed mind', 'No longer want the product', NULL, 'Awaiting handling', NULL, NULL, NULL, NULL),
+(4, 2, 4, 1004, '2023-04-04 12:00:00', 'SarahLee', 20.00, 'Sarah Lee', '555-555-5555', 2, NULL, 'https://example.com/product4.jpg', 'Product 4', 'Brand 4', 'Color: Black, Size: S', 1, 30.00, 25.00, 'Changed mind', 'No longer want the product', NULL, 'Awaiting handling', NULL, NULL, NULL, NULL),
 
-(5, 2002, 3005, 'ORD-005', '2023-04-07 15:30:00', 'MikeBrown', 60.00, 'Mike Brown', '555-123-7890', 2, '2023-04-08 10:00:00', 'https://example.com/product5.jpg', 'Product 5', 'Brand 5', 'Color: White, Size: L', 1, 80.00, 75.00, 'Not as described', 'Product did not match description', 'https://example.com/proof5.jpg', 'Handled successfully', 'JaneSmith', 'MikeBrown', '2023-04-08 10:00:00', 'Refund received');
+(5, 3, 5, 1005, '2023-04-07 15:30:00', 'MikeBrown', 60.00, 'Mike Brown', '555-123-7890', 3, '2023-04-08 10:00:00', 'https://example.com/product5.jpg', 'Product 5', 'Brand 5', 'Color: White, Size: L', 1, 80.00, 75.00, 'Not as described', 'Product did not match description', 'did not meet our return policy, item opened', 'Admin order', 'JaneSmith', NULL, NULL, NULL);
 
 
 DROP TABLE IF EXISTS order_change_history;

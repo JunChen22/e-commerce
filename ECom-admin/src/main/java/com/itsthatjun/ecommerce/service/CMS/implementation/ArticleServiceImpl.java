@@ -2,6 +2,7 @@ package com.itsthatjun.ecommerce.service.CMS.implementation;
 
 import com.itsthatjun.ecommerce.dao.CMS.ArticleDao;
 import com.itsthatjun.ecommerce.dto.CMS.Articles;
+import com.itsthatjun.ecommerce.exceptions.CMS.ArticleException;
 import com.itsthatjun.ecommerce.mbg.mapper.ArticleImageMapper;
 import com.itsthatjun.ecommerce.mbg.mapper.ArticleMapper;
 import com.itsthatjun.ecommerce.mbg.mapper.ArticleQaMapper;
@@ -41,6 +42,11 @@ public class ArticleServiceImpl implements ArticleService {
     public List<Articles> getAllArticles() {
         //  TODO: it works but too much query to database
         return articleDao.getAllArticles();
+    }
+
+    @Override
+    public Articles getArticle(int articleId) {
+        return articleDao.getArticle(articleId);
     }
 
     @Override
@@ -150,9 +156,15 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public void deleteArticle(Articles article) {
+    public void deleteArticle(int articleId) {
 
-        articleMapper.deleteByPrimaryKey(article.getArticle().getId());
+        if (articleMapper.selectByPrimaryKey(articleId) == null) {
+            throw new ArticleException("Article not found with ID: " + articleId);
+        }
+
+        Articles article = getArticle(articleId);
+
+        articleMapper.deleteByPrimaryKey(articleId);
 
         for (ArticleQa qa: article.getQA()) {
             qaMapper.deleteByPrimaryKey(qa.getId());

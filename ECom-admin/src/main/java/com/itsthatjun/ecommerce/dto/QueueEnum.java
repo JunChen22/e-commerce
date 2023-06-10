@@ -1,8 +1,5 @@
 package com.itsthatjun.ecommerce.dto;
 
-/**
- * Created by Jun Chen on 5/6/21.
- */
 public enum QueueEnum {
 
     QUEUE_ORDER_CANCEL("order.direct", ".order.cancel", "order.cancel"),

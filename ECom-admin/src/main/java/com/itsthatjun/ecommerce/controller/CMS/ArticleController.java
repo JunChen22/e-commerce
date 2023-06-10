@@ -24,7 +24,15 @@ public class ArticleController {
     @GetMapping("/all")
     @ApiOperation(value = "")
     public List<Articles> getAllArticle() {
+        System.out.println("im here at controller");
         return articleService.getAllArticles();
+    }
+
+    @GetMapping("/{articleId}")
+    @ApiOperation(value = "")
+    public Articles getArticle(@PathVariable int articleId) {
+        System.out.println("im here at controller");
+        return articleService.getArticle(articleId);
     }
 
     @PostMapping("/create")
@@ -40,10 +48,9 @@ public class ArticleController {
         return articles;
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete/{articleId}")
     @ApiOperation(value = "delete article and it's related content(QA, videos, and images)")
-    public Articles deleteArticle(Articles article) {
-        articleService.deleteArticle(article);
-        return article;
+    public void deleteArticle(@PathVariable int articleId) {
+        articleService.deleteArticle(articleId);
     }
 }

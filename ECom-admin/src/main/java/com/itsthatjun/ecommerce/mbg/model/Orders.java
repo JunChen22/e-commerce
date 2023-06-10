@@ -12,8 +12,6 @@ public class Orders {
 
     private Integer orderSn;
 
-    private Date createTime;
-
     private String memberEmail;
 
     private BigDecimal totalAmount;
@@ -58,8 +56,6 @@ public class Orders {
 
     private String receiverDetailAddress;
 
-    private String note;
-
     private Integer confirmStatus;
 
     private Integer deleteStatus;
@@ -71,6 +67,8 @@ public class Orders {
     private Date receiveTime;
 
     private String comment;
+
+    private String note;
 
     private Date createdAt;
 
@@ -106,14 +104,6 @@ public class Orders {
 
     public void setOrderSn(Integer orderSn) {
         this.orderSn = orderSn;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
     }
 
     public String getMemberEmail() {
@@ -292,14 +282,6 @@ public class Orders {
         this.receiverDetailAddress = receiverDetailAddress;
     }
 
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
     public Integer getConfirmStatus() {
         return confirmStatus;
     }
@@ -346,6 +328,14 @@ public class Orders {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public Date getCreatedAt() {

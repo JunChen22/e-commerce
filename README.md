@@ -2,10 +2,8 @@
 
 [![Java CI with Maven](https://github.com/JunChen22/E-commerce/actions/workflows/maven.yml/badge.svg)](https://github.com/JunChen22/E-commerce/actions/workflows/maven.yml) <a href="https://github.com/JunChen22/E-commerce-React"><img src="https://img.shields.io/badge/Frontend-React-green"></a> <a href="https://github.com/JunChen22/E-commerce-microservice"><img src="https://img.shields.io/badge/Miscroservice-version-green"></a> <a href="TBD"><img src="https://img.shields.io/badge/Demo-running-green"></a>
 
-This project was based on mall by macrozheng on GitHub. It's more of a database driven design approach. Existing
+Single vendor E-commerce suited for small to medium business. It's more of a database driven design approach. Turn existing
 RDMS turned into e-commerce.
-
-E-commerce for small to medium business. The microservice version have vendor.
 
 ``` lua
 E-commerece 

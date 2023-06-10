@@ -2,6 +2,7 @@ package com.itsthatjun.ecommerce.controller;
 
 import com.itsthatjun.ecommerce.dao.AdminDao;
 import com.itsthatjun.ecommerce.mbg.model.AdminLoginLog;
+import com.itsthatjun.ecommerce.mbg.model.Permission;
 import com.itsthatjun.ecommerce.mbg.model.Roles;
 import com.itsthatjun.ecommerce.service.UMS.implementation.AdminServiceImpl;
 import com.itsthatjun.ecommerce.mbg.model.Admin;
@@ -38,14 +39,15 @@ public class AdminController {
         if(token.isEmpty()){
             return new ResponseEntity<>(new LoginResponse(false, token), HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(new LoginResponse(true, token),HttpStatus.OK);
+        return ResponseEntity.ok(new LoginResponse(true, token));
     }
 
     @PostMapping("/register")
     @PreAuthorize("hasRole('ROLE_admin-root')")
     @ApiOperation(value = "Register a admin account, only main admin can create another admin and assign role and permission")
     public ResponseEntity<?> register(@RequestBody Admin admin){
-        System.out.println("hello only I can create user");
+
+        // TODO: register a admin
         //adminService.register(admin);
         return null;
     }
@@ -53,22 +55,24 @@ public class AdminController {
     @PreAuthorize("hasRole('ROLE_admin-user')")
     @GetMapping("/roles/{id}")
     @ApiOperation(value = "")
-    public String getRole(@PathVariable int id){
+    public List<Roles> getRole(@PathVariable int id){
         List<Roles> roles = adminDao.getRolesList(id);
-        for(Roles role : roles) {
-            System.out.println(role.getName() + " " + role.getDescription());
-        }
-        return "hello";
+        return roles;
+    }
+
+    @PreAuthorize("hasRole('ROLE_admin-user')")
+    @GetMapping("/permission/{id}")
+    @ApiOperation(value = "")
+    public List<Permission> getPermission(@PathVariable int id){
+        List<Permission> permissions = adminDao.getPermissionList(id);
+        return permissions;
     }
 
     @GetMapping("/logs/{id}")
     @PreAuthorize("hasAuthority('user:read')")
     @ApiOperation(value = "")
-    public String getLoginLogs(@PathVariable int id){
+    public List<AdminLoginLog> getLoginLogs(@PathVariable int id){
         List<AdminLoginLog> logs = adminDao.getLoginLog(id);
-        for(AdminLoginLog log: logs) {
-            System.out.println(log.getLoginTime());
-        }
-        return "hello";
+        return logs;
     }
 }

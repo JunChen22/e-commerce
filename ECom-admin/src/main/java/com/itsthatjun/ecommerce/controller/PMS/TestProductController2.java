@@ -1,4 +1,4 @@
-package com.itsthatjun.ecommerce.controller;
+package com.itsthatjun.ecommerce.controller.PMS;
 
 import com.itsthatjun.ecommerce.dto.CMS.Articles;
 import com.itsthatjun.ecommerce.mbg.mapper.ProductMapper;

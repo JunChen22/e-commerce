@@ -67,7 +67,6 @@ public class AdminServiceImpl implements UserDetailsService, AdminService {
             UserDetails userDetails = loadUserByUsername(username);
             // decode password to compare
             if(!passwordEncoder().matches(password, userDetails.getPassword())){
-                System.out.println("wrong password");
                 throw new BadCredentialsException("incorrect password");
             }
 

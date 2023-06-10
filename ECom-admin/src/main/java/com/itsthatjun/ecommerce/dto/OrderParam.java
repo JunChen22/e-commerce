@@ -1,8 +1,5 @@
 package com.itsthatjun.ecommerce.dto;
 
-/**
- * Created by Jun Chen on 5/6/21.
- */
 public class OrderParam {
 
     private Long memberReceiveAddressId;

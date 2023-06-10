@@ -7,15 +7,17 @@ import java.util.List;
 
 public interface ArticleService {
 
-    @ApiModelProperty(value = "")
+    @ApiModelProperty(value = "get all articles")
     List<Articles> getAllArticles();
 
-    @ApiModelProperty(value = "")
+    @ApiModelProperty(value = "get article based on id")
+    Articles getArticle(int articleId);
+    @ApiModelProperty(value = "create article")
     Articles createArticle(Articles article);
 
-    @ApiModelProperty(value = "")
+    @ApiModelProperty(value = "update/add article and its media content")
     Articles updateArticle(Articles article);
 
-    @ApiModelProperty(value = "")
-    void deleteArticle(Articles article);
+    @ApiModelProperty(value = "delete article and all of its media content")
+    void deleteArticle(int articleId);
 }

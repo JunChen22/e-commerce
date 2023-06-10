@@ -13,7 +13,7 @@ public interface ProductService {
 
     boolean createProduct(Product product);
 
-    boolean updateProduct(int id, Product product);
+    boolean updateProduct(Product product);
 
     boolean deleteProduct(int id);
 }

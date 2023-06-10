@@ -1,5 +1,6 @@
 package com.itsthatjun.ecommerce.service.OMS.implementation;
 
+import com.itsthatjun.ecommerce.exceptions.OMS.OrderReturnApplyException;
 import com.itsthatjun.ecommerce.mbg.mapper.OrderReturnApplyMapper;
 import com.itsthatjun.ecommerce.mbg.model.OrderReturnApply;
 import com.itsthatjun.ecommerce.mbg.model.OrderReturnApplyExample;
@@ -64,7 +65,8 @@ public class ReturnOrderServiceImpl implements ReturnOrderService {
         example.createCriteria().andOrderSnEqualTo(orderSn);
 
         List<OrderReturnApply> returnRequest = returnApplyMapper.selectByExample(example);
-
+        if (returnRequest.size() == 0)
+            throw new OrderReturnApplyException("Order Return request for order serial number: " + orderSn + " does not exist");
         return returnRequest.get(0);
     }
 

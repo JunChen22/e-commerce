@@ -49,6 +49,7 @@ public class CouponHistoryServiceImpl implements CouponHistoryService {
 
     @Override
     public List<UsedCouponHistory> getUserCoupon(int id) {
+        // TODO: fix the coupon history
         List<Coupon> couponList = couponMapper.selectByExample(new CouponExample());  // getting all coupon types
         List<UsedCouponHistory> result = new ArrayList<>();
         for(Coupon coupon : couponList) {

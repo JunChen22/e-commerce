@@ -2,8 +2,11 @@ package com.itsthatjun.ecommerce.service.PMS.implementation;
 
 import com.github.pagehelper.PageHelper;
 import com.itsthatjun.ecommerce.mbg.mapper.BrandMapper;
+import com.itsthatjun.ecommerce.mbg.mapper.ProductMapper;
 import com.itsthatjun.ecommerce.mbg.model.Brand;
 import com.itsthatjun.ecommerce.mbg.model.BrandExample;
+import com.itsthatjun.ecommerce.mbg.model.Product;
+import com.itsthatjun.ecommerce.mbg.model.ProductExample;
 import com.itsthatjun.ecommerce.service.PMS.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,10 +16,13 @@ import java.util.List;
 @Service
 public class BrandServiceImpl implements BrandService {
 
+    private final ProductMapper productMapper;
+
     private final BrandMapper brandMapper;
 
     @Autowired
-    public BrandServiceImpl(BrandMapper brandMapper) {
+    public BrandServiceImpl(ProductMapper productMapper, BrandMapper brandMapper) {
+        this.productMapper = productMapper;
         this.brandMapper = brandMapper;
     }
 
@@ -32,6 +38,14 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
+    public List<Product> listAllBrandProduct(int brandId) {
+        ProductExample example = new ProductExample();
+        example.createCriteria().andBrandIdEqualTo(brandId);
+        List<Product> brandProducts = productMapper.selectByExample(example);
+        return brandProducts;
+    }
+
+    @Override
     public Brand getBrand(int id) {
         return brandMapper.selectByPrimaryKey(id);
     }
@@ -43,8 +57,7 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public boolean updateBrand(int id, Brand brand) {
-        brand.setId(id);
+    public boolean updateBrand(Brand brand) {
         brandMapper.updateByPrimaryKeySelective(brand);
         return true;
     }

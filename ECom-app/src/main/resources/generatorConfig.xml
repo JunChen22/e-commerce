@@ -69,6 +69,12 @@
             <columnOverride column="product_id" javaType="java.lang.Integer" />
         </table>
 
+        <table tableName= "product_pictures">
+            <generatedKey column="id" sqlStatement="JDBC" />
+            <columnOverride column="id" javaType="java.lang.Integer" />
+            <columnOverride column="product_id" javaType="java.lang.Integer" />
+        </table>
+
         <table tableName= "review">
             <generatedKey column="id" sqlStatement="JDBC" />
             <columnOverride column="id" javaType="java.lang.Integer" />
@@ -158,6 +164,12 @@
             <generatedKey column="id" sqlStatement="JDBC" />
             <columnOverride column="id" javaType="java.lang.Integer" />
             <columnOverride column="order_id" javaType="java.lang.Integer" />
+        </table>
+
+        <table tableName="order_return_reason_files">
+            <generatedKey column="id" sqlStatement="JDBC" />
+            <columnOverride column="id" javaType="java.lang.Integer" />
+            <columnOverride column="order_return_reason_id" javaType="java.lang.Integer" />
         </table>
 
         <table tableName="order_return_apply">

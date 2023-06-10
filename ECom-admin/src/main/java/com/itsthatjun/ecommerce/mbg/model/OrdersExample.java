@@ -326,16 +326,6 @@ public class OrdersExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrderSnLike(Integer value) {
-            addCriterion("order_sn like", value, "orderSn");
-            return (Criteria) this;
-        }
-
-        public Criteria andOrderSnNotLike(Integer value) {
-            addCriterion("order_sn not like", value, "orderSn");
-            return (Criteria) this;
-        }
-
         public Criteria andOrderSnIn(List<Integer> values) {
             addCriterion("order_sn in", values, "orderSn");
             return (Criteria) this;
@@ -353,66 +343,6 @@ public class OrdersExample {
 
         public Criteria andOrderSnNotBetween(Integer value1, Integer value2) {
             addCriterion("order_sn not between", value1, value2, "orderSn");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeIsNull() {
-            addCriterion("create_time is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeIsNotNull() {
-            addCriterion("create_time is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeEqualTo(Date value) {
-            addCriterion("create_time =", value, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeNotEqualTo(Date value) {
-            addCriterion("create_time <>", value, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeGreaterThan(Date value) {
-            addCriterion("create_time >", value, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("create_time >=", value, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeLessThan(Date value) {
-            addCriterion("create_time <", value, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeLessThanOrEqualTo(Date value) {
-            addCriterion("create_time <=", value, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeIn(List<Date> values) {
-            addCriterion("create_time in", values, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeNotIn(List<Date> values) {
-            addCriterion("create_time not in", values, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeBetween(Date value1, Date value2) {
-            addCriterion("create_time between", value1, value2, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
-            addCriterion("create_time not between", value1, value2, "createTime");
             return (Criteria) this;
         }
 
@@ -1866,76 +1796,6 @@ public class OrdersExample {
             return (Criteria) this;
         }
 
-        public Criteria andNoteIsNull() {
-            addCriterion("note is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoteIsNotNull() {
-            addCriterion("note is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoteEqualTo(String value) {
-            addCriterion("note =", value, "note");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoteNotEqualTo(String value) {
-            addCriterion("note <>", value, "note");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoteGreaterThan(String value) {
-            addCriterion("note >", value, "note");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoteGreaterThanOrEqualTo(String value) {
-            addCriterion("note >=", value, "note");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoteLessThan(String value) {
-            addCriterion("note <", value, "note");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoteLessThanOrEqualTo(String value) {
-            addCriterion("note <=", value, "note");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoteLike(String value) {
-            addCriterion("note like", value, "note");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoteNotLike(String value) {
-            addCriterion("note not like", value, "note");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoteIn(List<String> values) {
-            addCriterion("note in", values, "note");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoteNotIn(List<String> values) {
-            addCriterion("note not in", values, "note");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoteBetween(String value1, String value2) {
-            addCriterion("note between", value1, value2, "note");
-            return (Criteria) this;
-        }
-
-        public Criteria andNoteNotBetween(String value1, String value2) {
-            addCriterion("note not between", value1, value2, "note");
-            return (Criteria) this;
-        }
-
         public Criteria andConfirmStatusIsNull() {
             addCriterion("confirm_status is null");
             return (Criteria) this;
@@ -2303,6 +2163,76 @@ public class OrdersExample {
 
         public Criteria andCommentNotBetween(String value1, String value2) {
             addCriterion("comment not between", value1, value2, "comment");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoteIsNull() {
+            addCriterion("note is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoteIsNotNull() {
+            addCriterion("note is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoteEqualTo(String value) {
+            addCriterion("note =", value, "note");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoteNotEqualTo(String value) {
+            addCriterion("note <>", value, "note");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoteGreaterThan(String value) {
+            addCriterion("note >", value, "note");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoteGreaterThanOrEqualTo(String value) {
+            addCriterion("note >=", value, "note");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoteLessThan(String value) {
+            addCriterion("note <", value, "note");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoteLessThanOrEqualTo(String value) {
+            addCriterion("note <=", value, "note");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoteLike(String value) {
+            addCriterion("note like", value, "note");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoteNotLike(String value) {
+            addCriterion("note not like", value, "note");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoteIn(List<String> values) {
+            addCriterion("note in", values, "note");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoteNotIn(List<String> values) {
+            addCriterion("note not in", values, "note");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoteBetween(String value1, String value2) {
+            addCriterion("note between", value1, value2, "note");
+            return (Criteria) this;
+        }
+
+        public Criteria andNoteNotBetween(String value1, String value2) {
+            addCriterion("note not between", value1, value2, "note");
             return (Criteria) this;
         }
 

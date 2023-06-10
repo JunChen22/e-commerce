@@ -22,20 +22,6 @@ public class CouponController {
         this.couponService = couponService;
     }
 
-    @PostMapping("/create")
-    @ApiOperation(value = "create a coupon")
-    public Coupon create(@RequestBody Coupon coupon) {
-        couponService.createCoupon(coupon);
-        return coupon;
-    }
-
-    @GetMapping("/list/")
-    @ApiOperation(value = "Get coupons that works with a product")
-    public List<Coupon>  list(@RequestBody Product product) {
-        List<Coupon> couponList = couponService.getCouponForProduct(product);
-        return couponList;
-    }
-
     @GetMapping("/listAll")
     @ApiOperation(value = "return all working non-expired coupon")
     public List<Coupon> listAll() {
@@ -44,6 +30,25 @@ public class CouponController {
         return couponList;
     }
 
+    @GetMapping("/{couponId}")
+    @ApiOperation(value = "Get coupons that works with a product")
+    public Coupon list(@PathVariable int couponId) {
+        return couponService.getACoupon(couponId);
+    }
+
+    @GetMapping("/product/all/{productId}")
+    @ApiOperation(value = "Get coupons that works with a product")
+    public List<Coupon> getCouponForProduct(@PathVariable int productId) {
+        List<Coupon> couponList = couponService.getCouponForProduct(productId);
+        return couponList;
+    }
+
+    @PostMapping("/create")
+    @ApiOperation(value = "create a coupon")
+    public Coupon create(@RequestBody Coupon coupon) {
+        couponService.createCoupon(coupon);
+        return coupon;
+    }
     @PostMapping("/update")
     @ApiOperation(value = "update a coupon")
     public Coupon update(@RequestBody Coupon updateCoupon){
@@ -51,9 +56,9 @@ public class CouponController {
         return updateCoupon;
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete/{couponId}")
     @ApiOperation(value = "delete a coupon")
-    public void delete(@RequestBody Coupon coupon) {
-        couponService.deleteCoupon(coupon);
+    public void delete(@PathVariable int couponId) {
+        couponService.deleteCoupon(couponId);
     }
 }

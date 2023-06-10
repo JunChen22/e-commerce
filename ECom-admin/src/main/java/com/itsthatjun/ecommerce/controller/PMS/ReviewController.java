@@ -23,13 +23,13 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
 
-    @GetMapping("/getAll/{productId}")
+    @GetMapping("/getAllProductReview/{productId}")
     @ApiOperation(value = "get all reviews for a product")
     public List<Review> getProductReviews(@PathVariable int productId) {
         return reviewService.listProductAllReview(productId);
     }
 
-    @GetMapping("/getAll/{id}")
+    @GetMapping("/getAllReviewByUser/{id}")
     @ApiOperation(value = "get all reviews made a user")
     public List<Review> getProductReviewsByUser(@PathVariable int id) {
         return reviewService.listAllReviewByUser(id);
@@ -38,6 +38,7 @@ public class ReviewController {
     @PostMapping("/create")
     @ApiOperation(value = "create review for a product")
     public Review createProductReview(@RequestBody Review review) {
+        // TODO: review created time did not create automatically
         reviewService.createReview(review);
         return review;
     }

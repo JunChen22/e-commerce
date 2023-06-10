@@ -46,23 +46,23 @@ public class ProductController {
 
     @PostMapping("/create")
     @ApiOperation(value = "Create a product")
-    @PreAuthorize("hasAuthority('product:create')")
+    //@PreAuthorize("hasAuthority('product:create')")
     public Product createProduct(@RequestBody Product product){
         productService.createProduct(product);
         return product;
     }
 
-    @PostMapping("/update/{id}")
+    @PostMapping("/update")
     @ApiOperation(value = "Update a product")
-    @PreAuthorize("hasAuthority('product:update')")
-    public Product updateProduct(@PathVariable int id, Product product){
-        productService.updateProduct(id, product);
+    //@PreAuthorize("hasAuthority('product:update')")
+    public Product updateProduct(@RequestBody Product product){
+        productService.updateProduct(product);
         return product;
     }
 
     @DeleteMapping("/delete/{id}")
     @ApiOperation(value = "Delete a product")
-    @PreAuthorize("hasAuthority('product:delete')")
+    //@PreAuthorize("hasAuthority('product:delete')")
     public String deleteProduct(@PathVariable int id){
         productService.deleteProduct(id);
         return "deleted";
