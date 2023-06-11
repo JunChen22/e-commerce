@@ -386,16 +386,6 @@ public class OrderReturnApplyExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrderSnLike(Integer value) {
-            addCriterion("order_sn like", value, "orderSn");
-            return (Criteria) this;
-        }
-
-        public Criteria andOrderSnNotLike(Integer value) {
-            addCriterion("order_sn not like", value, "orderSn");
-            return (Criteria) this;
-        }
-
         public Criteria andOrderSnIn(List<Integer> values) {
             addCriterion("order_sn in", values, "orderSn");
             return (Criteria) this;

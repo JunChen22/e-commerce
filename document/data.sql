@@ -356,17 +356,17 @@ INSERT INTO product(brand_id, category_id, attribute_category_id, brand_name, na
 INSERT INTO product(brand_id, category_id, attribute_category_id, brand_name, name, picture, description, original_price, sale_price, stock, description_album, keywords)
             VALUES (7,  15, 1, 'Oneplus', 'Oneplus 8p', ' ', 'phone desc' , 499, 480, 15, '', 'smart phone');
 
-INSERT INTO product(brand_id, category_id, name, picture, description, original_price, sale_price, stock, description_album)
-            VALUES (8,  8, 'Air jordon', ' ', 'shoes desc' , 120, 115, 20, '');
-INSERT INTO product(brand_id, category_id, name, picture, description, original_price, sale_price, stock, description_album)
-            VALUES (9,  8, 'Ultraboost 20 Sneaker', ' ', 'shoes desc' , 110, 99, 20, '');
+INSERT INTO product(brand_id, category_id, name, picture, description, original_price, sale_price, stock, description_album, keywords)
+            VALUES (8,  8, 'Air jordon', ' ', 'shoes desc' , 120, 115, 20, '','shoes');
+INSERT INTO product(brand_id, category_id, name, picture, description, original_price, sale_price, stock, description_album, keywords)
+            VALUES (9,  8, 'Ultraboost 20 Sneaker', ' ', 'shoes desc' , 110, 99, 20, '', 'speaker');
 
-INSERT INTO product(brand_id, category_id, name, picture, description, original_price, sale_price, stock, description_album)
-            VALUES (8, 7,  't-shirt', ' ', 'clothing desc' , 23, 20, 20, '');
-INSERT INTO product(brand_id, category_id, name, picture, description, original_price, sale_price, stock, description_album)
-            VALUES (9,  7, 't-shirt', ' ', 'clothing desc' , 16, 12, 20, '');
-INSERT INTO product(brand_id, category_id, name, picture, description, original_price, sale_price, stock, description_album)
-            VALUES (10,  7, 'hawaii', ' ', 'clothing desc' , 20, 15, 20, '');
+INSERT INTO product(brand_id, category_id, name, picture, description, original_price, sale_price, stock, description_album, keywords)
+            VALUES (8, 7,  't-shirt', ' ', 'clothing desc' , 23, 20, 20, '', 'clothe');
+INSERT INTO product(brand_id, category_id, name, picture, description, original_price, sale_price, stock, description_album, keywords)
+            VALUES (9,  7, 't-shirt', ' ', 'clothing desc' , 16, 12, 20, '', 'clothe');
+INSERT INTO product(brand_id, category_id, name, picture, description, original_price, sale_price, stock, description_album, keywords)
+            VALUES (10,  7, 'hawaii', ' ', 'clothing desc' , 20, 15, 20, '', 'clothe');
 
 INSERT INTO product(brand_id, category_id, name, picture, description, original_price, sale_price, stock, description_album, keywords)
             VALUES (11,  13,  'Calculus: Early Transcendentals 8th Edition', ' ', 'book desc' , 26, 20, 5, '', 'book');
@@ -498,6 +498,7 @@ INSERT INTO roles (name, description, create_time, status) VALUES ('ROLE_admin-u
 INSERT INTO roles (name, description, create_time, status) VALUES ('ROLE_admin-sale', 'manage sale issues', '2020-03-23 09:42:22', 'active');
 INSERT INTO roles (name, description, create_time, status) VALUES ('ROLE_admin-content', 'manage content issues', '2020-03-23 09:42:22', 'active');
 INSERT INTO roles (name, description, create_time, status) VALUES ('ROLE_admin-root', 'root', '2020-03-18 22:18:40', 'active');
+INSERT INTO roles (name, description, create_time, status) VALUES ('ROLE_member', 'root', '2020-03-18 22:18:40', 'active');
 
 -- base permission
 INSERT INTO permission (parent_id, name, value, create_time, status) VALUES ('0', 'product', null, '2019-08-18 16:00:38', 'active');
@@ -712,8 +713,8 @@ INSERT INTO coupon_history (coupon_id, member_id, order_id, order_sn, used_time,
 VALUES
 (1, 1, 1, 20230425-1001, '2023-04-25 08:45:00', '15OFF'),
 (2, 2, 2, 987654, '2023-03-25 08:45:00', '15OFF'),
-(3, 1, 3, ORD-00003, '2023-02-25 08:45:00', '50OFF'),
-(1, 3, 4, ORD-00004, '2022-01-11 10:00:00', 'FREE');
+(3, 1, 3, 00003, '2023-02-25 08:45:00', '50OFF'),
+(1, 3, 4, 00004, '2022-01-11 10:00:00', 'FREE');
 
 
 
@@ -779,7 +780,7 @@ DROP TABLE IF EXISTS order_item;
 CREATE TABLE order_item (
 	id SERIAL PRIMARY KEY,
 	order_id BIGINT DEFAULT NULL,
-	order_sn VARCHAR(64) DEFAULT NULL,
+	order_sn BIGINT DEFAULT NULL,
 	product_id BIGINT DEFAULT NULL,
 	product_pic VARCHAR(500) DEFAULT NULL,
 	product_name VARCHAR(200) DEFAULT NULL,

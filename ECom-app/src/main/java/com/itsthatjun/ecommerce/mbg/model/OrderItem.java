@@ -7,7 +7,7 @@ public class OrderItem {
 
     private Integer orderId;
 
-    private String orderSn;
+    private Integer orderSn;
 
     private Integer productId;
 
@@ -55,11 +55,11 @@ public class OrderItem {
         this.orderId = orderId;
     }
 
-    public String getOrderSn() {
+    public Integer getOrderSn() {
         return orderSn;
     }
 
-    public void setOrderSn(String orderSn) {
+    public void setOrderSn(Integer orderSn) {
         this.orderSn = orderSn;
     }
 

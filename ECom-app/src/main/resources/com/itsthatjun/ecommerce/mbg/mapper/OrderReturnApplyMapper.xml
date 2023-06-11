@@ -6,7 +6,7 @@
     <result column="order_id" jdbcType="BIGINT" property="orderId" />
     <result column="company_address_id" jdbcType="BIGINT" property="companyAddressId" />
     <result column="product_id" jdbcType="BIGINT" property="productId" />
-    <result column="order_sn" jdbcType="VARCHAR" property="orderSn" />
+    <result column="order_sn" jdbcType="INTEGER" property="orderSn" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="member_username" jdbcType="VARCHAR" property="memberUsername" />
     <result column="return_amount" jdbcType="NUMERIC" property="returnAmount" />
@@ -136,7 +136,7 @@
       handle_note, handle_operator, receive_operator, 
       receive_time, receive_note)
     values (#{orderId,jdbcType=BIGINT}, #{companyAddressId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, 
-      #{orderSn,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{memberUsername,jdbcType=VARCHAR}, 
+      #{orderSn,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{memberUsername,jdbcType=VARCHAR}, 
       #{returnAmount,jdbcType=NUMERIC}, #{returnName,jdbcType=VARCHAR}, #{returnPhone,jdbcType=VARCHAR}, 
       #{status,jdbcType=INTEGER}, #{handleTime,jdbcType=TIMESTAMP}, #{productPic,jdbcType=VARCHAR}, 
       #{productName,jdbcType=VARCHAR}, #{productBrand,jdbcType=VARCHAR}, #{productAttr,jdbcType=VARCHAR}, 
@@ -238,7 +238,7 @@
         #{productId,jdbcType=BIGINT},
       </if>
       <if test="orderSn != null">
-        #{orderSn,jdbcType=VARCHAR},
+        #{orderSn,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -330,7 +330,7 @@
         product_id = #{record.productId,jdbcType=BIGINT},
       </if>
       <if test="record.orderSn != null">
-        order_sn = #{record.orderSn,jdbcType=VARCHAR},
+        order_sn = #{record.orderSn,jdbcType=INTEGER},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -409,7 +409,7 @@
       order_id = #{record.orderId,jdbcType=BIGINT},
       company_address_id = #{record.companyAddressId,jdbcType=BIGINT},
       product_id = #{record.productId,jdbcType=BIGINT},
-      order_sn = #{record.orderSn,jdbcType=VARCHAR},
+      order_sn = #{record.orderSn,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       member_username = #{record.memberUsername,jdbcType=VARCHAR},
       return_amount = #{record.returnAmount,jdbcType=NUMERIC},
@@ -449,7 +449,7 @@
         product_id = #{productId,jdbcType=BIGINT},
       </if>
       <if test="orderSn != null">
-        order_sn = #{orderSn,jdbcType=VARCHAR},
+        order_sn = #{orderSn,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -525,7 +525,7 @@
     set order_id = #{orderId,jdbcType=BIGINT},
       company_address_id = #{companyAddressId,jdbcType=BIGINT},
       product_id = #{productId,jdbcType=BIGINT},
-      order_sn = #{orderSn,jdbcType=VARCHAR},
+      order_sn = #{orderSn,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       member_username = #{memberUsername,jdbcType=VARCHAR},
       return_amount = #{returnAmount,jdbcType=NUMERIC},

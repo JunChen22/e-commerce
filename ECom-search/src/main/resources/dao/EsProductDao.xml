@@ -18,6 +18,7 @@
             p.id id,
             p.name,
             p.brand_name brandName,
+            p.keywords,
             p.original_price price,
             pa.attribute_value attr_value,
             pa.attribute_unit attr_type

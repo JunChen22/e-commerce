@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.itsthatjun.ecommerce.mbg.model.OrderItem">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="order_id" jdbcType="BIGINT" property="orderId" />
-    <result column="order_sn" jdbcType="VARCHAR" property="orderSn" />
+    <result column="order_sn" jdbcType="BIGINT" property="orderSn" />
     <result column="product_id" jdbcType="BIGINT" property="productId" />
     <result column="product_pic" jdbcType="VARCHAR" property="productPic" />
     <result column="product_name" jdbcType="VARCHAR" property="productName" />
@@ -121,7 +121,7 @@
       product_sku_id, product_sku_code, product_category_id, 
       promotion_name, promotion_amount, coupon_amount, 
       real_amount, product_attr)
-    values (#{orderId,jdbcType=BIGINT}, #{orderSn,jdbcType=VARCHAR}, #{productId,jdbcType=BIGINT}, 
+    values (#{orderId,jdbcType=BIGINT}, #{orderSn,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, 
       #{productPic,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, #{productBrand,jdbcType=VARCHAR}, 
       #{productSn,jdbcType=VARCHAR}, #{productPrice,jdbcType=NUMERIC}, #{productQuantity,jdbcType=INTEGER}, 
       #{productSkuId,jdbcType=BIGINT}, #{productSkuCode,jdbcType=VARCHAR}, #{productCategoryId,jdbcType=BIGINT}, 
@@ -188,7 +188,7 @@
         #{orderId,jdbcType=BIGINT},
       </if>
       <if test="orderSn != null">
-        #{orderSn,jdbcType=VARCHAR},
+        #{orderSn,jdbcType=BIGINT},
       </if>
       <if test="productId != null">
         #{productId,jdbcType=BIGINT},
@@ -253,7 +253,7 @@
         order_id = #{record.orderId,jdbcType=BIGINT},
       </if>
       <if test="record.orderSn != null">
-        order_sn = #{record.orderSn,jdbcType=VARCHAR},
+        order_sn = #{record.orderSn,jdbcType=BIGINT},
       </if>
       <if test="record.productId != null">
         product_id = #{record.productId,jdbcType=BIGINT},
@@ -309,7 +309,7 @@
     update order_item
     set id = #{record.id,jdbcType=INTEGER},
       order_id = #{record.orderId,jdbcType=BIGINT},
-      order_sn = #{record.orderSn,jdbcType=VARCHAR},
+      order_sn = #{record.orderSn,jdbcType=BIGINT},
       product_id = #{record.productId,jdbcType=BIGINT},
       product_pic = #{record.productPic,jdbcType=VARCHAR},
       product_name = #{record.productName,jdbcType=VARCHAR},
@@ -336,7 +336,7 @@
         order_id = #{orderId,jdbcType=BIGINT},
       </if>
       <if test="orderSn != null">
-        order_sn = #{orderSn,jdbcType=VARCHAR},
+        order_sn = #{orderSn,jdbcType=BIGINT},
       </if>
       <if test="productId != null">
         product_id = #{productId,jdbcType=BIGINT},
@@ -389,7 +389,7 @@
   <update id="updateByPrimaryKey" parameterType="com.itsthatjun.ecommerce.mbg.model.OrderItem">
     update order_item
     set order_id = #{orderId,jdbcType=BIGINT},
-      order_sn = #{orderSn,jdbcType=VARCHAR},
+      order_sn = #{orderSn,jdbcType=BIGINT},
       product_id = #{productId,jdbcType=BIGINT},
       product_pic = #{productPic,jdbcType=VARCHAR},
       product_name = #{productName,jdbcType=VARCHAR},

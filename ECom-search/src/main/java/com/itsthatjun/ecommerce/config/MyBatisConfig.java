@@ -4,8 +4,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@MapperScan({"com.itsthatjun.spring.ecommerce.dao",
-             "com.example.spring.ecommerce.demo.springecommerce.mbg.mapper"})
+@MapperScan({"com.itsthatjun.ecommerce.dao",
+             "com.itsthatjun.ecommerce.mbg.mapper"})
 public class MyBatisConfig {
-    // creates the mapper bean
 }

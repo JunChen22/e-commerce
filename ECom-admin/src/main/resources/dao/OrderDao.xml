@@ -23,7 +23,6 @@
         WHERE o.id = #{orderId}
     </select>
 
-
     <update id="updateSkuStock">
         UPDATE pms_sku_stock
         SET

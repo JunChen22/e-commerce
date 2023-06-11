@@ -19,6 +19,7 @@ public interface EsProductService {
 
     //List<EsProduct> search(String name, String keyword, int category, int pageNum, int pageSize, int sort);
 
+    // TODO: recommendation
     Page<EsProduct> recommend(Long id, Integer pageNum, Integer pageSize);
 
     // EsProductRelatedInfo searchRelatedInfo(String keyword);

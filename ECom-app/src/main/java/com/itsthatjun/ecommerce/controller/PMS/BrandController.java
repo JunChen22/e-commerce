@@ -1,7 +1,8 @@
 package com.itsthatjun.ecommerce.controller.PMS;
 
-import com.itsthatjun.ecommerce.service.impl.BrandServiceImpl;
 import com.itsthatjun.ecommerce.mbg.model.Brand;
+import com.itsthatjun.ecommerce.mbg.model.Product;
+import com.itsthatjun.ecommerce.service.PMS.implementation.BrandServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/brand")
-@Api(tags = "Product related", description = "product management")
+@Api(tags = "brand related", description = "brand management")
 public class BrandController {
 
     private final BrandServiceImpl brandService;
@@ -34,30 +35,15 @@ public class BrandController {
         return brandService.listBrand(pageNum, pageSize);
     }
 
-    @GetMapping("{id}")
-    @ApiOperation(value = "Get brand by id")
-    public Brand getBrand(@PathVariable int id){
-        return brandService.getBrand(id);
+    @GetMapping("/product/{brandId}")
+    @ApiOperation(value = "Get all product of this brand")
+    public List<Product> getBrandProduct(@PathVariable int brandId){
+        return brandService.listAllBrandProduct(brandId);
     }
 
-    @PostMapping("/create")
-    @ApiOperation(value = "Create a brand")
-    public Brand createBrand(@RequestBody Brand brand){
-        brandService.createBrand(brand);
-        return brand;
-    }
-
-    @PostMapping("/update/{id}")
-    @ApiOperation(value = "Update a brand")
-    public Brand updateBrand(@PathVariable int id, @RequestBody Brand brand){
-        brandService.updateBrand(id, brand);
-        return brand;
-    }
-
-    @DeleteMapping("/delete/{id}")
-    @ApiOperation(value = "Delete a brand")
-    public String deleteBrand(@PathVariable int id){
-        brandService.deleteBrand(id);
-        return "deleted";
+    @GetMapping("/{brandId}")
+    @ApiOperation(value = "Get brand info")
+    public Brand getBrand(@PathVariable int brandId){
+        return brandService.getBrand(brandId);
     }
 }

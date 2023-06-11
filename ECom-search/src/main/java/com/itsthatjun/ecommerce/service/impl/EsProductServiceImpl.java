@@ -2,6 +2,8 @@ package com.itsthatjun.ecommerce.service.impl;
 
 import com.itsthatjun.ecommerce.elasticsearch.document.EsProduct;
 import com.itsthatjun.ecommerce.elasticsearch.repository.EsProductRepository;
+import com.itsthatjun.ecommerce.mongo.SearchEntity;
+import com.itsthatjun.ecommerce.mongo.SearchRepository;
 import com.itsthatjun.ecommerce.service.EsProductService;
 import com.itsthatjun.ecommerce.dao.EsProductDao;
 import com.github.pagehelper.Page;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -23,6 +26,10 @@ public class EsProductServiceImpl implements EsProductService {
 
     @Autowired
     private EsProductRepository productRepository;
+
+    @Autowired
+    private SearchRepository searchRepository;
+
 
     @Override
     public int importAll() {
@@ -69,16 +76,14 @@ public class EsProductServiceImpl implements EsProductService {
     @Override
     public List<EsProduct> search(String keyword, int pageNum, int pageSize) {
         Pageable pageable = PageRequest.of(pageNum, pageSize);
-
-        // TODO: store search history
-        return productRepository.findByNameOrSubTitleOrKeywords(keyword, keyword, keyword, pageable);
+        searchRepository.save(new SearchEntity(keyword, new Date()));
+        return productRepository.findByNameContainingOrSubTitleContainingOrKeywordsContaining(keyword, keyword, keyword, pageable);
     }
 
     @Override
     public Page<EsProduct> recommend(Long id, Integer pageNum, Integer pageSize) {
         return null;
     }
-
 
     public List<EsProduct> listImportedProduct() {
         List<EsProduct> improtedProducts = productRepository.findAll();

@@ -7,9 +7,6 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessagePostProcessor;
 import org.springframework.stereotype.Component;
 
-/**
- * Created by Jun Chen on 5/6/21.
- */
 @Component
 public class CancelOrderSender {
 

@@ -24,7 +24,6 @@ public class ArticleController {
     @GetMapping("/all")
     @ApiOperation(value = "")
     public List<Articles> getAllArticle() {
-        System.out.println("im here at controller");
         return articleService.getAllArticles();
     }
 

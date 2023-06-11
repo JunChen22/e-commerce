@@ -152,6 +152,7 @@
             <generatedKey column="id" sqlStatement="JDBC" />
             <columnOverride column="id" javaType="java.lang.Integer" />
             <columnOverride column="order_id" javaType="java.lang.Integer" />
+            <columnOverride column="order_sn" javaType="java.lang.Integer" />
             <columnOverride column="product_id" javaType="java.lang.Integer" />
         </table>
 

@@ -1,7 +1,7 @@
 package com.itsthatjun.ecommerce.controller.PMS;
 
-import com.itsthatjun.ecommerce.service.impl.ProductServiceImpl;
 import com.itsthatjun.ecommerce.mbg.model.Product;
+import com.itsthatjun.ecommerce.service.PMS.implementation.ProductServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +13,7 @@ import java.util.List;
 @RequestMapping("/product")
 @Api(tags = "Product related")
 @CrossOrigin
+//@PreAuthorize("isAuthenticated()")
 public class ProductController {
 
     private final ProductServiceImpl productService;
@@ -40,26 +41,5 @@ public class ProductController {
     @ApiOperation(value = "Get product by id")
     public Product listProduct(@PathVariable int id){
         return productService.getProduct(id);
-    }
-
-    @PostMapping("/create")
-    @ApiOperation(value = "Create a product")
-    public Product createProduct(@RequestBody Product product){
-        productService.createProduct(product);
-        return product;
-    }
-
-    @PostMapping("/update/{id}")
-    @ApiOperation(value = "Update a product")
-    public Product updateProduct(@PathVariable int id, Product product){
-        productService.updateProduct(id, product);
-        return product;
-    }
-
-    @DeleteMapping("/delete/{id}")
-    @ApiOperation(value = "Delete a product")
-    public String deleteProduct(@PathVariable int id){
-        productService.deleteProduct(id);
-        return "deleted";
     }
 }

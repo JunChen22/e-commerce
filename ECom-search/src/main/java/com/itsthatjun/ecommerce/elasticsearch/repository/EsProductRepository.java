@@ -11,6 +11,9 @@ public interface EsProductRepository extends ElasticsearchRepository<EsProduct, 
     List<EsProduct> findByKeywords(String keyword);
     List<EsProduct> findByName(String name);
     List<EsProduct> findByNameOrKeywords(String name, String keywords);
-    List<EsProduct> findByNameOrSubTitleOrKeywords(String name, String subtitle, String keywords, Pageable page);
+    List<EsProduct> findByNameContainingOrSubTitleContainingOrKeywordsContaining(String name, String subtitle, String keywords, Pageable page);
+    // Elastic Search don't support findAllContaining
     List<EsProduct> findAll();
+
+    List<EsProduct> findByNameContainingOrKeywordsContaining(String name, String keywords);
 }

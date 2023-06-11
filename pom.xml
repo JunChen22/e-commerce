@@ -15,9 +15,6 @@
         <module>ECom-app</module>               <!-- main app -->
         <module>ECom-admin</module>             <!-- admin used to interact with main app module -->
         <module>ECom-search</module>            <!-- searching module -->
-        <module>ECom-mbg</module>               <!-- shared module -->
-        <module>ECom-security</module>          <!-- shared module -->
-        <module>ECom-common</module>            <!-- shared module -->
     </modules>
 
     <parent>
@@ -34,22 +31,6 @@
 
     <dependencyManagement>  <!-- optional dependencies that child module can choose -->
         <dependencies>
-            <dependency>
-                <groupId>com.itsthatjun.ecommerce</groupId>
-                <artifactId>ECom-common</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.itsthatjun.ecommerce</groupId>
-                <artifactId>ECom-mbg</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.itsthatjun.ecommerce</groupId>
-                <artifactId>ECom-security</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>

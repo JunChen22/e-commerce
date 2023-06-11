@@ -12,6 +12,8 @@ spring:
     elasticsearch:
       repositories:
         enabled: true
+    mongodb:
+      auto-index-creation: true
   elasticsearch:
     rest:
       uris: http://localhost:9200
@@ -22,6 +24,11 @@ mybatis:
     - classpath:mapper/*.xml
     - classpath:dao/*.xml
 
+spring.data.mongodb:
+  host: localhost
+  port: 27017
+  database: springecommerece-db
+
 ---
 
 spring.config.activate.on-profile: docker
@@ -31,3 +38,5 @@ spring:
   elasticsearch:
     rest:
       uris: http://elasticsearch:9200
+
+spring.data.mongodb.host: mongodb

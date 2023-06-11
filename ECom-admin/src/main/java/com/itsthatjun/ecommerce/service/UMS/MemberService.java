@@ -9,4 +9,5 @@ public interface MemberService {
     Member deactivateMember(String username);
 
     Member activateMember(String username);
+
 }

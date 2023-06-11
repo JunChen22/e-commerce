@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itsthatjun.ecommerce.dao.CMS.ArticleDao">
+
+    <resultMap id="articlesResultMap" type="com.itsthatjun.ecommerce.dto.CMS.Articles">
+        <id property="article.id" column="id"/>
+        <result column="title" property="article.title"/>
+        <result column="body" property="article.body"/>
+        <result column="created_at" property="article.createdAt"/>
+        <result column="updated_at" property="article.updatedAt"/>
+        <collection property="videos" ofType="com.itsthatjun.ecommerce.mbg.model.ArticleVideo">
+            <id property="id" column="video_id"/>
+            <result property="url" column="url"/>
+            <result column="video_created_at" property="createdAt"/>
+            <result column="video_updated_at" property="updatedAt"/>
+        </collection>
+        <collection property="images" ofType="com.itsthatjun.ecommerce.mbg.model.ArticleImage">
+            <id property="id" column="image_id"/>
+            <result property="filename" column="filename"/>
+            <result column="image_created_at" property="createdAt"/>
+            <result column="image_updated_at" property="updatedAt"/>
+        </collection>
+        <collection property="QA" ofType="com.itsthatjun.ecommerce.mbg.model.ArticleQa">
+            <id property="id" column="qa_id"/>
+            <result property="question" column="question"/>
+            <result property="answer" column="answer"/>
+            <result column="qa_created_at" property="createdAt"/>
+            <result column="qa_updated_at" property="updatedAt"/>
+        </collection>
+    </resultMap>
+
+    <select id="getAllArticles" resultMap="articlesResultMap">
+        SELECT
+        a.id,
+        a.title,
+        a.body,
+        a.created_at,
+        a.updated_at,
+        image.id image_id,
+        image.filename,
+        image.created_at image_created_at,
+        image.updated_at image_updated_at,
+        qa.id qa_id,
+        qa.question,
+        qa.answer,
+        qa.created_at qa_created_at,
+        qa.updated_at qa_updated_at,
+        video.id video_id,
+        video.url,
+        video.created_at video_created_at,
+        video.updated_at video_updated_at
+        FROM article a
+        LEFT JOIN article_image image ON a.id = image.article_id
+        LEFT JOIN article_qa qa ON a.id = qa.article_id
+        LEFT JOIN article_video video ON a.id = video.article_id;
+    </select>
+
+    <select id="getArticle" resultMap="articlesResultMap">
+        SELECT
+        a.id,
+        a.title,
+        a.body,
+        a.created_at,
+        a.updated_at,
+        image.id image_id,
+        image.filename,
+        image.created_at image_created_at,
+        image.updated_at image_updated_at,
+        qa.id qa_id,
+        qa.question,
+        qa.answer,
+        qa.created_at qa_created_at,
+        qa.updated_at qa_updated_at,
+        video.id video_id,
+        video.url,
+        video.created_at video_created_at,
+        video.updated_at video_updated_at
+        FROM article a
+        LEFT JOIN article_image image ON a.id = image.article_id
+        LEFT JOIN article_qa qa ON a.id = qa.article_id
+        LEFT JOIN article_video video ON a.id = video.article_id
+        WHERE a.id = #{id};
+    </select>
+
+</mapper>

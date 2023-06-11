@@ -12,8 +12,8 @@ import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
-@RequestMapping("esProduct")
-@Api(tags = "EsProductController")
+@RequestMapping("/esProduct")
+@Api(tags = "EsProductController", description = "brand management")
 public class ESController {
 
     @Autowired
@@ -45,16 +45,16 @@ public class ESController {
         return esProduct != null? "success" : "failed";
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     @ApiOperation(value = "delete product by id")
     public String delete(@PathVariable Long id){
         productService.delete(id);
         return "deleted";
     }
 
-    @PostMapping("/delete/batch")
+    @DeleteMapping("/delete/batch")
     @ApiOperation(value = "delete product by ids")
-    public String delete(@PathParam("ids") List<Long> ids) {
+    public String delete(@RequestBody List<Long> ids) {
         productService.delete(ids);
         return "deleted";
     }
@@ -62,7 +62,6 @@ public class ESController {
     @GetMapping("/getAll")
     @ApiOperation(value = "get all imported products")
     public List<EsProduct> getAll() {
-        System.out.println( "get all imported service done");
         return productService.listImportedProduct();
     }
 }

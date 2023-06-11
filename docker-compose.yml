@@ -10,11 +10,6 @@ services:
       POSTGRES_DB: springecommerece
     ports:
       - 5432:5432
-      #volumes:
-      # - /home/jun/Desktop/data/db/pg:/var/lib/postgresql/data # data file
-      # - /home/jun/Desktop/data/db/log:/var/log/postgresql # log files
-      # - /mydata/mysql/data/conf:/etc/mysql/conf.d # config files
-      # use docker-entrypoint-initdb.d to read sql file
     volumes:
       - db-data:/var/lib/postgresql/data
       - ./document/data.sql:/docker-entrypoint-initdb.d/data.sql
@@ -28,9 +23,6 @@ services:
     restart: always
     ports:
       - 27017:27017
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USR}
-      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PWD}
     command: mongod
     healthcheck:
       test: "mongo --eval 'db.stats().ok'"
@@ -63,7 +55,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 10
-
 
   elasticsearch:
     image: elasticsearch:7.12.0

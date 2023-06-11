@@ -1,7 +1,8 @@
 package com.itsthatjun.ecommerce.controller.OMS;
 
 import com.itsthatjun.ecommerce.dto.OrderParam;
-import com.itsthatjun.ecommerce.service.OrderService;
+import com.itsthatjun.ecommerce.service.OMS.OrderService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +21,10 @@ public class OrderController {
     private OrderService orderService;
 
     @PostMapping("/generateOrder")
+    @ApiOperation(value = "")
     public Map<String, Object> generateOrder(@RequestBody OrderParam orderParam){
         return orderService.generateOrder(orderParam);
     }
+
+    // retrive order detail
 }

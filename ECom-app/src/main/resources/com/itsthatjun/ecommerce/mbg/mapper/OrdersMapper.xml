@@ -5,8 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="member_id" jdbcType="BIGINT" property="memberId" />
     <result column="coupon_id" jdbcType="BIGINT" property="couponId" />
-    <result column="order_sn" jdbcType="VARCHAR" property="orderSn" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="order_sn" jdbcType="INTEGER" property="orderSn" />
     <result column="member_email" jdbcType="VARCHAR" property="memberEmail" />
     <result column="total_amount" jdbcType="NUMERIC" property="totalAmount" />
     <result column="pay_amount" jdbcType="NUMERIC" property="payAmount" />
@@ -29,13 +28,13 @@
     <result column="receiver_city" jdbcType="VARCHAR" property="receiverCity" />
     <result column="receiver_zip_code" jdbcType="VARCHAR" property="receiverZipCode" />
     <result column="receiver_detail_address" jdbcType="VARCHAR" property="receiverDetailAddress" />
-    <result column="note" jdbcType="VARCHAR" property="note" />
     <result column="confirm_status" jdbcType="INTEGER" property="confirmStatus" />
     <result column="delete_status" jdbcType="INTEGER" property="deleteStatus" />
     <result column="payment_time" jdbcType="TIMESTAMP" property="paymentTime" />
     <result column="delivery_time" jdbcType="TIMESTAMP" property="deliveryTime" />
     <result column="receive_time" jdbcType="TIMESTAMP" property="receiveTime" />
     <result column="comment" jdbcType="VARCHAR" property="comment" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
   </resultMap>
@@ -98,12 +97,12 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, member_id, coupon_id, order_sn, create_time, member_email, total_amount, pay_amount, 
-    shipping_cost, promotion_amount, coupon_amount, discount_amount, pay_type, source_type, 
-    status, delivery_company, delivery_tracking_number, promotion_info, invoice_content, 
-    invoice_receiver_phone, invoice_receiver_email, receiver_name, receiver_phone, receiver_state, 
-    receiver_city, receiver_zip_code, receiver_detail_address, note, confirm_status, 
-    delete_status, payment_time, delivery_time, receive_time, comment, created_at, modify_time
+    id, member_id, coupon_id, order_sn, member_email, total_amount, pay_amount, shipping_cost, 
+    promotion_amount, coupon_amount, discount_amount, pay_type, source_type, status, 
+    delivery_company, delivery_tracking_number, promotion_info, invoice_content, invoice_receiver_phone, 
+    invoice_receiver_email, receiver_name, receiver_phone, receiver_state, receiver_city, 
+    receiver_zip_code, receiver_detail_address, confirm_status, delete_status, payment_time, 
+    delivery_time, receive_time, comment, note, created_at, modify_time
   </sql>
   <select id="selectByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.OrdersExample" resultMap="BaseResultMap">
     select
@@ -137,31 +136,29 @@
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.Orders" useGeneratedKeys="true">
     insert into orders (member_id, coupon_id, order_sn, 
-      create_time, member_email, total_amount, 
-      pay_amount, shipping_cost, promotion_amount, 
-      coupon_amount, discount_amount, pay_type, 
-      source_type, status, delivery_company, 
-      delivery_tracking_number, promotion_info, 
-      invoice_content, invoice_receiver_phone, invoice_receiver_email, 
-      receiver_name, receiver_phone, receiver_state, 
-      receiver_city, receiver_zip_code, receiver_detail_address, 
-      note, confirm_status, delete_status, 
+      member_email, total_amount, pay_amount, 
+      shipping_cost, promotion_amount, coupon_amount, 
+      discount_amount, pay_type, source_type, 
+      status, delivery_company, delivery_tracking_number, 
+      promotion_info, invoice_content, invoice_receiver_phone, 
+      invoice_receiver_email, receiver_name, receiver_phone, 
+      receiver_state, receiver_city, receiver_zip_code, 
+      receiver_detail_address, confirm_status, delete_status, 
       payment_time, delivery_time, receive_time, 
-      comment, created_at, modify_time
-      )
-    values (#{memberId,jdbcType=BIGINT}, #{couponId,jdbcType=BIGINT}, #{orderSn,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{memberEmail,jdbcType=VARCHAR}, #{totalAmount,jdbcType=NUMERIC}, 
-      #{payAmount,jdbcType=NUMERIC}, #{shippingCost,jdbcType=NUMERIC}, #{promotionAmount,jdbcType=NUMERIC}, 
-      #{couponAmount,jdbcType=NUMERIC}, #{discountAmount,jdbcType=NUMERIC}, #{payType,jdbcType=INTEGER}, 
-      #{sourceType,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{deliveryCompany,jdbcType=VARCHAR}, 
-      #{deliveryTrackingNumber,jdbcType=VARCHAR}, #{promotionInfo,jdbcType=VARCHAR}, 
-      #{invoiceContent,jdbcType=VARCHAR}, #{invoiceReceiverPhone,jdbcType=VARCHAR}, #{invoiceReceiverEmail,jdbcType=VARCHAR}, 
-      #{receiverName,jdbcType=VARCHAR}, #{receiverPhone,jdbcType=VARCHAR}, #{receiverState,jdbcType=VARCHAR}, 
-      #{receiverCity,jdbcType=VARCHAR}, #{receiverZipCode,jdbcType=VARCHAR}, #{receiverDetailAddress,jdbcType=VARCHAR}, 
-      #{note,jdbcType=VARCHAR}, #{confirmStatus,jdbcType=INTEGER}, #{deleteStatus,jdbcType=INTEGER}, 
+      comment, note, created_at, 
+      modify_time)
+    values (#{memberId,jdbcType=BIGINT}, #{couponId,jdbcType=BIGINT}, #{orderSn,jdbcType=INTEGER}, 
+      #{memberEmail,jdbcType=VARCHAR}, #{totalAmount,jdbcType=NUMERIC}, #{payAmount,jdbcType=NUMERIC}, 
+      #{shippingCost,jdbcType=NUMERIC}, #{promotionAmount,jdbcType=NUMERIC}, #{couponAmount,jdbcType=NUMERIC}, 
+      #{discountAmount,jdbcType=NUMERIC}, #{payType,jdbcType=INTEGER}, #{sourceType,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{deliveryCompany,jdbcType=VARCHAR}, #{deliveryTrackingNumber,jdbcType=VARCHAR}, 
+      #{promotionInfo,jdbcType=VARCHAR}, #{invoiceContent,jdbcType=VARCHAR}, #{invoiceReceiverPhone,jdbcType=VARCHAR}, 
+      #{invoiceReceiverEmail,jdbcType=VARCHAR}, #{receiverName,jdbcType=VARCHAR}, #{receiverPhone,jdbcType=VARCHAR}, 
+      #{receiverState,jdbcType=VARCHAR}, #{receiverCity,jdbcType=VARCHAR}, #{receiverZipCode,jdbcType=VARCHAR}, 
+      #{receiverDetailAddress,jdbcType=VARCHAR}, #{confirmStatus,jdbcType=INTEGER}, #{deleteStatus,jdbcType=INTEGER}, 
       #{paymentTime,jdbcType=TIMESTAMP}, #{deliveryTime,jdbcType=TIMESTAMP}, #{receiveTime,jdbcType=TIMESTAMP}, 
-      #{comment,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}
-      )
+      #{comment,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{modifyTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.Orders" useGeneratedKeys="true">
     insert into orders
@@ -174,9 +171,6 @@
       </if>
       <if test="orderSn != null">
         order_sn,
-      </if>
-      <if test="createTime != null">
-        create_time,
       </if>
       <if test="memberEmail != null">
         member_email,
@@ -244,9 +238,6 @@
       <if test="receiverDetailAddress != null">
         receiver_detail_address,
       </if>
-      <if test="note != null">
-        note,
-      </if>
       <if test="confirmStatus != null">
         confirm_status,
       </if>
@@ -265,6 +256,9 @@
       <if test="comment != null">
         comment,
       </if>
+      <if test="note != null">
+        note,
+      </if>
       <if test="createdAt != null">
         created_at,
       </if>
@@ -280,10 +274,7 @@
         #{couponId,jdbcType=BIGINT},
       </if>
       <if test="orderSn != null">
-        #{orderSn,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+        #{orderSn,jdbcType=INTEGER},
       </if>
       <if test="memberEmail != null">
         #{memberEmail,jdbcType=VARCHAR},
@@ -351,9 +342,6 @@
       <if test="receiverDetailAddress != null">
         #{receiverDetailAddress,jdbcType=VARCHAR},
       </if>
-      <if test="note != null">
-        #{note,jdbcType=VARCHAR},
-      </if>
       <if test="confirmStatus != null">
         #{confirmStatus,jdbcType=INTEGER},
       </if>
@@ -371,6 +359,9 @@
       </if>
       <if test="comment != null">
         #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
       </if>
       <if test="createdAt != null">
         #{createdAt,jdbcType=TIMESTAMP},
@@ -399,10 +390,7 @@
         coupon_id = #{record.couponId,jdbcType=BIGINT},
       </if>
       <if test="record.orderSn != null">
-        order_sn = #{record.orderSn,jdbcType=VARCHAR},
-      </if>
-      <if test="record.createTime != null">
-        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        order_sn = #{record.orderSn,jdbcType=INTEGER},
       </if>
       <if test="record.memberEmail != null">
         member_email = #{record.memberEmail,jdbcType=VARCHAR},
@@ -470,9 +458,6 @@
       <if test="record.receiverDetailAddress != null">
         receiver_detail_address = #{record.receiverDetailAddress,jdbcType=VARCHAR},
       </if>
-      <if test="record.note != null">
-        note = #{record.note,jdbcType=VARCHAR},
-      </if>
       <if test="record.confirmStatus != null">
         confirm_status = #{record.confirmStatus,jdbcType=INTEGER},
       </if>
@@ -491,6 +476,9 @@
       <if test="record.comment != null">
         comment = #{record.comment,jdbcType=VARCHAR},
       </if>
+      <if test="record.note != null">
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
       <if test="record.createdAt != null">
         created_at = #{record.createdAt,jdbcType=TIMESTAMP},
       </if>
@@ -507,8 +495,7 @@
     set id = #{record.id,jdbcType=INTEGER},
       member_id = #{record.memberId,jdbcType=BIGINT},
       coupon_id = #{record.couponId,jdbcType=BIGINT},
-      order_sn = #{record.orderSn,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      order_sn = #{record.orderSn,jdbcType=INTEGER},
       member_email = #{record.memberEmail,jdbcType=VARCHAR},
       total_amount = #{record.totalAmount,jdbcType=NUMERIC},
       pay_amount = #{record.payAmount,jdbcType=NUMERIC},
@@ -531,13 +518,13 @@
       receiver_city = #{record.receiverCity,jdbcType=VARCHAR},
       receiver_zip_code = #{record.receiverZipCode,jdbcType=VARCHAR},
       receiver_detail_address = #{record.receiverDetailAddress,jdbcType=VARCHAR},
-      note = #{record.note,jdbcType=VARCHAR},
       confirm_status = #{record.confirmStatus,jdbcType=INTEGER},
       delete_status = #{record.deleteStatus,jdbcType=INTEGER},
       payment_time = #{record.paymentTime,jdbcType=TIMESTAMP},
       delivery_time = #{record.deliveryTime,jdbcType=TIMESTAMP},
       receive_time = #{record.receiveTime,jdbcType=TIMESTAMP},
       comment = #{record.comment,jdbcType=VARCHAR},
+      note = #{record.note,jdbcType=VARCHAR},
       created_at = #{record.createdAt,jdbcType=TIMESTAMP},
       modify_time = #{record.modifyTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -554,10 +541,7 @@
         coupon_id = #{couponId,jdbcType=BIGINT},
       </if>
       <if test="orderSn != null">
-        order_sn = #{orderSn,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
+        order_sn = #{orderSn,jdbcType=INTEGER},
       </if>
       <if test="memberEmail != null">
         member_email = #{memberEmail,jdbcType=VARCHAR},
@@ -625,9 +609,6 @@
       <if test="receiverDetailAddress != null">
         receiver_detail_address = #{receiverDetailAddress,jdbcType=VARCHAR},
       </if>
-      <if test="note != null">
-        note = #{note,jdbcType=VARCHAR},
-      </if>
       <if test="confirmStatus != null">
         confirm_status = #{confirmStatus,jdbcType=INTEGER},
       </if>
@@ -646,6 +627,9 @@
       <if test="comment != null">
         comment = #{comment,jdbcType=VARCHAR},
       </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
       <if test="createdAt != null">
         created_at = #{createdAt,jdbcType=TIMESTAMP},
       </if>
@@ -659,8 +643,7 @@
     update orders
     set member_id = #{memberId,jdbcType=BIGINT},
       coupon_id = #{couponId,jdbcType=BIGINT},
-      order_sn = #{orderSn,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
+      order_sn = #{orderSn,jdbcType=INTEGER},
       member_email = #{memberEmail,jdbcType=VARCHAR},
       total_amount = #{totalAmount,jdbcType=NUMERIC},
       pay_amount = #{payAmount,jdbcType=NUMERIC},
@@ -683,13 +666,13 @@
       receiver_city = #{receiverCity,jdbcType=VARCHAR},
       receiver_zip_code = #{receiverZipCode,jdbcType=VARCHAR},
       receiver_detail_address = #{receiverDetailAddress,jdbcType=VARCHAR},
-      note = #{note,jdbcType=VARCHAR},
       confirm_status = #{confirmStatus,jdbcType=INTEGER},
       delete_status = #{deleteStatus,jdbcType=INTEGER},
       payment_time = #{paymentTime,jdbcType=TIMESTAMP},
       delivery_time = #{deliveryTime,jdbcType=TIMESTAMP},
       receive_time = #{receiveTime,jdbcType=TIMESTAMP},
       comment = #{comment,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
       created_at = #{createdAt,jdbcType=TIMESTAMP},
       modify_time = #{modifyTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}

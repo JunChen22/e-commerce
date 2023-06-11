@@ -60,6 +60,7 @@ ECom-search
 ├── elastic search     
 │   ├── document
 │   └── repository
+├── mongodb                - store search history.
 ├── service
 └── resources
     ├── dao                - custom SQL in xml file
@@ -104,7 +105,7 @@ Database and mybatis generator
 ### Tech stack
 | Tech                                                            | role                                  | version | How is it being used here                       |
 |-----------------------------------------------------------------|---------------------------------------|---------|-------------------------------------------------|
-| [SpringBoot](https://spring.io/projects/spring-boot)            | MVC framework                         |         |                                                 |
+| [SpringBoot](https://spring.io/projects/spring-boot)            | MVC framework                         | 2.5.2   |                                                 |
 | [SpringSecurity](https://spring.io/projects/spring-security)    | Security                              |         |                                                 |
 | [PostgreSQL](https://www.postgresql.org/)                       | SQL database                          |         | store all product and user related data         |
 | [MyBatis](http://www.mybatis.org/mybatis-3/zh/index.html)       | ORM framework                         |         |                                                 |
@@ -115,9 +116,8 @@ Database and mybatis generator
 | [Elasticsearch](https://github.com/elastic/elasticsearch)       | Search engine                         |         | imported data from PostgreSQL for fast search   |
 | [LogStash](https://github.com/elastic/logstash)                 | Logging Service                       |         |                                                 |
 | [Kibana](https://github.com/elastic/kibana)                     | Elasticsearch LogStash visualization  |         |                                                 |
-| [Nginx](https://www.nginx.com/)                                 | Webserver                             |         |                                                 |
+| [Nginx](https://www.nginx.com/)                                 | Webserver / Load balancing            |         |                                                 |
 | [Docker](https://www.docker.com)                                | Containerization                      |         | Easier deployment                               |
-| [Kubernetes](https://kubernetes.io/)                            | Container Orchestration               |         |                                                 |
 | [JWT](https://github.com/jwtk/jjwt)                             | Encryption tool                       |         |                                                 |
 | [Lombok](https://github.com/rzwitserloot/lombok)                | minimize boilerplate                  |         |                                                 |
 | [PageHelper](http://git.oschina.net/free/Mybatis_PageHelper)    | MyBatis pagination helper             |         |                                                 |
@@ -126,7 +126,7 @@ Database and mybatis generator
 | [PayPal](https://developer.paypal.com/home)                     | Payment Gateway                       | 1.4.1   |                                                 |
 | [Google Pay](https://developers.google.com/pay/api)             | Payment Gateway                       |         |                                                 |
 | [Ubuntu](https://ubuntu.com/)                                   | OS                                    |         |                                                 |
-| AWS S3                                                          | File storage                          |         |                                                 |
+| AWS S3                                                          | File storage                          |         | store images, videos                            |
 
 
 IntelliJ plugin
