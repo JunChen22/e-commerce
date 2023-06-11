@@ -8,7 +8,631 @@
 	"item": [
 		{
 			"name": "ECom-app",
-			"item": []
+			"item": [
+				{
+					"name": "CMS",
+					"item": [
+						{
+							"name": "Article - Get all",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/article/all",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"article",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Article - Get one",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/article/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"article",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "OMS",
+					"item": [
+						{
+							"name": "Order - Order get all user Order",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/order/getAll",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"order",
+										"getAll"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Order - Order look up",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/order/1002",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"order",
+										"1002"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Order - Orders made by user",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/order/user/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"order",
+										"user",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Order - create order",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"memberId\": 1,\n   \"couponId\": 11,\n   \"orderSn\": 1001,\n   \"memberEmail\": \"john@example.com\",\n   \"totalAmount\": 150.50,\n   \"payAmount\": 150.50,\n   \"shippingCost\": 0.00,\n   \"promotionAmount\": 0.00,\n   \"couponAmount\": 0.00,\n   \"discountAmount\": 0.00,\n   \"payType\": 1,\n   \"sourceType\": 0,\n   \"status\": 1,\n   \"deliveryCompany\": \"UPS\",\n   \"deliveryTrackingNumber\": \"new tracking\",\n   \"promotionInfo\": \"Free shipping on orders over $100\",\n   \"invoiceContent\": \"new\",\n   \"invoiceReceiverPhone\": \"123-456-7890\",\n   \"invoiceReceiverEmail\": \"new@gmail.com\",\n   \"receiverName\": \"new new\",\n   \"receiverPhone\": \"111-111-1111\",\n   \"receiverState\": \"NY\",\n   \"receiverCity\": \"New York City\",\n   \"receiverZipCode\": \"12345\",\n   \"receiverDetailAddress\": \"123 st\",\n   \"confirmStatus\": 1,\n   \"deleteStatus\": 0,\n   \"paymentTime\": \"2023-04-25T12:30:00.000+00:00\",\n   \"deliveryTime\": \"2023-04-26T13:30:00.000+00:00\",\n   \"receiveTime\": \"2023-04-28T16:30:00.000+00:00\",\n   \"comment\": \"Please include stickers\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/order/create",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"order",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "OrderReturn - Get All waiting to process",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/order/return/AllOpening",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"order",
+										"return",
+										"AllOpening"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "OrderReturn - Get All returning",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/order/return/AllReturning",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"order",
+										"return",
+										"AllReturning"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "OrderReturn - Get All Complete return",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/order/return/AllCompleted",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"order",
+										"return",
+										"AllCompleted"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "OrderReturn - Get All rejected",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/order/return/AllRejected",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"order",
+										"return",
+										"AllRejected"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "OrderReturn - Get return request",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/order/return/1002",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"order",
+										"return",
+										"1002"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "OrderReturn - Update return status",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/order/",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"order",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PMS",
+					"item": [
+						{
+							"name": "Review - Get all reviews of a product",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/reviews/getAllProductReview/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"reviews",
+										"getAllProductReview",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Review - Get All reviews by User",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/reviews/getAllReviewByUser/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"reviews",
+										"getAllReviewByUser",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Review - Create a review",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImNyZWF0ZWQiOjE2ODY1MDkzNDY1MjgsImV4cCI6MTY4NjUxMDI0Nn0.B93EomYFXSmZ-Dw0g82IbAo_JMtyMsVcrawjaPYdlcRfNCGSG78mYcuKWBVkZ2iSmIPzqY7HD4z-yx-xN3hKJg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"productId\": 1,\n   \"memberId\": 12,\n   \"memberName\": \"test1\",\n   \"star\": 1,\n   \"tittle\": \"item arrive late\",\n   \"content\": \"late\",\n   \"pictures\": \"something.jpg\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/reviews/create",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"reviews",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Review - Update a review",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"id\": 9,\n    \"productId\": 4,\n    \"memberId\": 1,\n    \"memberName\": \"test1\",\n    \"star\": 5,\n    \"tittle\": \"item arrive late\",\n    \"content\": \"changed my mind\",\n    \"pictures\": \"something.jpg\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/reviews/update",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"reviews",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Review - Delete a review",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMiIsImNyZWF0ZWQiOjE2ODY1MTIxNDI3MTQsImV4cCI6MTY4NjUxMzA0Mn0.p2InzGCGFasDjouMc3d_ZtqfQfnsYfTnMQNiekOg5Q6WEtlgNR3WNedZfiKuTq-lDolGii8p_fQ24QXXYe5ymQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/reviews/delete/9",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"reviews",
+										"delete",
+										"9"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Product - Get All",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/product/listAll",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"product",
+										"listAll"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Product - Get page of 5 product",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/product/list",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"product",
+										"list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Product - Get a product by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/product/3",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"product",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Brand - Get all brands",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/brand/listAll",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"brand",
+										"listAll"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Brand - Get All brand in size of 3",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/brand/list",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"brand",
+										"list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Brand - Get all brand product",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/brand/product/2",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"brand",
+										"product",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Brand - Get Brand info",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/brand/2",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"brand",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "SMS",
+					"item": [
+						{
+							"name": "Flash Sales -",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Promotional Sale -",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "UMS",
+					"item": [
+						{
+							"name": "Member - Login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\" :\"user2\",\n\t\"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/user/login",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Member - Register",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\" : \"user5\",\n\t\"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/user/register",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"register"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
 		},
 		{
 			"name": "ECom-admin",
@@ -1007,50 +1631,156 @@
 					"name": "SMS",
 					"item": [
 						{
-							"name": "Coupon -",
+							"name": "Coupon - Get all coupons",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "localhost:8082/coupon/listAll",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"coupon",
+										"listAll"
+									]
+								}
 							},
 							"response": []
 						},
 						{
-							"name": "Coupon - Copy",
+							"name": "Coupon - Get a coupon",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "localhost:8082/coupon/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"coupon",
+										"1"
+									]
+								}
 							},
 							"response": []
 						},
 						{
-							"name": "Coupon - Copy",
+							"name": "Coupon - Get all coupon for a product",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "localhost:8082/coupon/product/all/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"coupon",
+										"product",
+										"all",
+										"1"
+									]
+								}
 							},
 							"response": []
 						},
 						{
-							"name": "Coupon - Copy",
+							"name": "Coupon - Create a coupon",
 							"request": {
-								"method": "GET",
-								"header": []
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": " {\n    \"type\": 0,\n    \"name\": \"$100 off whole order\",\n    \"amount\": 100.00,\n    \"startTime\": \"2019-08-18\",\n    \"endTime\": \"2023-08-18\",\n    \"count\": 30,\n    \"publishCount\": 20,\n    \"usedCount\": 0,\n    \"code\": \"15OFF\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8082/coupon/create",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"coupon",
+										"create"
+									]
+								}
 							},
 							"response": []
 						},
 						{
-							"name": "Coupon - Copy",
+							"name": "Coupon - Update a coupon",
 							"request": {
-								"method": "GET",
-								"header": []
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": " {\n     \"id\": 5,\n    \"type\": 1,\n    \"name\": \"$10 off whole order\",\n    \"amount\": 10.00,\n    \"startTime\": \"2019-08-18\",\n    \"endTime\": \"2023-08-18\",\n    \"count\": 30,\n    \"publishCount\": 20,\n    \"usedCount\": 0,\n    \"code\": \"15OFF\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8082/coupon/update",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"coupon",
+										"update"
+									]
+								}
 							},
 							"response": []
 						},
 						{
-							"name": "Coupon History -",
+							"name": "Coupon - Delete a coupon",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8082/coupon/delete/5",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"coupon",
+										"delete",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Coupon History - Getll all used coupons",
 							"request": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "localhost:8082/coupon/getAllUsedCoupon",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"coupon",
+										"getAllUsedCoupon"
+									]
+								}
 							},
 							"response": []
 						},
@@ -1058,68 +1788,24 @@
 							"name": "Coupon History - Copy",
 							"request": {
 								"method": "GET",
-								"header": []
-							},
-							"response": []
-						},
-						{
-							"name": "Coupon History - Copy",
-							"request": {
-								"method": "GET",
-								"header": []
-							},
-							"response": []
-						},
-						{
-							"name": "Coupon History - Copy",
-							"request": {
-								"method": "GET",
-								"header": []
-							},
-							"response": []
-						},
-						{
-							"name": "Coupon History - Copy",
-							"request": {
-								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": "localhost:8082/coupon/getUserCoupon/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"coupon",
+										"getUserCoupon",
+										"1"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "Flash Sales -",
-							"request": {
-								"method": "GET",
-								"header": []
-							},
-							"response": []
-						},
-						{
-							"name": "Flash Sales - Copy",
-							"request": {
-								"method": "GET",
-								"header": []
-							},
-							"response": []
-						},
-						{
-							"name": "Flash Sales - Copy",
-							"request": {
-								"method": "GET",
-								"header": []
-							},
-							"response": []
-						},
-						{
-							"name": "Flash Sales - Copy",
-							"request": {
-								"method": "GET",
-								"header": []
-							},
-							"response": []
-						},
-						{
-							"name": "Flash Sales - Copy",
 							"request": {
 								"method": "GET",
 								"header": []
@@ -1143,38 +1829,6 @@
 								}
 							},
 							"response": []
-						},
-						{
-							"name": "Promotional Sale - Copy",
-							"request": {
-								"method": "GET",
-								"header": []
-							},
-							"response": []
-						},
-						{
-							"name": "Promotional Sale - Copy",
-							"request": {
-								"method": "GET",
-								"header": []
-							},
-							"response": []
-						},
-						{
-							"name": "Promotional Sale - Copy 2",
-							"request": {
-								"method": "GET",
-								"header": []
-							},
-							"response": []
-						},
-						{
-							"name": "Promotional Sale - Copy",
-							"request": {
-								"method": "GET",
-								"header": []
-							},
-							"response": []
 						}
 					]
 				},
@@ -1183,38 +1837,6 @@
 					"item": [
 						{
 							"name": "User -",
-							"request": {
-								"method": "GET",
-								"header": []
-							},
-							"response": []
-						},
-						{
-							"name": "User - Copy",
-							"request": {
-								"method": "GET",
-								"header": []
-							},
-							"response": []
-						},
-						{
-							"name": "User - Copy",
-							"request": {
-								"method": "GET",
-								"header": []
-							},
-							"response": []
-						},
-						{
-							"name": "User - Copy 2",
-							"request": {
-								"method": "GET",
-								"header": []
-							},
-							"response": []
-						},
-						{
-							"name": "User - Copy",
 							"request": {
 								"method": "GET",
 								"header": []
@@ -1309,12 +1931,25 @@
 				},
 				{
 					"name": "Admin - login logs",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
-						"method": "POST",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbmFjY3QiLCJjcmVhdGVkIjoxNjg2NDM5NDAzMzAwLCJleHAiOjE2ODY0NDAzMDN9.ccLolsRti8Jk4A7h4WEe-SdDyX2oLFQsH8-P-s0SOnVQ1l9uHOXF-zxryA5A0FuAKX4U3PTfDP2DAjV-ApcO0g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"username\" :\"devacct\",\n\t\"password\": \"devpass\"\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1322,14 +1957,15 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/admin/login",
+							"raw": "localhost:8082/admin/logs/1",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8082",
 							"path": [
 								"admin",
-								"login"
+								"logs",
+								"1"
 							]
 						}
 					},
@@ -1341,11 +1977,21 @@
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbmFjY3QiLCJjcmVhdGVkIjoxNjg2NDM5NDAzMzAwLCJleHAiOjE2ODY0NDAzMDN9.ccLolsRti8Jk4A7h4WEe-SdDyX2oLFQsH8-P-s0SOnVQ1l9uHOXF-zxryA5A0FuAKX4U3PTfDP2DAjV-ApcO0g",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"username\" :\"adminacct\",\n\t\"password\": \"adminpass\"\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1353,14 +1999,15 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8082/admin/login",
+							"raw": "localhost:8082/admin/roles/1",
 							"host": [
 								"localhost"
 							],
 							"port": "8082",
 							"path": [
 								"admin",
-								"login"
+								"roles",
+								"1"
 							]
 						}
 					},
@@ -1368,12 +2015,25 @@
 				},
 				{
 					"name": "Admin - get authority/permission",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
-						"method": "POST",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbmFjY3QiLCJjcmVhdGVkIjoxNjg2NDM5NDAzMzAwLCJleHAiOjE2ODY0NDAzMDN9.ccLolsRti8Jk4A7h4WEe-SdDyX2oLFQsH8-P-s0SOnVQ1l9uHOXF-zxryA5A0FuAKX4U3PTfDP2DAjV-ApcO0g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"username\" :\"adminacct\",\n\t\"password\": \"adminpass\"\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1381,14 +2041,15 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8082/admin/login",
+							"raw": "localhost:8082/admin/permission/1",
 							"host": [
 								"localhost"
 							],
 							"port": "8082",
 							"path": [
 								"admin",
-								"login"
+								"permission",
+								"1"
 							]
 						}
 					},
@@ -1428,42 +2089,134 @@
 			"name": "ECom-Search",
 			"item": [
 				{
-					"name": "New Request",
+					"name": "Import data",
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/esProduct/importAll",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"esProduct",
+								"importAll"
+							]
+						}
 					},
 					"response": []
 				},
 				{
-					"name": "New Request Copy",
+					"name": "Search",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/esProduct/search?keyword=phone",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"esProduct",
+								"search"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "phone"
+								}
+							]
+						}
 					},
 					"response": []
 				},
 				{
-					"name": "New Request Copy 2",
+					"name": "Get import data",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/esProduct/getAll",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"esProduct",
+								"getAll"
+							]
+						}
 					},
 					"response": []
 				},
 				{
-					"name": "New Request Copy",
+					"name": "Create a product",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/esProduct/create/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"esProduct",
+								"create",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
 				{
-					"name": "New Request Copy",
+					"name": "Delete a product",
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8081/esProduct/delete/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"esProduct",
+								"delete",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a list of product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    \"1\",\n    \"2\",\n    \"3\"\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/esProduct/delete/batch",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"esProduct",
+								"delete",
+								"batch"
+							]
+						}
 					},
 					"response": []
 				}
