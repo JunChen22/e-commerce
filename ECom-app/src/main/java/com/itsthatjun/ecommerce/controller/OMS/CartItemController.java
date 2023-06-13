@@ -1,7 +1,9 @@
 package com.itsthatjun.ecommerce.controller.OMS;
 
+import com.itsthatjun.ecommerce.service.OMS.implementation.CartItemServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -11,6 +13,13 @@ import java.util.List;
 @Api(tags = "shopping cart controller", description = "shopping cart and related api")
 @RequestMapping("/cart")
 public class CartItemController {
+
+    private final CartItemServiceImpl cartItemService;
+
+    @Autowired
+    public CartItemController(CartItemServiceImpl cartItemService) {
+        this.cartItemService = cartItemService;
+    }
 
     @ApiOperation("add item to shopping cart")
     @PostMapping(value = "/add")

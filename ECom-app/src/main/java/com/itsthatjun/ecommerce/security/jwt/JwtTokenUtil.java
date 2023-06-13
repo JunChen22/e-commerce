@@ -21,8 +21,6 @@ public class JwtTokenUtil {
         Map<String, Object> claims = new HashMap<>();
         claims.put("sub", userDetails.getUsername());
         claims.put("created", new Date());
-        // TODO: put member id
-        //  userDetails.getUsername()
         return Jwts.builder()
                 .setClaims(claims)
                 .setExpiration(generateExpirationDate())

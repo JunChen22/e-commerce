@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 public class CustomUserDetail implements UserDetails {
 
-    private Member member;
+    private final Member member;
 
     @Autowired
     public CustomUserDetail(Member member) {
@@ -57,5 +57,9 @@ public class CustomUserDetail implements UserDetails {
     @Override
     public boolean isEnabled() {
         return false;
+    }
+
+    public Member getMember() {
+        return member;
     }
 }

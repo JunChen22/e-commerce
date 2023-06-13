@@ -58,84 +58,27 @@
 						{
 							"name": "Order - Order get all user Order",
 							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/order/getAll",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"order",
-										"getAll"
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMiIsImNyZWF0ZWQiOjE2ODY1OTEwODc1NzgsImV4cCI6MTY4NjU5MTk4N30.CoqulUU2NBavCxrOjkm9fRDzFsvpM9EmeyBrZ8qWoJ0LgTIO1Y5GCQgZqirvG1YE2vtEegT6PpBlTITditd5Qg",
+											"type": "string"
+										}
 									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Order - Order look up",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/order/1002",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"order",
-										"1002"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Order - Orders made by user",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/order/user/1",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"order",
-										"user",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Order - create order",
-							"request": {
+								},
 								"method": "POST",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n   \"memberId\": 1,\n   \"couponId\": 11,\n   \"orderSn\": 1001,\n   \"memberEmail\": \"john@example.com\",\n   \"totalAmount\": 150.50,\n   \"payAmount\": 150.50,\n   \"shippingCost\": 0.00,\n   \"promotionAmount\": 0.00,\n   \"couponAmount\": 0.00,\n   \"discountAmount\": 0.00,\n   \"payType\": 1,\n   \"sourceType\": 0,\n   \"status\": 1,\n   \"deliveryCompany\": \"UPS\",\n   \"deliveryTrackingNumber\": \"new tracking\",\n   \"promotionInfo\": \"Free shipping on orders over $100\",\n   \"invoiceContent\": \"new\",\n   \"invoiceReceiverPhone\": \"123-456-7890\",\n   \"invoiceReceiverEmail\": \"new@gmail.com\",\n   \"receiverName\": \"new new\",\n   \"receiverPhone\": \"111-111-1111\",\n   \"receiverState\": \"NY\",\n   \"receiverCity\": \"New York City\",\n   \"receiverZipCode\": \"12345\",\n   \"receiverDetailAddress\": \"123 st\",\n   \"confirmStatus\": 1,\n   \"deleteStatus\": 0,\n   \"paymentTime\": \"2023-04-25T12:30:00.000+00:00\",\n   \"deliveryTime\": \"2023-04-26T13:30:00.000+00:00\",\n   \"receiveTime\": \"2023-04-28T16:30:00.000+00:00\",\n   \"comment\": \"Please include stickers\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
-									"raw": "localhost:8080/order/create",
+									"raw": "localhost:8080/order/generateOrder",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
 										"order",
-										"create"
+										"generateOrder"
 									]
 								}
 							},
@@ -156,105 +99,6 @@
 										"order",
 										"return",
 										"AllOpening"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "OrderReturn - Get All returning",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/order/return/AllReturning",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"order",
-										"return",
-										"AllReturning"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "OrderReturn - Get All Complete return",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/order/return/AllCompleted",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"order",
-										"return",
-										"AllCompleted"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "OrderReturn - Get All rejected",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/order/return/AllRejected",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"order",
-										"return",
-										"AllRejected"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "OrderReturn - Get return request",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/order/return/1002",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"order",
-										"return",
-										"1002"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "OrderReturn - Update return status",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/order/",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"order",
-										""
 									]
 								}
 							},
@@ -581,7 +425,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"username\" :\"user2\",\n\t\"password\": \"password\"\n}",
+									"raw": "{\n\t\"username\" :\"user1\",\n\t\"password\": \"password\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -631,6 +475,106 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "Paypal - payment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImNyZWF0ZWQiOjE2ODY2MjIzODA5NzcsImV4cCI6MTY4NjYyMzI4MH0.tyJVd7xJ7_cjfPGjnR3b9OJvEaoC2IScVRxlAD37MhxHANCrBwtWjigKH3JiplobquonA8UxrBdfIzrAyWWTdg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/payment/pay/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"payment",
+								"pay",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Paypal - payment success",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "paymentId",
+								"value": "PAYID-MSD4WIY82883406XJ140011M",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "PayerID",
+								"value": "PQVC7TMEZCCWC",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/payment/pay/success?paymentId=PAYID-&token=EC-&PayerID=",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"payment",
+								"pay",
+								"success"
+							],
+							"query": [
+								{
+									"key": "paymentId",
+									"value": "PAYID-"
+								},
+								{
+									"key": "token",
+									"value": "EC-"
+								},
+								{
+									"key": "PayerID",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Paypal - payment fail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/payment/pay/cancel",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"payment",
+								"pay",
+								"cancel"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},

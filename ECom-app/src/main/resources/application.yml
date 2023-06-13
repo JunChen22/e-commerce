@@ -68,6 +68,14 @@ jwt:
   secretKey: JunChen522
   expirationTimeMinute: 15
 
+
+paypal:
+  mode: sandbox
+  client:
+    id: xxxxxxxxxxxxxxxxxxYOUR_CLIENT_IDxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    secret: xxxxxxxxxxxxxxxxxxYOUR_CLIENT_SECRETxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
 ---
 
 spring.config.activate.on-profile: docker

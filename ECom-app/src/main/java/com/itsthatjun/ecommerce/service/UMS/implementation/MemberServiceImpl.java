@@ -1,6 +1,5 @@
 package com.itsthatjun.ecommerce.service.UMS.implementation;
 
-import com.itsthatjun.ecommerce.mbg.mapper.AdminMapper;
 import com.itsthatjun.ecommerce.mbg.mapper.MemberMapper;
 import com.itsthatjun.ecommerce.mbg.model.*;
 import com.itsthatjun.ecommerce.security.CustomUserDetail;
@@ -9,7 +8,9 @@ import com.itsthatjun.ecommerce.service.UMS.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -108,6 +109,14 @@ public class MemberServiceImpl implements MemberService , UserDetailsService {
         }
         //TODO: wasn't invoked when entering wrong username
         throw new UsernameNotFoundException("Username not found");
+    }
+
+    @Override
+    public Member getCurrentUser() {
+        SecurityContext ctx = SecurityContextHolder.getContext();
+        Authentication auth = ctx.getAuthentication();
+        CustomUserDetail memberDetail = (CustomUserDetail) auth.getPrincipal();
+        return memberDetail.getMember();
     }
 
     public PasswordEncoder passwordEncoder() {

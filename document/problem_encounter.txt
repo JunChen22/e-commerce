@@ -4,7 +4,8 @@ A: In MyBatisConfig, mapper and dao wasn't set in the right location.
 
 Q: docker-compose postgres not initiating data.
 A: it's a docker volume related problem. delete the existing volume.
-    $ docker exec -it ECom-db psql -U postgres
+    $ docker volume ls
+    $ docker volume rm e-commerce_db-data
 
 
 Q: pagination loop/cycle error, The dependencies of some of the beans in the application context form a cycle: "com.github.pagehelper.autoconfigure.PageHelperAutoConfiguration"

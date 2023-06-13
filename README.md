@@ -92,6 +92,10 @@ Database and mybatis generator
  $ mvn mybatis-generator:generate -Dmybatis.generator.overwrite=true // generate DAO, mapper and java clasees
  $ docker-compose down
 
+need to put your own paypal id and secret from Paypal developer API credential at https://developer.paypal.com/home/
+in ECom-app's application.yml or .env file.  The program won't run without it. And remove it when sharing program.
+And create a paypal sandbox account so transaction is not real.
+
   Start whole landscape
  $ mvn package
  $ docker-compose build
@@ -99,6 +103,15 @@ Database and mybatis generator
  
   Import data into elastic search
  $  curl -X POST http://localhost:8080/esProduct/importAll   // should return number of items imported
+ 
+
+Other nesscary commands
+ 
+ $ docker exec -it e-commerce_mongodb_1 bash     // interact with mongodb    
+ # mongosh
+
+ $ docker exec -it e-commerce_postgres_1 psql -U postgres    // interact with postgres
+ $ \c springecommerece
  
 ```
 
@@ -123,8 +136,7 @@ Database and mybatis generator
 | [PageHelper](http://git.oschina.net/free/Mybatis_PageHelper)    | MyBatis pagination helper             |         |                                                 |
 | [Swagger-UI](https://github.com/swagger-api/swagger-ui)         | Documentation tool                    |         |                                                 |
 | [Hibernate-Validator](http://hibernate.org/validator)           | Validation                            |         |                                                 |
-| [PayPal](https://developer.paypal.com/home)                     | Payment Gateway                       | 1.4.1   |                                                 |
-| [Google Pay](https://developers.google.com/pay/api)             | Payment Gateway                       |         |                                                 |
+| [PayPal](https://developer.paypal.com/home)                     | Payment Gateway                       | 1.14.0  | Third party payment option                      |
 | [Ubuntu](https://ubuntu.com/)                                   | OS                                    |         |                                                 |
 | AWS S3                                                          | File storage                          |         | store images, videos                            |
 
@@ -133,7 +145,7 @@ IntelliJ plugin
 - MyBatisCodeHelperPro 3.1.8 (highly needed when writing dao.xml)
 
 
-Mongo and Redis wasn't being used yet.
+Redis wasn't being used yet.
 
 
 Product management system(PMS) - manage their product catalog, including product data, pricing, and inventory.
@@ -168,9 +180,6 @@ Content management system(CMS) - create, manage, and publish digital content, su
 User management system(UMS) - manage user accounts and permissions, including authentication, authorization, and access control.
 - User
 - admin
-
-
-
 
 
 Docker:

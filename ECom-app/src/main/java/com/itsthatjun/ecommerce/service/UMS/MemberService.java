@@ -13,5 +13,10 @@ public interface MemberService {
 
     String register(Member member);
 
+    // TODO: use redis to send out auth code
+    // public void updatePassword();
+
     Member getMemberByUserName(String username);
+
+    Member getCurrentUser();
 }
