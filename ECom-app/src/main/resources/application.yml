@@ -72,8 +72,8 @@ jwt:
 paypal:
   mode: sandbox
   client:
-    id: xxxxxxxxxxxxxxxxxxYOUR_CLIENT_IDxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-    secret: xxxxxxxxxxxxxxxxxxYOUR_CLIENT_SECRETxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    id:
+    secret:
 
 
 ---

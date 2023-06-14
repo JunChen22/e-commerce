@@ -6,31 +6,58 @@ import com.itsthatjun.ecommerce.mbg.model.CartItem;
 import com.itsthatjun.ecommerce.mbg.model.Member;
 import com.itsthatjun.ecommerce.mbg.model.Orders;
 import com.itsthatjun.ecommerce.service.OMS.OrderService;
+import com.itsthatjun.ecommerce.service.PaypalService;
 import com.itsthatjun.ecommerce.service.UMS.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class OrderServiceImpl implements OrderService {
 
+    @Autowired
     private MemberService memberService;
 
     // TODO: not yet used, redis
     // private final CancelOrderSender cancelOrderSender;
 
     @Autowired
+    private PaypalService paypalService;
+
+    @Autowired
     public OrderServiceImpl(MemberService memberService) {
         this.memberService = memberService;
     }
 
-
     @Override
     public List<CartItem> generateCartItem() {
+
+        /*
+        ConfirmOrderResult result = new ConfirmOrderResult();
+        //获取购物车信息
+        UmsMember currentMember = memberService.getCurrentMember();
+        List<CartPromotionItem> cartPromotionItemList = cartItemService.listPromotion(currentMember.getId(),cartIds);
+        result.setCartPromotionItemList(cartPromotionItemList);
+        //获取用户收货地址列表
+        List<UmsMemberReceiveAddress> memberReceiveAddressList = memberReceiveAddressService.list();
+        result.setMemberReceiveAddressList(memberReceiveAddressList);
+        //获取用户可用优惠券列表
+        List<SmsCouponHistoryDetail> couponHistoryDetailList = memberCouponService.listCart(cartPromotionItemList, 1);
+        result.setCouponHistoryDetailList(couponHistoryDetailList);
+        //获取用户积分
+        result.setMemberIntegration(currentMember.getIntegration());
+        //获取积分使用规则
+        UmsIntegrationConsumeSetting integrationConsumeSetting = integrationConsumeSettingMapper.selectByPrimaryKey(1L);
+        result.setIntegrationConsumeSetting(integrationConsumeSetting);
+        //计算总金额、活动优惠、应付金额
+        ConfirmOrderResult.CalcAmount calcAmount = calcCartAmount(cartPromotionItemList);
+        result.setCalcAmount(calcAmount);
+        return result;
+         */
+
+        // turn cart in
         return null;
     }
 
@@ -66,6 +93,9 @@ public class OrderServiceImpl implements OrderService {
             orderItemList.add(orderItem);
         }
 
+        */
+
+
         // check stock if enough
 
         // check if used coupon
@@ -78,10 +108,12 @@ public class OrderServiceImpl implements OrderService {
 
 
         // TODO: payment by paypal
+        // paypalService.createPayment();
+        // paypalService.executePayment();
 
 
         // update/finish putting order data like
-        // order_status, paytype, create time, member, paymount
+        // order_status, pay type, create time, member, pay amount
 
 
         // deliver/receiver address
@@ -107,13 +139,14 @@ public class OrderServiceImpl implements OrderService {
 
         // delete member shopping cart
 
-
-         */
         return null;
     }
 
     @Override
     public Integer paySuccess(Long OrderId, Integer payType) {
+
+
+
         return null;
     }
 
@@ -129,7 +162,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     // TODO: use a better way to generate order serial number
-    private int generateOrderSn() {
-        return 0;
+    private String generateOrderSn() {
+        StringBuilder sb = new StringBuilder();
+        String date = new SimpleDateFormat("yyyyMMdd").format(new Date());
+        // use date and today order number?
+        //  2023 + 0613  +
+        return null;
     }
 }

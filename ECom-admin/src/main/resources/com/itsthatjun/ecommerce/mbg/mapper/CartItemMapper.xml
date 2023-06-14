@@ -3,22 +3,15 @@
 <mapper namespace="com.itsthatjun.ecommerce.mbg.mapper.CartItemMapper">
   <resultMap id="BaseResultMap" type="com.itsthatjun.ecommerce.mbg.model.CartItem">
     <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="cart_id" jdbcType="BIGINT" property="cartId" />
     <result column="product_id" jdbcType="BIGINT" property="productId" />
-    <result column="product_sku_id" jdbcType="BIGINT" property="productSkuId" />
-    <result column="member_id" jdbcType="BIGINT" property="memberId" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="product_sku" jdbcType="VARCHAR" property="productSku" />
+    <result column="product_pic" jdbcType="VARCHAR" property="productPic" />
     <result column="quantity" jdbcType="INTEGER" property="quantity" />
     <result column="price" jdbcType="NUMERIC" property="price" />
-    <result column="product_pic" jdbcType="VARCHAR" property="productPic" />
-    <result column="product_name" jdbcType="VARCHAR" property="productName" />
-    <result column="product_sub_title" jdbcType="VARCHAR" property="productSubTitle" />
-    <result column="product_sku_code" jdbcType="VARCHAR" property="productSkuCode" />
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
     <result column="modify_date" jdbcType="TIMESTAMP" property="modifyDate" />
-    <result column="delete_status" jdbcType="INTEGER" property="deleteStatus" />
-    <result column="product_category_id" jdbcType="BIGINT" property="productCategoryId" />
-    <result column="product_brand" jdbcType="VARCHAR" property="productBrand" />
-    <result column="product_sn" jdbcType="VARCHAR" property="productSn" />
-    <result column="product_attr" jdbcType="VARCHAR" property="productAttr" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -79,9 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, product_id, product_sku_id, member_id, quantity, price, product_pic, product_name, 
-    product_sub_title, product_sku_code, create_date, modify_date, delete_status, product_category_id, 
-    product_brand, product_sn, product_attr
+    id, cart_id, product_id, product_name, product_sku, product_pic, quantity, price, 
+    create_date, modify_date
   </sql>
   <select id="selectByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.CartItemExample" resultMap="BaseResultMap">
     select
@@ -114,30 +106,32 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.CartItem" useGeneratedKeys="true">
-    insert into cart_item (product_id, product_sku_id, member_id, 
-      quantity, price, product_pic, 
-      product_name, product_sub_title, product_sku_code, 
-      create_date, modify_date, delete_status, 
-      product_category_id, product_brand, product_sn, 
-      product_attr)
-    values (#{productId,jdbcType=BIGINT}, #{productSkuId,jdbcType=BIGINT}, #{memberId,jdbcType=BIGINT}, 
-      #{quantity,jdbcType=INTEGER}, #{price,jdbcType=NUMERIC}, #{productPic,jdbcType=VARCHAR}, 
-      #{productName,jdbcType=VARCHAR}, #{productSubTitle,jdbcType=VARCHAR}, #{productSkuCode,jdbcType=VARCHAR}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{modifyDate,jdbcType=TIMESTAMP}, #{deleteStatus,jdbcType=INTEGER}, 
-      #{productCategoryId,jdbcType=BIGINT}, #{productBrand,jdbcType=VARCHAR}, #{productSn,jdbcType=VARCHAR}, 
-      #{productAttr,jdbcType=VARCHAR})
+    insert into cart_item (cart_id, product_id, product_name, 
+      product_sku, product_pic, quantity, 
+      price, create_date, modify_date
+      )
+    values (#{cartId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, #{productName,jdbcType=VARCHAR}, 
+      #{productSku,jdbcType=VARCHAR}, #{productPic,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
+      #{price,jdbcType=NUMERIC}, #{createDate,jdbcType=TIMESTAMP}, #{modifyDate,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.CartItem" useGeneratedKeys="true">
     insert into cart_item
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cartId != null">
+        cart_id,
+      </if>
       <if test="productId != null">
         product_id,
       </if>
-      <if test="productSkuId != null">
-        product_sku_id,
+      <if test="productName != null">
+        product_name,
       </if>
-      <if test="memberId != null">
-        member_id,
+      <if test="productSku != null">
+        product_sku,
+      </if>
+      <if test="productPic != null">
+        product_pic,
       </if>
       <if test="quantity != null">
         quantity,
@@ -145,49 +139,28 @@
       <if test="price != null">
         price,
       </if>
-      <if test="productPic != null">
-        product_pic,
-      </if>
-      <if test="productName != null">
-        product_name,
-      </if>
-      <if test="productSubTitle != null">
-        product_sub_title,
-      </if>
-      <if test="productSkuCode != null">
-        product_sku_code,
-      </if>
       <if test="createDate != null">
         create_date,
       </if>
       <if test="modifyDate != null">
         modify_date,
       </if>
-      <if test="deleteStatus != null">
-        delete_status,
-      </if>
-      <if test="productCategoryId != null">
-        product_category_id,
-      </if>
-      <if test="productBrand != null">
-        product_brand,
-      </if>
-      <if test="productSn != null">
-        product_sn,
-      </if>
-      <if test="productAttr != null">
-        product_attr,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cartId != null">
+        #{cartId,jdbcType=BIGINT},
+      </if>
       <if test="productId != null">
         #{productId,jdbcType=BIGINT},
       </if>
-      <if test="productSkuId != null">
-        #{productSkuId,jdbcType=BIGINT},
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
       </if>
-      <if test="memberId != null">
-        #{memberId,jdbcType=BIGINT},
+      <if test="productSku != null">
+        #{productSku,jdbcType=VARCHAR},
+      </if>
+      <if test="productPic != null">
+        #{productPic,jdbcType=VARCHAR},
       </if>
       <if test="quantity != null">
         #{quantity,jdbcType=INTEGER},
@@ -195,38 +168,11 @@
       <if test="price != null">
         #{price,jdbcType=NUMERIC},
       </if>
-      <if test="productPic != null">
-        #{productPic,jdbcType=VARCHAR},
-      </if>
-      <if test="productName != null">
-        #{productName,jdbcType=VARCHAR},
-      </if>
-      <if test="productSubTitle != null">
-        #{productSubTitle,jdbcType=VARCHAR},
-      </if>
-      <if test="productSkuCode != null">
-        #{productSkuCode,jdbcType=VARCHAR},
-      </if>
       <if test="createDate != null">
         #{createDate,jdbcType=TIMESTAMP},
       </if>
       <if test="modifyDate != null">
         #{modifyDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="deleteStatus != null">
-        #{deleteStatus,jdbcType=INTEGER},
-      </if>
-      <if test="productCategoryId != null">
-        #{productCategoryId,jdbcType=BIGINT},
-      </if>
-      <if test="productBrand != null">
-        #{productBrand,jdbcType=VARCHAR},
-      </if>
-      <if test="productSn != null">
-        #{productSn,jdbcType=VARCHAR},
-      </if>
-      <if test="productAttr != null">
-        #{productAttr,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -242,14 +188,20 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
+      <if test="record.cartId != null">
+        cart_id = #{record.cartId,jdbcType=BIGINT},
+      </if>
       <if test="record.productId != null">
         product_id = #{record.productId,jdbcType=BIGINT},
       </if>
-      <if test="record.productSkuId != null">
-        product_sku_id = #{record.productSkuId,jdbcType=BIGINT},
+      <if test="record.productName != null">
+        product_name = #{record.productName,jdbcType=VARCHAR},
       </if>
-      <if test="record.memberId != null">
-        member_id = #{record.memberId,jdbcType=BIGINT},
+      <if test="record.productSku != null">
+        product_sku = #{record.productSku,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productPic != null">
+        product_pic = #{record.productPic,jdbcType=VARCHAR},
       </if>
       <if test="record.quantity != null">
         quantity = #{record.quantity,jdbcType=INTEGER},
@@ -257,38 +209,11 @@
       <if test="record.price != null">
         price = #{record.price,jdbcType=NUMERIC},
       </if>
-      <if test="record.productPic != null">
-        product_pic = #{record.productPic,jdbcType=VARCHAR},
-      </if>
-      <if test="record.productName != null">
-        product_name = #{record.productName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.productSubTitle != null">
-        product_sub_title = #{record.productSubTitle,jdbcType=VARCHAR},
-      </if>
-      <if test="record.productSkuCode != null">
-        product_sku_code = #{record.productSkuCode,jdbcType=VARCHAR},
-      </if>
       <if test="record.createDate != null">
         create_date = #{record.createDate,jdbcType=TIMESTAMP},
       </if>
       <if test="record.modifyDate != null">
         modify_date = #{record.modifyDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.deleteStatus != null">
-        delete_status = #{record.deleteStatus,jdbcType=INTEGER},
-      </if>
-      <if test="record.productCategoryId != null">
-        product_category_id = #{record.productCategoryId,jdbcType=BIGINT},
-      </if>
-      <if test="record.productBrand != null">
-        product_brand = #{record.productBrand,jdbcType=VARCHAR},
-      </if>
-      <if test="record.productSn != null">
-        product_sn = #{record.productSn,jdbcType=VARCHAR},
-      </if>
-      <if test="record.productAttr != null">
-        product_attr = #{record.productAttr,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -298,22 +223,15 @@
   <update id="updateByExample" parameterType="map">
     update cart_item
     set id = #{record.id,jdbcType=INTEGER},
+      cart_id = #{record.cartId,jdbcType=BIGINT},
       product_id = #{record.productId,jdbcType=BIGINT},
-      product_sku_id = #{record.productSkuId,jdbcType=BIGINT},
-      member_id = #{record.memberId,jdbcType=BIGINT},
+      product_name = #{record.productName,jdbcType=VARCHAR},
+      product_sku = #{record.productSku,jdbcType=VARCHAR},
+      product_pic = #{record.productPic,jdbcType=VARCHAR},
       quantity = #{record.quantity,jdbcType=INTEGER},
       price = #{record.price,jdbcType=NUMERIC},
-      product_pic = #{record.productPic,jdbcType=VARCHAR},
-      product_name = #{record.productName,jdbcType=VARCHAR},
-      product_sub_title = #{record.productSubTitle,jdbcType=VARCHAR},
-      product_sku_code = #{record.productSkuCode,jdbcType=VARCHAR},
       create_date = #{record.createDate,jdbcType=TIMESTAMP},
-      modify_date = #{record.modifyDate,jdbcType=TIMESTAMP},
-      delete_status = #{record.deleteStatus,jdbcType=INTEGER},
-      product_category_id = #{record.productCategoryId,jdbcType=BIGINT},
-      product_brand = #{record.productBrand,jdbcType=VARCHAR},
-      product_sn = #{record.productSn,jdbcType=VARCHAR},
-      product_attr = #{record.productAttr,jdbcType=VARCHAR}
+      modify_date = #{record.modifyDate,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -321,14 +239,20 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.itsthatjun.ecommerce.mbg.model.CartItem">
     update cart_item
     <set>
+      <if test="cartId != null">
+        cart_id = #{cartId,jdbcType=BIGINT},
+      </if>
       <if test="productId != null">
         product_id = #{productId,jdbcType=BIGINT},
       </if>
-      <if test="productSkuId != null">
-        product_sku_id = #{productSkuId,jdbcType=BIGINT},
+      <if test="productName != null">
+        product_name = #{productName,jdbcType=VARCHAR},
       </if>
-      <if test="memberId != null">
-        member_id = #{memberId,jdbcType=BIGINT},
+      <if test="productSku != null">
+        product_sku = #{productSku,jdbcType=VARCHAR},
+      </if>
+      <if test="productPic != null">
+        product_pic = #{productPic,jdbcType=VARCHAR},
       </if>
       <if test="quantity != null">
         quantity = #{quantity,jdbcType=INTEGER},
@@ -336,60 +260,26 @@
       <if test="price != null">
         price = #{price,jdbcType=NUMERIC},
       </if>
-      <if test="productPic != null">
-        product_pic = #{productPic,jdbcType=VARCHAR},
-      </if>
-      <if test="productName != null">
-        product_name = #{productName,jdbcType=VARCHAR},
-      </if>
-      <if test="productSubTitle != null">
-        product_sub_title = #{productSubTitle,jdbcType=VARCHAR},
-      </if>
-      <if test="productSkuCode != null">
-        product_sku_code = #{productSkuCode,jdbcType=VARCHAR},
-      </if>
       <if test="createDate != null">
         create_date = #{createDate,jdbcType=TIMESTAMP},
       </if>
       <if test="modifyDate != null">
         modify_date = #{modifyDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="deleteStatus != null">
-        delete_status = #{deleteStatus,jdbcType=INTEGER},
-      </if>
-      <if test="productCategoryId != null">
-        product_category_id = #{productCategoryId,jdbcType=BIGINT},
-      </if>
-      <if test="productBrand != null">
-        product_brand = #{productBrand,jdbcType=VARCHAR},
-      </if>
-      <if test="productSn != null">
-        product_sn = #{productSn,jdbcType=VARCHAR},
-      </if>
-      <if test="productAttr != null">
-        product_attr = #{productAttr,jdbcType=VARCHAR},
-      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.itsthatjun.ecommerce.mbg.model.CartItem">
     update cart_item
-    set product_id = #{productId,jdbcType=BIGINT},
-      product_sku_id = #{productSkuId,jdbcType=BIGINT},
-      member_id = #{memberId,jdbcType=BIGINT},
+    set cart_id = #{cartId,jdbcType=BIGINT},
+      product_id = #{productId,jdbcType=BIGINT},
+      product_name = #{productName,jdbcType=VARCHAR},
+      product_sku = #{productSku,jdbcType=VARCHAR},
+      product_pic = #{productPic,jdbcType=VARCHAR},
       quantity = #{quantity,jdbcType=INTEGER},
       price = #{price,jdbcType=NUMERIC},
-      product_pic = #{productPic,jdbcType=VARCHAR},
-      product_name = #{productName,jdbcType=VARCHAR},
-      product_sub_title = #{productSubTitle,jdbcType=VARCHAR},
-      product_sku_code = #{productSkuCode,jdbcType=VARCHAR},
       create_date = #{createDate,jdbcType=TIMESTAMP},
-      modify_date = #{modifyDate,jdbcType=TIMESTAMP},
-      delete_status = #{deleteStatus,jdbcType=INTEGER},
-      product_category_id = #{productCategoryId,jdbcType=BIGINT},
-      product_brand = #{productBrand,jdbcType=VARCHAR},
-      product_sn = #{productSn,jdbcType=VARCHAR},
-      product_attr = #{productAttr,jdbcType=VARCHAR}
+      modify_date = #{modifyDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

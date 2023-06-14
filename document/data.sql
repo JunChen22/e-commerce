@@ -634,37 +634,6 @@ insert into admin_login_log (admin_id, login_date, login_time, ip_address, user_
 --  order, shopping cart, address, return --
 --------------------------------------------
 
-DROP TABLE IF EXISTS cart_item;
-CREATE TABLE cart_item (
-  id SERIAL PRIMARY KEY,
-  product_id bigint,
-  product_sku_id bigint,
-  member_id bigint,
-  quantity integer,
-  price numeric(10,2),
-  product_pic varchar(1000),
-  product_name varchar(500),
-  product_sub_title varchar(500),           -- selling points,
-  product_sku_code varchar(200),
-  create_date timestamp,
-  modify_date timestamp,
-  delete_status integer DEFAULT 0,
-  product_category_id bigint,
-  product_brand varchar(200),
-  product_sn varchar(200),
-  product_attr varchar(500)
-);
-
-INSERT INTO cart_item (product_id, product_sku_id, member_id, quantity, price, product_pic, product_name, product_sub_title, product_sku_code, create_date, modify_date, delete_status, product_category_id, product_brand, product_sn, product_attr) VALUES
-
-(1, 01, 1, 2, 10.99, 'https://example.com/product1.jpg', 'Product 1', 'Amazing product 1', 'ABC123', '2023-04-25 08:30:00', '2023-04-25 08:30:00', 0, 101, 'Brand A', 'SN-1', 'Size: M, Color: Red'),
-(1, 02, 1, 1, 9.99, 'https://example.com/product1.jpg', 'Product 1', 'Amazing product 1', 'ABC124', '2023-04-25 08:30:00', '2023-04-25 08:30:00', 0, 101, 'Brand A', 'SN-1', 'Size: L, Color: Blue'),
-(2, 03, 2, 3, 5.99, 'https://example.com/product2.jpg', 'Product 2', 'Fantastic product 2', 'DEF123', '2023-04-25 08:30:00', '2023-04-25 08:30:00', 0, 102, 'Brand B', 'SN-2', 'Size: S, Color: Green'),
-(3, 04, 2, 1, 19.99, 'https://example.com/product3.jpg', 'Product 3', 'Incredible product 3', 'GHI123', '2023-04-25 08:30:00', '2023-04-25 08:30:00', 0, 103, 'Brand C', 'SN-3', 'Size: XL, Color: Black'),
-(3, 05, 2, 2, 18.99, 'https://example.com/product3.jpg', 'Product 3', 'Incredible product 3', 'GHI124', '2023-04-25 08:30:00', '2023-04-25 08:30:00', 0, 103, 'Brand C', 'SN-3', 'Size: XXL, Color: White'),
-(4, 06, 3, 1, 15.99, 'https://example.com/product4.jpg', 'Product 4', 'Awesome product 4', 'JKL123', '2023-04-25 08:30:00', '2023-04-25 08:30:00', 0, 104, 'Brand D', 'SN-4', 'Size: M, Color: Grey');
-
-
 
 
 
@@ -718,6 +687,48 @@ VALUES
 
 
 
+
+----- TODO: change the naming consistency in data.sql  like update_time and modify_date  and create_time, and create_date
+
+DROP TABLE IF EXISTS shopping_cart;
+CREATE TABLE shopping_cart (
+    id SERIAL PRIMARY KEY,
+    member_id bigint,
+    create_date timestamp,
+    modify_date timestamp
+);
+
+
+INSERT INTO shopping_cart (member_id, create_date, modify_date) VALUES
+(1, '2023-04-25 08:30:00', '2023-04-25 08:30:00'),
+(2, '2023-04-25 08:30:00', '2023-04-25 08:30:00'),
+(3, '2023-04-25 08:30:00', '2023-04-25 08:30:00');
+
+
+DROP TABLE IF EXISTS cart_item;
+CREATE TABLE cart_item (
+  id SERIAL PRIMARY KEY,
+  cart_id bigint,
+  product_id bigint,
+  product_name varchar(500),
+  product_sku varchar(500),
+  product_pic varchar(1000),
+  quantity integer,
+  price numeric(10,2),
+  create_date timestamp,
+  modify_date timestamp
+);
+
+INSERT INTO cart_item (cart_id, product_id, product_name, product_sku, product_pic, quantity, price, create_date, modify_date) VALUES
+
+(1, 1, 'Iphone-10', 'Size: 256 gb, Color: Red', 'https://example.com/product1.jpg', 2, 999, '2023-04-25 08:30:00', '2023-04-25 08:30:00'),
+(1, 2, 'note 10', 'Size: 256 gb, Color: black', 'https://example.com/product1.jpg', 1, 999, '2023-04-25 08:30:00', '2023-04-25 08:30:00'),
+
+(2, 4, 'Air jordon', 'Size: 256 gb, Color: black', 'https://example.com/product2.jpg', 1, 115, '2023-04-25 08:30:00', '2023-04-25 08:30:00'),
+(2, 5, 'Ultraboost 20 Sneaker', 'Size: 256 gb, Color: black', 'https://example.com/product3.jpg', 1, 99 , '2023-04-25 08:30:00', '2023-04-25 08:30:00'),
+
+(3, 6, 't-shirt', 'Size: XXL, Color: White', 'https://example.com/product3.jpg', 2, 20, '2023-04-25 08:30:00', '2023-04-25 08:30:00'),
+(3, 9, 'Calculus: Early Transcendentals 8th Edition','Size: 256 gb, Color: black' , 'https://example.com/product4.jpg', 1, 20, '2023-04-25 08:30:00', '2023-04-25 08:30:00');
 
 
 
@@ -773,9 +784,7 @@ VALUES
 (3, NULL, 1005, 'john_smith@example.com', 110.00, 98.00, 12.00, 0.00, 5.00, 7.00, 1, 1, 0, 'USPS', '987654321', 'Buy $100 get $10 off', 'Tax invoice', '555-987-6543', 'john_smith@example.com', 'John Smith', '555-987-6543', 'California', 'Los Angeles', '90001', '456 Oak St, Apt 12C', 1, 0, '2022-01-12 11:15:00', '2022-01-13 16:30:00', NULL, NULL, NULL, '2022-01-11 09:45:00','2022-01-13 16:30:00');
 
 
-
-
-
+-- all the items in one order
 DROP TABLE IF EXISTS order_item;
 CREATE TABLE order_item (
 	id SERIAL PRIMARY KEY,

@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "index", "/css/*", "/js/*","/swagger-resources/**","/v2/api-docs/**").permitAll()
+                .antMatchers("/", "/actuator", "index", "/css/*", "/js/*","/swagger-resources/**","/v2/api-docs/**").permitAll()
                 .antMatchers("/brand/**","/product/**","/user/**","/article/**").permitAll()
                 .antMatchers("/reviews/getAllProductReview/**").permitAll()
                 //.antMatchers("/**").permitAll()  // TODO: for testing purposes. All endpoints are open. Remove when needed.
