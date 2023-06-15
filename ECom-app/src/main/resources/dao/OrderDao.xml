@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itsthatjun.ecommerce.dao.OMS.OrderDao">
-    <resultMap id="orderDetailMap" type="com.itsthatjun.ecommerce.domainmodel.OrderDetail"
+    <resultMap id="orderDetailMap" type="com.itsthatjun.ecommerce.dto.OMS.OrderDetail"
                extends="com.itsthatjun.ecommerce.mbg.mapper.OrdersMapper.BaseResultMap">
         <collection property="orderItemList" columnPrefix="oi_"
                     resultMap="com.itsthatjun.ecommerce.mbg.mapper.OrderItemMapper.BaseResultMap">

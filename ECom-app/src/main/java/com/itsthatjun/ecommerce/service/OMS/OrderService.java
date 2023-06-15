@@ -1,6 +1,7 @@
 package com.itsthatjun.ecommerce.service.OMS;
 
-import com.itsthatjun.ecommerce.dto.OrderParam;
+import com.itsthatjun.ecommerce.dto.OMS.ConfirmOrderResult;
+import com.itsthatjun.ecommerce.dto.OMS.OrderParam;
 import com.itsthatjun.ecommerce.mbg.model.CartItem;
 import com.itsthatjun.ecommerce.mbg.model.Orders;
 import io.swagger.annotations.ApiModelProperty;
@@ -11,21 +12,27 @@ import java.util.Map;
 
 public interface OrderService {
 
-    @ApiModelProperty("")
-    List<CartItem> generateCartItem();
+    @ApiModelProperty("Generate confirmed order with prices all calculate include shipping and taxes")
+    ConfirmOrderResult generateCartItem(List<CartItem> cartItems, String coupon);
 
     @Transactional
-    @ApiModelProperty("")
+    @ApiModelProperty("Create the actual transaction and payment")
     Map<String, Object> generateOrder(OrderParam orderParam);
 
     @Transactional
-    @ApiModelProperty("")
+    @ApiModelProperty("payment successful, redirected from paypal")
     Integer paySuccess(Long OrderId, Integer payType);
 
+    @ApiModelProperty("payment unsuccessful, redirected from paypal")
+    public Integer payFail(Long OrderId, Integer payType);
+
     @Transactional
-    @ApiModelProperty("")
+    @ApiModelProperty("Member cancel order")
     String cancelOrder(Long orderId);
 
     @ApiModelProperty("list all user orders")
     List<Orders> list(int status, int pageNum, int pageSize);
+
+    @ApiModelProperty("Get order detail")
+    Orders detail(int orderId);
 }

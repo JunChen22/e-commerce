@@ -26,7 +26,7 @@ public class PaymentController {
     @Autowired
     private PaypalService paypalService;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping("/")
     public String index(){
         return "index";
     }

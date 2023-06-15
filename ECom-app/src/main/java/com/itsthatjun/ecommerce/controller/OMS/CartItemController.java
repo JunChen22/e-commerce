@@ -1,5 +1,6 @@
 package com.itsthatjun.ecommerce.controller.OMS;
 
+import com.itsthatjun.ecommerce.mbg.model.CartItem;
 import com.itsthatjun.ecommerce.service.OMS.implementation.CartItemServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -23,32 +24,31 @@ public class CartItemController {
 
     @ApiOperation("add item to shopping cart")
     @PostMapping(value = "/add")
-    public String add(@RequestBody String cartItem) {
-        return "";
+    public List<CartItem> add(@RequestBody CartItem cartItem) {
+        return cartItemService.addItem(cartItem);
     }
 
     @ApiOperation("list current user's shopping cart")
     @GetMapping(value = "/list")
-    public List<String> list() {
-        return new ArrayList<>();
+    public List<CartItem> list() {
+        return cartItemService.getUserCart();
     }
 
     @ApiOperation("update shopping cart item quantity")
     @PostMapping(value = "/update/quantity")
-    public String updateQuantity(@RequestParam Long id, @RequestParam Integer quantity) {
-       return "";
+    public List<CartItem> updateQuantity(@RequestParam int cartItemId, @RequestParam int quantity) {
+        return cartItemService.updateQuantity(cartItemId, quantity);
     }
 
     @ApiOperation("remove item from shopping cart")
-    @PostMapping(value = "/delete")
-    public String delete(@RequestParam("ids") List<Long> ids) {
-        return "";
+    @DeleteMapping(value = "/delete/{cartItemId}")
+    public void delete(@PathVariable int cartItemId) {
+        cartItemService.deleteCartItem(cartItemId);
     }
 
     @ApiOperation("clear user shopping cart")
-    @PostMapping(value = "/clear")
-    public String clear() {
-        return "";
+    @DeleteMapping(value = "/clear")
+    public void clear() {
+        cartItemService.clearCartItem();
     }
-
 }

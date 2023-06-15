@@ -1,7 +1,7 @@
 package com.itsthatjun.ecommerce.dto.OMS;
 
-import com.itsthatjun.ecommerce.mbg.model.*;
-import com.itsthatjun.ecommerce.mbg.model.ShoppingCart;
+import com.itsthatjun.ecommerce.mbg.model.CartItem;
+import com.itsthatjun.ecommerce.mbg.model.ReceiveAddress;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -10,7 +10,9 @@ import java.util.List;
 
 @Data
 @EqualsAndHashCode
-public class OrderParam {
+public class ConfirmOrderResult {
+
+    // generate the final cost of order before actual transaction
 
     @ApiModelProperty("item in shopping cart")
     private List<CartItem> cartItemList;
@@ -23,4 +25,9 @@ public class OrderParam {
 
     @ApiModelProperty("paypal, g pay, or finance. currently just paypal")
     private Integer payType;
+
+    private double totalPrice;
+    private double couponDiscount;
+    private double shippingCost;
+    private double payAmount;
 }

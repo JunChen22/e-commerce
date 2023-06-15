@@ -43,6 +43,8 @@ public class CartItemServiceImpl implements CartItemService {
 
         ShoppingCart currShopingCart = shoppingCartMapper.selectByExample(shoppingCartExample).get(0);
 
+        // TODO: if exist then increase quantity but sku might be different
+
         item.setCartId(currShopingCart.getId());
         cartItemMapper.insert(item);
 
@@ -111,6 +113,5 @@ public class CartItemServiceImpl implements CartItemService {
         CartItemExample example = new CartItemExample();
         example.createCriteria().andCartIdEqualTo(cart.getId());
         cartItemMapper.deleteByExample(example);
-        shoppingCartMapper.deleteByExample(shoppingCartExample);
     }
 }

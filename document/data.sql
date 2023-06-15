@@ -463,12 +463,12 @@ INSERT INTO member (username, password, phone_number, status, create_time,icon, 
 INSERT INTO member (username, password, phone_number, status, create_time,icon, last_login)
             VALUES ('user2','$2a$10$pSHd2ngUssBZYRlHQQaKu.rb0me5ZAgld0fVASB50vrMslLb8md0a', '877-393-4448', 'active','2020-03-19 14:02:32','','2020-03-19 22:18:40');
 INSERT INTO member (username, password, phone_number, status, create_time,icon, last_login)
-            VALUES ('test1', '$2a$10$xEbGJ1QHr/CZ.ltRIP4A9.K27Sq3HJ4Dh/sN0ssd5GwkaPbjPRW9S','112-323-1111', 'active', '2020-03-18 04:20:52','','2020-03-20 05:01:02');
+            VALUES ('user3', '$2a$10$xEbGJ1QHr/CZ.ltRIP4A9.K27Sq3HJ4Dh/sN0ssd5GwkaPbjPRW9S','112-323-1111', 'active', '2020-03-18 04:20:52','','2020-03-20 05:01:02');
 
-INSERT INTO receive_address (member_id, phone_number, street, city, state, zip_code, note) VALUES (1,'212-212-2222', '1 1st street 2nd ave', 'Chicago','Illinois','60007','');
-INSERT INTO receive_address (member_id, phone_number, street, city, state, zip_code, note) VALUES (1, '111-111-1111', '2 2nd street 3rd ave Apt 4F', 'Dallas','Texas', '75001' ,'please call, door bell broken');
-INSERT INTO receive_address (member_id, phone_number, street, city, state, zip_code, note) VALUES (2,'212-212-2222', '3 4st street 5nd ave', 'San Francisco','California','94016','');
-INSERT INTO receive_address (member_id, phone_number, street, city, state, zip_code, note) VALUES (3,'212-212-2222', '5 6st street 7nd ave', 'Miami','Florida','33101','');
+INSERT INTO receive_address (member_id, phone_number, street, city, state, zip_code, note) VALUES (1, '212-212-2222', '1 1st street 2nd ave', 'Chicago','Illinois','60007','');
+INSERT INTO receive_address (member_id, phone_number, street, city, state, zip_code, note) VALUES (2, '111-111-1111', '2 2nd street 3rd ave Apt 4F', 'Dallas','Texas', '75001' ,'please call, door bell broken');
+INSERT INTO receive_address (member_id, phone_number, street, city, state, zip_code, note) VALUES (3, '212-212-2222', '3 4st street 5nd ave', 'San Francisco','California','94016','');
+INSERT INTO receive_address (member_id, phone_number, street, city, state, zip_code, note) VALUES (4, '212-212-2222', '5 6st street 7nd ave', 'Miami','Florida','33101','');
 
 --- login type ,pc/andriod/IOS   = 0/1/2
 INSERT INTO member_login_log (member_id, login_time, ip_address, login_type) VALUES (1,'2020-03-18 22:18:40','127.0.0.1','0');
@@ -654,8 +654,9 @@ CREATE TABLE coupon (
   status integer NULL DEFAULT 1          -- is the coupon active or disable ,  0 -> disable, 1 -> active
 );
 
+-- TODO: add percentage off coupon
 INSERT INTO coupon(type, name, amount, start_time, end_time, count, publish_count, used_count, code, status)
-VALUES (0, '$15 off whole order',15.00, '2019-08-18 16:00:3', '2023-08-18 16:00:3', 20, 10 , 0, '15OFF', 1);
+VALUES (0, '$15 off whole order', 15.00, '2019-08-18 16:00:3', '2023-08-18 16:00:3', 20, 10 , 0, '15OFF', 1);
 
 INSERT INTO coupon(type, name, amount, start_time, end_time, count, publish_count, used_count, code, status)
 VALUES (1, '$50 off Apple product', 50.00, '2019-08-18 16:00:3', '2023-08-18 16:00:3', 1, 1 , 0, '50OFF', 1);
@@ -664,7 +665,7 @@ INSERT INTO coupon(type, name, amount, start_time, end_time, count, publish_coun
 VALUES (0, 'All free', 999999.99, '2019-08-18 16:00:3', '2023-08-18 16:00:3', 1, 1 , 1, 'FREE', 1);
 
 INSERT INTO coupon(type, name, amount, start_time, end_time, count, publish_count, used_count, code, status)
-VALUES (0, 'not working coupon', 999999.99, '2019-08-18 16:00:3', '2023-08-18 16:00:3', 1, 1 , 0, 'FREE', 0);
+VALUES (0, 'not working coupon', 200, '2019-08-18 16:00:3', '2023-08-18 16:00:3', 1, 1 , 0, '200OFF', 0);
 
 
 DROP TABLE IF EXISTS coupon_history;
@@ -673,17 +674,16 @@ CREATE TABLE coupon_history (
     coupon_id bigint NOT NULL,
     member_id  bigint NOT NULL,
     order_id  bigint NOT NULL,
-    order_sn VARCHAR(64),
-    used_time timestamp NULL DEFAULT NULL,
+    used_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     code varchar(64) NULL DEFAULT NULL
 );
 
-INSERT INTO coupon_history (coupon_id, member_id, order_id, order_sn, used_time, code)
+INSERT INTO coupon_history (coupon_id, member_id, order_id, used_time, code)
 VALUES
-(1, 1, 1, 20230425-1001, '2023-04-25 08:45:00', '15OFF'),
-(2, 2, 2, 987654, '2023-03-25 08:45:00', '15OFF'),
-(3, 1, 3, 00003, '2023-02-25 08:45:00', '50OFF'),
-(1, 3, 4, 00004, '2022-01-11 10:00:00', 'FREE');
+(1, 1, 1, '2023-04-25 08:45:00', '15OFF'),
+(2, 2, 2, '2023-03-25 08:45:00', '15OFF'),
+(3, 1, 3, '2023-02-25 08:45:00', '50OFF'),
+(1, 3, 4, '2022-01-11 10:00:00', 'FREE');
 
 
 
@@ -941,6 +941,7 @@ VALUES
 (5, 3, 5, 1005, '2023-04-07 15:30:00', 'MikeBrown', 60.00, 'Mike Brown', '555-123-7890', 3, '2023-04-08 10:00:00', 'https://example.com/product5.jpg', 'Product 5', 'Brand 5', 'Color: White, Size: L', 1, 80.00, 75.00, 'Not as described', 'Product did not match description', 'did not meet our return policy, item opened', 'Admin order', 'JaneSmith', NULL, NULL, NULL);
 
 
+-- update order status history/logs
 DROP TABLE IF EXISTS order_change_history;
 CREATE TABLE order_change_history (
   id SERIAL PRIMARY KEY,

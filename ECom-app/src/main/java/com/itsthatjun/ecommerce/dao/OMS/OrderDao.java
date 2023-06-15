@@ -1,6 +1,6 @@
 package com.itsthatjun.ecommerce.dao.OMS;
 
-import com.itsthatjun.ecommerce.domainmodel.OrderDetail;
+import com.itsthatjun.ecommerce.dto.OMS.OrderDetail;
 import com.itsthatjun.ecommerce.mbg.model.OrderItem;
 import io.swagger.annotations.ApiModelProperty;
 import org.apache.ibatis.annotations.Param;
