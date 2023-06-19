@@ -3,6 +3,7 @@
 <mapper namespace="com.itsthatjun.ecommerce.mbg.mapper.ProductAttributeMapper">
   <resultMap id="BaseResultMap" type="com.itsthatjun.ecommerce.mbg.model.ProductAttribute">
     <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="sku_code" jdbcType="VARCHAR" property="skuCode" />
     <result column="product_id" jdbcType="NUMERIC" property="productId" />
     <result column="attribute_type_id" jdbcType="NUMERIC" property="attributeTypeId" />
     <result column="attribute_value" jdbcType="VARCHAR" property="attributeValue" />
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, product_id, attribute_type_id, attribute_value, attribute_unit
+    id, sku_code, product_id, attribute_type_id, attribute_value, attribute_unit
   </sql>
   <select id="selectByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.ProductAttributeExample" resultMap="BaseResultMap">
     select
@@ -100,14 +101,17 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.ProductAttribute" useGeneratedKeys="true">
-    insert into product_attribute (product_id, attribute_type_id, attribute_value, 
-      attribute_unit)
-    values (#{productId,jdbcType=NUMERIC}, #{attributeTypeId,jdbcType=NUMERIC}, #{attributeValue,jdbcType=VARCHAR}, 
-      #{attributeUnit,jdbcType=VARCHAR})
+    insert into product_attribute (sku_code, product_id, attribute_type_id, 
+      attribute_value, attribute_unit)
+    values (#{skuCode,jdbcType=VARCHAR}, #{productId,jdbcType=NUMERIC}, #{attributeTypeId,jdbcType=NUMERIC}, 
+      #{attributeValue,jdbcType=VARCHAR}, #{attributeUnit,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.ProductAttribute" useGeneratedKeys="true">
     insert into product_attribute
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuCode != null">
+        sku_code,
+      </if>
       <if test="productId != null">
         product_id,
       </if>
@@ -122,6 +126,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuCode != null">
+        #{skuCode,jdbcType=VARCHAR},
+      </if>
       <if test="productId != null">
         #{productId,jdbcType=NUMERIC},
       </if>
@@ -148,6 +155,9 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
+      <if test="record.skuCode != null">
+        sku_code = #{record.skuCode,jdbcType=VARCHAR},
+      </if>
       <if test="record.productId != null">
         product_id = #{record.productId,jdbcType=NUMERIC},
       </if>
@@ -168,6 +178,7 @@
   <update id="updateByExample" parameterType="map">
     update product_attribute
     set id = #{record.id,jdbcType=INTEGER},
+      sku_code = #{record.skuCode,jdbcType=VARCHAR},
       product_id = #{record.productId,jdbcType=NUMERIC},
       attribute_type_id = #{record.attributeTypeId,jdbcType=NUMERIC},
       attribute_value = #{record.attributeValue,jdbcType=VARCHAR},
@@ -179,6 +190,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.itsthatjun.ecommerce.mbg.model.ProductAttribute">
     update product_attribute
     <set>
+      <if test="skuCode != null">
+        sku_code = #{skuCode,jdbcType=VARCHAR},
+      </if>
       <if test="productId != null">
         product_id = #{productId,jdbcType=NUMERIC},
       </if>
@@ -196,7 +210,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.itsthatjun.ecommerce.mbg.model.ProductAttribute">
     update product_attribute
-    set product_id = #{productId,jdbcType=NUMERIC},
+    set sku_code = #{skuCode,jdbcType=VARCHAR},
+      product_id = #{productId,jdbcType=NUMERIC},
       attribute_type_id = #{attributeTypeId,jdbcType=NUMERIC},
       attribute_value = #{attributeValue,jdbcType=VARCHAR},
       attribute_unit = #{attributeUnit,jdbcType=VARCHAR}

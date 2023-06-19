@@ -20,7 +20,7 @@ public class CartItem {
 
     private BigDecimal price;
 
-    private Date createDate;
+    private Date createdAt;
 
     private Date modifyDate;
 
@@ -88,12 +88,12 @@ public class CartItem {
         this.price = price;
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public Date getModifyDate() {

@@ -1,15 +1,16 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class ReviewPictures {
     private Integer id;
 
-    private Integer reviewId;
+    private BigDecimal reviewAlbumId;
 
     private String filename;
 
-    private Date createTime;
+    private Date createdAt;
 
     public Integer getId() {
         return id;
@@ -19,12 +20,12 @@ public class ReviewPictures {
         this.id = id;
     }
 
-    public Integer getReviewId() {
-        return reviewId;
+    public BigDecimal getReviewAlbumId() {
+        return reviewAlbumId;
     }
 
-    public void setReviewId(Integer reviewId) {
-        this.reviewId = reviewId;
+    public void setReviewAlbumId(BigDecimal reviewAlbumId) {
+        this.reviewAlbumId = reviewAlbumId;
     }
 
     public String getFilename() {
@@ -35,11 +36,11 @@ public class ReviewPictures {
         this.filename = filename;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }

@@ -13,7 +13,7 @@ public class Member {
 
     private String status;
 
-    private Date createTime;
+    private Date createdAt;
 
     private Date lastLogin;
 
@@ -61,12 +61,12 @@ public class Member {
         this.status = status;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public Date getLastLogin() {

@@ -166,63 +166,63 @@ public class CouponExample {
             return (Criteria) this;
         }
 
-        public Criteria andTypeIsNull() {
-            addCriterion("type is null");
+        public Criteria andCouponTypeIsNull() {
+            addCriterion("coupon_type is null");
             return (Criteria) this;
         }
 
-        public Criteria andTypeIsNotNull() {
-            addCriterion("type is not null");
+        public Criteria andCouponTypeIsNotNull() {
+            addCriterion("coupon_type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTypeEqualTo(Integer value) {
-            addCriterion("type =", value, "type");
+        public Criteria andCouponTypeEqualTo(Integer value) {
+            addCriterion("coupon_type =", value, "couponType");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotEqualTo(Integer value) {
-            addCriterion("type <>", value, "type");
+        public Criteria andCouponTypeNotEqualTo(Integer value) {
+            addCriterion("coupon_type <>", value, "couponType");
             return (Criteria) this;
         }
 
-        public Criteria andTypeGreaterThan(Integer value) {
-            addCriterion("type >", value, "type");
+        public Criteria andCouponTypeGreaterThan(Integer value) {
+            addCriterion("coupon_type >", value, "couponType");
             return (Criteria) this;
         }
 
-        public Criteria andTypeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("type >=", value, "type");
+        public Criteria andCouponTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("coupon_type >=", value, "couponType");
             return (Criteria) this;
         }
 
-        public Criteria andTypeLessThan(Integer value) {
-            addCriterion("type <", value, "type");
+        public Criteria andCouponTypeLessThan(Integer value) {
+            addCriterion("coupon_type <", value, "couponType");
             return (Criteria) this;
         }
 
-        public Criteria andTypeLessThanOrEqualTo(Integer value) {
-            addCriterion("type <=", value, "type");
+        public Criteria andCouponTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("coupon_type <=", value, "couponType");
             return (Criteria) this;
         }
 
-        public Criteria andTypeIn(List<Integer> values) {
-            addCriterion("type in", values, "type");
+        public Criteria andCouponTypeIn(List<Integer> values) {
+            addCriterion("coupon_type in", values, "couponType");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotIn(List<Integer> values) {
-            addCriterion("type not in", values, "type");
+        public Criteria andCouponTypeNotIn(List<Integer> values) {
+            addCriterion("coupon_type not in", values, "couponType");
             return (Criteria) this;
         }
 
-        public Criteria andTypeBetween(Integer value1, Integer value2) {
-            addCriterion("type between", value1, value2, "type");
+        public Criteria andCouponTypeBetween(Integer value1, Integer value2) {
+            addCriterion("coupon_type between", value1, value2, "couponType");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotBetween(Integer value1, Integer value2) {
-            addCriterion("type not between", value1, value2, "type");
+        public Criteria andCouponTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("coupon_type not between", value1, value2, "couponType");
             return (Criteria) this;
         }
 
@@ -293,6 +293,66 @@ public class CouponExample {
 
         public Criteria andNameNotBetween(String value1, String value2) {
             addCriterion("name not between", value1, value2, "name");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountTypeIsNull() {
+            addCriterion("discount_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountTypeIsNotNull() {
+            addCriterion("discount_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountTypeEqualTo(Integer value) {
+            addCriterion("discount_type =", value, "discountType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountTypeNotEqualTo(Integer value) {
+            addCriterion("discount_type <>", value, "discountType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountTypeGreaterThan(Integer value) {
+            addCriterion("discount_type >", value, "discountType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("discount_type >=", value, "discountType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountTypeLessThan(Integer value) {
+            addCriterion("discount_type <", value, "discountType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("discount_type <=", value, "discountType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountTypeIn(List<Integer> values) {
+            addCriterion("discount_type in", values, "discountType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountTypeNotIn(List<Integer> values) {
+            addCriterion("discount_type not in", values, "discountType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountTypeBetween(Integer value1, Integer value2) {
+            addCriterion("discount_type between", value1, value2, "discountType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("discount_type not between", value1, value2, "discountType");
             return (Criteria) this;
         }
 

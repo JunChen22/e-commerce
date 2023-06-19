@@ -1,5 +1,6 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -165,63 +166,63 @@ public class ReviewPicturesExample {
             return (Criteria) this;
         }
 
-        public Criteria andReviewIdIsNull() {
-            addCriterion("review_id is null");
+        public Criteria andReviewAlbumIdIsNull() {
+            addCriterion("review_album_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andReviewIdIsNotNull() {
-            addCriterion("review_id is not null");
+        public Criteria andReviewAlbumIdIsNotNull() {
+            addCriterion("review_album_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andReviewIdEqualTo(Integer value) {
-            addCriterion("review_id =", value, "reviewId");
+        public Criteria andReviewAlbumIdEqualTo(BigDecimal value) {
+            addCriterion("review_album_id =", value, "reviewAlbumId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewIdNotEqualTo(Integer value) {
-            addCriterion("review_id <>", value, "reviewId");
+        public Criteria andReviewAlbumIdNotEqualTo(BigDecimal value) {
+            addCriterion("review_album_id <>", value, "reviewAlbumId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewIdGreaterThan(Integer value) {
-            addCriterion("review_id >", value, "reviewId");
+        public Criteria andReviewAlbumIdGreaterThan(BigDecimal value) {
+            addCriterion("review_album_id >", value, "reviewAlbumId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("review_id >=", value, "reviewId");
+        public Criteria andReviewAlbumIdGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("review_album_id >=", value, "reviewAlbumId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewIdLessThan(Integer value) {
-            addCriterion("review_id <", value, "reviewId");
+        public Criteria andReviewAlbumIdLessThan(BigDecimal value) {
+            addCriterion("review_album_id <", value, "reviewAlbumId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewIdLessThanOrEqualTo(Integer value) {
-            addCriterion("review_id <=", value, "reviewId");
+        public Criteria andReviewAlbumIdLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("review_album_id <=", value, "reviewAlbumId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewIdIn(List<Integer> values) {
-            addCriterion("review_id in", values, "reviewId");
+        public Criteria andReviewAlbumIdIn(List<BigDecimal> values) {
+            addCriterion("review_album_id in", values, "reviewAlbumId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewIdNotIn(List<Integer> values) {
-            addCriterion("review_id not in", values, "reviewId");
+        public Criteria andReviewAlbumIdNotIn(List<BigDecimal> values) {
+            addCriterion("review_album_id not in", values, "reviewAlbumId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewIdBetween(Integer value1, Integer value2) {
-            addCriterion("review_id between", value1, value2, "reviewId");
+        public Criteria andReviewAlbumIdBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("review_album_id between", value1, value2, "reviewAlbumId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("review_id not between", value1, value2, "reviewId");
+        public Criteria andReviewAlbumIdNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("review_album_id not between", value1, value2, "reviewAlbumId");
             return (Criteria) this;
         }
 
@@ -295,63 +296,63 @@ public class ReviewPicturesExample {
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeIsNull() {
-            addCriterion("create_time is null");
+        public Criteria andCreatedAtIsNull() {
+            addCriterion("created_at is null");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeIsNotNull() {
-            addCriterion("create_time is not null");
+        public Criteria andCreatedAtIsNotNull() {
+            addCriterion("created_at is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeEqualTo(Date value) {
-            addCriterion("create_time =", value, "createTime");
+        public Criteria andCreatedAtEqualTo(Date value) {
+            addCriterion("created_at =", value, "createdAt");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeNotEqualTo(Date value) {
-            addCriterion("create_time <>", value, "createTime");
+        public Criteria andCreatedAtNotEqualTo(Date value) {
+            addCriterion("created_at <>", value, "createdAt");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeGreaterThan(Date value) {
-            addCriterion("create_time >", value, "createTime");
+        public Criteria andCreatedAtGreaterThan(Date value) {
+            addCriterion("created_at >", value, "createdAt");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("create_time >=", value, "createTime");
+        public Criteria andCreatedAtGreaterThanOrEqualTo(Date value) {
+            addCriterion("created_at >=", value, "createdAt");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeLessThan(Date value) {
-            addCriterion("create_time <", value, "createTime");
+        public Criteria andCreatedAtLessThan(Date value) {
+            addCriterion("created_at <", value, "createdAt");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeLessThanOrEqualTo(Date value) {
-            addCriterion("create_time <=", value, "createTime");
+        public Criteria andCreatedAtLessThanOrEqualTo(Date value) {
+            addCriterion("created_at <=", value, "createdAt");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeIn(List<Date> values) {
-            addCriterion("create_time in", values, "createTime");
+        public Criteria andCreatedAtIn(List<Date> values) {
+            addCriterion("created_at in", values, "createdAt");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeNotIn(List<Date> values) {
-            addCriterion("create_time not in", values, "createTime");
+        public Criteria andCreatedAtNotIn(List<Date> values) {
+            addCriterion("created_at not in", values, "createdAt");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeBetween(Date value1, Date value2) {
-            addCriterion("create_time between", value1, value2, "createTime");
+        public Criteria andCreatedAtBetween(Date value1, Date value2) {
+            addCriterion("created_at between", value1, value2, "createdAt");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
-            addCriterion("create_time not between", value1, value2, "createTime");
+        public Criteria andCreatedAtNotBetween(Date value1, Date value2) {
+            addCriterion("created_at not between", value1, value2, "createdAt");
             return (Criteria) this;
         }
     }

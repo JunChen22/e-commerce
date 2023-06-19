@@ -486,123 +486,123 @@ public class ReviewExample {
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeIsNull() {
-            addCriterion("create_time is null");
+        public Criteria andCreatedAtIsNull() {
+            addCriterion("created_at is null");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeIsNotNull() {
-            addCriterion("create_time is not null");
+        public Criteria andCreatedAtIsNotNull() {
+            addCriterion("created_at is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeEqualTo(Date value) {
-            addCriterion("create_time =", value, "createTime");
+        public Criteria andCreatedAtEqualTo(Date value) {
+            addCriterion("created_at =", value, "createdAt");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeNotEqualTo(Date value) {
-            addCriterion("create_time <>", value, "createTime");
+        public Criteria andCreatedAtNotEqualTo(Date value) {
+            addCriterion("created_at <>", value, "createdAt");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeGreaterThan(Date value) {
-            addCriterion("create_time >", value, "createTime");
+        public Criteria andCreatedAtGreaterThan(Date value) {
+            addCriterion("created_at >", value, "createdAt");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("create_time >=", value, "createTime");
+        public Criteria andCreatedAtGreaterThanOrEqualTo(Date value) {
+            addCriterion("created_at >=", value, "createdAt");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeLessThan(Date value) {
-            addCriterion("create_time <", value, "createTime");
+        public Criteria andCreatedAtLessThan(Date value) {
+            addCriterion("created_at <", value, "createdAt");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeLessThanOrEqualTo(Date value) {
-            addCriterion("create_time <=", value, "createTime");
+        public Criteria andCreatedAtLessThanOrEqualTo(Date value) {
+            addCriterion("created_at <=", value, "createdAt");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeIn(List<Date> values) {
-            addCriterion("create_time in", values, "createTime");
+        public Criteria andCreatedAtIn(List<Date> values) {
+            addCriterion("created_at in", values, "createdAt");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeNotIn(List<Date> values) {
-            addCriterion("create_time not in", values, "createTime");
+        public Criteria andCreatedAtNotIn(List<Date> values) {
+            addCriterion("created_at not in", values, "createdAt");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeBetween(Date value1, Date value2) {
-            addCriterion("create_time between", value1, value2, "createTime");
+        public Criteria andCreatedAtBetween(Date value1, Date value2) {
+            addCriterion("created_at between", value1, value2, "createdAt");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
-            addCriterion("create_time not between", value1, value2, "createTime");
+        public Criteria andCreatedAtNotBetween(Date value1, Date value2) {
+            addCriterion("created_at not between", value1, value2, "createdAt");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedTimeIsNull() {
-            addCriterion("updated_time is null");
+        public Criteria andUpdatedAtIsNull() {
+            addCriterion("updated_at is null");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedTimeIsNotNull() {
-            addCriterion("updated_time is not null");
+        public Criteria andUpdatedAtIsNotNull() {
+            addCriterion("updated_at is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedTimeEqualTo(Date value) {
-            addCriterion("updated_time =", value, "updatedTime");
+        public Criteria andUpdatedAtEqualTo(Date value) {
+            addCriterion("updated_at =", value, "updatedAt");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedTimeNotEqualTo(Date value) {
-            addCriterion("updated_time <>", value, "updatedTime");
+        public Criteria andUpdatedAtNotEqualTo(Date value) {
+            addCriterion("updated_at <>", value, "updatedAt");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedTimeGreaterThan(Date value) {
-            addCriterion("updated_time >", value, "updatedTime");
+        public Criteria andUpdatedAtGreaterThan(Date value) {
+            addCriterion("updated_at >", value, "updatedAt");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedTimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("updated_time >=", value, "updatedTime");
+        public Criteria andUpdatedAtGreaterThanOrEqualTo(Date value) {
+            addCriterion("updated_at >=", value, "updatedAt");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedTimeLessThan(Date value) {
-            addCriterion("updated_time <", value, "updatedTime");
+        public Criteria andUpdatedAtLessThan(Date value) {
+            addCriterion("updated_at <", value, "updatedAt");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedTimeLessThanOrEqualTo(Date value) {
-            addCriterion("updated_time <=", value, "updatedTime");
+        public Criteria andUpdatedAtLessThanOrEqualTo(Date value) {
+            addCriterion("updated_at <=", value, "updatedAt");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedTimeIn(List<Date> values) {
-            addCriterion("updated_time in", values, "updatedTime");
+        public Criteria andUpdatedAtIn(List<Date> values) {
+            addCriterion("updated_at in", values, "updatedAt");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedTimeNotIn(List<Date> values) {
-            addCriterion("updated_time not in", values, "updatedTime");
+        public Criteria andUpdatedAtNotIn(List<Date> values) {
+            addCriterion("updated_at not in", values, "updatedAt");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedTimeBetween(Date value1, Date value2) {
-            addCriterion("updated_time between", value1, value2, "updatedTime");
+        public Criteria andUpdatedAtBetween(Date value1, Date value2) {
+            addCriterion("updated_at between", value1, value2, "updatedAt");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatedTimeNotBetween(Date value1, Date value2) {
-            addCriterion("updated_time not between", value1, value2, "updatedTime");
+        public Criteria andUpdatedAtNotBetween(Date value1, Date value2) {
+            addCriterion("updated_at not between", value1, value2, "updatedAt");
             return (Criteria) this;
         }
 
@@ -806,73 +806,63 @@ public class ReviewExample {
             return (Criteria) this;
         }
 
-        public Criteria andPicturesIsNull() {
-            addCriterion("pictures is null");
+        public Criteria andAlbumIsNull() {
+            addCriterion("album is null");
             return (Criteria) this;
         }
 
-        public Criteria andPicturesIsNotNull() {
-            addCriterion("pictures is not null");
+        public Criteria andAlbumIsNotNull() {
+            addCriterion("album is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPicturesEqualTo(String value) {
-            addCriterion("pictures =", value, "pictures");
+        public Criteria andAlbumEqualTo(BigDecimal value) {
+            addCriterion("album =", value, "album");
             return (Criteria) this;
         }
 
-        public Criteria andPicturesNotEqualTo(String value) {
-            addCriterion("pictures <>", value, "pictures");
+        public Criteria andAlbumNotEqualTo(BigDecimal value) {
+            addCriterion("album <>", value, "album");
             return (Criteria) this;
         }
 
-        public Criteria andPicturesGreaterThan(String value) {
-            addCriterion("pictures >", value, "pictures");
+        public Criteria andAlbumGreaterThan(BigDecimal value) {
+            addCriterion("album >", value, "album");
             return (Criteria) this;
         }
 
-        public Criteria andPicturesGreaterThanOrEqualTo(String value) {
-            addCriterion("pictures >=", value, "pictures");
+        public Criteria andAlbumGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("album >=", value, "album");
             return (Criteria) this;
         }
 
-        public Criteria andPicturesLessThan(String value) {
-            addCriterion("pictures <", value, "pictures");
+        public Criteria andAlbumLessThan(BigDecimal value) {
+            addCriterion("album <", value, "album");
             return (Criteria) this;
         }
 
-        public Criteria andPicturesLessThanOrEqualTo(String value) {
-            addCriterion("pictures <=", value, "pictures");
+        public Criteria andAlbumLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("album <=", value, "album");
             return (Criteria) this;
         }
 
-        public Criteria andPicturesLike(String value) {
-            addCriterion("pictures like", value, "pictures");
+        public Criteria andAlbumIn(List<BigDecimal> values) {
+            addCriterion("album in", values, "album");
             return (Criteria) this;
         }
 
-        public Criteria andPicturesNotLike(String value) {
-            addCriterion("pictures not like", value, "pictures");
+        public Criteria andAlbumNotIn(List<BigDecimal> values) {
+            addCriterion("album not in", values, "album");
             return (Criteria) this;
         }
 
-        public Criteria andPicturesIn(List<String> values) {
-            addCriterion("pictures in", values, "pictures");
+        public Criteria andAlbumBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("album between", value1, value2, "album");
             return (Criteria) this;
         }
 
-        public Criteria andPicturesNotIn(List<String> values) {
-            addCriterion("pictures not in", values, "pictures");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicturesBetween(String value1, String value2) {
-            addCriterion("pictures between", value1, value2, "pictures");
-            return (Criteria) this;
-        }
-
-        public Criteria andPicturesNotBetween(String value1, String value2) {
-            addCriterion("pictures not between", value1, value2, "pictures");
+        public Criteria andAlbumNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("album not between", value1, value2, "album");
             return (Criteria) this;
         }
     }

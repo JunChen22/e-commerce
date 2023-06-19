@@ -3,8 +3,9 @@
 <mapper namespace="com.itsthatjun.ecommerce.mbg.mapper.CouponMapper">
   <resultMap id="BaseResultMap" type="com.itsthatjun.ecommerce.mbg.model.Coupon">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="coupon_type" jdbcType="INTEGER" property="couponType" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="discount_type" jdbcType="INTEGER" property="discountType" />
     <result column="amount" jdbcType="NUMERIC" property="amount" />
     <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
     <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
@@ -74,8 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, type, name, amount, start_time, end_time, note, count, publish_count, used_count, 
-    code, status
+    id, coupon_type, name, discount_type, amount, start_time, end_time, note, count, 
+    publish_count, used_count, code, status
   </sql>
   <select id="selectByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.CouponExample" resultMap="BaseResultMap">
     select
@@ -108,23 +109,28 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.Coupon" useGeneratedKeys="true">
-    insert into coupon (type, name, amount, 
-      start_time, end_time, note, 
-      count, publish_count, used_count, 
-      code, status)
-    values (#{type,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{amount,jdbcType=NUMERIC}, 
-      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{note,jdbcType=VARCHAR}, 
-      #{count,jdbcType=INTEGER}, #{publishCount,jdbcType=INTEGER}, #{usedCount,jdbcType=INTEGER}, 
-      #{code,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
+    insert into coupon (coupon_type, name, discount_type, 
+      amount, start_time, end_time, 
+      note, count, publish_count, 
+      used_count, code, status
+      )
+    values (#{couponType,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{discountType,jdbcType=INTEGER}, 
+      #{amount,jdbcType=NUMERIC}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{note,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, #{publishCount,jdbcType=INTEGER}, 
+      #{usedCount,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.Coupon" useGeneratedKeys="true">
     insert into coupon
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="type != null">
-        type,
+      <if test="couponType != null">
+        coupon_type,
       </if>
       <if test="name != null">
         name,
+      </if>
+      <if test="discountType != null">
+        discount_type,
       </if>
       <if test="amount != null">
         amount,
@@ -155,11 +161,14 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="type != null">
-        #{type,jdbcType=INTEGER},
+      <if test="couponType != null">
+        #{couponType,jdbcType=INTEGER},
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="discountType != null">
+        #{discountType,jdbcType=INTEGER},
       </if>
       <if test="amount != null">
         #{amount,jdbcType=NUMERIC},
@@ -202,11 +211,14 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.type != null">
-        type = #{record.type,jdbcType=INTEGER},
+      <if test="record.couponType != null">
+        coupon_type = #{record.couponType,jdbcType=INTEGER},
       </if>
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.discountType != null">
+        discount_type = #{record.discountType,jdbcType=INTEGER},
       </if>
       <if test="record.amount != null">
         amount = #{record.amount,jdbcType=NUMERIC},
@@ -243,8 +255,9 @@
   <update id="updateByExample" parameterType="map">
     update coupon
     set id = #{record.id,jdbcType=INTEGER},
-      type = #{record.type,jdbcType=INTEGER},
+      coupon_type = #{record.couponType,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
+      discount_type = #{record.discountType,jdbcType=INTEGER},
       amount = #{record.amount,jdbcType=NUMERIC},
       start_time = #{record.startTime,jdbcType=TIMESTAMP},
       end_time = #{record.endTime,jdbcType=TIMESTAMP},
@@ -261,11 +274,14 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.itsthatjun.ecommerce.mbg.model.Coupon">
     update coupon
     <set>
-      <if test="type != null">
-        type = #{type,jdbcType=INTEGER},
+      <if test="couponType != null">
+        coupon_type = #{couponType,jdbcType=INTEGER},
       </if>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="discountType != null">
+        discount_type = #{discountType,jdbcType=INTEGER},
       </if>
       <if test="amount != null">
         amount = #{amount,jdbcType=NUMERIC},
@@ -299,8 +315,9 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.itsthatjun.ecommerce.mbg.model.Coupon">
     update coupon
-    set type = #{type,jdbcType=INTEGER},
+    set coupon_type = #{couponType,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR},
+      discount_type = #{discountType,jdbcType=INTEGER},
       amount = #{amount,jdbcType=NUMERIC},
       start_time = #{startTime,jdbcType=TIMESTAMP},
       end_time = #{endTime,jdbcType=TIMESTAMP},

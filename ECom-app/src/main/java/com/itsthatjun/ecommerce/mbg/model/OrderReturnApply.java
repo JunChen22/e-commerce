@@ -12,11 +12,9 @@ public class OrderReturnApply {
 
     private Integer productId;
 
-    private Integer orderSn;
+    private String orderSn;
 
-    private Date createTime;
-
-    private String memberUsername;
+    private Long memberId;
 
     private BigDecimal returnAmount;
 
@@ -28,19 +26,15 @@ public class OrderReturnApply {
 
     private Date handleTime;
 
-    private String productPic;
-
     private String productName;
 
     private String productBrand;
 
-    private String productAttr;
+    private String productSkuCode;
 
     private Integer productCount;
 
     private BigDecimal productPrice;
-
-    private BigDecimal productRealPrice;
 
     private String reason;
 
@@ -57,6 +51,8 @@ public class OrderReturnApply {
     private Date receiveTime;
 
     private String receiveNote;
+
+    private Date createdAt;
 
     public Integer getId() {
         return id;
@@ -90,28 +86,20 @@ public class OrderReturnApply {
         this.productId = productId;
     }
 
-    public Integer getOrderSn() {
+    public String getOrderSn() {
         return orderSn;
     }
 
-    public void setOrderSn(Integer orderSn) {
+    public void setOrderSn(String orderSn) {
         this.orderSn = orderSn;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Long getMemberId() {
+        return memberId;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getMemberUsername() {
-        return memberUsername;
-    }
-
-    public void setMemberUsername(String memberUsername) {
-        this.memberUsername = memberUsername;
+    public void setMemberId(Long memberId) {
+        this.memberId = memberId;
     }
 
     public BigDecimal getReturnAmount() {
@@ -154,14 +142,6 @@ public class OrderReturnApply {
         this.handleTime = handleTime;
     }
 
-    public String getProductPic() {
-        return productPic;
-    }
-
-    public void setProductPic(String productPic) {
-        this.productPic = productPic;
-    }
-
     public String getProductName() {
         return productName;
     }
@@ -178,12 +158,12 @@ public class OrderReturnApply {
         this.productBrand = productBrand;
     }
 
-    public String getProductAttr() {
-        return productAttr;
+    public String getProductSkuCode() {
+        return productSkuCode;
     }
 
-    public void setProductAttr(String productAttr) {
-        this.productAttr = productAttr;
+    public void setProductSkuCode(String productSkuCode) {
+        this.productSkuCode = productSkuCode;
     }
 
     public Integer getProductCount() {
@@ -200,14 +180,6 @@ public class OrderReturnApply {
 
     public void setProductPrice(BigDecimal productPrice) {
         this.productPrice = productPrice;
-    }
-
-    public BigDecimal getProductRealPrice() {
-        return productRealPrice;
-    }
-
-    public void setProductRealPrice(BigDecimal productRealPrice) {
-        this.productRealPrice = productRealPrice;
     }
 
     public String getReason() {
@@ -272,5 +244,13 @@ public class OrderReturnApply {
 
     public void setReceiveNote(String receiveNote) {
         this.receiveNote = receiveNote;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }

@@ -3,9 +3,9 @@
 <mapper namespace="com.itsthatjun.ecommerce.mbg.mapper.ReviewPicturesMapper">
   <resultMap id="BaseResultMap" type="com.itsthatjun.ecommerce.mbg.model.ReviewPictures">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="review_id" jdbcType="NUMERIC" property="reviewId" />
+    <result column="review_album_id" jdbcType="NUMERIC" property="reviewAlbumId" />
     <result column="filename" jdbcType="VARCHAR" property="filename" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, review_id, filename, create_time
+    id, review_album_id, filename, created_at
   </sql>
   <select id="selectByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.ReviewPicturesExample" resultMap="BaseResultMap">
     select
@@ -99,33 +99,33 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.ReviewPictures" useGeneratedKeys="true">
-    insert into review_pictures (review_id, filename, create_time
+    insert into review_pictures (review_album_id, filename, created_at
       )
-    values (#{reviewId,jdbcType=NUMERIC}, #{filename,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+    values (#{reviewAlbumId,jdbcType=NUMERIC}, #{filename,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.ReviewPictures" useGeneratedKeys="true">
     insert into review_pictures
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="reviewId != null">
-        review_id,
+      <if test="reviewAlbumId != null">
+        review_album_id,
       </if>
       <if test="filename != null">
         filename,
       </if>
-      <if test="createTime != null">
-        create_time,
+      <if test="createdAt != null">
+        created_at,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="reviewId != null">
-        #{reviewId,jdbcType=NUMERIC},
+      <if test="reviewAlbumId != null">
+        #{reviewAlbumId,jdbcType=NUMERIC},
       </if>
       <if test="filename != null">
         #{filename,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -141,14 +141,14 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.reviewId != null">
-        review_id = #{record.reviewId,jdbcType=NUMERIC},
+      <if test="record.reviewAlbumId != null">
+        review_album_id = #{record.reviewAlbumId,jdbcType=NUMERIC},
       </if>
       <if test="record.filename != null">
         filename = #{record.filename,jdbcType=VARCHAR},
       </if>
-      <if test="record.createTime != null">
-        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null">
@@ -158,9 +158,9 @@
   <update id="updateByExample" parameterType="map">
     update review_pictures
     set id = #{record.id,jdbcType=INTEGER},
-      review_id = #{record.reviewId,jdbcType=NUMERIC},
+      review_album_id = #{record.reviewAlbumId,jdbcType=NUMERIC},
       filename = #{record.filename,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -168,23 +168,23 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.itsthatjun.ecommerce.mbg.model.ReviewPictures">
     update review_pictures
     <set>
-      <if test="reviewId != null">
-        review_id = #{reviewId,jdbcType=NUMERIC},
+      <if test="reviewAlbumId != null">
+        review_album_id = #{reviewAlbumId,jdbcType=NUMERIC},
       </if>
       <if test="filename != null">
         filename = #{filename,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.itsthatjun.ecommerce.mbg.model.ReviewPictures">
     update review_pictures
-    set review_id = #{reviewId,jdbcType=NUMERIC},
+    set review_album_id = #{reviewAlbumId,jdbcType=NUMERIC},
       filename = #{filename,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
+      created_at = #{createdAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

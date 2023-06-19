@@ -12,7 +12,7 @@ public class Permission {
 
     private String value;
 
-    private Date createTime;
+    private Date createdAt;
 
     private String status;
 
@@ -48,12 +48,12 @@ public class Permission {
         this.value = value;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public String getStatus() {

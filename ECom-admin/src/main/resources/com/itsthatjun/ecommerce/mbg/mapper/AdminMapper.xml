@@ -8,7 +8,7 @@
     <result column="icon" jdbcType="VARCHAR" property="icon" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
     <result column="last_login" jdbcType="TIMESTAMP" property="lastLogin" />
     <result column="status" jdbcType="VARCHAR" property="status" />
   </resultMap>
@@ -71,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, password, icon, email, name, create_time, last_login, status
+    id, username, password, icon, email, name, created_at, last_login, status
   </sql>
   <select id="selectByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.AdminExample" resultMap="BaseResultMap">
     select
@@ -105,10 +105,10 @@
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.Admin" useGeneratedKeys="true">
     insert into admin (username, password, icon, 
-      email, name, create_time, 
+      email, name, created_at, 
       last_login, status)
     values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{email,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, 
       #{lastLogin,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.Admin" useGeneratedKeys="true">
@@ -129,8 +129,8 @@
       <if test="name != null">
         name,
       </if>
-      <if test="createTime != null">
-        create_time,
+      <if test="createdAt != null">
+        created_at,
       </if>
       <if test="lastLogin != null">
         last_login,
@@ -155,8 +155,8 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
       </if>
       <if test="lastLogin != null">
         #{lastLogin,jdbcType=TIMESTAMP},
@@ -193,8 +193,8 @@
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.createTime != null">
-        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
       </if>
       <if test="record.lastLogin != null">
         last_login = #{record.lastLogin,jdbcType=TIMESTAMP},
@@ -215,7 +215,7 @@
       icon = #{record.icon,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
       last_login = #{record.lastLogin,jdbcType=TIMESTAMP},
       status = #{record.status,jdbcType=VARCHAR}
     <if test="_parameter != null">
@@ -240,8 +240,8 @@
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
       </if>
       <if test="lastLogin != null">
         last_login = #{lastLogin,jdbcType=TIMESTAMP},
@@ -259,7 +259,7 @@
       icon = #{icon,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
       last_login = #{lastLogin,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}

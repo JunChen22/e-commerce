@@ -8,12 +8,12 @@
     <result column="member_name" jdbcType="VARCHAR" property="memberName" />
     <result column="member_icon" jdbcType="VARCHAR" property="memberIcon" />
     <result column="star" jdbcType="NUMERIC" property="star" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
     <result column="tittle" jdbcType="VARCHAR" property="tittle" />
     <result column="likes" jdbcType="NUMERIC" property="likes" />
     <result column="content" jdbcType="VARCHAR" property="content" />
-    <result column="pictures" jdbcType="VARCHAR" property="pictures" />
+    <result column="album" jdbcType="NUMERIC" property="album" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -74,8 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, product_id, member_id, member_name, member_icon, star, create_time, updated_time, 
-    tittle, likes, content, pictures
+    id, product_id, member_id, member_name, member_icon, star, created_at, updated_at, 
+    tittle, likes, content, album
   </sql>
   <select id="selectByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.ReviewExample" resultMap="BaseResultMap">
     select
@@ -109,13 +109,13 @@
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.Review" useGeneratedKeys="true">
     insert into review (product_id, member_id, member_name, 
-      member_icon, star, create_time, 
-      updated_time, tittle, likes, 
-      content, pictures)
+      member_icon, star, created_at, 
+      updated_at, tittle, likes, 
+      content, album)
     values (#{productId,jdbcType=NUMERIC}, #{memberId,jdbcType=NUMERIC}, #{memberName,jdbcType=VARCHAR}, 
-      #{memberIcon,jdbcType=VARCHAR}, #{star,jdbcType=NUMERIC}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updatedTime,jdbcType=TIMESTAMP}, #{tittle,jdbcType=VARCHAR}, #{likes,jdbcType=NUMERIC}, 
-      #{content,jdbcType=VARCHAR}, #{pictures,jdbcType=VARCHAR})
+      #{memberIcon,jdbcType=VARCHAR}, #{star,jdbcType=NUMERIC}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP}, #{tittle,jdbcType=VARCHAR}, #{likes,jdbcType=NUMERIC}, 
+      #{content,jdbcType=VARCHAR}, #{album,jdbcType=NUMERIC})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.Review" useGeneratedKeys="true">
     insert into review
@@ -135,11 +135,11 @@
       <if test="star != null">
         star,
       </if>
-      <if test="createTime != null">
-        create_time,
+      <if test="createdAt != null">
+        created_at,
       </if>
-      <if test="updatedTime != null">
-        updated_time,
+      <if test="updatedAt != null">
+        updated_at,
       </if>
       <if test="tittle != null">
         tittle,
@@ -150,8 +150,8 @@
       <if test="content != null">
         content,
       </if>
-      <if test="pictures != null">
-        pictures,
+      <if test="album != null">
+        album,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -170,11 +170,11 @@
       <if test="star != null">
         #{star,jdbcType=NUMERIC},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
       </if>
-      <if test="updatedTime != null">
-        #{updatedTime,jdbcType=TIMESTAMP},
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
       </if>
       <if test="tittle != null">
         #{tittle,jdbcType=VARCHAR},
@@ -185,8 +185,8 @@
       <if test="content != null">
         #{content,jdbcType=VARCHAR},
       </if>
-      <if test="pictures != null">
-        #{pictures,jdbcType=VARCHAR},
+      <if test="album != null">
+        #{album,jdbcType=NUMERIC},
       </if>
     </trim>
   </insert>
@@ -217,11 +217,11 @@
       <if test="record.star != null">
         star = #{record.star,jdbcType=NUMERIC},
       </if>
-      <if test="record.createTime != null">
-        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.updatedTime != null">
-        updated_time = #{record.updatedTime,jdbcType=TIMESTAMP},
+      <if test="record.updatedAt != null">
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
       </if>
       <if test="record.tittle != null">
         tittle = #{record.tittle,jdbcType=VARCHAR},
@@ -232,8 +232,8 @@
       <if test="record.content != null">
         content = #{record.content,jdbcType=VARCHAR},
       </if>
-      <if test="record.pictures != null">
-        pictures = #{record.pictures,jdbcType=VARCHAR},
+      <if test="record.album != null">
+        album = #{record.album,jdbcType=NUMERIC},
       </if>
     </set>
     <if test="_parameter != null">
@@ -248,12 +248,12 @@
       member_name = #{record.memberName,jdbcType=VARCHAR},
       member_icon = #{record.memberIcon,jdbcType=VARCHAR},
       star = #{record.star,jdbcType=NUMERIC},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      updated_time = #{record.updatedTime,jdbcType=TIMESTAMP},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
       tittle = #{record.tittle,jdbcType=VARCHAR},
       likes = #{record.likes,jdbcType=NUMERIC},
       content = #{record.content,jdbcType=VARCHAR},
-      pictures = #{record.pictures,jdbcType=VARCHAR}
+      album = #{record.album,jdbcType=NUMERIC}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -276,11 +276,11 @@
       <if test="star != null">
         star = #{star,jdbcType=NUMERIC},
       </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
       </if>
-      <if test="updatedTime != null">
-        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
       </if>
       <if test="tittle != null">
         tittle = #{tittle,jdbcType=VARCHAR},
@@ -291,8 +291,8 @@
       <if test="content != null">
         content = #{content,jdbcType=VARCHAR},
       </if>
-      <if test="pictures != null">
-        pictures = #{pictures,jdbcType=VARCHAR},
+      <if test="album != null">
+        album = #{album,jdbcType=NUMERIC},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -304,12 +304,12 @@
       member_name = #{memberName,jdbcType=VARCHAR},
       member_icon = #{memberIcon,jdbcType=VARCHAR},
       star = #{star,jdbcType=NUMERIC},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
       tittle = #{tittle,jdbcType=VARCHAR},
       likes = #{likes,jdbcType=NUMERIC},
       content = #{content,jdbcType=VARCHAR},
-      pictures = #{pictures,jdbcType=VARCHAR}
+      album = #{album,jdbcType=NUMERIC}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

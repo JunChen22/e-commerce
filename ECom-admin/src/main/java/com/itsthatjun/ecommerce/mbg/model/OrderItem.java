@@ -7,7 +7,7 @@ public class OrderItem {
 
     private Integer orderId;
 
-    private Integer orderSn;
+    private String orderSn;
 
     private Integer productId;
 
@@ -37,8 +37,6 @@ public class OrderItem {
 
     private BigDecimal realAmount;
 
-    private String productAttr;
-
     public Integer getId() {
         return id;
     }
@@ -55,11 +53,11 @@ public class OrderItem {
         this.orderId = orderId;
     }
 
-    public Integer getOrderSn() {
+    public String getOrderSn() {
         return orderSn;
     }
 
-    public void setOrderSn(Integer orderSn) {
+    public void setOrderSn(String orderSn) {
         this.orderSn = orderSn;
     }
 
@@ -173,13 +171,5 @@ public class OrderItem {
 
     public void setRealAmount(BigDecimal realAmount) {
         this.realAmount = realAmount;
-    }
-
-    public String getProductAttr() {
-        return productAttr;
-    }
-
-    public void setProductAttr(String productAttr) {
-        this.productAttr = productAttr;
     }
 }

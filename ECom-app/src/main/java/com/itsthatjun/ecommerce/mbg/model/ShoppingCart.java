@@ -7,7 +7,7 @@ public class ShoppingCart {
 
     private Integer memberId;
 
-    private Date createDate;
+    private Date createdAt;
 
     private Date modifyDate;
 
@@ -27,12 +27,12 @@ public class ShoppingCart {
         this.memberId = memberId;
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public Date getModifyDate() {

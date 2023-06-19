@@ -5,7 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="order_id" jdbcType="BIGINT" property="orderId" />
     <result column="change_operator" jdbcType="VARCHAR" property="changeOperator" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
     <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
     <result column="note" jdbcType="VARCHAR" property="note" />
   </resultMap>
@@ -68,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, order_id, change_operator, create_time, order_status, note
+    id, order_id, change_operator, created_at, order_status, note
   </sql>
   <select id="selectByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.OrderChangeHistoryExample" resultMap="BaseResultMap">
     select
@@ -101,9 +101,9 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.OrderChangeHistory" useGeneratedKeys="true">
-    insert into order_change_history (order_id, change_operator, create_time, 
+    insert into order_change_history (order_id, change_operator, created_at, 
       order_status, note)
-    values (#{orderId,jdbcType=BIGINT}, #{changeOperator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+    values (#{orderId,jdbcType=BIGINT}, #{changeOperator,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, 
       #{orderStatus,jdbcType=INTEGER}, #{note,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.OrderChangeHistory" useGeneratedKeys="true">
@@ -115,8 +115,8 @@
       <if test="changeOperator != null">
         change_operator,
       </if>
-      <if test="createTime != null">
-        create_time,
+      <if test="createdAt != null">
+        created_at,
       </if>
       <if test="orderStatus != null">
         order_status,
@@ -132,8 +132,8 @@
       <if test="changeOperator != null">
         #{changeOperator,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
       </if>
       <if test="orderStatus != null">
         #{orderStatus,jdbcType=INTEGER},
@@ -161,8 +161,8 @@
       <if test="record.changeOperator != null">
         change_operator = #{record.changeOperator,jdbcType=VARCHAR},
       </if>
-      <if test="record.createTime != null">
-        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
       </if>
       <if test="record.orderStatus != null">
         order_status = #{record.orderStatus,jdbcType=INTEGER},
@@ -180,7 +180,7 @@
     set id = #{record.id,jdbcType=INTEGER},
       order_id = #{record.orderId,jdbcType=BIGINT},
       change_operator = #{record.changeOperator,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
       order_status = #{record.orderStatus,jdbcType=INTEGER},
       note = #{record.note,jdbcType=VARCHAR}
     <if test="_parameter != null">
@@ -196,8 +196,8 @@
       <if test="changeOperator != null">
         change_operator = #{changeOperator,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
       </if>
       <if test="orderStatus != null">
         order_status = #{orderStatus,jdbcType=INTEGER},
@@ -212,7 +212,7 @@
     update order_change_history
     set order_id = #{orderId,jdbcType=BIGINT},
       change_operator = #{changeOperator,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
       order_status = #{orderStatus,jdbcType=INTEGER},
       note = #{note,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}

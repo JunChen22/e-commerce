@@ -9,7 +9,7 @@ public class Roles {
 
     private String description;
 
-    private Date createTime;
+    private Date createdAt;
 
     private String status;
 
@@ -37,12 +37,12 @@ public class Roles {
         this.description = description;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public String getStatus() {

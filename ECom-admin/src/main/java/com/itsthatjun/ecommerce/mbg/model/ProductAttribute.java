@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 public class ProductAttribute {
     private Integer id;
 
+    private String skuCode;
+
     private Integer productId;
 
     private BigDecimal attributeTypeId;
@@ -19,6 +21,14 @@ public class ProductAttribute {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getSkuCode() {
+        return skuCode;
+    }
+
+    public void setSkuCode(String skuCode) {
+        this.skuCode = skuCode;
     }
 
     public Integer getProductId() {

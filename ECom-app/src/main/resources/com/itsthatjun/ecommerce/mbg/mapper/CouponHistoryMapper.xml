@@ -6,7 +6,6 @@
     <result column="coupon_id" jdbcType="BIGINT" property="couponId" />
     <result column="member_id" jdbcType="BIGINT" property="memberId" />
     <result column="order_id" jdbcType="BIGINT" property="orderId" />
-    <result column="order_sn" jdbcType="VARCHAR" property="orderSn" />
     <result column="used_time" jdbcType="TIMESTAMP" property="usedTime" />
     <result column="code" jdbcType="VARCHAR" property="code" />
   </resultMap>
@@ -69,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, coupon_id, member_id, order_id, order_sn, used_time, code
+    id, coupon_id, member_id, order_id, used_time, code
   </sql>
   <select id="selectByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.CouponHistoryExample" resultMap="BaseResultMap">
     select
@@ -103,11 +102,9 @@
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.CouponHistory" useGeneratedKeys="true">
     insert into coupon_history (coupon_id, member_id, order_id, 
-      order_sn, used_time, code
-      )
+      used_time, code)
     values (#{couponId,jdbcType=BIGINT}, #{memberId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, 
-      #{orderSn,jdbcType=VARCHAR}, #{usedTime,jdbcType=TIMESTAMP}, #{code,jdbcType=VARCHAR}
-      )
+      #{usedTime,jdbcType=TIMESTAMP}, #{code,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.CouponHistory" useGeneratedKeys="true">
     insert into coupon_history
@@ -120,9 +117,6 @@
       </if>
       <if test="orderId != null">
         order_id,
-      </if>
-      <if test="orderSn != null">
-        order_sn,
       </if>
       <if test="usedTime != null">
         used_time,
@@ -140,9 +134,6 @@
       </if>
       <if test="orderId != null">
         #{orderId,jdbcType=BIGINT},
-      </if>
-      <if test="orderSn != null">
-        #{orderSn,jdbcType=VARCHAR},
       </if>
       <if test="usedTime != null">
         #{usedTime,jdbcType=TIMESTAMP},
@@ -173,9 +164,6 @@
       <if test="record.orderId != null">
         order_id = #{record.orderId,jdbcType=BIGINT},
       </if>
-      <if test="record.orderSn != null">
-        order_sn = #{record.orderSn,jdbcType=VARCHAR},
-      </if>
       <if test="record.usedTime != null">
         used_time = #{record.usedTime,jdbcType=TIMESTAMP},
       </if>
@@ -193,7 +181,6 @@
       coupon_id = #{record.couponId,jdbcType=BIGINT},
       member_id = #{record.memberId,jdbcType=BIGINT},
       order_id = #{record.orderId,jdbcType=BIGINT},
-      order_sn = #{record.orderSn,jdbcType=VARCHAR},
       used_time = #{record.usedTime,jdbcType=TIMESTAMP},
       code = #{record.code,jdbcType=VARCHAR}
     <if test="_parameter != null">
@@ -212,9 +199,6 @@
       <if test="orderId != null">
         order_id = #{orderId,jdbcType=BIGINT},
       </if>
-      <if test="orderSn != null">
-        order_sn = #{orderSn,jdbcType=VARCHAR},
-      </if>
       <if test="usedTime != null">
         used_time = #{usedTime,jdbcType=TIMESTAMP},
       </if>
@@ -229,7 +213,6 @@
     set coupon_id = #{couponId,jdbcType=BIGINT},
       member_id = #{memberId,jdbcType=BIGINT},
       order_id = #{orderId,jdbcType=BIGINT},
-      order_sn = #{orderSn,jdbcType=VARCHAR},
       used_time = #{usedTime,jdbcType=TIMESTAMP},
       code = #{code,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}

@@ -10,7 +10,7 @@
     <result column="product_pic" jdbcType="VARCHAR" property="productPic" />
     <result column="quantity" jdbcType="INTEGER" property="quantity" />
     <result column="price" jdbcType="NUMERIC" property="price" />
-    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
     <result column="modify_date" jdbcType="TIMESTAMP" property="modifyDate" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -73,7 +73,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, cart_id, product_id, product_name, product_sku, product_pic, quantity, price, 
-    create_date, modify_date
+    created_at, modify_date
   </sql>
   <select id="selectByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.CartItemExample" resultMap="BaseResultMap">
     select
@@ -108,11 +108,11 @@
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.CartItem" useGeneratedKeys="true">
     insert into cart_item (cart_id, product_id, product_name, 
       product_sku, product_pic, quantity, 
-      price, create_date, modify_date
+      price, created_at, modify_date
       )
     values (#{cartId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, #{productName,jdbcType=VARCHAR}, 
       #{productSku,jdbcType=VARCHAR}, #{productPic,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
-      #{price,jdbcType=NUMERIC}, #{createDate,jdbcType=TIMESTAMP}, #{modifyDate,jdbcType=TIMESTAMP}
+      #{price,jdbcType=NUMERIC}, #{createdAt,jdbcType=TIMESTAMP}, #{modifyDate,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.CartItem" useGeneratedKeys="true">
@@ -139,8 +139,8 @@
       <if test="price != null">
         price,
       </if>
-      <if test="createDate != null">
-        create_date,
+      <if test="createdAt != null">
+        created_at,
       </if>
       <if test="modifyDate != null">
         modify_date,
@@ -168,8 +168,8 @@
       <if test="price != null">
         #{price,jdbcType=NUMERIC},
       </if>
-      <if test="createDate != null">
-        #{createDate,jdbcType=TIMESTAMP},
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
       </if>
       <if test="modifyDate != null">
         #{modifyDate,jdbcType=TIMESTAMP},
@@ -209,8 +209,8 @@
       <if test="record.price != null">
         price = #{record.price,jdbcType=NUMERIC},
       </if>
-      <if test="record.createDate != null">
-        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
       </if>
       <if test="record.modifyDate != null">
         modify_date = #{record.modifyDate,jdbcType=TIMESTAMP},
@@ -230,7 +230,7 @@
       product_pic = #{record.productPic,jdbcType=VARCHAR},
       quantity = #{record.quantity,jdbcType=INTEGER},
       price = #{record.price,jdbcType=NUMERIC},
-      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
       modify_date = #{record.modifyDate,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -260,8 +260,8 @@
       <if test="price != null">
         price = #{price,jdbcType=NUMERIC},
       </if>
-      <if test="createDate != null">
-        create_date = #{createDate,jdbcType=TIMESTAMP},
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
       </if>
       <if test="modifyDate != null">
         modify_date = #{modifyDate,jdbcType=TIMESTAMP},
@@ -278,7 +278,7 @@
       product_pic = #{productPic,jdbcType=VARCHAR},
       quantity = #{quantity,jdbcType=INTEGER},
       price = #{price,jdbcType=NUMERIC},
-      create_date = #{createDate,jdbcType=TIMESTAMP},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
       modify_date = #{modifyDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>

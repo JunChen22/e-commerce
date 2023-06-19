@@ -15,7 +15,7 @@ public class Admin {
 
     private String name;
 
-    private Date createTime;
+    private Date createdAt;
 
     private Date lastLogin;
 
@@ -69,12 +69,12 @@ public class Admin {
         this.name = name;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public Date getLastLogin() {

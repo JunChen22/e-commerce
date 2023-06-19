@@ -11,8 +11,6 @@ public class CouponHistory {
 
     private Integer orderId;
 
-    private String orderSn;
-
     private Date usedTime;
 
     private String code;
@@ -47,14 +45,6 @@ public class CouponHistory {
 
     public void setOrderId(Integer orderId) {
         this.orderId = orderId;
-    }
-
-    public String getOrderSn() {
-        return orderSn;
-    }
-
-    public void setOrderSn(String orderSn) {
-        this.orderSn = orderSn;
     }
 
     public Date getUsedTime() {

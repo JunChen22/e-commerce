@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itsthatjun.ecommerce.mbg.mapper.ProductPicturesMapper">
+  <resultMap id="BaseResultMap" type="com.itsthatjun.ecommerce.mbg.model.ProductPictures">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="product_album_id" jdbcType="NUMERIC" property="productAlbumId" />
+    <result column="product_id" jdbcType="NUMERIC" property="productId" />
+    <result column="filename" jdbcType="VARCHAR" property="filename" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, product_album_id, product_id, filename, created_at
+  </sql>
+  <select id="selectByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.ProductPicturesExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from product_pictures
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product_pictures
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from product_pictures
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.ProductPicturesExample">
+    delete from product_pictures
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.ProductPictures" useGeneratedKeys="true">
+    insert into product_pictures (product_album_id, product_id, filename, 
+      created_at)
+    values (#{productAlbumId,jdbcType=NUMERIC}, #{productId,jdbcType=NUMERIC}, #{filename,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.ProductPictures" useGeneratedKeys="true">
+    insert into product_pictures
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productAlbumId != null">
+        product_album_id,
+      </if>
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="filename != null">
+        filename,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productAlbumId != null">
+        #{productAlbumId,jdbcType=NUMERIC},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=NUMERIC},
+      </if>
+      <if test="filename != null">
+        #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.ProductPicturesExample" resultType="java.lang.Long">
+    select count(*) from product_pictures
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update product_pictures
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.productAlbumId != null">
+        product_album_id = #{record.productAlbumId,jdbcType=NUMERIC},
+      </if>
+      <if test="record.productId != null">
+        product_id = #{record.productId,jdbcType=NUMERIC},
+      </if>
+      <if test="record.filename != null">
+        filename = #{record.filename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update product_pictures
+    set id = #{record.id,jdbcType=INTEGER},
+      product_album_id = #{record.productAlbumId,jdbcType=NUMERIC},
+      product_id = #{record.productId,jdbcType=NUMERIC},
+      filename = #{record.filename,jdbcType=VARCHAR},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itsthatjun.ecommerce.mbg.model.ProductPictures">
+    update product_pictures
+    <set>
+      <if test="productAlbumId != null">
+        product_album_id = #{productAlbumId,jdbcType=NUMERIC},
+      </if>
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=NUMERIC},
+      </if>
+      <if test="filename != null">
+        filename = #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itsthatjun.ecommerce.mbg.model.ProductPictures">
+    update product_pictures
+    set product_album_id = #{productAlbumId,jdbcType=NUMERIC},
+      product_id = #{productId,jdbcType=NUMERIC},
+      filename = #{filename,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

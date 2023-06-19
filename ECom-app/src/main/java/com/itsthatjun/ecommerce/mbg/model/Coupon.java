@@ -6,9 +6,11 @@ import java.util.Date;
 public class Coupon {
     private Integer id;
 
-    private Integer type;
+    private Integer couponType;
 
     private String name;
+
+    private Integer discountType;
 
     private BigDecimal amount;
 
@@ -36,12 +38,12 @@ public class Coupon {
         this.id = id;
     }
 
-    public Integer getType() {
-        return type;
+    public Integer getCouponType() {
+        return couponType;
     }
 
-    public void setType(Integer type) {
-        this.type = type;
+    public void setCouponType(Integer couponType) {
+        this.couponType = couponType;
     }
 
     public String getName() {
@@ -50,6 +52,14 @@ public class Coupon {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getDiscountType() {
+        return discountType;
+    }
+
+    public void setDiscountType(Integer discountType) {
+        this.discountType = discountType;
     }
 
     public BigDecimal getAmount() {

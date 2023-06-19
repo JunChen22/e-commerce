@@ -6,21 +6,18 @@
     <result column="order_id" jdbcType="BIGINT" property="orderId" />
     <result column="company_address_id" jdbcType="BIGINT" property="companyAddressId" />
     <result column="product_id" jdbcType="BIGINT" property="productId" />
-    <result column="order_sn" jdbcType="INTEGER" property="orderSn" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="member_username" jdbcType="VARCHAR" property="memberUsername" />
+    <result column="order_sn" jdbcType="VARCHAR" property="orderSn" />
+    <result column="member_id" jdbcType="BIGINT" property="memberId" />
     <result column="return_amount" jdbcType="NUMERIC" property="returnAmount" />
     <result column="return_name" jdbcType="VARCHAR" property="returnName" />
     <result column="return_phone" jdbcType="VARCHAR" property="returnPhone" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="handle_time" jdbcType="TIMESTAMP" property="handleTime" />
-    <result column="product_pic" jdbcType="VARCHAR" property="productPic" />
     <result column="product_name" jdbcType="VARCHAR" property="productName" />
     <result column="product_brand" jdbcType="VARCHAR" property="productBrand" />
-    <result column="product_attr" jdbcType="VARCHAR" property="productAttr" />
+    <result column="product_sku_code" jdbcType="VARCHAR" property="productSkuCode" />
     <result column="product_count" jdbcType="INTEGER" property="productCount" />
     <result column="product_price" jdbcType="NUMERIC" property="productPrice" />
-    <result column="product_real_price" jdbcType="NUMERIC" property="productRealPrice" />
     <result column="reason" jdbcType="VARCHAR" property="reason" />
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="proof_pics" jdbcType="VARCHAR" property="proofPics" />
@@ -29,6 +26,7 @@
     <result column="receive_operator" jdbcType="VARCHAR" property="receiveOperator" />
     <result column="receive_time" jdbcType="TIMESTAMP" property="receiveTime" />
     <result column="receive_note" jdbcType="VARCHAR" property="receiveNote" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -89,11 +87,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, order_id, company_address_id, product_id, order_sn, create_time, member_username, 
-    return_amount, return_name, return_phone, status, handle_time, product_pic, product_name, 
-    product_brand, product_attr, product_count, product_price, product_real_price, reason, 
-    description, proof_pics, handle_note, handle_operator, receive_operator, receive_time, 
-    receive_note
+    id, order_id, company_address_id, product_id, order_sn, member_id, return_amount, 
+    return_name, return_phone, status, handle_time, product_name, product_brand, product_sku_code, 
+    product_count, product_price, reason, description, proof_pics, handle_note, handle_operator, 
+    receive_operator, receive_time, receive_note, created_at
   </sql>
   <select id="selectByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.OrderReturnApplyExample" resultMap="BaseResultMap">
     select
@@ -127,23 +124,23 @@
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.OrderReturnApply" useGeneratedKeys="true">
     insert into order_return_apply (order_id, company_address_id, product_id, 
-      order_sn, create_time, member_username, 
-      return_amount, return_name, return_phone, 
-      status, handle_time, product_pic, 
-      product_name, product_brand, product_attr, 
-      product_count, product_price, product_real_price, 
+      order_sn, member_id, return_amount, 
+      return_name, return_phone, status, 
+      handle_time, product_name, product_brand, 
+      product_sku_code, product_count, product_price, 
       reason, description, proof_pics, 
       handle_note, handle_operator, receive_operator, 
-      receive_time, receive_note)
+      receive_time, receive_note, created_at
+      )
     values (#{orderId,jdbcType=BIGINT}, #{companyAddressId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, 
-      #{orderSn,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{memberUsername,jdbcType=VARCHAR}, 
-      #{returnAmount,jdbcType=NUMERIC}, #{returnName,jdbcType=VARCHAR}, #{returnPhone,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{handleTime,jdbcType=TIMESTAMP}, #{productPic,jdbcType=VARCHAR}, 
-      #{productName,jdbcType=VARCHAR}, #{productBrand,jdbcType=VARCHAR}, #{productAttr,jdbcType=VARCHAR}, 
-      #{productCount,jdbcType=INTEGER}, #{productPrice,jdbcType=NUMERIC}, #{productRealPrice,jdbcType=NUMERIC}, 
+      #{orderSn,jdbcType=VARCHAR}, #{memberId,jdbcType=BIGINT}, #{returnAmount,jdbcType=NUMERIC}, 
+      #{returnName,jdbcType=VARCHAR}, #{returnPhone,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{handleTime,jdbcType=TIMESTAMP}, #{productName,jdbcType=VARCHAR}, #{productBrand,jdbcType=VARCHAR}, 
+      #{productSkuCode,jdbcType=VARCHAR}, #{productCount,jdbcType=INTEGER}, #{productPrice,jdbcType=NUMERIC}, 
       #{reason,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{proofPics,jdbcType=VARCHAR}, 
       #{handleNote,jdbcType=VARCHAR}, #{handleOperator,jdbcType=VARCHAR}, #{receiveOperator,jdbcType=VARCHAR}, 
-      #{receiveTime,jdbcType=TIMESTAMP}, #{receiveNote,jdbcType=VARCHAR})
+      #{receiveTime,jdbcType=TIMESTAMP}, #{receiveNote,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.OrderReturnApply" useGeneratedKeys="true">
     insert into order_return_apply
@@ -160,11 +157,8 @@
       <if test="orderSn != null">
         order_sn,
       </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="memberUsername != null">
-        member_username,
+      <if test="memberId != null">
+        member_id,
       </if>
       <if test="returnAmount != null">
         return_amount,
@@ -181,26 +175,20 @@
       <if test="handleTime != null">
         handle_time,
       </if>
-      <if test="productPic != null">
-        product_pic,
-      </if>
       <if test="productName != null">
         product_name,
       </if>
       <if test="productBrand != null">
         product_brand,
       </if>
-      <if test="productAttr != null">
-        product_attr,
+      <if test="productSkuCode != null">
+        product_sku_code,
       </if>
       <if test="productCount != null">
         product_count,
       </if>
       <if test="productPrice != null">
         product_price,
-      </if>
-      <if test="productRealPrice != null">
-        product_real_price,
       </if>
       <if test="reason != null">
         reason,
@@ -226,6 +214,9 @@
       <if test="receiveNote != null">
         receive_note,
       </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="orderId != null">
@@ -238,13 +229,10 @@
         #{productId,jdbcType=BIGINT},
       </if>
       <if test="orderSn != null">
-        #{orderSn,jdbcType=INTEGER},
+        #{orderSn,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="memberUsername != null">
-        #{memberUsername,jdbcType=VARCHAR},
+      <if test="memberId != null">
+        #{memberId,jdbcType=BIGINT},
       </if>
       <if test="returnAmount != null">
         #{returnAmount,jdbcType=NUMERIC},
@@ -261,26 +249,20 @@
       <if test="handleTime != null">
         #{handleTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="productPic != null">
-        #{productPic,jdbcType=VARCHAR},
-      </if>
       <if test="productName != null">
         #{productName,jdbcType=VARCHAR},
       </if>
       <if test="productBrand != null">
         #{productBrand,jdbcType=VARCHAR},
       </if>
-      <if test="productAttr != null">
-        #{productAttr,jdbcType=VARCHAR},
+      <if test="productSkuCode != null">
+        #{productSkuCode,jdbcType=VARCHAR},
       </if>
       <if test="productCount != null">
         #{productCount,jdbcType=INTEGER},
       </if>
       <if test="productPrice != null">
         #{productPrice,jdbcType=NUMERIC},
-      </if>
-      <if test="productRealPrice != null">
-        #{productRealPrice,jdbcType=NUMERIC},
       </if>
       <if test="reason != null">
         #{reason,jdbcType=VARCHAR},
@@ -306,6 +288,9 @@
       <if test="receiveNote != null">
         #{receiveNote,jdbcType=VARCHAR},
       </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.OrderReturnApplyExample" resultType="java.lang.Long">
@@ -330,13 +315,10 @@
         product_id = #{record.productId,jdbcType=BIGINT},
       </if>
       <if test="record.orderSn != null">
-        order_sn = #{record.orderSn,jdbcType=INTEGER},
+        order_sn = #{record.orderSn,jdbcType=VARCHAR},
       </if>
-      <if test="record.createTime != null">
-        create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.memberUsername != null">
-        member_username = #{record.memberUsername,jdbcType=VARCHAR},
+      <if test="record.memberId != null">
+        member_id = #{record.memberId,jdbcType=BIGINT},
       </if>
       <if test="record.returnAmount != null">
         return_amount = #{record.returnAmount,jdbcType=NUMERIC},
@@ -353,26 +335,20 @@
       <if test="record.handleTime != null">
         handle_time = #{record.handleTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.productPic != null">
-        product_pic = #{record.productPic,jdbcType=VARCHAR},
-      </if>
       <if test="record.productName != null">
         product_name = #{record.productName,jdbcType=VARCHAR},
       </if>
       <if test="record.productBrand != null">
         product_brand = #{record.productBrand,jdbcType=VARCHAR},
       </if>
-      <if test="record.productAttr != null">
-        product_attr = #{record.productAttr,jdbcType=VARCHAR},
+      <if test="record.productSkuCode != null">
+        product_sku_code = #{record.productSkuCode,jdbcType=VARCHAR},
       </if>
       <if test="record.productCount != null">
         product_count = #{record.productCount,jdbcType=INTEGER},
       </if>
       <if test="record.productPrice != null">
         product_price = #{record.productPrice,jdbcType=NUMERIC},
-      </if>
-      <if test="record.productRealPrice != null">
-        product_real_price = #{record.productRealPrice,jdbcType=NUMERIC},
       </if>
       <if test="record.reason != null">
         reason = #{record.reason,jdbcType=VARCHAR},
@@ -398,6 +374,9 @@
       <if test="record.receiveNote != null">
         receive_note = #{record.receiveNote,jdbcType=VARCHAR},
       </if>
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -409,21 +388,18 @@
       order_id = #{record.orderId,jdbcType=BIGINT},
       company_address_id = #{record.companyAddressId,jdbcType=BIGINT},
       product_id = #{record.productId,jdbcType=BIGINT},
-      order_sn = #{record.orderSn,jdbcType=INTEGER},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      member_username = #{record.memberUsername,jdbcType=VARCHAR},
+      order_sn = #{record.orderSn,jdbcType=VARCHAR},
+      member_id = #{record.memberId,jdbcType=BIGINT},
       return_amount = #{record.returnAmount,jdbcType=NUMERIC},
       return_name = #{record.returnName,jdbcType=VARCHAR},
       return_phone = #{record.returnPhone,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=INTEGER},
       handle_time = #{record.handleTime,jdbcType=TIMESTAMP},
-      product_pic = #{record.productPic,jdbcType=VARCHAR},
       product_name = #{record.productName,jdbcType=VARCHAR},
       product_brand = #{record.productBrand,jdbcType=VARCHAR},
-      product_attr = #{record.productAttr,jdbcType=VARCHAR},
+      product_sku_code = #{record.productSkuCode,jdbcType=VARCHAR},
       product_count = #{record.productCount,jdbcType=INTEGER},
       product_price = #{record.productPrice,jdbcType=NUMERIC},
-      product_real_price = #{record.productRealPrice,jdbcType=NUMERIC},
       reason = #{record.reason,jdbcType=VARCHAR},
       description = #{record.description,jdbcType=VARCHAR},
       proof_pics = #{record.proofPics,jdbcType=VARCHAR},
@@ -431,7 +407,8 @@
       handle_operator = #{record.handleOperator,jdbcType=VARCHAR},
       receive_operator = #{record.receiveOperator,jdbcType=VARCHAR},
       receive_time = #{record.receiveTime,jdbcType=TIMESTAMP},
-      receive_note = #{record.receiveNote,jdbcType=VARCHAR}
+      receive_note = #{record.receiveNote,jdbcType=VARCHAR},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -449,13 +426,10 @@
         product_id = #{productId,jdbcType=BIGINT},
       </if>
       <if test="orderSn != null">
-        order_sn = #{orderSn,jdbcType=INTEGER},
+        order_sn = #{orderSn,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="memberUsername != null">
-        member_username = #{memberUsername,jdbcType=VARCHAR},
+      <if test="memberId != null">
+        member_id = #{memberId,jdbcType=BIGINT},
       </if>
       <if test="returnAmount != null">
         return_amount = #{returnAmount,jdbcType=NUMERIC},
@@ -472,26 +446,20 @@
       <if test="handleTime != null">
         handle_time = #{handleTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="productPic != null">
-        product_pic = #{productPic,jdbcType=VARCHAR},
-      </if>
       <if test="productName != null">
         product_name = #{productName,jdbcType=VARCHAR},
       </if>
       <if test="productBrand != null">
         product_brand = #{productBrand,jdbcType=VARCHAR},
       </if>
-      <if test="productAttr != null">
-        product_attr = #{productAttr,jdbcType=VARCHAR},
+      <if test="productSkuCode != null">
+        product_sku_code = #{productSkuCode,jdbcType=VARCHAR},
       </if>
       <if test="productCount != null">
         product_count = #{productCount,jdbcType=INTEGER},
       </if>
       <if test="productPrice != null">
         product_price = #{productPrice,jdbcType=NUMERIC},
-      </if>
-      <if test="productRealPrice != null">
-        product_real_price = #{productRealPrice,jdbcType=NUMERIC},
       </if>
       <if test="reason != null">
         reason = #{reason,jdbcType=VARCHAR},
@@ -517,6 +485,9 @@
       <if test="receiveNote != null">
         receive_note = #{receiveNote,jdbcType=VARCHAR},
       </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -525,21 +496,18 @@
     set order_id = #{orderId,jdbcType=BIGINT},
       company_address_id = #{companyAddressId,jdbcType=BIGINT},
       product_id = #{productId,jdbcType=BIGINT},
-      order_sn = #{orderSn,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      member_username = #{memberUsername,jdbcType=VARCHAR},
+      order_sn = #{orderSn,jdbcType=VARCHAR},
+      member_id = #{memberId,jdbcType=BIGINT},
       return_amount = #{returnAmount,jdbcType=NUMERIC},
       return_name = #{returnName,jdbcType=VARCHAR},
       return_phone = #{returnPhone,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},
       handle_time = #{handleTime,jdbcType=TIMESTAMP},
-      product_pic = #{productPic,jdbcType=VARCHAR},
       product_name = #{productName,jdbcType=VARCHAR},
       product_brand = #{productBrand,jdbcType=VARCHAR},
-      product_attr = #{productAttr,jdbcType=VARCHAR},
+      product_sku_code = #{productSkuCode,jdbcType=VARCHAR},
       product_count = #{productCount,jdbcType=INTEGER},
       product_price = #{productPrice,jdbcType=NUMERIC},
-      product_real_price = #{productRealPrice,jdbcType=NUMERIC},
       reason = #{reason,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
       proof_pics = #{proofPics,jdbcType=VARCHAR},
@@ -547,7 +515,8 @@
       handle_operator = #{handleOperator,jdbcType=VARCHAR},
       receive_operator = #{receiveOperator,jdbcType=VARCHAR},
       receive_time = #{receiveTime,jdbcType=TIMESTAMP},
-      receive_note = #{receiveNote,jdbcType=VARCHAR}
+      receive_note = #{receiveNote,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

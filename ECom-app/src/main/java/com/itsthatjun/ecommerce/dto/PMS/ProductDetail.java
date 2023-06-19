@@ -13,7 +13,13 @@ public class ProductDetail {
     private List<ProductAttribute> productAttributeList;
     private List<Review> reviews;
 
+    /* TODO:
+    private List<SKU> skuList
+    private List<Picture> pictures
+    private List<picture> descriptionPicures
     private List<ProductAttributeCategory> productAttributeCategoryList;
     private List<ProductAttributeType> productAttributeTypesList;
     private List<Coupon> couponList;
+
+     */
 }

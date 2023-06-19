@@ -4,8 +4,6 @@
   <resultMap id="BaseResultMap" type="com.itsthatjun.ecommerce.mbg.model.ProductCategory">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="product_count" jdbcType="NUMERIC" property="productCount" />
-    <result column="icon" jdbcType="VARCHAR" property="icon" />
     <result column="parent_id" jdbcType="NUMERIC" property="parentId" />
     <result column="level" jdbcType="NUMERIC" property="level" />
   </resultMap>
@@ -68,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, product_count, icon, parent_id, level
+    id, name, parent_id, level
   </sql>
   <select id="selectByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.ProductCategoryExample" resultMap="BaseResultMap">
     select
@@ -101,22 +99,16 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.ProductCategory" useGeneratedKeys="true">
-    insert into product_category (name, product_count, icon, 
-      parent_id, level)
-    values (#{name,jdbcType=VARCHAR}, #{productCount,jdbcType=NUMERIC}, #{icon,jdbcType=VARCHAR}, 
-      #{parentId,jdbcType=NUMERIC}, #{level,jdbcType=NUMERIC})
+    insert into product_category (name, parent_id, level
+      )
+    values (#{name,jdbcType=VARCHAR}, #{parentId,jdbcType=NUMERIC}, #{level,jdbcType=NUMERIC}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.ProductCategory" useGeneratedKeys="true">
     insert into product_category
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="name != null">
         name,
-      </if>
-      <if test="productCount != null">
-        product_count,
-      </if>
-      <if test="icon != null">
-        icon,
       </if>
       <if test="parentId != null">
         parent_id,
@@ -128,12 +120,6 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="productCount != null">
-        #{productCount,jdbcType=NUMERIC},
-      </if>
-      <if test="icon != null">
-        #{icon,jdbcType=VARCHAR},
       </if>
       <if test="parentId != null">
         #{parentId,jdbcType=NUMERIC},
@@ -158,12 +144,6 @@
       <if test="record.name != null">
         name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.productCount != null">
-        product_count = #{record.productCount,jdbcType=NUMERIC},
-      </if>
-      <if test="record.icon != null">
-        icon = #{record.icon,jdbcType=VARCHAR},
-      </if>
       <if test="record.parentId != null">
         parent_id = #{record.parentId,jdbcType=NUMERIC},
       </if>
@@ -179,8 +159,6 @@
     update product_category
     set id = #{record.id,jdbcType=INTEGER},
       name = #{record.name,jdbcType=VARCHAR},
-      product_count = #{record.productCount,jdbcType=NUMERIC},
-      icon = #{record.icon,jdbcType=VARCHAR},
       parent_id = #{record.parentId,jdbcType=NUMERIC},
       level = #{record.level,jdbcType=NUMERIC}
     <if test="_parameter != null">
@@ -192,12 +170,6 @@
     <set>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="productCount != null">
-        product_count = #{productCount,jdbcType=NUMERIC},
-      </if>
-      <if test="icon != null">
-        icon = #{icon,jdbcType=VARCHAR},
       </if>
       <if test="parentId != null">
         parent_id = #{parentId,jdbcType=NUMERIC},
@@ -211,8 +183,6 @@
   <update id="updateByPrimaryKey" parameterType="com.itsthatjun.ecommerce.mbg.model.ProductCategory">
     update product_category
     set name = #{name,jdbcType=VARCHAR},
-      product_count = #{productCount,jdbcType=NUMERIC},
-      icon = #{icon,jdbcType=VARCHAR},
       parent_id = #{parentId,jdbcType=NUMERIC},
       level = #{level,jdbcType=NUMERIC}
     where id = #{id,jdbcType=INTEGER}

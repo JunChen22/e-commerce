@@ -16,9 +16,9 @@ public class Review {
 
     private BigDecimal star;
 
-    private Date createTime;
+    private Date createdAt;
 
-    private Date updatedTime;
+    private Date updatedAt;
 
     private String tittle;
 
@@ -26,7 +26,7 @@ public class Review {
 
     private String content;
 
-    private String pictures;
+    private BigDecimal album;
 
     public Integer getId() {
         return id;
@@ -76,20 +76,20 @@ public class Review {
         this.star = star;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public Date getUpdatedTime() {
-        return updatedTime;
+    public Date getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setUpdatedTime(Date updatedTime) {
-        this.updatedTime = updatedTime;
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public String getTittle() {
@@ -116,11 +116,11 @@ public class Review {
         this.content = content;
     }
 
-    public String getPictures() {
-        return pictures;
+    public BigDecimal getAlbum() {
+        return album;
     }
 
-    public void setPictures(String pictures) {
-        this.pictures = pictures;
+    public void setAlbum(BigDecimal album) {
+        this.album = album;
     }
 }

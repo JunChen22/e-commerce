@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itsthatjun.ecommerce.mbg.mapper.ProductUpdateLogMapper">
+  <resultMap id="BaseResultMap" type="com.itsthatjun.ecommerce.mbg.model.ProductUpdateLog">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="product_id" jdbcType="NUMERIC" property="productId" />
+    <result column="price_old" jdbcType="NUMERIC" property="priceOld" />
+    <result column="price_new" jdbcType="NUMERIC" property="priceNew" />
+    <result column="sale_price_old" jdbcType="NUMERIC" property="salePriceOld" />
+    <result column="sale_price_new" jdbcType="NUMERIC" property="salePriceNew" />
+    <result column="operate_man" jdbcType="VARCHAR" property="operateMan" />
+    <result column="stock_old" jdbcType="NUMERIC" property="stockOld" />
+    <result column="stock_new" jdbcType="NUMERIC" property="stockNew" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, product_id, price_old, price_new, sale_price_old, sale_price_new, operate_man, 
+    stock_old, stock_new, created_at
+  </sql>
+  <select id="selectByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.ProductUpdateLogExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from product_update_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product_update_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from product_update_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.ProductUpdateLogExample">
+    delete from product_update_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.ProductUpdateLog" useGeneratedKeys="true">
+    insert into product_update_log (product_id, price_old, price_new, 
+      sale_price_old, sale_price_new, operate_man, 
+      stock_old, stock_new, created_at
+      )
+    values (#{productId,jdbcType=NUMERIC}, #{priceOld,jdbcType=NUMERIC}, #{priceNew,jdbcType=NUMERIC}, 
+      #{salePriceOld,jdbcType=NUMERIC}, #{salePriceNew,jdbcType=NUMERIC}, #{operateMan,jdbcType=VARCHAR}, 
+      #{stockOld,jdbcType=NUMERIC}, #{stockNew,jdbcType=NUMERIC}, #{createdAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.ProductUpdateLog" useGeneratedKeys="true">
+    insert into product_update_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="priceOld != null">
+        price_old,
+      </if>
+      <if test="priceNew != null">
+        price_new,
+      </if>
+      <if test="salePriceOld != null">
+        sale_price_old,
+      </if>
+      <if test="salePriceNew != null">
+        sale_price_new,
+      </if>
+      <if test="operateMan != null">
+        operate_man,
+      </if>
+      <if test="stockOld != null">
+        stock_old,
+      </if>
+      <if test="stockNew != null">
+        stock_new,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productId != null">
+        #{productId,jdbcType=NUMERIC},
+      </if>
+      <if test="priceOld != null">
+        #{priceOld,jdbcType=NUMERIC},
+      </if>
+      <if test="priceNew != null">
+        #{priceNew,jdbcType=NUMERIC},
+      </if>
+      <if test="salePriceOld != null">
+        #{salePriceOld,jdbcType=NUMERIC},
+      </if>
+      <if test="salePriceNew != null">
+        #{salePriceNew,jdbcType=NUMERIC},
+      </if>
+      <if test="operateMan != null">
+        #{operateMan,jdbcType=VARCHAR},
+      </if>
+      <if test="stockOld != null">
+        #{stockOld,jdbcType=NUMERIC},
+      </if>
+      <if test="stockNew != null">
+        #{stockNew,jdbcType=NUMERIC},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.ProductUpdateLogExample" resultType="java.lang.Long">
+    select count(*) from product_update_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update product_update_log
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.productId != null">
+        product_id = #{record.productId,jdbcType=NUMERIC},
+      </if>
+      <if test="record.priceOld != null">
+        price_old = #{record.priceOld,jdbcType=NUMERIC},
+      </if>
+      <if test="record.priceNew != null">
+        price_new = #{record.priceNew,jdbcType=NUMERIC},
+      </if>
+      <if test="record.salePriceOld != null">
+        sale_price_old = #{record.salePriceOld,jdbcType=NUMERIC},
+      </if>
+      <if test="record.salePriceNew != null">
+        sale_price_new = #{record.salePriceNew,jdbcType=NUMERIC},
+      </if>
+      <if test="record.operateMan != null">
+        operate_man = #{record.operateMan,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stockOld != null">
+        stock_old = #{record.stockOld,jdbcType=NUMERIC},
+      </if>
+      <if test="record.stockNew != null">
+        stock_new = #{record.stockNew,jdbcType=NUMERIC},
+      </if>
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update product_update_log
+    set id = #{record.id,jdbcType=INTEGER},
+      product_id = #{record.productId,jdbcType=NUMERIC},
+      price_old = #{record.priceOld,jdbcType=NUMERIC},
+      price_new = #{record.priceNew,jdbcType=NUMERIC},
+      sale_price_old = #{record.salePriceOld,jdbcType=NUMERIC},
+      sale_price_new = #{record.salePriceNew,jdbcType=NUMERIC},
+      operate_man = #{record.operateMan,jdbcType=VARCHAR},
+      stock_old = #{record.stockOld,jdbcType=NUMERIC},
+      stock_new = #{record.stockNew,jdbcType=NUMERIC},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.itsthatjun.ecommerce.mbg.model.ProductUpdateLog">
+    update product_update_log
+    <set>
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=NUMERIC},
+      </if>
+      <if test="priceOld != null">
+        price_old = #{priceOld,jdbcType=NUMERIC},
+      </if>
+      <if test="priceNew != null">
+        price_new = #{priceNew,jdbcType=NUMERIC},
+      </if>
+      <if test="salePriceOld != null">
+        sale_price_old = #{salePriceOld,jdbcType=NUMERIC},
+      </if>
+      <if test="salePriceNew != null">
+        sale_price_new = #{salePriceNew,jdbcType=NUMERIC},
+      </if>
+      <if test="operateMan != null">
+        operate_man = #{operateMan,jdbcType=VARCHAR},
+      </if>
+      <if test="stockOld != null">
+        stock_old = #{stockOld,jdbcType=NUMERIC},
+      </if>
+      <if test="stockNew != null">
+        stock_new = #{stockNew,jdbcType=NUMERIC},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.itsthatjun.ecommerce.mbg.model.ProductUpdateLog">
+    update product_update_log
+    set product_id = #{productId,jdbcType=NUMERIC},
+      price_old = #{priceOld,jdbcType=NUMERIC},
+      price_new = #{priceNew,jdbcType=NUMERIC},
+      sale_price_old = #{salePriceOld,jdbcType=NUMERIC},
+      sale_price_new = #{salePriceNew,jdbcType=NUMERIC},
+      operate_man = #{operateMan,jdbcType=VARCHAR},
+      stock_old = #{stockOld,jdbcType=NUMERIC},
+      stock_new = #{stockNew,jdbcType=NUMERIC},
+      created_at = #{createdAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

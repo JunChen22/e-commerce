@@ -9,7 +9,7 @@ public class OrderChangeHistory {
 
     private String changeOperator;
 
-    private Date createTime;
+    private Date createdAt;
 
     private Integer orderStatus;
 
@@ -39,12 +39,12 @@ public class OrderChangeHistory {
         this.changeOperator = changeOperator;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public Integer getOrderStatus() {

@@ -18,7 +18,7 @@ public class Product {
 
     private Integer attributeCategoryId;
 
-    private BigDecimal sn;
+    private String sn;
 
     private BigDecimal deleteStatus;
 
@@ -32,7 +32,9 @@ public class Product {
 
     private String subTitle;
 
-    private String picture;
+    private String coverPicture;
+
+    private BigDecimal pictureAlbum;
 
     private String description;
 
@@ -46,27 +48,19 @@ public class Product {
 
     private BigDecimal lowStock;
 
-    private String unit;
+    private BigDecimal unitSold;
 
     private BigDecimal weight;
 
-    private Date promotionStartTime;
-
-    private Date promotionEndTime;
-
-    private BigDecimal promotionPerLimit;
-
-    private BigDecimal promotionType;
-
     private String keywords;
-
-    private String descriptionAlbum;
-
-    private String albumPics;
 
     private String detailTitle;
 
     private String detailDesc;
+
+    private BigDecimal descriptionAlbum;
+
+    private Date createdAt;
 
     private String note;
 
@@ -126,11 +120,11 @@ public class Product {
         this.attributeCategoryId = attributeCategoryId;
     }
 
-    public BigDecimal getSn() {
+    public String getSn() {
         return sn;
     }
 
-    public void setSn(BigDecimal sn) {
+    public void setSn(String sn) {
         this.sn = sn;
     }
 
@@ -182,12 +176,20 @@ public class Product {
         this.subTitle = subTitle;
     }
 
-    public String getPicture() {
-        return picture;
+    public String getCoverPicture() {
+        return coverPicture;
     }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
+    public void setCoverPicture(String coverPicture) {
+        this.coverPicture = coverPicture;
+    }
+
+    public BigDecimal getPictureAlbum() {
+        return pictureAlbum;
+    }
+
+    public void setPictureAlbum(BigDecimal pictureAlbum) {
+        this.pictureAlbum = pictureAlbum;
     }
 
     public String getDescription() {
@@ -238,12 +240,12 @@ public class Product {
         this.lowStock = lowStock;
     }
 
-    public String getUnit() {
-        return unit;
+    public BigDecimal getUnitSold() {
+        return unitSold;
     }
 
-    public void setUnit(String unit) {
-        this.unit = unit;
+    public void setUnitSold(BigDecimal unitSold) {
+        this.unitSold = unitSold;
     }
 
     public BigDecimal getWeight() {
@@ -254,60 +256,12 @@ public class Product {
         this.weight = weight;
     }
 
-    public Date getPromotionStartTime() {
-        return promotionStartTime;
-    }
-
-    public void setPromotionStartTime(Date promotionStartTime) {
-        this.promotionStartTime = promotionStartTime;
-    }
-
-    public Date getPromotionEndTime() {
-        return promotionEndTime;
-    }
-
-    public void setPromotionEndTime(Date promotionEndTime) {
-        this.promotionEndTime = promotionEndTime;
-    }
-
-    public BigDecimal getPromotionPerLimit() {
-        return promotionPerLimit;
-    }
-
-    public void setPromotionPerLimit(BigDecimal promotionPerLimit) {
-        this.promotionPerLimit = promotionPerLimit;
-    }
-
-    public BigDecimal getPromotionType() {
-        return promotionType;
-    }
-
-    public void setPromotionType(BigDecimal promotionType) {
-        this.promotionType = promotionType;
-    }
-
     public String getKeywords() {
         return keywords;
     }
 
     public void setKeywords(String keywords) {
         this.keywords = keywords;
-    }
-
-    public String getDescriptionAlbum() {
-        return descriptionAlbum;
-    }
-
-    public void setDescriptionAlbum(String descriptionAlbum) {
-        this.descriptionAlbum = descriptionAlbum;
-    }
-
-    public String getAlbumPics() {
-        return albumPics;
-    }
-
-    public void setAlbumPics(String albumPics) {
-        this.albumPics = albumPics;
     }
 
     public String getDetailTitle() {
@@ -324,6 +278,22 @@ public class Product {
 
     public void setDetailDesc(String detailDesc) {
         this.detailDesc = detailDesc;
+    }
+
+    public BigDecimal getDescriptionAlbum() {
+        return descriptionAlbum;
+    }
+
+    public void setDescriptionAlbum(BigDecimal descriptionAlbum) {
+        this.descriptionAlbum = descriptionAlbum;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public String getNote() {

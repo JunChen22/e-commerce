@@ -10,21 +10,23 @@ public class Orders {
 
     private Integer couponId;
 
-    private Integer orderSn;
+    private String orderSn;
 
     private String memberEmail;
 
     private BigDecimal totalAmount;
 
-    private BigDecimal payAmount;
-
-    private BigDecimal shippingCost;
+    private String promotionInfo;
 
     private BigDecimal promotionAmount;
 
     private BigDecimal couponAmount;
 
     private BigDecimal discountAmount;
+
+    private BigDecimal shippingCost;
+
+    private BigDecimal payAmount;
 
     private Integer payType;
 
@@ -36,29 +38,17 @@ public class Orders {
 
     private String deliveryTrackingNumber;
 
-    private String promotionInfo;
-
-    private String invoiceContent;
-
-    private String invoiceReceiverPhone;
-
-    private String invoiceReceiverEmail;
+    private String receiverPhone;
 
     private String receiverName;
 
-    private String receiverPhone;
-
-    private String receiverState;
+    private String receiverDetailAddress;
 
     private String receiverCity;
 
+    private String receiverState;
+
     private String receiverZipCode;
-
-    private String receiverDetailAddress;
-
-    private Integer confirmStatus;
-
-    private Integer deleteStatus;
 
     private Date paymentTime;
 
@@ -68,11 +58,11 @@ public class Orders {
 
     private String comment;
 
-    private String note;
+    private String adminNote;
 
     private Date createdAt;
 
-    private Date modifyTime;
+    private Date updatedAt;
 
     public Integer getId() {
         return id;
@@ -98,11 +88,11 @@ public class Orders {
         this.couponId = couponId;
     }
 
-    public Integer getOrderSn() {
+    public String getOrderSn() {
         return orderSn;
     }
 
-    public void setOrderSn(Integer orderSn) {
+    public void setOrderSn(String orderSn) {
         this.orderSn = orderSn;
     }
 
@@ -122,20 +112,12 @@ public class Orders {
         this.totalAmount = totalAmount;
     }
 
-    public BigDecimal getPayAmount() {
-        return payAmount;
+    public String getPromotionInfo() {
+        return promotionInfo;
     }
 
-    public void setPayAmount(BigDecimal payAmount) {
-        this.payAmount = payAmount;
-    }
-
-    public BigDecimal getShippingCost() {
-        return shippingCost;
-    }
-
-    public void setShippingCost(BigDecimal shippingCost) {
-        this.shippingCost = shippingCost;
+    public void setPromotionInfo(String promotionInfo) {
+        this.promotionInfo = promotionInfo;
     }
 
     public BigDecimal getPromotionAmount() {
@@ -160,6 +142,22 @@ public class Orders {
 
     public void setDiscountAmount(BigDecimal discountAmount) {
         this.discountAmount = discountAmount;
+    }
+
+    public BigDecimal getShippingCost() {
+        return shippingCost;
+    }
+
+    public void setShippingCost(BigDecimal shippingCost) {
+        this.shippingCost = shippingCost;
+    }
+
+    public BigDecimal getPayAmount() {
+        return payAmount;
+    }
+
+    public void setPayAmount(BigDecimal payAmount) {
+        this.payAmount = payAmount;
     }
 
     public Integer getPayType() {
@@ -202,36 +200,12 @@ public class Orders {
         this.deliveryTrackingNumber = deliveryTrackingNumber;
     }
 
-    public String getPromotionInfo() {
-        return promotionInfo;
+    public String getReceiverPhone() {
+        return receiverPhone;
     }
 
-    public void setPromotionInfo(String promotionInfo) {
-        this.promotionInfo = promotionInfo;
-    }
-
-    public String getInvoiceContent() {
-        return invoiceContent;
-    }
-
-    public void setInvoiceContent(String invoiceContent) {
-        this.invoiceContent = invoiceContent;
-    }
-
-    public String getInvoiceReceiverPhone() {
-        return invoiceReceiverPhone;
-    }
-
-    public void setInvoiceReceiverPhone(String invoiceReceiverPhone) {
-        this.invoiceReceiverPhone = invoiceReceiverPhone;
-    }
-
-    public String getInvoiceReceiverEmail() {
-        return invoiceReceiverEmail;
-    }
-
-    public void setInvoiceReceiverEmail(String invoiceReceiverEmail) {
-        this.invoiceReceiverEmail = invoiceReceiverEmail;
+    public void setReceiverPhone(String receiverPhone) {
+        this.receiverPhone = receiverPhone;
     }
 
     public String getReceiverName() {
@@ -242,20 +216,12 @@ public class Orders {
         this.receiverName = receiverName;
     }
 
-    public String getReceiverPhone() {
-        return receiverPhone;
+    public String getReceiverDetailAddress() {
+        return receiverDetailAddress;
     }
 
-    public void setReceiverPhone(String receiverPhone) {
-        this.receiverPhone = receiverPhone;
-    }
-
-    public String getReceiverState() {
-        return receiverState;
-    }
-
-    public void setReceiverState(String receiverState) {
-        this.receiverState = receiverState;
+    public void setReceiverDetailAddress(String receiverDetailAddress) {
+        this.receiverDetailAddress = receiverDetailAddress;
     }
 
     public String getReceiverCity() {
@@ -266,36 +232,20 @@ public class Orders {
         this.receiverCity = receiverCity;
     }
 
+    public String getReceiverState() {
+        return receiverState;
+    }
+
+    public void setReceiverState(String receiverState) {
+        this.receiverState = receiverState;
+    }
+
     public String getReceiverZipCode() {
         return receiverZipCode;
     }
 
     public void setReceiverZipCode(String receiverZipCode) {
         this.receiverZipCode = receiverZipCode;
-    }
-
-    public String getReceiverDetailAddress() {
-        return receiverDetailAddress;
-    }
-
-    public void setReceiverDetailAddress(String receiverDetailAddress) {
-        this.receiverDetailAddress = receiverDetailAddress;
-    }
-
-    public Integer getConfirmStatus() {
-        return confirmStatus;
-    }
-
-    public void setConfirmStatus(Integer confirmStatus) {
-        this.confirmStatus = confirmStatus;
-    }
-
-    public Integer getDeleteStatus() {
-        return deleteStatus;
-    }
-
-    public void setDeleteStatus(Integer deleteStatus) {
-        this.deleteStatus = deleteStatus;
     }
 
     public Date getPaymentTime() {
@@ -330,12 +280,12 @@ public class Orders {
         this.comment = comment;
     }
 
-    public String getNote() {
-        return note;
+    public String getAdminNote() {
+        return adminNote;
     }
 
-    public void setNote(String note) {
-        this.note = note;
+    public void setAdminNote(String adminNote) {
+        this.adminNote = adminNote;
     }
 
     public Date getCreatedAt() {
@@ -346,11 +296,11 @@ public class Orders {
         this.createdAt = createdAt;
     }
 
-    public Date getModifyTime() {
-        return modifyTime;
+    public Date getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setModifyTime(Date modifyTime) {
-        this.modifyTime = modifyTime;
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

@@ -7,10 +7,6 @@ public class ProductCategory {
 
     private String name;
 
-    private BigDecimal productCount;
-
-    private String icon;
-
     private BigDecimal parentId;
 
     private BigDecimal level;
@@ -29,22 +25,6 @@ public class ProductCategory {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public BigDecimal getProductCount() {
-        return productCount;
-    }
-
-    public void setProductCount(BigDecimal productCount) {
-        this.productCount = productCount;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
     }
 
     public BigDecimal getParentId() {

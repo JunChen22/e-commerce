@@ -9,31 +9,28 @@
     <result column="category_id" jdbcType="NUMERIC" property="categoryId" />
     <result column="category_name" jdbcType="VARCHAR" property="categoryName" />
     <result column="attribute_category_id" jdbcType="NUMERIC" property="attributeCategoryId" />
-    <result column="sn" jdbcType="NUMERIC" property="sn" />
+    <result column="sn" jdbcType="VARCHAR" property="sn" />
     <result column="delete_status" jdbcType="NUMERIC" property="deleteStatus" />
     <result column="publish_status" jdbcType="NUMERIC" property="publishStatus" />
     <result column="new_status" jdbcType="NUMERIC" property="newStatus" />
     <result column="recommend_status" jdbcType="NUMERIC" property="recommendStatus" />
     <result column="verify_status" jdbcType="NUMERIC" property="verifyStatus" />
     <result column="sub_title" jdbcType="VARCHAR" property="subTitle" />
-    <result column="picture" jdbcType="VARCHAR" property="picture" />
+    <result column="cover_picture" jdbcType="VARCHAR" property="coverPicture" />
+    <result column="picture_album" jdbcType="NUMERIC" property="pictureAlbum" />
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="original_price" jdbcType="NUMERIC" property="originalPrice" />
     <result column="on_sale_status" jdbcType="NUMERIC" property="onSaleStatus" />
     <result column="sale_price" jdbcType="NUMERIC" property="salePrice" />
     <result column="stock" jdbcType="NUMERIC" property="stock" />
     <result column="low_stock" jdbcType="NUMERIC" property="lowStock" />
-    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="unit_sold" jdbcType="NUMERIC" property="unitSold" />
     <result column="weight" jdbcType="NUMERIC" property="weight" />
-    <result column="promotion_start_time" jdbcType="DATE" property="promotionStartTime" />
-    <result column="promotion_end_time" jdbcType="DATE" property="promotionEndTime" />
-    <result column="promotion_per_limit" jdbcType="NUMERIC" property="promotionPerLimit" />
-    <result column="promotion_type" jdbcType="NUMERIC" property="promotionType" />
     <result column="keywords" jdbcType="VARCHAR" property="keywords" />
-    <result column="description_album" jdbcType="VARCHAR" property="descriptionAlbum" />
-    <result column="album_pics" jdbcType="VARCHAR" property="albumPics" />
     <result column="detail_title" jdbcType="VARCHAR" property="detailTitle" />
     <result column="detail_desc" jdbcType="VARCHAR" property="detailDesc" />
+    <result column="description_album" jdbcType="NUMERIC" property="descriptionAlbum" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
     <result column="note" jdbcType="VARCHAR" property="note" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -97,9 +94,9 @@
   <sql id="Base_Column_List">
     id, brand_id, brand_name, name, category_id, category_name, attribute_category_id, 
     sn, delete_status, publish_status, new_status, recommend_status, verify_status, sub_title, 
-    picture, description, original_price, on_sale_status, sale_price, stock, low_stock, 
-    unit, weight, promotion_start_time, promotion_end_time, promotion_per_limit, promotion_type, 
-    keywords, description_album, album_pics, detail_title, detail_desc, note
+    cover_picture, picture_album, description, original_price, on_sale_status, sale_price, 
+    stock, low_stock, unit_sold, weight, keywords, detail_title, detail_desc, description_album, 
+    created_at, note
   </sql>
   <select id="selectByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.ProductExample" resultMap="BaseResultMap">
     select
@@ -136,24 +133,22 @@
       category_id, category_name, attribute_category_id, 
       sn, delete_status, publish_status, 
       new_status, recommend_status, verify_status, 
-      sub_title, picture, description, 
-      original_price, on_sale_status, sale_price, 
-      stock, low_stock, unit, 
-      weight, promotion_start_time, promotion_end_time, 
-      promotion_per_limit, promotion_type, keywords, 
-      description_album, album_pics, detail_title, 
-      detail_desc, note)
+      sub_title, cover_picture, picture_album, 
+      description, original_price, on_sale_status, 
+      sale_price, stock, low_stock, 
+      unit_sold, weight, keywords, 
+      detail_title, detail_desc, description_album, 
+      created_at, note)
     values (#{brandId,jdbcType=NUMERIC}, #{brandName,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{categoryId,jdbcType=NUMERIC}, #{categoryName,jdbcType=VARCHAR}, #{attributeCategoryId,jdbcType=NUMERIC}, 
-      #{sn,jdbcType=NUMERIC}, #{deleteStatus,jdbcType=NUMERIC}, #{publishStatus,jdbcType=NUMERIC}, 
+      #{sn,jdbcType=VARCHAR}, #{deleteStatus,jdbcType=NUMERIC}, #{publishStatus,jdbcType=NUMERIC}, 
       #{newStatus,jdbcType=NUMERIC}, #{recommendStatus,jdbcType=NUMERIC}, #{verifyStatus,jdbcType=NUMERIC}, 
-      #{subTitle,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
-      #{originalPrice,jdbcType=NUMERIC}, #{onSaleStatus,jdbcType=NUMERIC}, #{salePrice,jdbcType=NUMERIC}, 
-      #{stock,jdbcType=NUMERIC}, #{lowStock,jdbcType=NUMERIC}, #{unit,jdbcType=VARCHAR}, 
-      #{weight,jdbcType=NUMERIC}, #{promotionStartTime,jdbcType=DATE}, #{promotionEndTime,jdbcType=DATE}, 
-      #{promotionPerLimit,jdbcType=NUMERIC}, #{promotionType,jdbcType=NUMERIC}, #{keywords,jdbcType=VARCHAR}, 
-      #{descriptionAlbum,jdbcType=VARCHAR}, #{albumPics,jdbcType=VARCHAR}, #{detailTitle,jdbcType=VARCHAR}, 
-      #{detailDesc,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR})
+      #{subTitle,jdbcType=VARCHAR}, #{coverPicture,jdbcType=VARCHAR}, #{pictureAlbum,jdbcType=NUMERIC}, 
+      #{description,jdbcType=VARCHAR}, #{originalPrice,jdbcType=NUMERIC}, #{onSaleStatus,jdbcType=NUMERIC}, 
+      #{salePrice,jdbcType=NUMERIC}, #{stock,jdbcType=NUMERIC}, #{lowStock,jdbcType=NUMERIC}, 
+      #{unitSold,jdbcType=NUMERIC}, #{weight,jdbcType=NUMERIC}, #{keywords,jdbcType=VARCHAR}, 
+      #{detailTitle,jdbcType=VARCHAR}, #{detailDesc,jdbcType=VARCHAR}, #{descriptionAlbum,jdbcType=NUMERIC}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{note,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.Product" useGeneratedKeys="true">
     insert into product
@@ -197,8 +192,11 @@
       <if test="subTitle != null">
         sub_title,
       </if>
-      <if test="picture != null">
-        picture,
+      <if test="coverPicture != null">
+        cover_picture,
+      </if>
+      <if test="pictureAlbum != null">
+        picture_album,
       </if>
       <if test="description != null">
         description,
@@ -218,38 +216,26 @@
       <if test="lowStock != null">
         low_stock,
       </if>
-      <if test="unit != null">
-        unit,
+      <if test="unitSold != null">
+        unit_sold,
       </if>
       <if test="weight != null">
         weight,
       </if>
-      <if test="promotionStartTime != null">
-        promotion_start_time,
-      </if>
-      <if test="promotionEndTime != null">
-        promotion_end_time,
-      </if>
-      <if test="promotionPerLimit != null">
-        promotion_per_limit,
-      </if>
-      <if test="promotionType != null">
-        promotion_type,
-      </if>
       <if test="keywords != null">
         keywords,
-      </if>
-      <if test="descriptionAlbum != null">
-        description_album,
-      </if>
-      <if test="albumPics != null">
-        album_pics,
       </if>
       <if test="detailTitle != null">
         detail_title,
       </if>
       <if test="detailDesc != null">
         detail_desc,
+      </if>
+      <if test="descriptionAlbum != null">
+        description_album,
+      </if>
+      <if test="createdAt != null">
+        created_at,
       </if>
       <if test="note != null">
         note,
@@ -275,7 +261,7 @@
         #{attributeCategoryId,jdbcType=NUMERIC},
       </if>
       <if test="sn != null">
-        #{sn,jdbcType=NUMERIC},
+        #{sn,jdbcType=VARCHAR},
       </if>
       <if test="deleteStatus != null">
         #{deleteStatus,jdbcType=NUMERIC},
@@ -295,8 +281,11 @@
       <if test="subTitle != null">
         #{subTitle,jdbcType=VARCHAR},
       </if>
-      <if test="picture != null">
-        #{picture,jdbcType=VARCHAR},
+      <if test="coverPicture != null">
+        #{coverPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureAlbum != null">
+        #{pictureAlbum,jdbcType=NUMERIC},
       </if>
       <if test="description != null">
         #{description,jdbcType=VARCHAR},
@@ -316,38 +305,26 @@
       <if test="lowStock != null">
         #{lowStock,jdbcType=NUMERIC},
       </if>
-      <if test="unit != null">
-        #{unit,jdbcType=VARCHAR},
+      <if test="unitSold != null">
+        #{unitSold,jdbcType=NUMERIC},
       </if>
       <if test="weight != null">
         #{weight,jdbcType=NUMERIC},
       </if>
-      <if test="promotionStartTime != null">
-        #{promotionStartTime,jdbcType=DATE},
-      </if>
-      <if test="promotionEndTime != null">
-        #{promotionEndTime,jdbcType=DATE},
-      </if>
-      <if test="promotionPerLimit != null">
-        #{promotionPerLimit,jdbcType=NUMERIC},
-      </if>
-      <if test="promotionType != null">
-        #{promotionType,jdbcType=NUMERIC},
-      </if>
       <if test="keywords != null">
         #{keywords,jdbcType=VARCHAR},
-      </if>
-      <if test="descriptionAlbum != null">
-        #{descriptionAlbum,jdbcType=VARCHAR},
-      </if>
-      <if test="albumPics != null">
-        #{albumPics,jdbcType=VARCHAR},
       </if>
       <if test="detailTitle != null">
         #{detailTitle,jdbcType=VARCHAR},
       </if>
       <if test="detailDesc != null">
         #{detailDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="descriptionAlbum != null">
+        #{descriptionAlbum,jdbcType=NUMERIC},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
       </if>
       <if test="note != null">
         #{note,jdbcType=VARCHAR},
@@ -385,7 +362,7 @@
         attribute_category_id = #{record.attributeCategoryId,jdbcType=NUMERIC},
       </if>
       <if test="record.sn != null">
-        sn = #{record.sn,jdbcType=NUMERIC},
+        sn = #{record.sn,jdbcType=VARCHAR},
       </if>
       <if test="record.deleteStatus != null">
         delete_status = #{record.deleteStatus,jdbcType=NUMERIC},
@@ -405,8 +382,11 @@
       <if test="record.subTitle != null">
         sub_title = #{record.subTitle,jdbcType=VARCHAR},
       </if>
-      <if test="record.picture != null">
-        picture = #{record.picture,jdbcType=VARCHAR},
+      <if test="record.coverPicture != null">
+        cover_picture = #{record.coverPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pictureAlbum != null">
+        picture_album = #{record.pictureAlbum,jdbcType=NUMERIC},
       </if>
       <if test="record.description != null">
         description = #{record.description,jdbcType=VARCHAR},
@@ -426,38 +406,26 @@
       <if test="record.lowStock != null">
         low_stock = #{record.lowStock,jdbcType=NUMERIC},
       </if>
-      <if test="record.unit != null">
-        unit = #{record.unit,jdbcType=VARCHAR},
+      <if test="record.unitSold != null">
+        unit_sold = #{record.unitSold,jdbcType=NUMERIC},
       </if>
       <if test="record.weight != null">
         weight = #{record.weight,jdbcType=NUMERIC},
       </if>
-      <if test="record.promotionStartTime != null">
-        promotion_start_time = #{record.promotionStartTime,jdbcType=DATE},
-      </if>
-      <if test="record.promotionEndTime != null">
-        promotion_end_time = #{record.promotionEndTime,jdbcType=DATE},
-      </if>
-      <if test="record.promotionPerLimit != null">
-        promotion_per_limit = #{record.promotionPerLimit,jdbcType=NUMERIC},
-      </if>
-      <if test="record.promotionType != null">
-        promotion_type = #{record.promotionType,jdbcType=NUMERIC},
-      </if>
       <if test="record.keywords != null">
         keywords = #{record.keywords,jdbcType=VARCHAR},
-      </if>
-      <if test="record.descriptionAlbum != null">
-        description_album = #{record.descriptionAlbum,jdbcType=VARCHAR},
-      </if>
-      <if test="record.albumPics != null">
-        album_pics = #{record.albumPics,jdbcType=VARCHAR},
       </if>
       <if test="record.detailTitle != null">
         detail_title = #{record.detailTitle,jdbcType=VARCHAR},
       </if>
       <if test="record.detailDesc != null">
         detail_desc = #{record.detailDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.descriptionAlbum != null">
+        description_album = #{record.descriptionAlbum,jdbcType=NUMERIC},
+      </if>
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
       </if>
       <if test="record.note != null">
         note = #{record.note,jdbcType=VARCHAR},
@@ -476,31 +444,28 @@
       category_id = #{record.categoryId,jdbcType=NUMERIC},
       category_name = #{record.categoryName,jdbcType=VARCHAR},
       attribute_category_id = #{record.attributeCategoryId,jdbcType=NUMERIC},
-      sn = #{record.sn,jdbcType=NUMERIC},
+      sn = #{record.sn,jdbcType=VARCHAR},
       delete_status = #{record.deleteStatus,jdbcType=NUMERIC},
       publish_status = #{record.publishStatus,jdbcType=NUMERIC},
       new_status = #{record.newStatus,jdbcType=NUMERIC},
       recommend_status = #{record.recommendStatus,jdbcType=NUMERIC},
       verify_status = #{record.verifyStatus,jdbcType=NUMERIC},
       sub_title = #{record.subTitle,jdbcType=VARCHAR},
-      picture = #{record.picture,jdbcType=VARCHAR},
+      cover_picture = #{record.coverPicture,jdbcType=VARCHAR},
+      picture_album = #{record.pictureAlbum,jdbcType=NUMERIC},
       description = #{record.description,jdbcType=VARCHAR},
       original_price = #{record.originalPrice,jdbcType=NUMERIC},
       on_sale_status = #{record.onSaleStatus,jdbcType=NUMERIC},
       sale_price = #{record.salePrice,jdbcType=NUMERIC},
       stock = #{record.stock,jdbcType=NUMERIC},
       low_stock = #{record.lowStock,jdbcType=NUMERIC},
-      unit = #{record.unit,jdbcType=VARCHAR},
+      unit_sold = #{record.unitSold,jdbcType=NUMERIC},
       weight = #{record.weight,jdbcType=NUMERIC},
-      promotion_start_time = #{record.promotionStartTime,jdbcType=DATE},
-      promotion_end_time = #{record.promotionEndTime,jdbcType=DATE},
-      promotion_per_limit = #{record.promotionPerLimit,jdbcType=NUMERIC},
-      promotion_type = #{record.promotionType,jdbcType=NUMERIC},
       keywords = #{record.keywords,jdbcType=VARCHAR},
-      description_album = #{record.descriptionAlbum,jdbcType=VARCHAR},
-      album_pics = #{record.albumPics,jdbcType=VARCHAR},
       detail_title = #{record.detailTitle,jdbcType=VARCHAR},
       detail_desc = #{record.detailDesc,jdbcType=VARCHAR},
+      description_album = #{record.descriptionAlbum,jdbcType=NUMERIC},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
       note = #{record.note,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -528,7 +493,7 @@
         attribute_category_id = #{attributeCategoryId,jdbcType=NUMERIC},
       </if>
       <if test="sn != null">
-        sn = #{sn,jdbcType=NUMERIC},
+        sn = #{sn,jdbcType=VARCHAR},
       </if>
       <if test="deleteStatus != null">
         delete_status = #{deleteStatus,jdbcType=NUMERIC},
@@ -548,8 +513,11 @@
       <if test="subTitle != null">
         sub_title = #{subTitle,jdbcType=VARCHAR},
       </if>
-      <if test="picture != null">
-        picture = #{picture,jdbcType=VARCHAR},
+      <if test="coverPicture != null">
+        cover_picture = #{coverPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="pictureAlbum != null">
+        picture_album = #{pictureAlbum,jdbcType=NUMERIC},
       </if>
       <if test="description != null">
         description = #{description,jdbcType=VARCHAR},
@@ -569,38 +537,26 @@
       <if test="lowStock != null">
         low_stock = #{lowStock,jdbcType=NUMERIC},
       </if>
-      <if test="unit != null">
-        unit = #{unit,jdbcType=VARCHAR},
+      <if test="unitSold != null">
+        unit_sold = #{unitSold,jdbcType=NUMERIC},
       </if>
       <if test="weight != null">
         weight = #{weight,jdbcType=NUMERIC},
       </if>
-      <if test="promotionStartTime != null">
-        promotion_start_time = #{promotionStartTime,jdbcType=DATE},
-      </if>
-      <if test="promotionEndTime != null">
-        promotion_end_time = #{promotionEndTime,jdbcType=DATE},
-      </if>
-      <if test="promotionPerLimit != null">
-        promotion_per_limit = #{promotionPerLimit,jdbcType=NUMERIC},
-      </if>
-      <if test="promotionType != null">
-        promotion_type = #{promotionType,jdbcType=NUMERIC},
-      </if>
       <if test="keywords != null">
         keywords = #{keywords,jdbcType=VARCHAR},
-      </if>
-      <if test="descriptionAlbum != null">
-        description_album = #{descriptionAlbum,jdbcType=VARCHAR},
-      </if>
-      <if test="albumPics != null">
-        album_pics = #{albumPics,jdbcType=VARCHAR},
       </if>
       <if test="detailTitle != null">
         detail_title = #{detailTitle,jdbcType=VARCHAR},
       </if>
       <if test="detailDesc != null">
         detail_desc = #{detailDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="descriptionAlbum != null">
+        description_album = #{descriptionAlbum,jdbcType=NUMERIC},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
       </if>
       <if test="note != null">
         note = #{note,jdbcType=VARCHAR},
@@ -616,31 +572,28 @@
       category_id = #{categoryId,jdbcType=NUMERIC},
       category_name = #{categoryName,jdbcType=VARCHAR},
       attribute_category_id = #{attributeCategoryId,jdbcType=NUMERIC},
-      sn = #{sn,jdbcType=NUMERIC},
+      sn = #{sn,jdbcType=VARCHAR},
       delete_status = #{deleteStatus,jdbcType=NUMERIC},
       publish_status = #{publishStatus,jdbcType=NUMERIC},
       new_status = #{newStatus,jdbcType=NUMERIC},
       recommend_status = #{recommendStatus,jdbcType=NUMERIC},
       verify_status = #{verifyStatus,jdbcType=NUMERIC},
       sub_title = #{subTitle,jdbcType=VARCHAR},
-      picture = #{picture,jdbcType=VARCHAR},
+      cover_picture = #{coverPicture,jdbcType=VARCHAR},
+      picture_album = #{pictureAlbum,jdbcType=NUMERIC},
       description = #{description,jdbcType=VARCHAR},
       original_price = #{originalPrice,jdbcType=NUMERIC},
       on_sale_status = #{onSaleStatus,jdbcType=NUMERIC},
       sale_price = #{salePrice,jdbcType=NUMERIC},
       stock = #{stock,jdbcType=NUMERIC},
       low_stock = #{lowStock,jdbcType=NUMERIC},
-      unit = #{unit,jdbcType=VARCHAR},
+      unit_sold = #{unitSold,jdbcType=NUMERIC},
       weight = #{weight,jdbcType=NUMERIC},
-      promotion_start_time = #{promotionStartTime,jdbcType=DATE},
-      promotion_end_time = #{promotionEndTime,jdbcType=DATE},
-      promotion_per_limit = #{promotionPerLimit,jdbcType=NUMERIC},
-      promotion_type = #{promotionType,jdbcType=NUMERIC},
       keywords = #{keywords,jdbcType=VARCHAR},
-      description_album = #{descriptionAlbum,jdbcType=VARCHAR},
-      album_pics = #{albumPics,jdbcType=VARCHAR},
       detail_title = #{detailTitle,jdbcType=VARCHAR},
       detail_desc = #{detailDesc,jdbcType=VARCHAR},
+      description_album = #{descriptionAlbum,jdbcType=NUMERIC},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
       note = #{note,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>

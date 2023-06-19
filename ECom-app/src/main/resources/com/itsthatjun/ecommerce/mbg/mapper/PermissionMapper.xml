@@ -6,7 +6,7 @@
     <result column="parent_id" jdbcType="NUMERIC" property="parentId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="value" jdbcType="VARCHAR" property="value" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
     <result column="status" jdbcType="VARCHAR" property="status" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -68,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, parent_id, name, value, create_time, status
+    id, parent_id, name, value, created_at, status
   </sql>
   <select id="selectByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.PermissionExample" resultMap="BaseResultMap">
     select
@@ -102,9 +102,9 @@
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.Permission" useGeneratedKeys="true">
     insert into permission (parent_id, name, value, 
-      create_time, status)
+      created_at, status)
     values (#{parentId,jdbcType=NUMERIC}, #{name,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR})
+      #{createdAt,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.Permission" useGeneratedKeys="true">
     insert into permission
@@ -118,8 +118,8 @@
       <if test="value != null">
         value,
       </if>
-      <if test="createTime != null">
-        create_time,
+      <if test="createdAt != null">
+        created_at,
       </if>
       <if test="status != null">
         status,
@@ -135,8 +135,8 @@
       <if test="value != null">
         #{value,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
       </if>
       <if test="status != null">
         #{status,jdbcType=VARCHAR},
@@ -164,8 +164,8 @@
       <if test="record.value != null">
         value = #{record.value,jdbcType=VARCHAR},
       </if>
-      <if test="record.createTime != null">
-        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
       </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=VARCHAR},
@@ -181,7 +181,7 @@
       parent_id = #{record.parentId,jdbcType=NUMERIC},
       name = #{record.name,jdbcType=VARCHAR},
       value = #{record.value,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
       status = #{record.status,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -199,8 +199,8 @@
       <if test="value != null">
         value = #{value,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=VARCHAR},
@@ -213,7 +213,7 @@
     set parent_id = #{parentId,jdbcType=NUMERIC},
       name = #{name,jdbcType=VARCHAR},
       value = #{value,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
