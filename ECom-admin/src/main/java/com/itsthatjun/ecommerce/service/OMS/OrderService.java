@@ -16,7 +16,7 @@ public interface OrderService {
     List<Orders> getAllCompleteOrder();
 
     // get by order number
-    Orders getOrderByOrderNumber(int orderSerialNumber);
+    Orders getOrderByOrderNumber(String orderSerialNumber);
 
     // get all orders from user
     List<Orders> getUserOrders(int memberId);
@@ -28,5 +28,5 @@ public interface OrderService {
     Orders updateOrder(Orders updateOrder);
 
     // delete an order
-    void deleteOrder(int orderSerialNumber);
+    void deleteOrder(String orderSerialNumber);
 }

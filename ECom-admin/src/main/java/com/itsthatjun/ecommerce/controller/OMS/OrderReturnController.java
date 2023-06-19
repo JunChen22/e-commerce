@@ -50,7 +50,7 @@ public class OrderReturnController {
 
     @GetMapping("/{serialNumber}")
     @ApiOperation(value = "return a return request detail")
-    public OrderReturnApply getReturnRequest(@PathVariable int serialNumber){
+    public OrderReturnApply getReturnRequest(@PathVariable String serialNumber){
         return returnOrderService.getOrderReturnDetail(serialNumber);
     }
 

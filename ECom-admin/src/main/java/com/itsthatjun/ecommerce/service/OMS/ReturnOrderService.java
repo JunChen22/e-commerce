@@ -17,7 +17,7 @@ public interface ReturnOrderService {
     List<OrderReturnApply> getAllRejected();
 
     // get specific return
-    OrderReturnApply getOrderReturnDetail(int orderSn);
+    OrderReturnApply getOrderReturnDetail(String orderSn);
 
     // approve return request
     OrderReturnApply approveReturnRequest(OrderReturnApply returnRequest);

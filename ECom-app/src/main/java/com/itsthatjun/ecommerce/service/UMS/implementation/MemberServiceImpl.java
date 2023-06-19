@@ -73,7 +73,7 @@ public class MemberServiceImpl implements MemberService , UserDetailsService {
 
     @Override
     public String register(Member newMember) {
-        newMember.setCreateTime(new Date());
+        newMember.setCreatedAt(new Date());
         newMember.setStatus("active");
         MemberExample example = new MemberExample();
         example.createCriteria().andUsernameEqualTo(newMember.getUsername());

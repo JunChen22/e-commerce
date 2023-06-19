@@ -54,7 +54,7 @@ public class CouponServiceImpl implements CouponService {
         example.createCriteria().andNameLike("%" + productName + "%");
         example.or().andNameLike("%" + brandName + "%");
         example.or().andNameLike("%" + "all product" + "%");
-        example.or().andTypeEqualTo(0);
+        example.or().andCouponTypeEqualTo(0);
         return couponMapper.selectByExample(example);
     }
 

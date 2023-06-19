@@ -54,7 +54,7 @@ public class OrderController {
 
     @GetMapping("/{serialNumber}")
     @ApiOperation(value = "look up a order by serial number")
-    public Orders getOrder(@PathVariable int serialNumber){
+    public Orders getOrder(@PathVariable String serialNumber){
         Orders order = orderService.getOrderByOrderNumber(serialNumber);
         return order;
     }
@@ -75,7 +75,7 @@ public class OrderController {
 
     @DeleteMapping("/delete/{serialNumber}")
     @ApiOperation(value = "delete a order by serial number")
-    public void deleteOrder(@PathVariable int serialNumber){
+    public void deleteOrder(@PathVariable String serialNumber){
         orderService.deleteOrder(serialNumber);
     }
 }

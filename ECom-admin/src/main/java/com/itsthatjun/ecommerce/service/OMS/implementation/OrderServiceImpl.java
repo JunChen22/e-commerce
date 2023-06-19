@@ -55,7 +55,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Orders getOrderByOrderNumber(int orderSerialNumber) {
+    public Orders getOrderByOrderNumber(String orderSerialNumber) {
         OrdersExample example = new OrdersExample();
         example.createCriteria().andOrderSnEqualTo(orderSerialNumber);
         List<Orders> ordersList = ordersMapper.selectByExample(example);
@@ -91,7 +91,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void deleteOrder(int orderSerialNumber) {
+    public void deleteOrder(String orderSerialNumber) {
         OrdersExample example = new OrdersExample();
         example.createCriteria().andOrderSnEqualTo(orderSerialNumber);
         ordersMapper.deleteByExample(example);

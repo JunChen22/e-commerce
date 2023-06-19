@@ -60,7 +60,7 @@ public class ReturnOrderServiceImpl implements ReturnOrderService {
     }
 
     @Override
-    public OrderReturnApply getOrderReturnDetail(int orderSn) {
+    public OrderReturnApply getOrderReturnDetail(String orderSn) {
         OrderReturnApplyExample example = new OrderReturnApplyExample();
         example.createCriteria().andOrderSnEqualTo(orderSn);
 

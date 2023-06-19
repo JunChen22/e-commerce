@@ -1838,11 +1838,47 @@ CREATE TABLE coupon (
 INSERT INTO coupon(coupon_type, name, discount_type, amount, start_time, end_time, count, publish_count, used_count, code, status)
 VALUES
 (0, '$15 off whole order', 0, 15.00, '2019-08-18 16:00:3', '2023-08-18 16:00:3', 20, 10 , 0, '15OFF', 1),
-(0, '10% off whole order', 1, 10, '2019-08-18 16:00:3', '2023-08-18 16:00:3', 20, 10 , 0, '15OFF', 1),
+(0, '10% off whole order', 1, 10, '2019-08-18 16:00:3', '2023-08-18 16:00:3', 20, 10 , 0, '10OFF', 1),
 (0, 'All free', 0, 999999.99, '2019-08-18 16:00:3', '2023-08-18 16:00:3', 1, 1 , 1, 'FREE', 1),
 (1, '$50 off Apple product', 0, 50.00, '2019-08-18 16:00:3', '2023-08-18 16:00:3', 1, 1 , 0, '50OFFAPPLE', 1),
 (2, '60% off shirts', 1, 60, '2019-08-18 16:00:3', '2023-08-18 16:00:3', 1, 1 , 0, '60OFFSHIRTS', 1),
-(2, '20% off note 10', 1, 20, '2019-08-18 16:00:3', '2023-08-18 16:00:3', 1, 1 , 1, '20NOTE10OFF', 1);
+(3, '20% off Galaxy S21', 1, 20, '2019-08-18 16:00:3', '2023-08-18 16:00:3', 1, 1 , 1, '20OFFS21', 1);
+
+
+-- the product that are affected by the coupon
+DROP TABLE IF EXISTS coupon_product_relation;
+CREATE TABLE coupon_product_relation(
+      id SERIAL PRIMARY KEY,
+      coupon_id integer,
+      product_id integer,
+      product_name integer,
+      product_sn integer,
+      product_sku_code varchar(100)
+);
+
+(1, '$50 off Apple product', 0, 50.00, '2019-08-18 16:00:3', '2023-08-18 16:00:3', 1, 1 , 0, '50OFFAPPLE', 1),
+
+  1 | Apple      | iPhone 12   | Smartphones   | IP12-RED
+  1 | Apple      | iPhone 12   | Smartphones   | IP12-WHITE
+  1 | Apple      | iPhone 12   | Smartphones   | IP12-BLACK
+  2 | Apple      | iPhone SE   | Smartphones   | IPSE-RED
+  2 | Apple      | iPhone SE   | Smartphones   | IPSE-BLUE
+  6 | Apple      | AirPods Pro | Headphones    | APRO1
+  7 | Apple      | AirPods 2   | Headphones    | APO2
+  9 | Apple      | iPad Pro    | Tablets       | IPPRO
+ 13 | Apple      | MacBook Pro | Laptop        | MBP
+
+
+(2, '60% off shirts', 1, 60, '2019-08-18 16:00:3', '2023-08-18 16:00:3', 1, 1 , 0, '60OFFSHIRTS', 1),
+
+ 25 | Nike         | Nike Dri-FIT T-Shirt                  | Men clothing             | NDFTS
+ 26 | Calvin Klein | Calvin Klein Logo T-Shirt             | Men clothing             | CKLTS
+ 27 | Adidas       | Adidas Essential Track Pants          | Men clothing             | AEPTP
+
+
+(2, '20% off Galaxy S21', 1, 20, '2019-08-18 16:00:3', '2023-08-18 16:00:3', 1, 1 , 1, '20OFFS21', 1);
+  5 | Samsung      | Galaxy S21                            | Smartphones              | GS21
+
 
 
 

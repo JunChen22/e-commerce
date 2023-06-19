@@ -62,6 +62,11 @@ services:
       - "cluster.name=elasticsearch"
       - "discovery.type=single-node"
       - "ES_JAVA_OPTS=-Xms512m -Xmx1024m"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://elasticsearch:9200" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
     #volumes:
     #  - /home/jun/Desktop/data/ELK/es:/usr/share/elasticsearch/data # data
     ports:
@@ -70,6 +75,11 @@ services:
 
   logstash:
     image: logstash:7.12.0
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://logstash:9600" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
     ports:
       - 4560:4560
       - 4561:4561
@@ -82,6 +92,11 @@ services:
     image: kibana:7.12.0
     environment:
       - "ELASTICSEARCH_HOSTS=http://elasticsearch:9200"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://kibana:5601" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
     ports:
       - 5601:5601
     depends_on:
@@ -106,6 +121,9 @@ services:
       - SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE=admin
       - SPRING_DATA_MONGODB_USERNAME=${MONGODB_USR}
       - SPRING_DATA_MONGODB_PASSWORD=${MONGODB_PWD}
+      - paypal_mode=${paypal_mode}
+      - paypal_client_id=${paypal_client_id}
+      - paypal_client_secret=${paypal_client_secret}
     depends_on:
       postgres:
         condition: service_healthy
@@ -126,10 +144,14 @@ services:
       - SPRING_DATASOURCE_USERNAME=${POSTGRES_USR}
       - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PWD}
     depends_on:
-      - kibana
-      - logstash
-      - elasticsearch
-      - postgres
+      kibana:
+        condition: service_healthy
+      logstash:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
 
   admin:
     build: ECom-admin
