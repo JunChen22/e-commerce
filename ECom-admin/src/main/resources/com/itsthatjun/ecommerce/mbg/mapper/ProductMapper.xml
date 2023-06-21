@@ -22,9 +22,9 @@
     <result column="original_price" jdbcType="NUMERIC" property="originalPrice" />
     <result column="on_sale_status" jdbcType="NUMERIC" property="onSaleStatus" />
     <result column="sale_price" jdbcType="NUMERIC" property="salePrice" />
-    <result column="stock" jdbcType="NUMERIC" property="stock" />
-    <result column="low_stock" jdbcType="NUMERIC" property="lowStock" />
-    <result column="unit_sold" jdbcType="NUMERIC" property="unitSold" />
+    <result column="stock" jdbcType="INTEGER" property="stock" />
+    <result column="low_stock" jdbcType="INTEGER" property="lowStock" />
+    <result column="unit_sold" jdbcType="INTEGER" property="unitSold" />
     <result column="weight" jdbcType="NUMERIC" property="weight" />
     <result column="keywords" jdbcType="VARCHAR" property="keywords" />
     <result column="detail_title" jdbcType="VARCHAR" property="detailTitle" />
@@ -145,8 +145,8 @@
       #{newStatus,jdbcType=NUMERIC}, #{recommendStatus,jdbcType=NUMERIC}, #{verifyStatus,jdbcType=NUMERIC}, 
       #{subTitle,jdbcType=VARCHAR}, #{coverPicture,jdbcType=VARCHAR}, #{pictureAlbum,jdbcType=NUMERIC}, 
       #{description,jdbcType=VARCHAR}, #{originalPrice,jdbcType=NUMERIC}, #{onSaleStatus,jdbcType=NUMERIC}, 
-      #{salePrice,jdbcType=NUMERIC}, #{stock,jdbcType=NUMERIC}, #{lowStock,jdbcType=NUMERIC}, 
-      #{unitSold,jdbcType=NUMERIC}, #{weight,jdbcType=NUMERIC}, #{keywords,jdbcType=VARCHAR}, 
+      #{salePrice,jdbcType=NUMERIC}, #{stock,jdbcType=INTEGER}, #{lowStock,jdbcType=INTEGER}, 
+      #{unitSold,jdbcType=INTEGER}, #{weight,jdbcType=NUMERIC}, #{keywords,jdbcType=VARCHAR}, 
       #{detailTitle,jdbcType=VARCHAR}, #{detailDesc,jdbcType=VARCHAR}, #{descriptionAlbum,jdbcType=NUMERIC}, 
       #{createdAt,jdbcType=TIMESTAMP}, #{note,jdbcType=VARCHAR})
   </insert>
@@ -300,13 +300,13 @@
         #{salePrice,jdbcType=NUMERIC},
       </if>
       <if test="stock != null">
-        #{stock,jdbcType=NUMERIC},
+        #{stock,jdbcType=INTEGER},
       </if>
       <if test="lowStock != null">
-        #{lowStock,jdbcType=NUMERIC},
+        #{lowStock,jdbcType=INTEGER},
       </if>
       <if test="unitSold != null">
-        #{unitSold,jdbcType=NUMERIC},
+        #{unitSold,jdbcType=INTEGER},
       </if>
       <if test="weight != null">
         #{weight,jdbcType=NUMERIC},
@@ -401,13 +401,13 @@
         sale_price = #{record.salePrice,jdbcType=NUMERIC},
       </if>
       <if test="record.stock != null">
-        stock = #{record.stock,jdbcType=NUMERIC},
+        stock = #{record.stock,jdbcType=INTEGER},
       </if>
       <if test="record.lowStock != null">
-        low_stock = #{record.lowStock,jdbcType=NUMERIC},
+        low_stock = #{record.lowStock,jdbcType=INTEGER},
       </if>
       <if test="record.unitSold != null">
-        unit_sold = #{record.unitSold,jdbcType=NUMERIC},
+        unit_sold = #{record.unitSold,jdbcType=INTEGER},
       </if>
       <if test="record.weight != null">
         weight = #{record.weight,jdbcType=NUMERIC},
@@ -457,9 +457,9 @@
       original_price = #{record.originalPrice,jdbcType=NUMERIC},
       on_sale_status = #{record.onSaleStatus,jdbcType=NUMERIC},
       sale_price = #{record.salePrice,jdbcType=NUMERIC},
-      stock = #{record.stock,jdbcType=NUMERIC},
-      low_stock = #{record.lowStock,jdbcType=NUMERIC},
-      unit_sold = #{record.unitSold,jdbcType=NUMERIC},
+      stock = #{record.stock,jdbcType=INTEGER},
+      low_stock = #{record.lowStock,jdbcType=INTEGER},
+      unit_sold = #{record.unitSold,jdbcType=INTEGER},
       weight = #{record.weight,jdbcType=NUMERIC},
       keywords = #{record.keywords,jdbcType=VARCHAR},
       detail_title = #{record.detailTitle,jdbcType=VARCHAR},
@@ -532,13 +532,13 @@
         sale_price = #{salePrice,jdbcType=NUMERIC},
       </if>
       <if test="stock != null">
-        stock = #{stock,jdbcType=NUMERIC},
+        stock = #{stock,jdbcType=INTEGER},
       </if>
       <if test="lowStock != null">
-        low_stock = #{lowStock,jdbcType=NUMERIC},
+        low_stock = #{lowStock,jdbcType=INTEGER},
       </if>
       <if test="unitSold != null">
-        unit_sold = #{unitSold,jdbcType=NUMERIC},
+        unit_sold = #{unitSold,jdbcType=INTEGER},
       </if>
       <if test="weight != null">
         weight = #{weight,jdbcType=NUMERIC},
@@ -585,9 +585,9 @@
       original_price = #{originalPrice,jdbcType=NUMERIC},
       on_sale_status = #{onSaleStatus,jdbcType=NUMERIC},
       sale_price = #{salePrice,jdbcType=NUMERIC},
-      stock = #{stock,jdbcType=NUMERIC},
-      low_stock = #{lowStock,jdbcType=NUMERIC},
-      unit_sold = #{unitSold,jdbcType=NUMERIC},
+      stock = #{stock,jdbcType=INTEGER},
+      low_stock = #{lowStock,jdbcType=INTEGER},
+      unit_sold = #{unitSold,jdbcType=INTEGER},
       weight = #{weight,jdbcType=NUMERIC},
       keywords = #{keywords,jdbcType=VARCHAR},
       detail_title = #{detailTitle,jdbcType=VARCHAR},

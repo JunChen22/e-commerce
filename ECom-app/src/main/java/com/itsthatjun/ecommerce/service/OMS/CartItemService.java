@@ -10,6 +10,9 @@ public interface CartItemService {
     @ApiModelProperty(value = "add an item to shopping cart")
     List<CartItem> addItem(CartItem item);
 
+    @ApiModelProperty(value = "add all item to shopping cart")
+    List<CartItem> addAllItem(List<CartItem> itemList);
+
     @ApiModelProperty(value = "get user's shopping cart")
     List<CartItem> getUserCart();
 

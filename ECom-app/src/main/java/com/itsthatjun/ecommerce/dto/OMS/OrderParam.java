@@ -21,6 +21,6 @@ public class OrderParam {
     @ApiModelProperty("coupon for discount")
     private String coupon;
 
-    @ApiModelProperty("paypal, g pay, or finance. currently just paypal")
-    private Integer payType;
+    //@ApiModelProperty("paypal, g pay, or finance. currently just paypal")
+    //private Integer payType;
 }

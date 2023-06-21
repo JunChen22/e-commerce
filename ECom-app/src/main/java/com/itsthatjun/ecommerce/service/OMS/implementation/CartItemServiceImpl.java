@@ -56,12 +56,22 @@ public class CartItemServiceImpl implements CartItemService {
     }
 
     @Override
+    public List<CartItem> addAllItem(List<CartItem> itemList) {
+        for (CartItem item : itemList) {
+            addItem(item);
+        }
+        return itemList;
+    }
+
+    @Override
     public List<CartItem> getUserCart() {
         Member currUser = memberService.getCurrentUser();
 
         ShoppingCartExample shoppingCartExample = new ShoppingCartExample();
         shoppingCartExample.createCriteria().andMemberIdEqualTo(currUser.getId());
-        ShoppingCart cart = shoppingCartMapper.selectByExample(shoppingCartExample).get(0);
+        ShoppingCart cart = shoppingCartMapper.selectByExample(shoppingCartExample).size() > 0 ?
+                shoppingCartMapper.selectByExample(shoppingCartExample).get(0) : null;
+        if (cart == null) throw new RuntimeException("error getting user shopping cart");
 
         CartItemExample example = new CartItemExample();
         example.createCriteria().andCartIdEqualTo(cart.getId());

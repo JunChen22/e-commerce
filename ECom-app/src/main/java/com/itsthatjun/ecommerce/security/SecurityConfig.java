@@ -47,6 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/brand/**","/product/**","/user/**","/article/**").permitAll()
                 .antMatchers("/reviews/getAllProductReview/**").permitAll()
                 //.antMatchers("/**").permitAll()  // TODO: for testing purposes. All endpoints are open. Remove when needed.
+                .antMatchers("/order/success**", "/order/cancel**").permitAll() // TODO: remove this when using a front that store the jwt token
                 .anyRequest()
                 .authenticated();
 

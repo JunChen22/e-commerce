@@ -463,9 +463,9 @@ CREATE TABLE product (
   original_price  decimal(10, 2),
   on_sale_status NUMERIC,  --  0-> not on sale; 1-> is on sale; 2-> flash sale/special sales/clarance/used item
   sale_price        decimal(10, 2),
-  stock             NUMERIC,
-  low_stock NUMERIC, -- -- low stock alarm, default is about 10% alarm
-  unit_sold NUMERIC,
+  stock             INTEGER,
+  low_stock INTEGER, -- -- low stock alarm, default is about 10% alarm
+  unit_sold INTEGER,
   weight decimal(10,2), -- product weight in grams
   keywords TEXT,
   detail_title TEXT,                -- at the bottom of product with detail title, description and picture
@@ -538,23 +538,23 @@ VALUES
 DROP TABLE IF EXISTS product_sku_stock;
 CREATE TABLE product_sku_stock (    -- all product have one default sku variant
   id SERIAL PRIMARY KEY,
-  product_id NUMERIC,
+  product_id INTEGER,
   sku_code TEXT,
   picture TEXT,
   price NUMERIC,
   promotion_price NUMERIC,
-  stock NUMERIC,
-  low_stock NUMERIC,     -- low stock alarm, default is about 10% alarm
-  lock_stock NUMERIC DEFAULT 0, -- lock stock is updated from lock stock + order quantity, can't order when current stock is less than lock stock. update lock stock to 0 after ordered.
-  unit_sold NUMERIC
+  stock INTEGER,
+  low_stock INTEGER,     -- low stock alarm, default is about 10% alarm
+  lock_stock INTEGER DEFAULT 0, -- lock stock is updated from lock stock + order quantity, can't order when current stock is less than lock stock. update lock stock to 0 after ordered.
+  unit_sold INTEGER
 );
 
 INSERT INTO product_sku_stock (product_id, sku_code, picture, price, promotion_price, stock, low_stock, unit_sold)
 VALUES
 -- iphone
 (1, 'IP12-RED', 'iphone12-red.jpg', 899.99 ,  899.99 , 35 , 4 , 20),
-(1, 'IP12-WHITE', 'iphone12-white.jpg', 899.99 , 799.99 , 35 , 4 , 20),
-(1, 'IP12-BLACK', 'iphone12-black.jpg', 899.99 , 799.99 , 30 , 2 , 10),
+(1, 'IP12-WHITE', 'iphone12-white.jpg', 899.99 , 899.99 , 35 , 4 , 20),
+(1, 'IP12-BLACK', 'iphone12-black.jpg', 899.99 , 899.99 , 30 , 2 , 10),
 (2, 'IPSE-BLUE', 'iphonese-blue.jpg', 499.99 ,  499.99 , 25 ,  3 , 25),
 (2, 'IPSE-RED', 'iphonese-red.jpg', 499.99 , 499.99 , 25 , 3 , 5),
 (3, 'PX5', 'pixel5.jpg', 799.99 ,  799.99 , 80 ,  8 , 40),
@@ -1214,8 +1214,9 @@ DROP TABLE IF EXISTS receive_address;
 CREATE TABLE receive_address
   (  id SERIAL PRIMARY KEY,
      member_id    NUMERIC,
+     receiver_name TEXT,
      phone_number TEXT,
-     street       TEXT,
+     detail_address  TEXT,
      city         TEXT,
      state        TEXT,
      zip_code     TEXT,
@@ -1310,10 +1311,10 @@ INSERT INTO member (username, password, phone_number, status, created_at,icon, l
 INSERT INTO member (username, password, phone_number, status, created_at,icon, last_login)
             VALUES ('user3', '$2a$10$xEbGJ1QHr/CZ.ltRIP4A9.K27Sq3HJ4Dh/sN0ssd5GwkaPbjPRW9S','112-323-1111', 'active', '2020-03-18 04:20:52','','2020-03-20 05:01:02');
 
-INSERT INTO receive_address (member_id, phone_number, street, city, state, zip_code, note) VALUES (1, '212-212-2222', '1 1st street 2nd ave', 'Chicago','Illinois','60007','');
-INSERT INTO receive_address (member_id, phone_number, street, city, state, zip_code, note) VALUES (2, '111-111-1111', '2 2nd street 3rd ave Apt 4F', 'Dallas','Texas', '75001' ,'please call, door bell broken');
-INSERT INTO receive_address (member_id, phone_number, street, city, state, zip_code, note) VALUES (3, '212-212-2222', '3 4st street 5nd ave', 'San Francisco','California','94016','');
-INSERT INTO receive_address (member_id, phone_number, street, city, state, zip_code, note) VALUES (4, '212-212-2222', '5 6st street 7nd ave', 'Miami','Florida','33101','');
+INSERT INTO receive_address (member_id, receiver_name, phone_number, detail_address, city, state, zip_code, note) VALUES (1, 'Jun',  '212-212-2222', '1 1st street 2nd ave', 'Chicago','Illinois','60007','');
+INSERT INTO receive_address (member_id, receiver_name, phone_number, detail_address, city, state, zip_code, note) VALUES (2, 'John', '111-111-1111', '2 2nd street 3rd ave Apt 4F', 'Dallas','Texas', '75001' ,'please call, door bell broken');
+INSERT INTO receive_address (member_id, receiver_name, phone_number, detail_address, city, state, zip_code, note) VALUES (3, 'Jane', '212-212-2222', '3 4st street 5nd ave', 'San Francisco','California','94016','');
+INSERT INTO receive_address (member_id, receiver_name, phone_number, detail_address, city, state, zip_code, note) VALUES (4, 'James', '212-212-2222', '5 6st street 7nd ave', 'Miami','Florida','33101','');
 
 --- login type ,pc/andriod/IOS   = 0/1/2
 INSERT INTO member_login_log (member_id, login_time, ip_address, login_type) VALUES (1,'2020-03-18 22:18:40','127.0.0.1','0');
@@ -1495,14 +1496,14 @@ CREATE TABLE cart_item (
 
 INSERT INTO cart_item (cart_id, product_id, product_name, product_sku, product_pic, quantity, price) VALUES
 
-(1, 5, 'Galaxy S21', 'GS21', 'galaxyS21.jpg', 2, 1099.99),
-(1, 19, 'Xbox Series X', 'XSX', 'xboxSeriesX.jpg', 1, 499.99),
-
 (2, 21, 'Nike Air Max 270', 'NAM270', 'nikeairmax270.jpg', 1, 129.99),
 (2, 29, 'To Kill a Mockingbird ', 'TKAM', 'tokillamockingbird.jpg', 1, 12.99),
 
 (3, 25, 'Nike Dri-FIT T-Shirt ', 'NDFTS', 'nikeDriFitShirt.jpg', 2, 29.99),
-(3, 2, 'iPhone SE','IPSE-RED' , 'iphonese-red.jpg', 1, 20);
+(3, 2, 'iPhone SE','IPSE-RED' , 'iphonese-red.jpg', 1, 449.99),
+
+(5, 5, 'Galaxy S21', 'GS21', 'galaxyS21.jpg', 2, 1099.99),
+(5, 19, 'Xbox Series X', 'XSX', 'xboxSeriesX.jpg', 1, 499.99);
 
 
 
@@ -1514,7 +1515,6 @@ CREATE TABLE orders (   -- have to called orders instead of order, or else confl
    order_sn VARCHAR(64),
    member_email VARCHAR(64),
    total_amount NUMERIC(10,2),
-   promotion_info VARCHAR(100),           -- promotion that only affect orders like free shipping, total off x amount, discount after purchase x amount.
    promotion_amount NUMERIC(10,2),
    coupon_amount NUMERIC(10,2),
    discount_amount NUMERIC(10,2),
@@ -1522,7 +1522,7 @@ CREATE TABLE orders (   -- have to called orders instead of order, or else confl
    pay_amount NUMERIC(10,2),
    pay_type INTEGER,              -- credit card -> 0, paypal -> 1, google pay -> 2
    source_type INTEGER,           -- pc -> 0 , mobile -> 1
-   status INTEGER DEFAULT 0,                -- waiting for payment 0 , fulfilling 1,  send 2 , complete(received) 3, closed(out of return period) 4 ,invalid 5
+   status INTEGER DEFAULT 0,                -- waiting for payment 0 , fulfilling 1,  send 2 , complete(received) 3, closed(out of return period) 4 ,invalid/cancel 5
    delivery_company VARCHAR(64),
    delivery_tracking_number VARCHAR(64),
    receiver_phone VARCHAR(32),
@@ -1540,28 +1540,28 @@ CREATE TABLE orders (   -- have to called orders instead of order, or else confl
    updated_at TIMESTAMP DEFAULT NULL
 );
 
-INSERT INTO orders (member_id, coupon_id, order_sn, total_amount, promotion_info,  promotion_amount, coupon_amount, discount_amount, shipping_cost, pay_amount,
+INSERT INTO orders (member_id, coupon_id, order_sn, total_amount,  promotion_amount, coupon_amount, discount_amount, shipping_cost, pay_amount,
                     pay_type, source_type, status, delivery_company, delivery_tracking_number,
                     receiver_name, receiver_phone, member_email, receiver_detail_address, receiver_city, receiver_state, receiver_zip_code,
                     payment_time, delivery_time, comment)
 VALUES
-(1, 1, '1001', 2499.98, 'iphone-SE 10% OFF,All laptop 100 off', 149.99, 15, 164.99, 0, 2334.99, 1, 0, 1, 'UPS', '1234567890',
+(1, 1, '1001', 2499.98, 149.99, 15, 164.99, 0, 2334.99, 1, 0, 1, 'UPS', '1234567890',
 'Jane Doe', '123-456-7890', 'john@example.com', '123 Main St', 'San Francisco', 'California', '12345',
 '2023-04-25 08:30:00', NULL, 'Please include stickers'),
 -- $20 off + 10% off coupon
-(2, 2, '1002', 2199.98, 'OnePlus product $10 off', 20, 217.99, 237.99, 0, 1961.99, 1, 0, 2, 'UPS', '9876543210',
+(2, 2, '1002', 2199.98, 20, 217.99, 237.99, 0, 1961.99, 1, 0, 2, 'UPS', '9876543210',
 'Jane Doe', '555-999-8888', 'janedoe@example.com', '456 Market St', 'San Francisco', 'CA', '94102',
 '2023-04-24 09:15:00', NULL, 'no comments'),
 
-(1, 1, '1003', 1399.99, 'All laptop 100 off', 100, 15, 115, 0, 1284, 1, 0, 3, 'UPS', '123456789',
+(1, 1, '1003', 1399.99, 100, 15, 115, 0, 1284, 1, 0, 3, 'UPS', '123456789',
 'Jane Doe', '555-123-4567', 'jane_doe@example.com', '123 Main St, Apt 4B', 'New York City', 'New York', '10001',
 '2022-01-09 10:45:00', NULL, 'I order it with other item, please ship it together'),
 
-(2, NULL, '1004', 129.99, '', 0, 0, 0, 0, 129.99, 1, 0, 4, 'UPS', '987654321',
+(2, NULL, '1004', 129.99, 0, 0, 0, 0, 129.99, 1, 0, 4, 'UPS', '987654321',
 'John Smith', '555-987-6543', 'john_smith@example.com', '456 Oak St, Apt 12C', 'Los Angeles', 'California', '90001',
 '2022-01-12 11:15:00', NULL, NULL),
 
-(3, 3, '1005', 19999.90, 'All laptop 100 off', 1000, 999999.99, 1000999.99, 0, 0, 1, 1, 5, 'USPS', '987654321',
+(3, 3, '1005', 19999.90, 1000, 999999.99, 1000999.99, 0, 0, 1, 1, 5, 'USPS', '987654321',
 'John Smith','555-987-6543', 'john_smith@example.com', '456 Oak St, Apt 12C', 'Los Angeles', 'California', '90001',
 '2022-01-12 11:15:00', NULL, NULL);
 
@@ -1845,41 +1845,40 @@ VALUES
 (3, '20% off Galaxy S21', 1, 20, '2019-08-18 16:00:3', '2023-08-18 16:00:3', 1, 1 , 1, '20OFFS21', 1);
 
 
--- the product that are affected by the coupon
+-- the product that are affected by the coupon, coupon type 1-3 will use this. 0 type will not.
 DROP TABLE IF EXISTS coupon_product_relation;
 CREATE TABLE coupon_product_relation(
       id SERIAL PRIMARY KEY,
       coupon_id integer,
       product_id integer,
-      product_name integer,
-      product_sn integer,
+      product_name varchar(100),
+      product_sn varchar(100),
       product_sku_code varchar(100)
 );
 
-(1, '$50 off Apple product', 0, 50.00, '2019-08-18 16:00:3', '2023-08-18 16:00:3', 1, 1 , 0, '50OFFAPPLE', 1),
-
-  1 | Apple      | iPhone 12   | Smartphones   | IP12-RED
-  1 | Apple      | iPhone 12   | Smartphones   | IP12-WHITE
-  1 | Apple      | iPhone 12   | Smartphones   | IP12-BLACK
-  2 | Apple      | iPhone SE   | Smartphones   | IPSE-RED
-  2 | Apple      | iPhone SE   | Smartphones   | IPSE-BLUE
-  6 | Apple      | AirPods Pro | Headphones    | APRO1
-  7 | Apple      | AirPods 2   | Headphones    | APO2
-  9 | Apple      | iPad Pro    | Tablets       | IPPRO
- 13 | Apple      | MacBook Pro | Laptop        | MBP
-
-
-(2, '60% off shirts', 1, 60, '2019-08-18 16:00:3', '2023-08-18 16:00:3', 1, 1 , 0, '60OFFSHIRTS', 1),
-
- 25 | Nike         | Nike Dri-FIT T-Shirt                  | Men clothing             | NDFTS
- 26 | Calvin Klein | Calvin Klein Logo T-Shirt             | Men clothing             | CKLTS
- 27 | Adidas       | Adidas Essential Track Pants          | Men clothing             | AEPTP
+INSERT INTO coupon_product_relation(coupon_id, product_id, product_name, product_sn, product_sku_code)
+VALUES
+(4, 1, 'iPhone 12', 'SN-123', 'IP12-RED'),
+(4, 1, 'iPhone 12', 'SN-123', 'IP12-WHITE'),
+(4, 1, 'iPhone 12', 'SN-123', 'IP12-BLACK'),
+(4, 2, 'iPhone SE', 'SN-456', 'IPSE-RED'),
+(4, 2, 'iPhone SE', 'SN-456', 'IPSE-BLUE'),
+(4, 6, 'AirPods Pro', 'SN-234', 'APRO1'),
+(4, 7, 'AirPods 2', 'SN-789', 'APO2'),
+(4, 9, 'iPad Pro', 'SN-901', 'IPPRO'),
+(4, 13, 'MacBook Pro', 'SN-678', 'MBP');
 
 
-(2, '20% off Galaxy S21', 1, 20, '2019-08-18 16:00:3', '2023-08-18 16:00:3', 1, 1 , 1, '20OFFS21', 1);
-  5 | Samsung      | Galaxy S21                            | Smartphones              | GS21
+INSERT INTO coupon_product_relation(coupon_id, product_id, product_name, product_sn, product_sku_code)
+VALUES
+(5, 25, 'Nike Dri-FIT T-Shirt', 'SN-002', 'NDFTS'),
+(5, 26, 'Calvin Klein Logo T-Shirt', 'SN-008', 'CKLTS'),
+(5, 27, 'Adidas Essential Track Pants', 'SN-005', 'AEPTP');
 
 
+INSERT INTO coupon_product_relation(coupon_id, product_id, product_name, product_sn, product_sku_code)
+VALUES
+(6, 5, 'Galaxy S21', 'SN-234', 'GS21');
 
 
 DROP TABLE IF EXISTS coupon_history;

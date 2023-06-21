@@ -5,9 +5,11 @@ public class ReceiveAddress {
 
     private Integer memberId;
 
+    private String receiverName;
+
     private String phoneNumber;
 
-    private String street;
+    private String detailAddress;
 
     private String city;
 
@@ -33,6 +35,14 @@ public class ReceiveAddress {
         this.memberId = memberId;
     }
 
+    public String getReceiverName() {
+        return receiverName;
+    }
+
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName;
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -41,12 +51,12 @@ public class ReceiveAddress {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getStreet() {
-        return street;
+    public String getDetailAddress() {
+        return detailAddress;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
+    public void setDetailAddress(String detailAddress) {
+        this.detailAddress = detailAddress;
     }
 
     public String getCity() {

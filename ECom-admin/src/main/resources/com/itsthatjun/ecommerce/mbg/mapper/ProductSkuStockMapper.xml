@@ -3,15 +3,15 @@
 <mapper namespace="com.itsthatjun.ecommerce.mbg.mapper.ProductSkuStockMapper">
   <resultMap id="BaseResultMap" type="com.itsthatjun.ecommerce.mbg.model.ProductSkuStock">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="product_id" jdbcType="NUMERIC" property="productId" />
+    <result column="product_id" jdbcType="INTEGER" property="productId" />
     <result column="sku_code" jdbcType="VARCHAR" property="skuCode" />
     <result column="picture" jdbcType="VARCHAR" property="picture" />
     <result column="price" jdbcType="NUMERIC" property="price" />
     <result column="promotion_price" jdbcType="NUMERIC" property="promotionPrice" />
-    <result column="stock" jdbcType="NUMERIC" property="stock" />
-    <result column="low_stock" jdbcType="NUMERIC" property="lowStock" />
-    <result column="lock_stock" jdbcType="NUMERIC" property="lockStock" />
-    <result column="unit_sold" jdbcType="NUMERIC" property="unitSold" />
+    <result column="stock" jdbcType="INTEGER" property="stock" />
+    <result column="low_stock" jdbcType="INTEGER" property="lowStock" />
+    <result column="lock_stock" jdbcType="INTEGER" property="lockStock" />
+    <result column="unit_sold" jdbcType="INTEGER" property="unitSold" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -110,9 +110,9 @@
       price, promotion_price, stock, 
       low_stock, lock_stock, unit_sold
       )
-    values (#{productId,jdbcType=NUMERIC}, #{skuCode,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, 
-      #{price,jdbcType=NUMERIC}, #{promotionPrice,jdbcType=NUMERIC}, #{stock,jdbcType=NUMERIC}, 
-      #{lowStock,jdbcType=NUMERIC}, #{lockStock,jdbcType=NUMERIC}, #{unitSold,jdbcType=NUMERIC}
+    values (#{productId,jdbcType=INTEGER}, #{skuCode,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, 
+      #{price,jdbcType=NUMERIC}, #{promotionPrice,jdbcType=NUMERIC}, #{stock,jdbcType=INTEGER}, 
+      #{lowStock,jdbcType=INTEGER}, #{lockStock,jdbcType=INTEGER}, #{unitSold,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.ProductSkuStock" useGeneratedKeys="true">
@@ -148,7 +148,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="productId != null">
-        #{productId,jdbcType=NUMERIC},
+        #{productId,jdbcType=INTEGER},
       </if>
       <if test="skuCode != null">
         #{skuCode,jdbcType=VARCHAR},
@@ -163,16 +163,16 @@
         #{promotionPrice,jdbcType=NUMERIC},
       </if>
       <if test="stock != null">
-        #{stock,jdbcType=NUMERIC},
+        #{stock,jdbcType=INTEGER},
       </if>
       <if test="lowStock != null">
-        #{lowStock,jdbcType=NUMERIC},
+        #{lowStock,jdbcType=INTEGER},
       </if>
       <if test="lockStock != null">
-        #{lockStock,jdbcType=NUMERIC},
+        #{lockStock,jdbcType=INTEGER},
       </if>
       <if test="unitSold != null">
-        #{unitSold,jdbcType=NUMERIC},
+        #{unitSold,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -189,7 +189,7 @@
         id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.productId != null">
-        product_id = #{record.productId,jdbcType=NUMERIC},
+        product_id = #{record.productId,jdbcType=INTEGER},
       </if>
       <if test="record.skuCode != null">
         sku_code = #{record.skuCode,jdbcType=VARCHAR},
@@ -204,16 +204,16 @@
         promotion_price = #{record.promotionPrice,jdbcType=NUMERIC},
       </if>
       <if test="record.stock != null">
-        stock = #{record.stock,jdbcType=NUMERIC},
+        stock = #{record.stock,jdbcType=INTEGER},
       </if>
       <if test="record.lowStock != null">
-        low_stock = #{record.lowStock,jdbcType=NUMERIC},
+        low_stock = #{record.lowStock,jdbcType=INTEGER},
       </if>
       <if test="record.lockStock != null">
-        lock_stock = #{record.lockStock,jdbcType=NUMERIC},
+        lock_stock = #{record.lockStock,jdbcType=INTEGER},
       </if>
       <if test="record.unitSold != null">
-        unit_sold = #{record.unitSold,jdbcType=NUMERIC},
+        unit_sold = #{record.unitSold,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -223,15 +223,15 @@
   <update id="updateByExample" parameterType="map">
     update product_sku_stock
     set id = #{record.id,jdbcType=INTEGER},
-      product_id = #{record.productId,jdbcType=NUMERIC},
+      product_id = #{record.productId,jdbcType=INTEGER},
       sku_code = #{record.skuCode,jdbcType=VARCHAR},
       picture = #{record.picture,jdbcType=VARCHAR},
       price = #{record.price,jdbcType=NUMERIC},
       promotion_price = #{record.promotionPrice,jdbcType=NUMERIC},
-      stock = #{record.stock,jdbcType=NUMERIC},
-      low_stock = #{record.lowStock,jdbcType=NUMERIC},
-      lock_stock = #{record.lockStock,jdbcType=NUMERIC},
-      unit_sold = #{record.unitSold,jdbcType=NUMERIC}
+      stock = #{record.stock,jdbcType=INTEGER},
+      low_stock = #{record.lowStock,jdbcType=INTEGER},
+      lock_stock = #{record.lockStock,jdbcType=INTEGER},
+      unit_sold = #{record.unitSold,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -240,7 +240,7 @@
     update product_sku_stock
     <set>
       <if test="productId != null">
-        product_id = #{productId,jdbcType=NUMERIC},
+        product_id = #{productId,jdbcType=INTEGER},
       </if>
       <if test="skuCode != null">
         sku_code = #{skuCode,jdbcType=VARCHAR},
@@ -255,31 +255,31 @@
         promotion_price = #{promotionPrice,jdbcType=NUMERIC},
       </if>
       <if test="stock != null">
-        stock = #{stock,jdbcType=NUMERIC},
+        stock = #{stock,jdbcType=INTEGER},
       </if>
       <if test="lowStock != null">
-        low_stock = #{lowStock,jdbcType=NUMERIC},
+        low_stock = #{lowStock,jdbcType=INTEGER},
       </if>
       <if test="lockStock != null">
-        lock_stock = #{lockStock,jdbcType=NUMERIC},
+        lock_stock = #{lockStock,jdbcType=INTEGER},
       </if>
       <if test="unitSold != null">
-        unit_sold = #{unitSold,jdbcType=NUMERIC},
+        unit_sold = #{unitSold,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.itsthatjun.ecommerce.mbg.model.ProductSkuStock">
     update product_sku_stock
-    set product_id = #{productId,jdbcType=NUMERIC},
+    set product_id = #{productId,jdbcType=INTEGER},
       sku_code = #{skuCode,jdbcType=VARCHAR},
       picture = #{picture,jdbcType=VARCHAR},
       price = #{price,jdbcType=NUMERIC},
       promotion_price = #{promotionPrice,jdbcType=NUMERIC},
-      stock = #{stock,jdbcType=NUMERIC},
-      low_stock = #{lowStock,jdbcType=NUMERIC},
-      lock_stock = #{lockStock,jdbcType=NUMERIC},
-      unit_sold = #{unitSold,jdbcType=NUMERIC}
+      stock = #{stock,jdbcType=INTEGER},
+      low_stock = #{lowStock,jdbcType=INTEGER},
+      lock_stock = #{lockStock,jdbcType=INTEGER},
+      unit_sold = #{unitSold,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

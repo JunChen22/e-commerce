@@ -44,11 +44,11 @@ public class Product {
 
     private BigDecimal salePrice;
 
-    private BigDecimal stock;
+    private Integer stock;
 
-    private BigDecimal lowStock;
+    private Integer lowStock;
 
-    private BigDecimal unitSold;
+    private Integer unitSold;
 
     private BigDecimal weight;
 
@@ -224,27 +224,27 @@ public class Product {
         this.salePrice = salePrice;
     }
 
-    public BigDecimal getStock() {
+    public Integer getStock() {
         return stock;
     }
 
-    public void setStock(BigDecimal stock) {
+    public void setStock(Integer stock) {
         this.stock = stock;
     }
 
-    public BigDecimal getLowStock() {
+    public Integer getLowStock() {
         return lowStock;
     }
 
-    public void setLowStock(BigDecimal lowStock) {
+    public void setLowStock(Integer lowStock) {
         this.lowStock = lowStock;
     }
 
-    public BigDecimal getUnitSold() {
+    public Integer getUnitSold() {
         return unitSold;
     }
 
-    public void setUnitSold(BigDecimal unitSold) {
+    public void setUnitSold(Integer unitSold) {
         this.unitSold = unitSold;
     }
 

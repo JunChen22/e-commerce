@@ -28,6 +28,12 @@ public class CartItemController {
         return cartItemService.addItem(cartItem);
     }
 
+    @ApiOperation("add all item to shopping cart")
+    @PostMapping(value = "/add/all")
+    public List<CartItem> addAll(@RequestBody List<CartItem> cartItem) {
+        return cartItemService.addAllItem(cartItem);
+    }
+
     @ApiOperation("list current user's shopping cart")
     @GetMapping(value = "/list")
     public List<CartItem> list() {

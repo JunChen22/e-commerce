@@ -237,6 +237,13 @@
             <columnOverride column="id" javaType="java.lang.Integer" />
         </table>
 
+        <table tableName="coupon_product_relation">
+            <generatedKey column="id" sqlStatement="JDBC" />
+            <columnOverride column="id" javaType="java.lang.Integer" />
+            <columnOverride column="coupon_id" javaType="java.lang.Integer" />
+            <columnOverride column="product_id" javaType="java.lang.Integer" />
+        </table>
+
         <table tableName="coupon_history">
             <generatedKey column="id" sqlStatement="JDBC" />
             <columnOverride column="id" javaType="java.lang.Integer" />

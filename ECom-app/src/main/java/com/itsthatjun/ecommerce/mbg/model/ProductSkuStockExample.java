@@ -495,52 +495,52 @@ public class ProductSkuStockExample {
             return (Criteria) this;
         }
 
-        public Criteria andStockEqualTo(BigDecimal value) {
+        public Criteria andStockEqualTo(Integer value) {
             addCriterion("stock =", value, "stock");
             return (Criteria) this;
         }
 
-        public Criteria andStockNotEqualTo(BigDecimal value) {
+        public Criteria andStockNotEqualTo(Integer value) {
             addCriterion("stock <>", value, "stock");
             return (Criteria) this;
         }
 
-        public Criteria andStockGreaterThan(BigDecimal value) {
+        public Criteria andStockGreaterThan(Integer value) {
             addCriterion("stock >", value, "stock");
             return (Criteria) this;
         }
 
-        public Criteria andStockGreaterThanOrEqualTo(BigDecimal value) {
+        public Criteria andStockGreaterThanOrEqualTo(Integer value) {
             addCriterion("stock >=", value, "stock");
             return (Criteria) this;
         }
 
-        public Criteria andStockLessThan(BigDecimal value) {
+        public Criteria andStockLessThan(Integer value) {
             addCriterion("stock <", value, "stock");
             return (Criteria) this;
         }
 
-        public Criteria andStockLessThanOrEqualTo(BigDecimal value) {
+        public Criteria andStockLessThanOrEqualTo(Integer value) {
             addCriterion("stock <=", value, "stock");
             return (Criteria) this;
         }
 
-        public Criteria andStockIn(List<BigDecimal> values) {
+        public Criteria andStockIn(List<Integer> values) {
             addCriterion("stock in", values, "stock");
             return (Criteria) this;
         }
 
-        public Criteria andStockNotIn(List<BigDecimal> values) {
+        public Criteria andStockNotIn(List<Integer> values) {
             addCriterion("stock not in", values, "stock");
             return (Criteria) this;
         }
 
-        public Criteria andStockBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andStockBetween(Integer value1, Integer value2) {
             addCriterion("stock between", value1, value2, "stock");
             return (Criteria) this;
         }
 
-        public Criteria andStockNotBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andStockNotBetween(Integer value1, Integer value2) {
             addCriterion("stock not between", value1, value2, "stock");
             return (Criteria) this;
         }
@@ -555,52 +555,52 @@ public class ProductSkuStockExample {
             return (Criteria) this;
         }
 
-        public Criteria andLowStockEqualTo(BigDecimal value) {
+        public Criteria andLowStockEqualTo(Integer value) {
             addCriterion("low_stock =", value, "lowStock");
             return (Criteria) this;
         }
 
-        public Criteria andLowStockNotEqualTo(BigDecimal value) {
+        public Criteria andLowStockNotEqualTo(Integer value) {
             addCriterion("low_stock <>", value, "lowStock");
             return (Criteria) this;
         }
 
-        public Criteria andLowStockGreaterThan(BigDecimal value) {
+        public Criteria andLowStockGreaterThan(Integer value) {
             addCriterion("low_stock >", value, "lowStock");
             return (Criteria) this;
         }
 
-        public Criteria andLowStockGreaterThanOrEqualTo(BigDecimal value) {
+        public Criteria andLowStockGreaterThanOrEqualTo(Integer value) {
             addCriterion("low_stock >=", value, "lowStock");
             return (Criteria) this;
         }
 
-        public Criteria andLowStockLessThan(BigDecimal value) {
+        public Criteria andLowStockLessThan(Integer value) {
             addCriterion("low_stock <", value, "lowStock");
             return (Criteria) this;
         }
 
-        public Criteria andLowStockLessThanOrEqualTo(BigDecimal value) {
+        public Criteria andLowStockLessThanOrEqualTo(Integer value) {
             addCriterion("low_stock <=", value, "lowStock");
             return (Criteria) this;
         }
 
-        public Criteria andLowStockIn(List<BigDecimal> values) {
+        public Criteria andLowStockIn(List<Integer> values) {
             addCriterion("low_stock in", values, "lowStock");
             return (Criteria) this;
         }
 
-        public Criteria andLowStockNotIn(List<BigDecimal> values) {
+        public Criteria andLowStockNotIn(List<Integer> values) {
             addCriterion("low_stock not in", values, "lowStock");
             return (Criteria) this;
         }
 
-        public Criteria andLowStockBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andLowStockBetween(Integer value1, Integer value2) {
             addCriterion("low_stock between", value1, value2, "lowStock");
             return (Criteria) this;
         }
 
-        public Criteria andLowStockNotBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andLowStockNotBetween(Integer value1, Integer value2) {
             addCriterion("low_stock not between", value1, value2, "lowStock");
             return (Criteria) this;
         }
@@ -615,52 +615,52 @@ public class ProductSkuStockExample {
             return (Criteria) this;
         }
 
-        public Criteria andLockStockEqualTo(BigDecimal value) {
+        public Criteria andLockStockEqualTo(Integer value) {
             addCriterion("lock_stock =", value, "lockStock");
             return (Criteria) this;
         }
 
-        public Criteria andLockStockNotEqualTo(BigDecimal value) {
+        public Criteria andLockStockNotEqualTo(Integer value) {
             addCriterion("lock_stock <>", value, "lockStock");
             return (Criteria) this;
         }
 
-        public Criteria andLockStockGreaterThan(BigDecimal value) {
+        public Criteria andLockStockGreaterThan(Integer value) {
             addCriterion("lock_stock >", value, "lockStock");
             return (Criteria) this;
         }
 
-        public Criteria andLockStockGreaterThanOrEqualTo(BigDecimal value) {
+        public Criteria andLockStockGreaterThanOrEqualTo(Integer value) {
             addCriterion("lock_stock >=", value, "lockStock");
             return (Criteria) this;
         }
 
-        public Criteria andLockStockLessThan(BigDecimal value) {
+        public Criteria andLockStockLessThan(Integer value) {
             addCriterion("lock_stock <", value, "lockStock");
             return (Criteria) this;
         }
 
-        public Criteria andLockStockLessThanOrEqualTo(BigDecimal value) {
+        public Criteria andLockStockLessThanOrEqualTo(Integer value) {
             addCriterion("lock_stock <=", value, "lockStock");
             return (Criteria) this;
         }
 
-        public Criteria andLockStockIn(List<BigDecimal> values) {
+        public Criteria andLockStockIn(List<Integer> values) {
             addCriterion("lock_stock in", values, "lockStock");
             return (Criteria) this;
         }
 
-        public Criteria andLockStockNotIn(List<BigDecimal> values) {
+        public Criteria andLockStockNotIn(List<Integer> values) {
             addCriterion("lock_stock not in", values, "lockStock");
             return (Criteria) this;
         }
 
-        public Criteria andLockStockBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andLockStockBetween(Integer value1, Integer value2) {
             addCriterion("lock_stock between", value1, value2, "lockStock");
             return (Criteria) this;
         }
 
-        public Criteria andLockStockNotBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andLockStockNotBetween(Integer value1, Integer value2) {
             addCriterion("lock_stock not between", value1, value2, "lockStock");
             return (Criteria) this;
         }
@@ -675,52 +675,52 @@ public class ProductSkuStockExample {
             return (Criteria) this;
         }
 
-        public Criteria andUnitSoldEqualTo(BigDecimal value) {
+        public Criteria andUnitSoldEqualTo(Integer value) {
             addCriterion("unit_sold =", value, "unitSold");
             return (Criteria) this;
         }
 
-        public Criteria andUnitSoldNotEqualTo(BigDecimal value) {
+        public Criteria andUnitSoldNotEqualTo(Integer value) {
             addCriterion("unit_sold <>", value, "unitSold");
             return (Criteria) this;
         }
 
-        public Criteria andUnitSoldGreaterThan(BigDecimal value) {
+        public Criteria andUnitSoldGreaterThan(Integer value) {
             addCriterion("unit_sold >", value, "unitSold");
             return (Criteria) this;
         }
 
-        public Criteria andUnitSoldGreaterThanOrEqualTo(BigDecimal value) {
+        public Criteria andUnitSoldGreaterThanOrEqualTo(Integer value) {
             addCriterion("unit_sold >=", value, "unitSold");
             return (Criteria) this;
         }
 
-        public Criteria andUnitSoldLessThan(BigDecimal value) {
+        public Criteria andUnitSoldLessThan(Integer value) {
             addCriterion("unit_sold <", value, "unitSold");
             return (Criteria) this;
         }
 
-        public Criteria andUnitSoldLessThanOrEqualTo(BigDecimal value) {
+        public Criteria andUnitSoldLessThanOrEqualTo(Integer value) {
             addCriterion("unit_sold <=", value, "unitSold");
             return (Criteria) this;
         }
 
-        public Criteria andUnitSoldIn(List<BigDecimal> values) {
+        public Criteria andUnitSoldIn(List<Integer> values) {
             addCriterion("unit_sold in", values, "unitSold");
             return (Criteria) this;
         }
 
-        public Criteria andUnitSoldNotIn(List<BigDecimal> values) {
+        public Criteria andUnitSoldNotIn(List<Integer> values) {
             addCriterion("unit_sold not in", values, "unitSold");
             return (Criteria) this;
         }
 
-        public Criteria andUnitSoldBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andUnitSoldBetween(Integer value1, Integer value2) {
             addCriterion("unit_sold between", value1, value2, "unitSold");
             return (Criteria) this;
         }
 
-        public Criteria andUnitSoldNotBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andUnitSoldNotBetween(Integer value1, Integer value2) {
             addCriterion("unit_sold not between", value1, value2, "unitSold");
             return (Criteria) this;
         }

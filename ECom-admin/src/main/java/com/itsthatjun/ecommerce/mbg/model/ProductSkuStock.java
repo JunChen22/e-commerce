@@ -15,13 +15,13 @@ public class ProductSkuStock {
 
     private BigDecimal promotionPrice;
 
-    private BigDecimal stock;
+    private Integer stock;
 
-    private BigDecimal lowStock;
+    private Integer lowStock;
 
-    private BigDecimal lockStock;
+    private Integer lockStock;
 
-    private BigDecimal unitSold;
+    private Integer unitSold;
 
     public Integer getId() {
         return id;
@@ -71,35 +71,35 @@ public class ProductSkuStock {
         this.promotionPrice = promotionPrice;
     }
 
-    public BigDecimal getStock() {
+    public Integer getStock() {
         return stock;
     }
 
-    public void setStock(BigDecimal stock) {
+    public void setStock(Integer stock) {
         this.stock = stock;
     }
 
-    public BigDecimal getLowStock() {
+    public Integer getLowStock() {
         return lowStock;
     }
 
-    public void setLowStock(BigDecimal lowStock) {
+    public void setLowStock(Integer lowStock) {
         this.lowStock = lowStock;
     }
 
-    public BigDecimal getLockStock() {
+    public Integer getLockStock() {
         return lockStock;
     }
 
-    public void setLockStock(BigDecimal lockStock) {
+    public void setLockStock(Integer lockStock) {
         this.lockStock = lockStock;
     }
 
-    public BigDecimal getUnitSold() {
+    public Integer getUnitSold() {
         return unitSold;
     }
 
-    public void setUnitSold(BigDecimal unitSold) {
+    public void setUnitSold(Integer unitSold) {
         this.unitSold = unitSold;
     }
 }

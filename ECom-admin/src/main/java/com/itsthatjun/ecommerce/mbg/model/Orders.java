@@ -16,8 +16,6 @@ public class Orders {
 
     private BigDecimal totalAmount;
 
-    private String promotionInfo;
-
     private BigDecimal promotionAmount;
 
     private BigDecimal couponAmount;
@@ -110,14 +108,6 @@ public class Orders {
 
     public void setTotalAmount(BigDecimal totalAmount) {
         this.totalAmount = totalAmount;
-    }
-
-    public String getPromotionInfo() {
-        return promotionInfo;
-    }
-
-    public void setPromotionInfo(String promotionInfo) {
-        this.promotionInfo = promotionInfo;
     }
 
     public BigDecimal getPromotionAmount() {
