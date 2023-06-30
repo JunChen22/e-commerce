@@ -193,7 +193,7 @@ User management system(UMS) - manage user accounts and permissions, including au
 
 3. (will ask for login if your e-commerce requires, this ECom requires)
 
-4. geneated (actual) order ->
+4. generate (actual) order ->
    calculate final price(coupon, promotion, sale), check stock, lock in stock, shipping
    -> send price to PayPal -> PayPal send customer to their paypal page -> (this part not done by us)
    they choose their payment and agreed amount to pay to PayPal -> PayPal send us pay proof they paid to PayPal,

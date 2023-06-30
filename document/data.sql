@@ -461,7 +461,7 @@ CREATE TABLE product (
   picture_album  NUMERIC,           -- collection of pictures
   description       TEXT,
   original_price  decimal(10, 2),
-  on_sale_status NUMERIC,  --  0-> not on sale; 1-> is on sale; 2-> flash sale/special sales/clarance/used item
+  on_sale_status integer,  --  0-> not on sale; 1-> is on sale; 2-> flash sale/special sales/clarance/used item
   sale_price        decimal(10, 2),
   stock             INTEGER,
   low_stock INTEGER, -- -- low stock alarm, default is about 10% alarm
@@ -1929,9 +1929,9 @@ CREATE TABLE promotion_sale_product_relation (
     promotion_sale_id bigint NOT NULL,
     product_id bigint NOT NULL,
     product_sku_code TEXT,
-    promotion_price bigint NOT NULL,        -- what the price - promotion sale amount = promotion_price
-    promotion_count  bigint NOT NULL,       -- how many allowed to sell at discount, need to check sku stock
-    promotion_limit  bigint NOT NULL       -- number of limit per member/account
+    promotion_price numeric NOT NULL,        -- what the price - promotion sale amount = promotion_price
+    promotion_count  integer NOT NULL,       -- how many allowed to sell at discount, need to check sku stock
+    promotion_limit  integer NOT NULL       -- number of limit per member/account
 );
 
 -- TODO: need to check when stock/sold meet limit before canceling hte discount
@@ -1980,7 +1980,6 @@ UPDATE product_sku_stock SET promotion_price = 139.99 WHERE product_id = 8 AND s
 
 UPDATE product SET on_sale_status = 1, sale_price = 189.99 WHERE id = 10;
 UPDATE product_sku_stock SET promotion_price = 189.99 WHERE product_id = 10 AND sku_code = 'OPW3';
-
 
 -- iphone-SE 10% OFF
 INSERT INTO promotion_sale_product_relation(promotion_sale_id , product_id, product_sku_code, promotion_price, promotion_count, promotion_limit)

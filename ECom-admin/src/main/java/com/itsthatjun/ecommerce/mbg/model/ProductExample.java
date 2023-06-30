@@ -1266,52 +1266,52 @@ public class ProductExample {
             return (Criteria) this;
         }
 
-        public Criteria andOnSaleStatusEqualTo(BigDecimal value) {
+        public Criteria andOnSaleStatusEqualTo(Integer value) {
             addCriterion("on_sale_status =", value, "onSaleStatus");
             return (Criteria) this;
         }
 
-        public Criteria andOnSaleStatusNotEqualTo(BigDecimal value) {
+        public Criteria andOnSaleStatusNotEqualTo(Integer value) {
             addCriterion("on_sale_status <>", value, "onSaleStatus");
             return (Criteria) this;
         }
 
-        public Criteria andOnSaleStatusGreaterThan(BigDecimal value) {
+        public Criteria andOnSaleStatusGreaterThan(Integer value) {
             addCriterion("on_sale_status >", value, "onSaleStatus");
             return (Criteria) this;
         }
 
-        public Criteria andOnSaleStatusGreaterThanOrEqualTo(BigDecimal value) {
+        public Criteria andOnSaleStatusGreaterThanOrEqualTo(Integer value) {
             addCriterion("on_sale_status >=", value, "onSaleStatus");
             return (Criteria) this;
         }
 
-        public Criteria andOnSaleStatusLessThan(BigDecimal value) {
+        public Criteria andOnSaleStatusLessThan(Integer value) {
             addCriterion("on_sale_status <", value, "onSaleStatus");
             return (Criteria) this;
         }
 
-        public Criteria andOnSaleStatusLessThanOrEqualTo(BigDecimal value) {
+        public Criteria andOnSaleStatusLessThanOrEqualTo(Integer value) {
             addCriterion("on_sale_status <=", value, "onSaleStatus");
             return (Criteria) this;
         }
 
-        public Criteria andOnSaleStatusIn(List<BigDecimal> values) {
+        public Criteria andOnSaleStatusIn(List<Integer> values) {
             addCriterion("on_sale_status in", values, "onSaleStatus");
             return (Criteria) this;
         }
 
-        public Criteria andOnSaleStatusNotIn(List<BigDecimal> values) {
+        public Criteria andOnSaleStatusNotIn(List<Integer> values) {
             addCriterion("on_sale_status not in", values, "onSaleStatus");
             return (Criteria) this;
         }
 
-        public Criteria andOnSaleStatusBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andOnSaleStatusBetween(Integer value1, Integer value2) {
             addCriterion("on_sale_status between", value1, value2, "onSaleStatus");
             return (Criteria) this;
         }
 
-        public Criteria andOnSaleStatusNotBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andOnSaleStatusNotBetween(Integer value1, Integer value2) {
             addCriterion("on_sale_status not between", value1, value2, "onSaleStatus");
             return (Criteria) this;
         }

@@ -91,9 +91,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void deleteOrder(String orderSerialNumber) {
+    public void cancelOrder(String orderSerialNumber) {
         OrdersExample example = new OrdersExample();
         example.createCriteria().andOrderSnEqualTo(orderSerialNumber);
+        // TODO: cancel order/delete
         ordersMapper.deleteByExample(example);
     }
 }

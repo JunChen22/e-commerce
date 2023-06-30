@@ -1,5 +1,7 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
+import java.math.BigDecimal;
+
 public class PromotionSaleProductRelation {
     private Integer id;
 
@@ -9,11 +11,11 @@ public class PromotionSaleProductRelation {
 
     private String productSkuCode;
 
-    private Long promotionPrice;
+    private BigDecimal promotionPrice;
 
-    private Long promotionCount;
+    private Integer promotionCount;
 
-    private Long promotionLimit;
+    private Integer promotionLimit;
 
     public Integer getId() {
         return id;
@@ -47,27 +49,27 @@ public class PromotionSaleProductRelation {
         this.productSkuCode = productSkuCode;
     }
 
-    public Long getPromotionPrice() {
+    public BigDecimal getPromotionPrice() {
         return promotionPrice;
     }
 
-    public void setPromotionPrice(Long promotionPrice) {
+    public void setPromotionPrice(BigDecimal promotionPrice) {
         this.promotionPrice = promotionPrice;
     }
 
-    public Long getPromotionCount() {
+    public Integer getPromotionCount() {
         return promotionCount;
     }
 
-    public void setPromotionCount(Long promotionCount) {
+    public void setPromotionCount(Integer promotionCount) {
         this.promotionCount = promotionCount;
     }
 
-    public Long getPromotionLimit() {
+    public Integer getPromotionLimit() {
         return promotionLimit;
     }
 
-    public void setPromotionLimit(Long promotionLimit) {
+    public void setPromotionLimit(Integer promotionLimit) {
         this.promotionLimit = promotionLimit;
     }
 }

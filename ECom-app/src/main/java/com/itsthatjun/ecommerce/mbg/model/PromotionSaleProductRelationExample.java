@@ -1,5 +1,6 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -364,52 +365,52 @@ public class PromotionSaleProductRelationExample {
             return (Criteria) this;
         }
 
-        public Criteria andPromotionPriceEqualTo(Long value) {
+        public Criteria andPromotionPriceEqualTo(BigDecimal value) {
             addCriterion("promotion_price =", value, "promotionPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPromotionPriceNotEqualTo(Long value) {
+        public Criteria andPromotionPriceNotEqualTo(BigDecimal value) {
             addCriterion("promotion_price <>", value, "promotionPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPromotionPriceGreaterThan(Long value) {
+        public Criteria andPromotionPriceGreaterThan(BigDecimal value) {
             addCriterion("promotion_price >", value, "promotionPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPromotionPriceGreaterThanOrEqualTo(Long value) {
+        public Criteria andPromotionPriceGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("promotion_price >=", value, "promotionPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPromotionPriceLessThan(Long value) {
+        public Criteria andPromotionPriceLessThan(BigDecimal value) {
             addCriterion("promotion_price <", value, "promotionPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPromotionPriceLessThanOrEqualTo(Long value) {
+        public Criteria andPromotionPriceLessThanOrEqualTo(BigDecimal value) {
             addCriterion("promotion_price <=", value, "promotionPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPromotionPriceIn(List<Long> values) {
+        public Criteria andPromotionPriceIn(List<BigDecimal> values) {
             addCriterion("promotion_price in", values, "promotionPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPromotionPriceNotIn(List<Long> values) {
+        public Criteria andPromotionPriceNotIn(List<BigDecimal> values) {
             addCriterion("promotion_price not in", values, "promotionPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPromotionPriceBetween(Long value1, Long value2) {
+        public Criteria andPromotionPriceBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("promotion_price between", value1, value2, "promotionPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPromotionPriceNotBetween(Long value1, Long value2) {
+        public Criteria andPromotionPriceNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("promotion_price not between", value1, value2, "promotionPrice");
             return (Criteria) this;
         }
@@ -424,52 +425,52 @@ public class PromotionSaleProductRelationExample {
             return (Criteria) this;
         }
 
-        public Criteria andPromotionCountEqualTo(Long value) {
+        public Criteria andPromotionCountEqualTo(Integer value) {
             addCriterion("promotion_count =", value, "promotionCount");
             return (Criteria) this;
         }
 
-        public Criteria andPromotionCountNotEqualTo(Long value) {
+        public Criteria andPromotionCountNotEqualTo(Integer value) {
             addCriterion("promotion_count <>", value, "promotionCount");
             return (Criteria) this;
         }
 
-        public Criteria andPromotionCountGreaterThan(Long value) {
+        public Criteria andPromotionCountGreaterThan(Integer value) {
             addCriterion("promotion_count >", value, "promotionCount");
             return (Criteria) this;
         }
 
-        public Criteria andPromotionCountGreaterThanOrEqualTo(Long value) {
+        public Criteria andPromotionCountGreaterThanOrEqualTo(Integer value) {
             addCriterion("promotion_count >=", value, "promotionCount");
             return (Criteria) this;
         }
 
-        public Criteria andPromotionCountLessThan(Long value) {
+        public Criteria andPromotionCountLessThan(Integer value) {
             addCriterion("promotion_count <", value, "promotionCount");
             return (Criteria) this;
         }
 
-        public Criteria andPromotionCountLessThanOrEqualTo(Long value) {
+        public Criteria andPromotionCountLessThanOrEqualTo(Integer value) {
             addCriterion("promotion_count <=", value, "promotionCount");
             return (Criteria) this;
         }
 
-        public Criteria andPromotionCountIn(List<Long> values) {
+        public Criteria andPromotionCountIn(List<Integer> values) {
             addCriterion("promotion_count in", values, "promotionCount");
             return (Criteria) this;
         }
 
-        public Criteria andPromotionCountNotIn(List<Long> values) {
+        public Criteria andPromotionCountNotIn(List<Integer> values) {
             addCriterion("promotion_count not in", values, "promotionCount");
             return (Criteria) this;
         }
 
-        public Criteria andPromotionCountBetween(Long value1, Long value2) {
+        public Criteria andPromotionCountBetween(Integer value1, Integer value2) {
             addCriterion("promotion_count between", value1, value2, "promotionCount");
             return (Criteria) this;
         }
 
-        public Criteria andPromotionCountNotBetween(Long value1, Long value2) {
+        public Criteria andPromotionCountNotBetween(Integer value1, Integer value2) {
             addCriterion("promotion_count not between", value1, value2, "promotionCount");
             return (Criteria) this;
         }
@@ -484,52 +485,52 @@ public class PromotionSaleProductRelationExample {
             return (Criteria) this;
         }
 
-        public Criteria andPromotionLimitEqualTo(Long value) {
+        public Criteria andPromotionLimitEqualTo(Integer value) {
             addCriterion("promotion_limit =", value, "promotionLimit");
             return (Criteria) this;
         }
 
-        public Criteria andPromotionLimitNotEqualTo(Long value) {
+        public Criteria andPromotionLimitNotEqualTo(Integer value) {
             addCriterion("promotion_limit <>", value, "promotionLimit");
             return (Criteria) this;
         }
 
-        public Criteria andPromotionLimitGreaterThan(Long value) {
+        public Criteria andPromotionLimitGreaterThan(Integer value) {
             addCriterion("promotion_limit >", value, "promotionLimit");
             return (Criteria) this;
         }
 
-        public Criteria andPromotionLimitGreaterThanOrEqualTo(Long value) {
+        public Criteria andPromotionLimitGreaterThanOrEqualTo(Integer value) {
             addCriterion("promotion_limit >=", value, "promotionLimit");
             return (Criteria) this;
         }
 
-        public Criteria andPromotionLimitLessThan(Long value) {
+        public Criteria andPromotionLimitLessThan(Integer value) {
             addCriterion("promotion_limit <", value, "promotionLimit");
             return (Criteria) this;
         }
 
-        public Criteria andPromotionLimitLessThanOrEqualTo(Long value) {
+        public Criteria andPromotionLimitLessThanOrEqualTo(Integer value) {
             addCriterion("promotion_limit <=", value, "promotionLimit");
             return (Criteria) this;
         }
 
-        public Criteria andPromotionLimitIn(List<Long> values) {
+        public Criteria andPromotionLimitIn(List<Integer> values) {
             addCriterion("promotion_limit in", values, "promotionLimit");
             return (Criteria) this;
         }
 
-        public Criteria andPromotionLimitNotIn(List<Long> values) {
+        public Criteria andPromotionLimitNotIn(List<Integer> values) {
             addCriterion("promotion_limit not in", values, "promotionLimit");
             return (Criteria) this;
         }
 
-        public Criteria andPromotionLimitBetween(Long value1, Long value2) {
+        public Criteria andPromotionLimitBetween(Integer value1, Integer value2) {
             addCriterion("promotion_limit between", value1, value2, "promotionLimit");
             return (Criteria) this;
         }
 
-        public Criteria andPromotionLimitNotBetween(Long value1, Long value2) {
+        public Criteria andPromotionLimitNotBetween(Integer value1, Integer value2) {
             addCriterion("promotion_limit not between", value1, value2, "promotionLimit");
             return (Criteria) this;
         }

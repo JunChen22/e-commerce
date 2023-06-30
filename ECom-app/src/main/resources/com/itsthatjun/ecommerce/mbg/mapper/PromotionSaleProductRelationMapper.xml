@@ -6,9 +6,9 @@
     <result column="promotion_sale_id" jdbcType="BIGINT" property="promotionSaleId" />
     <result column="product_id" jdbcType="BIGINT" property="productId" />
     <result column="product_sku_code" jdbcType="VARCHAR" property="productSkuCode" />
-    <result column="promotion_price" jdbcType="BIGINT" property="promotionPrice" />
-    <result column="promotion_count" jdbcType="BIGINT" property="promotionCount" />
-    <result column="promotion_limit" jdbcType="BIGINT" property="promotionLimit" />
+    <result column="promotion_price" jdbcType="NUMERIC" property="promotionPrice" />
+    <result column="promotion_count" jdbcType="INTEGER" property="promotionCount" />
+    <result column="promotion_limit" jdbcType="INTEGER" property="promotionLimit" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -107,7 +107,7 @@
       promotion_price, promotion_count, promotion_limit
       )
     values (#{promotionSaleId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, #{productSkuCode,jdbcType=VARCHAR}, 
-      #{promotionPrice,jdbcType=BIGINT}, #{promotionCount,jdbcType=BIGINT}, #{promotionLimit,jdbcType=BIGINT}
+      #{promotionPrice,jdbcType=NUMERIC}, #{promotionCount,jdbcType=INTEGER}, #{promotionLimit,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.PromotionSaleProductRelation" useGeneratedKeys="true">
@@ -143,13 +143,13 @@
         #{productSkuCode,jdbcType=VARCHAR},
       </if>
       <if test="promotionPrice != null">
-        #{promotionPrice,jdbcType=BIGINT},
+        #{promotionPrice,jdbcType=NUMERIC},
       </if>
       <if test="promotionCount != null">
-        #{promotionCount,jdbcType=BIGINT},
+        #{promotionCount,jdbcType=INTEGER},
       </if>
       <if test="promotionLimit != null">
-        #{promotionLimit,jdbcType=BIGINT},
+        #{promotionLimit,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -175,13 +175,13 @@
         product_sku_code = #{record.productSkuCode,jdbcType=VARCHAR},
       </if>
       <if test="record.promotionPrice != null">
-        promotion_price = #{record.promotionPrice,jdbcType=BIGINT},
+        promotion_price = #{record.promotionPrice,jdbcType=NUMERIC},
       </if>
       <if test="record.promotionCount != null">
-        promotion_count = #{record.promotionCount,jdbcType=BIGINT},
+        promotion_count = #{record.promotionCount,jdbcType=INTEGER},
       </if>
       <if test="record.promotionLimit != null">
-        promotion_limit = #{record.promotionLimit,jdbcType=BIGINT},
+        promotion_limit = #{record.promotionLimit,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -194,9 +194,9 @@
       promotion_sale_id = #{record.promotionSaleId,jdbcType=BIGINT},
       product_id = #{record.productId,jdbcType=BIGINT},
       product_sku_code = #{record.productSkuCode,jdbcType=VARCHAR},
-      promotion_price = #{record.promotionPrice,jdbcType=BIGINT},
-      promotion_count = #{record.promotionCount,jdbcType=BIGINT},
-      promotion_limit = #{record.promotionLimit,jdbcType=BIGINT}
+      promotion_price = #{record.promotionPrice,jdbcType=NUMERIC},
+      promotion_count = #{record.promotionCount,jdbcType=INTEGER},
+      promotion_limit = #{record.promotionLimit,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -214,13 +214,13 @@
         product_sku_code = #{productSkuCode,jdbcType=VARCHAR},
       </if>
       <if test="promotionPrice != null">
-        promotion_price = #{promotionPrice,jdbcType=BIGINT},
+        promotion_price = #{promotionPrice,jdbcType=NUMERIC},
       </if>
       <if test="promotionCount != null">
-        promotion_count = #{promotionCount,jdbcType=BIGINT},
+        promotion_count = #{promotionCount,jdbcType=INTEGER},
       </if>
       <if test="promotionLimit != null">
-        promotion_limit = #{promotionLimit,jdbcType=BIGINT},
+        promotion_limit = #{promotionLimit,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -230,9 +230,9 @@
     set promotion_sale_id = #{promotionSaleId,jdbcType=BIGINT},
       product_id = #{productId,jdbcType=BIGINT},
       product_sku_code = #{productSkuCode,jdbcType=VARCHAR},
-      promotion_price = #{promotionPrice,jdbcType=BIGINT},
-      promotion_count = #{promotionCount,jdbcType=BIGINT},
-      promotion_limit = #{promotionLimit,jdbcType=BIGINT}
+      promotion_price = #{promotionPrice,jdbcType=NUMERIC},
+      promotion_count = #{promotionCount,jdbcType=INTEGER},
+      promotion_limit = #{promotionLimit,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -1,7 +1,6 @@
 package com.itsthatjun.ecommerce.controller.OMS;
 
 import com.itsthatjun.ecommerce.mbg.model.Orders;
-import com.itsthatjun.ecommerce.mbg.model.Product;
 import com.itsthatjun.ecommerce.service.OMS.implementation.OrderServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -76,6 +75,6 @@ public class OrderController {
     @DeleteMapping("/delete/{serialNumber}")
     @ApiOperation(value = "delete a order by serial number")
     public void deleteOrder(@PathVariable String serialNumber){
-        orderService.deleteOrder(serialNumber);
+        orderService.cancelOrder(serialNumber);
     }
 }

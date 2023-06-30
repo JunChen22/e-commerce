@@ -40,7 +40,7 @@ public class Product {
 
     private BigDecimal originalPrice;
 
-    private BigDecimal onSaleStatus;
+    private Integer onSaleStatus;
 
     private BigDecimal salePrice;
 
@@ -208,11 +208,11 @@ public class Product {
         this.originalPrice = originalPrice;
     }
 
-    public BigDecimal getOnSaleStatus() {
+    public Integer getOnSaleStatus() {
         return onSaleStatus;
     }
 
-    public void setOnSaleStatus(BigDecimal onSaleStatus) {
+    public void setOnSaleStatus(Integer onSaleStatus) {
         this.onSaleStatus = onSaleStatus;
     }
 

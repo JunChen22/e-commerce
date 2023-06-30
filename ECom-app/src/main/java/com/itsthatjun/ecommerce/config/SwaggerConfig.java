@@ -19,7 +19,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.itsthatjun.spring.ecommerce.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.itsthatjun.ecommerce.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

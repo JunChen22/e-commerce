@@ -20,7 +20,7 @@
     <result column="picture_album" jdbcType="NUMERIC" property="pictureAlbum" />
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="original_price" jdbcType="NUMERIC" property="originalPrice" />
-    <result column="on_sale_status" jdbcType="NUMERIC" property="onSaleStatus" />
+    <result column="on_sale_status" jdbcType="INTEGER" property="onSaleStatus" />
     <result column="sale_price" jdbcType="NUMERIC" property="salePrice" />
     <result column="stock" jdbcType="INTEGER" property="stock" />
     <result column="low_stock" jdbcType="INTEGER" property="lowStock" />
@@ -144,7 +144,7 @@
       #{sn,jdbcType=VARCHAR}, #{deleteStatus,jdbcType=NUMERIC}, #{publishStatus,jdbcType=NUMERIC}, 
       #{newStatus,jdbcType=NUMERIC}, #{recommendStatus,jdbcType=NUMERIC}, #{verifyStatus,jdbcType=NUMERIC}, 
       #{subTitle,jdbcType=VARCHAR}, #{coverPicture,jdbcType=VARCHAR}, #{pictureAlbum,jdbcType=NUMERIC}, 
-      #{description,jdbcType=VARCHAR}, #{originalPrice,jdbcType=NUMERIC}, #{onSaleStatus,jdbcType=NUMERIC}, 
+      #{description,jdbcType=VARCHAR}, #{originalPrice,jdbcType=NUMERIC}, #{onSaleStatus,jdbcType=INTEGER}, 
       #{salePrice,jdbcType=NUMERIC}, #{stock,jdbcType=INTEGER}, #{lowStock,jdbcType=INTEGER}, 
       #{unitSold,jdbcType=INTEGER}, #{weight,jdbcType=NUMERIC}, #{keywords,jdbcType=VARCHAR}, 
       #{detailTitle,jdbcType=VARCHAR}, #{detailDesc,jdbcType=VARCHAR}, #{descriptionAlbum,jdbcType=NUMERIC}, 
@@ -294,7 +294,7 @@
         #{originalPrice,jdbcType=NUMERIC},
       </if>
       <if test="onSaleStatus != null">
-        #{onSaleStatus,jdbcType=NUMERIC},
+        #{onSaleStatus,jdbcType=INTEGER},
       </if>
       <if test="salePrice != null">
         #{salePrice,jdbcType=NUMERIC},
@@ -395,7 +395,7 @@
         original_price = #{record.originalPrice,jdbcType=NUMERIC},
       </if>
       <if test="record.onSaleStatus != null">
-        on_sale_status = #{record.onSaleStatus,jdbcType=NUMERIC},
+        on_sale_status = #{record.onSaleStatus,jdbcType=INTEGER},
       </if>
       <if test="record.salePrice != null">
         sale_price = #{record.salePrice,jdbcType=NUMERIC},
@@ -455,7 +455,7 @@
       picture_album = #{record.pictureAlbum,jdbcType=NUMERIC},
       description = #{record.description,jdbcType=VARCHAR},
       original_price = #{record.originalPrice,jdbcType=NUMERIC},
-      on_sale_status = #{record.onSaleStatus,jdbcType=NUMERIC},
+      on_sale_status = #{record.onSaleStatus,jdbcType=INTEGER},
       sale_price = #{record.salePrice,jdbcType=NUMERIC},
       stock = #{record.stock,jdbcType=INTEGER},
       low_stock = #{record.lowStock,jdbcType=INTEGER},
@@ -526,7 +526,7 @@
         original_price = #{originalPrice,jdbcType=NUMERIC},
       </if>
       <if test="onSaleStatus != null">
-        on_sale_status = #{onSaleStatus,jdbcType=NUMERIC},
+        on_sale_status = #{onSaleStatus,jdbcType=INTEGER},
       </if>
       <if test="salePrice != null">
         sale_price = #{salePrice,jdbcType=NUMERIC},
@@ -583,7 +583,7 @@
       picture_album = #{pictureAlbum,jdbcType=NUMERIC},
       description = #{description,jdbcType=VARCHAR},
       original_price = #{originalPrice,jdbcType=NUMERIC},
-      on_sale_status = #{onSaleStatus,jdbcType=NUMERIC},
+      on_sale_status = #{onSaleStatus,jdbcType=INTEGER},
       sale_price = #{salePrice,jdbcType=NUMERIC},
       stock = #{stock,jdbcType=INTEGER},
       low_stock = #{lowStock,jdbcType=INTEGER},

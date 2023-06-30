@@ -1,35 +1,50 @@
 package com.itsthatjun.ecommerce.service.SMS;
 
-import com.itsthatjun.ecommerce.mbg.model.Brand;
+import com.itsthatjun.ecommerce.dto.SMS.OnSaleRequest;
 import com.itsthatjun.ecommerce.mbg.model.Product;
+import com.itsthatjun.ecommerce.mbg.model.PromotionSale;
+import io.swagger.annotations.ApiModelProperty;
 
-import java.util.Date;
 import java.util.List;
 
 public interface SalesService {
 
     // 0-> not on sale; 1-> is on sale; 2-> flash sale/special sales/clarance/used item
     // promotional sale and flash sale is similar
+    // promotion sale is the "normal" discount. flash sale for clearance/used
+    @ApiModelProperty(value = "get all promotion items on sale")  // TODO: add date interval, active status
+    List<PromotionSale> getAllPromotionalSale();
 
-    // get all promotion/"normal" items on sale
-    List<Product> getAllPromotionalSale();
+    @ApiModelProperty(value = "get all promotion items on sale")
+    List<Product> getAllPromotionalSaleItems();
 
-    // get all sales items
-    List<Product> getAllFlashSale();
+    @ApiModelProperty(value = "get all sales items")
+    List<Product> getAllFlashSaleItems();
 
-    // get detail of specific item
-    Product getProduct();
+    @ApiModelProperty(value = "create sale on list of items")
+    List<Product> createList(OnSaleRequest request);
 
-    // create
-    Product create(Product product, Date saleEnd);
+    @ApiModelProperty(value = "create sales based on brand name")
+    List<Product> createBrandSale(OnSaleRequest request);
 
-    Product createBrandSale(String brandName, Date saleEnd);
+    @ApiModelProperty(value = "create sales based on product category")
+    List<Product> createCategorySale(OnSaleRequest request);
 
-    Product createCategorySale(String categoryName, Date saleEnd);
+    @ApiModelProperty(value = "")
+    OnSaleRequest updateStatus(OnSaleRequest updateSaleRequest);
 
-    // update
-    Product update(Product updateProduct);
+    @ApiModelProperty(value = "")
+    OnSaleRequest upateSaleDate(OnSaleRequest updateSaleRequest);
 
-    // delete
-    Product delete(Product product);
+    @ApiModelProperty(value = "")
+    OnSaleRequest updateSaleAmount(OnSaleRequest updateSaleRequest);
+
+    @ApiModelProperty(value = "")
+    OnSaleRequest updateSaleLimt(OnSaleRequest updateSaleRequest);
+
+    @ApiModelProperty(value = "update promotion sale to clarance sale vice versa")
+    OnSaleRequest updateSaleType(OnSaleRequest updateSaleRequest);
+
+    @ApiModelProperty(value = "delete")
+    void delete(int promotionSaleId);
 }
