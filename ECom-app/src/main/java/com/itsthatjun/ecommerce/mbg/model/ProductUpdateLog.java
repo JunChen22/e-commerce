@@ -18,9 +18,11 @@ public class ProductUpdateLog {
 
     private String operateMan;
 
-    private BigDecimal stockOld;
+    private BigDecimal oldStock;
 
-    private BigDecimal stockNew;
+    private BigDecimal addedStock;
+
+    private BigDecimal totalStock;
 
     private Date createdAt;
 
@@ -80,20 +82,28 @@ public class ProductUpdateLog {
         this.operateMan = operateMan;
     }
 
-    public BigDecimal getStockOld() {
-        return stockOld;
+    public BigDecimal getOldStock() {
+        return oldStock;
     }
 
-    public void setStockOld(BigDecimal stockOld) {
-        this.stockOld = stockOld;
+    public void setOldStock(BigDecimal oldStock) {
+        this.oldStock = oldStock;
     }
 
-    public BigDecimal getStockNew() {
-        return stockNew;
+    public BigDecimal getAddedStock() {
+        return addedStock;
     }
 
-    public void setStockNew(BigDecimal stockNew) {
-        this.stockNew = stockNew;
+    public void setAddedStock(BigDecimal addedStock) {
+        this.addedStock = addedStock;
+    }
+
+    public BigDecimal getTotalStock() {
+        return totalStock;
+    }
+
+    public void setTotalStock(BigDecimal totalStock) {
+        this.totalStock = totalStock;
     }
 
     public Date getCreatedAt() {

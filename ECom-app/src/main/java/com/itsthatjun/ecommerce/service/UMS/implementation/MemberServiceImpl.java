@@ -74,7 +74,7 @@ public class MemberServiceImpl implements MemberService , UserDetailsService {
     @Override
     public String register(Member newMember) {
         newMember.setCreatedAt(new Date());
-        newMember.setStatus("active");
+        newMember.setStatus(1);
         MemberExample example = new MemberExample();
         example.createCriteria().andUsernameEqualTo(newMember.getUsername());
         List<Member> existing = memberMapper.selectByExample(example);

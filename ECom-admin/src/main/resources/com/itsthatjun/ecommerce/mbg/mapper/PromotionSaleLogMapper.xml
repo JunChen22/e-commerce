@@ -4,7 +4,8 @@
   <resultMap id="BaseResultMap" type="com.itsthatjun.ecommerce.mbg.model.PromotionSaleLog">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="promotion_sale_id" jdbcType="NUMERIC" property="promotionSaleId" />
-    <result column="promotion_type" jdbcType="NUMERIC" property="promotionType" />
+    <result column="sale_action" jdbcType="VARCHAR" property="saleAction" />
+    <result column="promotion_type" jdbcType="INTEGER" property="promotionType" />
     <result column="discount_type" jdbcType="INTEGER" property="discountType" />
     <result column="amount" jdbcType="NUMERIC" property="amount" />
     <result column="operate_man" jdbcType="VARCHAR" property="operateMan" />
@@ -69,7 +70,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, promotion_sale_id, promotion_type, discount_type, amount, operate_man, created_at
+    id, promotion_sale_id, sale_action, promotion_type, discount_type, amount, operate_man, 
+    created_at
   </sql>
   <select id="selectByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.PromotionSaleLogExample" resultMap="BaseResultMap">
     select
@@ -102,18 +104,21 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.PromotionSaleLog" useGeneratedKeys="true">
-    insert into promotion_sale_log (promotion_sale_id, promotion_type, discount_type, 
-      amount, operate_man, created_at
-      )
-    values (#{promotionSaleId,jdbcType=NUMERIC}, #{promotionType,jdbcType=NUMERIC}, #{discountType,jdbcType=INTEGER}, 
-      #{amount,jdbcType=NUMERIC}, #{operateMan,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}
-      )
+    insert into promotion_sale_log (promotion_sale_id, sale_action, promotion_type, 
+      discount_type, amount, operate_man, 
+      created_at)
+    values (#{promotionSaleId,jdbcType=NUMERIC}, #{saleAction,jdbcType=VARCHAR}, #{promotionType,jdbcType=INTEGER}, 
+      #{discountType,jdbcType=INTEGER}, #{amount,jdbcType=NUMERIC}, #{operateMan,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.PromotionSaleLog" useGeneratedKeys="true">
     insert into promotion_sale_log
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="promotionSaleId != null">
         promotion_sale_id,
+      </if>
+      <if test="saleAction != null">
+        sale_action,
       </if>
       <if test="promotionType != null">
         promotion_type,
@@ -135,8 +140,11 @@
       <if test="promotionSaleId != null">
         #{promotionSaleId,jdbcType=NUMERIC},
       </if>
+      <if test="saleAction != null">
+        #{saleAction,jdbcType=VARCHAR},
+      </if>
       <if test="promotionType != null">
-        #{promotionType,jdbcType=NUMERIC},
+        #{promotionType,jdbcType=INTEGER},
       </if>
       <if test="discountType != null">
         #{discountType,jdbcType=INTEGER},
@@ -167,8 +175,11 @@
       <if test="record.promotionSaleId != null">
         promotion_sale_id = #{record.promotionSaleId,jdbcType=NUMERIC},
       </if>
+      <if test="record.saleAction != null">
+        sale_action = #{record.saleAction,jdbcType=VARCHAR},
+      </if>
       <if test="record.promotionType != null">
-        promotion_type = #{record.promotionType,jdbcType=NUMERIC},
+        promotion_type = #{record.promotionType,jdbcType=INTEGER},
       </if>
       <if test="record.discountType != null">
         discount_type = #{record.discountType,jdbcType=INTEGER},
@@ -191,7 +202,8 @@
     update promotion_sale_log
     set id = #{record.id,jdbcType=INTEGER},
       promotion_sale_id = #{record.promotionSaleId,jdbcType=NUMERIC},
-      promotion_type = #{record.promotionType,jdbcType=NUMERIC},
+      sale_action = #{record.saleAction,jdbcType=VARCHAR},
+      promotion_type = #{record.promotionType,jdbcType=INTEGER},
       discount_type = #{record.discountType,jdbcType=INTEGER},
       amount = #{record.amount,jdbcType=NUMERIC},
       operate_man = #{record.operateMan,jdbcType=VARCHAR},
@@ -206,8 +218,11 @@
       <if test="promotionSaleId != null">
         promotion_sale_id = #{promotionSaleId,jdbcType=NUMERIC},
       </if>
+      <if test="saleAction != null">
+        sale_action = #{saleAction,jdbcType=VARCHAR},
+      </if>
       <if test="promotionType != null">
-        promotion_type = #{promotionType,jdbcType=NUMERIC},
+        promotion_type = #{promotionType,jdbcType=INTEGER},
       </if>
       <if test="discountType != null">
         discount_type = #{discountType,jdbcType=INTEGER},
@@ -227,7 +242,8 @@
   <update id="updateByPrimaryKey" parameterType="com.itsthatjun.ecommerce.mbg.model.PromotionSaleLog">
     update promotion_sale_log
     set promotion_sale_id = #{promotionSaleId,jdbcType=NUMERIC},
-      promotion_type = #{promotionType,jdbcType=NUMERIC},
+      sale_action = #{saleAction,jdbcType=VARCHAR},
+      promotion_type = #{promotionType,jdbcType=INTEGER},
       discount_type = #{discountType,jdbcType=INTEGER},
       amount = #{amount,jdbcType=NUMERIC},
       operate_man = #{operateMan,jdbcType=VARCHAR},

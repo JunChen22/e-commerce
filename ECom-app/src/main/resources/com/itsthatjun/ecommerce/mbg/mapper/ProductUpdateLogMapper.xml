@@ -9,8 +9,9 @@
     <result column="sale_price_old" jdbcType="NUMERIC" property="salePriceOld" />
     <result column="sale_price_new" jdbcType="NUMERIC" property="salePriceNew" />
     <result column="operate_man" jdbcType="VARCHAR" property="operateMan" />
-    <result column="stock_old" jdbcType="NUMERIC" property="stockOld" />
-    <result column="stock_new" jdbcType="NUMERIC" property="stockNew" />
+    <result column="old_stock" jdbcType="NUMERIC" property="oldStock" />
+    <result column="added_stock" jdbcType="NUMERIC" property="addedStock" />
+    <result column="total_stock" jdbcType="NUMERIC" property="totalStock" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -73,7 +74,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, product_id, price_old, price_new, sale_price_old, sale_price_new, operate_man, 
-    stock_old, stock_new, created_at
+    old_stock, added_stock, total_stock, created_at
   </sql>
   <select id="selectByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.ProductUpdateLogExample" resultMap="BaseResultMap">
     select
@@ -108,12 +109,12 @@
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.ProductUpdateLog" useGeneratedKeys="true">
     insert into product_update_log (product_id, price_old, price_new, 
       sale_price_old, sale_price_new, operate_man, 
-      stock_old, stock_new, created_at
-      )
+      old_stock, added_stock, total_stock, 
+      created_at)
     values (#{productId,jdbcType=NUMERIC}, #{priceOld,jdbcType=NUMERIC}, #{priceNew,jdbcType=NUMERIC}, 
       #{salePriceOld,jdbcType=NUMERIC}, #{salePriceNew,jdbcType=NUMERIC}, #{operateMan,jdbcType=VARCHAR}, 
-      #{stockOld,jdbcType=NUMERIC}, #{stockNew,jdbcType=NUMERIC}, #{createdAt,jdbcType=TIMESTAMP}
-      )
+      #{oldStock,jdbcType=NUMERIC}, #{addedStock,jdbcType=NUMERIC}, #{totalStock,jdbcType=NUMERIC}, 
+      #{createdAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.ProductUpdateLog" useGeneratedKeys="true">
     insert into product_update_log
@@ -136,11 +137,14 @@
       <if test="operateMan != null">
         operate_man,
       </if>
-      <if test="stockOld != null">
-        stock_old,
+      <if test="oldStock != null">
+        old_stock,
       </if>
-      <if test="stockNew != null">
-        stock_new,
+      <if test="addedStock != null">
+        added_stock,
+      </if>
+      <if test="totalStock != null">
+        total_stock,
       </if>
       <if test="createdAt != null">
         created_at,
@@ -165,11 +169,14 @@
       <if test="operateMan != null">
         #{operateMan,jdbcType=VARCHAR},
       </if>
-      <if test="stockOld != null">
-        #{stockOld,jdbcType=NUMERIC},
+      <if test="oldStock != null">
+        #{oldStock,jdbcType=NUMERIC},
       </if>
-      <if test="stockNew != null">
-        #{stockNew,jdbcType=NUMERIC},
+      <if test="addedStock != null">
+        #{addedStock,jdbcType=NUMERIC},
+      </if>
+      <if test="totalStock != null">
+        #{totalStock,jdbcType=NUMERIC},
       </if>
       <if test="createdAt != null">
         #{createdAt,jdbcType=TIMESTAMP},
@@ -206,11 +213,14 @@
       <if test="record.operateMan != null">
         operate_man = #{record.operateMan,jdbcType=VARCHAR},
       </if>
-      <if test="record.stockOld != null">
-        stock_old = #{record.stockOld,jdbcType=NUMERIC},
+      <if test="record.oldStock != null">
+        old_stock = #{record.oldStock,jdbcType=NUMERIC},
       </if>
-      <if test="record.stockNew != null">
-        stock_new = #{record.stockNew,jdbcType=NUMERIC},
+      <if test="record.addedStock != null">
+        added_stock = #{record.addedStock,jdbcType=NUMERIC},
+      </if>
+      <if test="record.totalStock != null">
+        total_stock = #{record.totalStock,jdbcType=NUMERIC},
       </if>
       <if test="record.createdAt != null">
         created_at = #{record.createdAt,jdbcType=TIMESTAMP},
@@ -229,8 +239,9 @@
       sale_price_old = #{record.salePriceOld,jdbcType=NUMERIC},
       sale_price_new = #{record.salePriceNew,jdbcType=NUMERIC},
       operate_man = #{record.operateMan,jdbcType=VARCHAR},
-      stock_old = #{record.stockOld,jdbcType=NUMERIC},
-      stock_new = #{record.stockNew,jdbcType=NUMERIC},
+      old_stock = #{record.oldStock,jdbcType=NUMERIC},
+      added_stock = #{record.addedStock,jdbcType=NUMERIC},
+      total_stock = #{record.totalStock,jdbcType=NUMERIC},
       created_at = #{record.createdAt,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -257,11 +268,14 @@
       <if test="operateMan != null">
         operate_man = #{operateMan,jdbcType=VARCHAR},
       </if>
-      <if test="stockOld != null">
-        stock_old = #{stockOld,jdbcType=NUMERIC},
+      <if test="oldStock != null">
+        old_stock = #{oldStock,jdbcType=NUMERIC},
       </if>
-      <if test="stockNew != null">
-        stock_new = #{stockNew,jdbcType=NUMERIC},
+      <if test="addedStock != null">
+        added_stock = #{addedStock,jdbcType=NUMERIC},
+      </if>
+      <if test="totalStock != null">
+        total_stock = #{totalStock,jdbcType=NUMERIC},
       </if>
       <if test="createdAt != null">
         created_at = #{createdAt,jdbcType=TIMESTAMP},
@@ -277,8 +291,9 @@
       sale_price_old = #{salePriceOld,jdbcType=NUMERIC},
       sale_price_new = #{salePriceNew,jdbcType=NUMERIC},
       operate_man = #{operateMan,jdbcType=VARCHAR},
-      stock_old = #{stockOld,jdbcType=NUMERIC},
-      stock_new = #{stockNew,jdbcType=NUMERIC},
+      old_stock = #{oldStock,jdbcType=NUMERIC},
+      added_stock = #{addedStock,jdbcType=NUMERIC},
+      total_stock = #{totalStock,jdbcType=NUMERIC},
       created_at = #{createdAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>

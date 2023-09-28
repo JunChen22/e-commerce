@@ -9,17 +9,21 @@ public class Member {
 
     private String password;
 
+    private String name;
+
     private String phoneNumber;
 
-    private String status;
+    private String email;
+
+    private Integer status;
+
+    private Integer deleteStatus;
 
     private Date createdAt;
 
     private Date lastLogin;
 
     private String sourceType;
-
-    private String icon;
 
     public Integer getId() {
         return id;
@@ -45,6 +49,14 @@ public class Member {
         this.password = password;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -53,12 +65,28 @@ public class Member {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getStatus() {
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Integer getDeleteStatus() {
+        return deleteStatus;
+    }
+
+    public void setDeleteStatus(Integer deleteStatus) {
+        this.deleteStatus = deleteStatus;
     }
 
     public Date getCreatedAt() {
@@ -83,13 +111,5 @@ public class Member {
 
     public void setSourceType(String sourceType) {
         this.sourceType = sourceType;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
     }
 }

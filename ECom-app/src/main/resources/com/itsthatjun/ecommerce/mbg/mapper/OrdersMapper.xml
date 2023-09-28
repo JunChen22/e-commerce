@@ -24,6 +24,8 @@
     <result column="receiver_city" jdbcType="VARCHAR" property="receiverCity" />
     <result column="receiver_state" jdbcType="VARCHAR" property="receiverState" />
     <result column="receiver_zip_code" jdbcType="VARCHAR" property="receiverZipCode" />
+    <result column="payment_id" jdbcType="VARCHAR" property="paymentId" />
+    <result column="payer_id" jdbcType="VARCHAR" property="payerId" />
     <result column="payment_time" jdbcType="TIMESTAMP" property="paymentTime" />
     <result column="delivery_time" jdbcType="TIMESTAMP" property="deliveryTime" />
     <result column="receive_time" jdbcType="TIMESTAMP" property="receiveTime" />
@@ -94,8 +96,9 @@
     id, member_id, coupon_id, order_sn, member_email, total_amount, promotion_amount, 
     coupon_amount, discount_amount, shipping_cost, pay_amount, pay_type, source_type, 
     status, delivery_company, delivery_tracking_number, receiver_phone, receiver_name, 
-    receiver_detail_address, receiver_city, receiver_state, receiver_zip_code, payment_time, 
-    delivery_time, receive_time, comment, admin_note, created_at, updated_at
+    receiver_detail_address, receiver_city, receiver_state, receiver_zip_code, payment_id, 
+    payer_id, payment_time, delivery_time, receive_time, comment, admin_note, created_at, 
+    updated_at
   </sql>
   <select id="selectByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.OrdersExample" resultMap="BaseResultMap">
     select
@@ -135,9 +138,10 @@
       status, delivery_company, delivery_tracking_number, 
       receiver_phone, receiver_name, receiver_detail_address, 
       receiver_city, receiver_state, receiver_zip_code, 
-      payment_time, delivery_time, receive_time, 
-      comment, admin_note, created_at, 
-      updated_at)
+      payment_id, payer_id, payment_time, 
+      delivery_time, receive_time, comment, 
+      admin_note, created_at, updated_at
+      )
     values (#{memberId,jdbcType=BIGINT}, #{couponId,jdbcType=BIGINT}, #{orderSn,jdbcType=VARCHAR}, 
       #{memberEmail,jdbcType=VARCHAR}, #{totalAmount,jdbcType=NUMERIC}, #{promotionAmount,jdbcType=NUMERIC}, 
       #{couponAmount,jdbcType=NUMERIC}, #{discountAmount,jdbcType=NUMERIC}, #{shippingCost,jdbcType=NUMERIC}, 
@@ -145,9 +149,10 @@
       #{status,jdbcType=INTEGER}, #{deliveryCompany,jdbcType=VARCHAR}, #{deliveryTrackingNumber,jdbcType=VARCHAR}, 
       #{receiverPhone,jdbcType=VARCHAR}, #{receiverName,jdbcType=VARCHAR}, #{receiverDetailAddress,jdbcType=VARCHAR}, 
       #{receiverCity,jdbcType=VARCHAR}, #{receiverState,jdbcType=VARCHAR}, #{receiverZipCode,jdbcType=VARCHAR}, 
-      #{paymentTime,jdbcType=TIMESTAMP}, #{deliveryTime,jdbcType=TIMESTAMP}, #{receiveTime,jdbcType=TIMESTAMP}, 
-      #{comment,jdbcType=VARCHAR}, #{adminNote,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, 
-      #{updatedAt,jdbcType=TIMESTAMP})
+      #{paymentId,jdbcType=VARCHAR}, #{payerId,jdbcType=VARCHAR}, #{paymentTime,jdbcType=TIMESTAMP}, 
+      #{deliveryTime,jdbcType=TIMESTAMP}, #{receiveTime,jdbcType=TIMESTAMP}, #{comment,jdbcType=VARCHAR}, 
+      #{adminNote,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.Orders" useGeneratedKeys="true">
     insert into orders
@@ -214,6 +219,12 @@
       </if>
       <if test="receiverZipCode != null">
         receiver_zip_code,
+      </if>
+      <if test="paymentId != null">
+        payment_id,
+      </if>
+      <if test="payerId != null">
+        payer_id,
       </if>
       <if test="paymentTime != null">
         payment_time,
@@ -300,6 +311,12 @@
       </if>
       <if test="receiverZipCode != null">
         #{receiverZipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentId != null">
+        #{paymentId,jdbcType=VARCHAR},
+      </if>
+      <if test="payerId != null">
+        #{payerId,jdbcType=VARCHAR},
       </if>
       <if test="paymentTime != null">
         #{paymentTime,jdbcType=TIMESTAMP},
@@ -399,6 +416,12 @@
       <if test="record.receiverZipCode != null">
         receiver_zip_code = #{record.receiverZipCode,jdbcType=VARCHAR},
       </if>
+      <if test="record.paymentId != null">
+        payment_id = #{record.paymentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payerId != null">
+        payer_id = #{record.payerId,jdbcType=VARCHAR},
+      </if>
       <if test="record.paymentTime != null">
         payment_time = #{record.paymentTime,jdbcType=TIMESTAMP},
       </if>
@@ -449,6 +472,8 @@
       receiver_city = #{record.receiverCity,jdbcType=VARCHAR},
       receiver_state = #{record.receiverState,jdbcType=VARCHAR},
       receiver_zip_code = #{record.receiverZipCode,jdbcType=VARCHAR},
+      payment_id = #{record.paymentId,jdbcType=VARCHAR},
+      payer_id = #{record.payerId,jdbcType=VARCHAR},
       payment_time = #{record.paymentTime,jdbcType=TIMESTAMP},
       delivery_time = #{record.deliveryTime,jdbcType=TIMESTAMP},
       receive_time = #{record.receiveTime,jdbcType=TIMESTAMP},
@@ -526,6 +551,12 @@
       <if test="receiverZipCode != null">
         receiver_zip_code = #{receiverZipCode,jdbcType=VARCHAR},
       </if>
+      <if test="paymentId != null">
+        payment_id = #{paymentId,jdbcType=VARCHAR},
+      </if>
+      <if test="payerId != null">
+        payer_id = #{payerId,jdbcType=VARCHAR},
+      </if>
       <if test="paymentTime != null">
         payment_time = #{paymentTime,jdbcType=TIMESTAMP},
       </if>
@@ -573,6 +604,8 @@
       receiver_city = #{receiverCity,jdbcType=VARCHAR},
       receiver_state = #{receiverState,jdbcType=VARCHAR},
       receiver_zip_code = #{receiverZipCode,jdbcType=VARCHAR},
+      payment_id = #{paymentId,jdbcType=VARCHAR},
+      payer_id = #{payerId,jdbcType=VARCHAR},
       payment_time = #{paymentTime,jdbcType=TIMESTAMP},
       delivery_time = #{deliveryTime,jdbcType=TIMESTAMP},
       receive_time = #{receiveTime,jdbcType=TIMESTAMP},

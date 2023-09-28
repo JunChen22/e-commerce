@@ -77,13 +77,11 @@
             <columnOverride column="member_id" javaType="java.lang.Integer" />
         </table>
 
-
         <table tableName= "review_album">
             <generatedKey column="id" sqlStatement="JDBC" />
             <columnOverride column="id" javaType="java.lang.Integer" />
             <columnOverride column="review_id" javaType="java.lang.Integer" />
         </table>
-
 
         <table tableName= "review_pictures">
             <generatedKey column="id" sqlStatement="JDBC" />
@@ -110,8 +108,7 @@
             <columnOverride column="product_id" javaType="java.lang.Integer" />
         </table>
 
-
-        <table tableName= "product_sku_stock">
+        <table tableName= "product_sku">
             <generatedKey column="id" sqlStatement="JDBC" />
             <columnOverride column="id" javaType="java.lang.Integer" />
             <columnOverride column="product_id" javaType="java.lang.Integer" />
@@ -123,7 +120,7 @@
             <generatedKey column="id" sqlStatement="JDBC" />
             <columnOverride column="id" javaType="java.lang.Integer" />
         </table>
-        <table tableName= "receive_address">
+        <table tableName= "address">
             <generatedKey column="id" sqlStatement="JDBC" />
             <columnOverride column="id" javaType="java.lang.Integer" />
             <columnOverride column="member_id" javaType="java.lang.Integer" />
@@ -133,6 +130,12 @@
             <columnOverride column="id" javaType="java.lang.Integer" />
             <columnOverride column="member_id" javaType="java.lang.Integer" />
         </table>
+        <table tableName= "member_icon">
+            <generatedKey column="id" sqlStatement="JDBC" />
+            <columnOverride column="id" javaType="java.lang.Integer" />
+            <columnOverride column="member_id" javaType="java.lang.Integer" />
+        </table>
+
         <table tableName= "admin">
             <generatedKey column="id" sqlStatement="JDBC" />
             <columnOverride column="id" javaType="java.lang.Integer" />
@@ -162,9 +165,6 @@
             <columnOverride column="role_id" javaType="java.lang.Integer" />
             <columnOverride column="permission_id" javaType="java.lang.Integer" />
         </table>
-
-
-
 
 
 
@@ -201,30 +201,36 @@
             <columnOverride column="id" javaType="java.lang.Integer" />
         </table>
 
-        <table tableName="order_return_reason">
+        <table tableName="return_request">
             <generatedKey column="id" sqlStatement="JDBC" />
             <columnOverride column="id" javaType="java.lang.Integer" />
             <columnOverride column="order_id" javaType="java.lang.Integer" />
+            <columnOverride column="company_address_id" javaType="java.lang.Integer" />
             <columnOverride column="member_id" javaType="java.lang.Integer" />
+            <columnOverride column="return_quantity" javaType="java.lang.Integer" />
+            <columnOverride column="status" javaType="java.lang.Integer" />
         </table>
 
-        <table tableName="order_return_reason_pictures">
+        <table tableName="return_item">
             <generatedKey column="id" sqlStatement="JDBC" />
             <columnOverride column="id" javaType="java.lang.Integer" />
-            <columnOverride column="order_return_reason_id" javaType="java.lang.Integer" />
-        </table>
-
-        <table tableName="order_return_apply">
-            <generatedKey column="id" sqlStatement="JDBC" />
-            <columnOverride column="id" javaType="java.lang.Integer" />
+            <columnOverride column="return_request_id" javaType="java.lang.Integer" />
+            <columnOverride column="brand_id" javaType="java.lang.Integer" />
             <columnOverride column="order_id" javaType="java.lang.Integer" />
             <columnOverride column="product_id" javaType="java.lang.Integer" />
+            <columnOverride column="quantity" javaType="java.lang.Integer" />
         </table>
 
-        <table tableName="order_change_history">
+        <table tableName="return_reason_pictures">
             <generatedKey column="id" sqlStatement="JDBC" />
             <columnOverride column="id" javaType="java.lang.Integer" />
-            <columnOverride column="order_id" javaType="java.lang.Integer" />
+            <columnOverride column="return_request_id" javaType="java.lang.Integer" />
+        </table>
+
+        <table tableName="return_log">
+            <generatedKey column="id" sqlStatement="JDBC" />
+            <columnOverride column="id" javaType="java.lang.Integer" />
+            <columnOverride column="return_request_id" javaType="java.lang.Integer" />
         </table>
 
 
@@ -257,7 +263,7 @@
             <columnOverride column="id" javaType="java.lang.Integer" />
         </table>
 
-        <table tableName="promotion_sale_product_relation">
+        <table tableName="promotion_sale_product">
             <generatedKey column="id" sqlStatement="JDBC" />
             <columnOverride column="id" javaType="java.lang.Integer" />
             <columnOverride column="promotion_sale_id" javaType="java.lang.Integer" />

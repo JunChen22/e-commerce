@@ -536,123 +536,183 @@ public class ProductUpdateLogExample {
             return (Criteria) this;
         }
 
-        public Criteria andStockOldIsNull() {
-            addCriterion("stock_old is null");
+        public Criteria andOldStockIsNull() {
+            addCriterion("old_stock is null");
             return (Criteria) this;
         }
 
-        public Criteria andStockOldIsNotNull() {
-            addCriterion("stock_old is not null");
+        public Criteria andOldStockIsNotNull() {
+            addCriterion("old_stock is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStockOldEqualTo(BigDecimal value) {
-            addCriterion("stock_old =", value, "stockOld");
+        public Criteria andOldStockEqualTo(BigDecimal value) {
+            addCriterion("old_stock =", value, "oldStock");
             return (Criteria) this;
         }
 
-        public Criteria andStockOldNotEqualTo(BigDecimal value) {
-            addCriterion("stock_old <>", value, "stockOld");
+        public Criteria andOldStockNotEqualTo(BigDecimal value) {
+            addCriterion("old_stock <>", value, "oldStock");
             return (Criteria) this;
         }
 
-        public Criteria andStockOldGreaterThan(BigDecimal value) {
-            addCriterion("stock_old >", value, "stockOld");
+        public Criteria andOldStockGreaterThan(BigDecimal value) {
+            addCriterion("old_stock >", value, "oldStock");
             return (Criteria) this;
         }
 
-        public Criteria andStockOldGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("stock_old >=", value, "stockOld");
+        public Criteria andOldStockGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("old_stock >=", value, "oldStock");
             return (Criteria) this;
         }
 
-        public Criteria andStockOldLessThan(BigDecimal value) {
-            addCriterion("stock_old <", value, "stockOld");
+        public Criteria andOldStockLessThan(BigDecimal value) {
+            addCriterion("old_stock <", value, "oldStock");
             return (Criteria) this;
         }
 
-        public Criteria andStockOldLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("stock_old <=", value, "stockOld");
+        public Criteria andOldStockLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("old_stock <=", value, "oldStock");
             return (Criteria) this;
         }
 
-        public Criteria andStockOldIn(List<BigDecimal> values) {
-            addCriterion("stock_old in", values, "stockOld");
+        public Criteria andOldStockIn(List<BigDecimal> values) {
+            addCriterion("old_stock in", values, "oldStock");
             return (Criteria) this;
         }
 
-        public Criteria andStockOldNotIn(List<BigDecimal> values) {
-            addCriterion("stock_old not in", values, "stockOld");
+        public Criteria andOldStockNotIn(List<BigDecimal> values) {
+            addCriterion("old_stock not in", values, "oldStock");
             return (Criteria) this;
         }
 
-        public Criteria andStockOldBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("stock_old between", value1, value2, "stockOld");
+        public Criteria andOldStockBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("old_stock between", value1, value2, "oldStock");
             return (Criteria) this;
         }
 
-        public Criteria andStockOldNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("stock_old not between", value1, value2, "stockOld");
+        public Criteria andOldStockNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("old_stock not between", value1, value2, "oldStock");
             return (Criteria) this;
         }
 
-        public Criteria andStockNewIsNull() {
-            addCriterion("stock_new is null");
+        public Criteria andAddedStockIsNull() {
+            addCriterion("added_stock is null");
             return (Criteria) this;
         }
 
-        public Criteria andStockNewIsNotNull() {
-            addCriterion("stock_new is not null");
+        public Criteria andAddedStockIsNotNull() {
+            addCriterion("added_stock is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStockNewEqualTo(BigDecimal value) {
-            addCriterion("stock_new =", value, "stockNew");
+        public Criteria andAddedStockEqualTo(BigDecimal value) {
+            addCriterion("added_stock =", value, "addedStock");
             return (Criteria) this;
         }
 
-        public Criteria andStockNewNotEqualTo(BigDecimal value) {
-            addCriterion("stock_new <>", value, "stockNew");
+        public Criteria andAddedStockNotEqualTo(BigDecimal value) {
+            addCriterion("added_stock <>", value, "addedStock");
             return (Criteria) this;
         }
 
-        public Criteria andStockNewGreaterThan(BigDecimal value) {
-            addCriterion("stock_new >", value, "stockNew");
+        public Criteria andAddedStockGreaterThan(BigDecimal value) {
+            addCriterion("added_stock >", value, "addedStock");
             return (Criteria) this;
         }
 
-        public Criteria andStockNewGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("stock_new >=", value, "stockNew");
+        public Criteria andAddedStockGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("added_stock >=", value, "addedStock");
             return (Criteria) this;
         }
 
-        public Criteria andStockNewLessThan(BigDecimal value) {
-            addCriterion("stock_new <", value, "stockNew");
+        public Criteria andAddedStockLessThan(BigDecimal value) {
+            addCriterion("added_stock <", value, "addedStock");
             return (Criteria) this;
         }
 
-        public Criteria andStockNewLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("stock_new <=", value, "stockNew");
+        public Criteria andAddedStockLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("added_stock <=", value, "addedStock");
             return (Criteria) this;
         }
 
-        public Criteria andStockNewIn(List<BigDecimal> values) {
-            addCriterion("stock_new in", values, "stockNew");
+        public Criteria andAddedStockIn(List<BigDecimal> values) {
+            addCriterion("added_stock in", values, "addedStock");
             return (Criteria) this;
         }
 
-        public Criteria andStockNewNotIn(List<BigDecimal> values) {
-            addCriterion("stock_new not in", values, "stockNew");
+        public Criteria andAddedStockNotIn(List<BigDecimal> values) {
+            addCriterion("added_stock not in", values, "addedStock");
             return (Criteria) this;
         }
 
-        public Criteria andStockNewBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("stock_new between", value1, value2, "stockNew");
+        public Criteria andAddedStockBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("added_stock between", value1, value2, "addedStock");
             return (Criteria) this;
         }
 
-        public Criteria andStockNewNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("stock_new not between", value1, value2, "stockNew");
+        public Criteria andAddedStockNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("added_stock not between", value1, value2, "addedStock");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalStockIsNull() {
+            addCriterion("total_stock is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalStockIsNotNull() {
+            addCriterion("total_stock is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalStockEqualTo(BigDecimal value) {
+            addCriterion("total_stock =", value, "totalStock");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalStockNotEqualTo(BigDecimal value) {
+            addCriterion("total_stock <>", value, "totalStock");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalStockGreaterThan(BigDecimal value) {
+            addCriterion("total_stock >", value, "totalStock");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalStockGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("total_stock >=", value, "totalStock");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalStockLessThan(BigDecimal value) {
+            addCriterion("total_stock <", value, "totalStock");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalStockLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("total_stock <=", value, "totalStock");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalStockIn(List<BigDecimal> values) {
+            addCriterion("total_stock in", values, "totalStock");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalStockNotIn(List<BigDecimal> values) {
+            addCriterion("total_stock not in", values, "totalStock");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalStockBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("total_stock between", value1, value2, "totalStock");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalStockNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("total_stock not between", value1, value2, "totalStock");
             return (Criteria) this;
         }
 

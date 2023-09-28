@@ -48,6 +48,10 @@ public class Orders {
 
     private String receiverZipCode;
 
+    private String paymentId;
+
+    private String payerId;
+
     private Date paymentTime;
 
     private Date deliveryTime;
@@ -236,6 +240,22 @@ public class Orders {
 
     public void setReceiverZipCode(String receiverZipCode) {
         this.receiverZipCode = receiverZipCode;
+    }
+
+    public String getPaymentId() {
+        return paymentId;
+    }
+
+    public void setPaymentId(String paymentId) {
+        this.paymentId = paymentId;
+    }
+
+    public String getPayerId() {
+        return payerId;
+    }
+
+    public void setPayerId(String payerId) {
+        this.payerId = payerId;
     }
 
     public Date getPaymentTime() {

@@ -1526,6 +1526,146 @@ public class OrdersExample {
             return (Criteria) this;
         }
 
+        public Criteria andPaymentIdIsNull() {
+            addCriterion("payment_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentIdIsNotNull() {
+            addCriterion("payment_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentIdEqualTo(String value) {
+            addCriterion("payment_id =", value, "paymentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentIdNotEqualTo(String value) {
+            addCriterion("payment_id <>", value, "paymentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentIdGreaterThan(String value) {
+            addCriterion("payment_id >", value, "paymentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentIdGreaterThanOrEqualTo(String value) {
+            addCriterion("payment_id >=", value, "paymentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentIdLessThan(String value) {
+            addCriterion("payment_id <", value, "paymentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentIdLessThanOrEqualTo(String value) {
+            addCriterion("payment_id <=", value, "paymentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentIdLike(String value) {
+            addCriterion("payment_id like", value, "paymentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentIdNotLike(String value) {
+            addCriterion("payment_id not like", value, "paymentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentIdIn(List<String> values) {
+            addCriterion("payment_id in", values, "paymentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentIdNotIn(List<String> values) {
+            addCriterion("payment_id not in", values, "paymentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentIdBetween(String value1, String value2) {
+            addCriterion("payment_id between", value1, value2, "paymentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaymentIdNotBetween(String value1, String value2) {
+            addCriterion("payment_id not between", value1, value2, "paymentId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayerIdIsNull() {
+            addCriterion("payer_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayerIdIsNotNull() {
+            addCriterion("payer_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayerIdEqualTo(String value) {
+            addCriterion("payer_id =", value, "payerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayerIdNotEqualTo(String value) {
+            addCriterion("payer_id <>", value, "payerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayerIdGreaterThan(String value) {
+            addCriterion("payer_id >", value, "payerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayerIdGreaterThanOrEqualTo(String value) {
+            addCriterion("payer_id >=", value, "payerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayerIdLessThan(String value) {
+            addCriterion("payer_id <", value, "payerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayerIdLessThanOrEqualTo(String value) {
+            addCriterion("payer_id <=", value, "payerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayerIdLike(String value) {
+            addCriterion("payer_id like", value, "payerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayerIdNotLike(String value) {
+            addCriterion("payer_id not like", value, "payerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayerIdIn(List<String> values) {
+            addCriterion("payer_id in", values, "payerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayerIdNotIn(List<String> values) {
+            addCriterion("payer_id not in", values, "payerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayerIdBetween(String value1, String value2) {
+            addCriterion("payer_id between", value1, value2, "payerId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayerIdNotBetween(String value1, String value2) {
+            addCriterion("payer_id not between", value1, value2, "payerId");
+            return (Criteria) this;
+        }
+
         public Criteria andPaymentTimeIsNull() {
             addCriterion("payment_time is null");
             return (Criteria) this;

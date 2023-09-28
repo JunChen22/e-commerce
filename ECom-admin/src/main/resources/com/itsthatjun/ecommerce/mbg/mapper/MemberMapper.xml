@@ -5,12 +5,14 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
-    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="delete_status" jdbcType="INTEGER" property="deleteStatus" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
     <result column="last_login" jdbcType="TIMESTAMP" property="lastLogin" />
     <result column="source_type" jdbcType="VARCHAR" property="sourceType" />
-    <result column="icon" jdbcType="VARCHAR" property="icon" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,8 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, password, phone_number, status, created_at, last_login, source_type, 
-    icon
+    id, username, password, name, phone_number, email, status, delete_status, created_at, 
+    last_login, source_type
   </sql>
   <select id="selectByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.MemberExample" resultMap="BaseResultMap">
     select
@@ -105,12 +107,14 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.Member" useGeneratedKeys="true">
-    insert into member (username, password, phone_number, 
-      status, created_at, last_login, 
-      source_type, icon)
-    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, 
-      #{status,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, #{lastLogin,jdbcType=TIMESTAMP}, 
-      #{sourceType,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR})
+    insert into member (username, password, name, 
+      phone_number, email, status, 
+      delete_status, created_at, last_login, 
+      source_type)
+    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{phoneNumber,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{deleteStatus,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}, #{lastLogin,jdbcType=TIMESTAMP}, 
+      #{sourceType,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.Member" useGeneratedKeys="true">
     insert into member
@@ -121,11 +125,20 @@
       <if test="password != null">
         password,
       </if>
+      <if test="name != null">
+        name,
+      </if>
       <if test="phoneNumber != null">
         phone_number,
       </if>
+      <if test="email != null">
+        email,
+      </if>
       <if test="status != null">
         status,
+      </if>
+      <if test="deleteStatus != null">
+        delete_status,
       </if>
       <if test="createdAt != null">
         created_at,
@@ -136,9 +149,6 @@
       <if test="sourceType != null">
         source_type,
       </if>
-      <if test="icon != null">
-        icon,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="username != null">
@@ -147,11 +157,20 @@
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
       </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
       <if test="phoneNumber != null">
         #{phoneNumber,jdbcType=VARCHAR},
       </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
       <if test="status != null">
-        #{status,jdbcType=VARCHAR},
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="deleteStatus != null">
+        #{deleteStatus,jdbcType=INTEGER},
       </if>
       <if test="createdAt != null">
         #{createdAt,jdbcType=TIMESTAMP},
@@ -161,9 +180,6 @@
       </if>
       <if test="sourceType != null">
         #{sourceType,jdbcType=VARCHAR},
-      </if>
-      <if test="icon != null">
-        #{icon,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -185,11 +201,20 @@
       <if test="record.password != null">
         password = #{record.password,jdbcType=VARCHAR},
       </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
       <if test="record.phoneNumber != null">
         phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
       </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
       <if test="record.status != null">
-        status = #{record.status,jdbcType=VARCHAR},
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.deleteStatus != null">
+        delete_status = #{record.deleteStatus,jdbcType=INTEGER},
       </if>
       <if test="record.createdAt != null">
         created_at = #{record.createdAt,jdbcType=TIMESTAMP},
@@ -199,9 +224,6 @@
       </if>
       <if test="record.sourceType != null">
         source_type = #{record.sourceType,jdbcType=VARCHAR},
-      </if>
-      <if test="record.icon != null">
-        icon = #{record.icon,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -213,12 +235,14 @@
     set id = #{record.id,jdbcType=INTEGER},
       username = #{record.username,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
       phone_number = #{record.phoneNumber,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      delete_status = #{record.deleteStatus,jdbcType=INTEGER},
       created_at = #{record.createdAt,jdbcType=TIMESTAMP},
       last_login = #{record.lastLogin,jdbcType=TIMESTAMP},
-      source_type = #{record.sourceType,jdbcType=VARCHAR},
-      icon = #{record.icon,jdbcType=VARCHAR}
+      source_type = #{record.sourceType,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -232,11 +256,20 @@
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
       </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
       <if test="phoneNumber != null">
         phone_number = #{phoneNumber,jdbcType=VARCHAR},
       </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
       <if test="status != null">
-        status = #{status,jdbcType=VARCHAR},
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="deleteStatus != null">
+        delete_status = #{deleteStatus,jdbcType=INTEGER},
       </if>
       <if test="createdAt != null">
         created_at = #{createdAt,jdbcType=TIMESTAMP},
@@ -247,9 +280,6 @@
       <if test="sourceType != null">
         source_type = #{sourceType,jdbcType=VARCHAR},
       </if>
-      <if test="icon != null">
-        icon = #{icon,jdbcType=VARCHAR},
-      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -257,12 +287,14 @@
     update member
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
       phone_number = #{phoneNumber,jdbcType=VARCHAR},
-      status = #{status,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      delete_status = #{deleteStatus,jdbcType=INTEGER},
       created_at = #{createdAt,jdbcType=TIMESTAMP},
       last_login = #{lastLogin,jdbcType=TIMESTAMP},
-      source_type = #{sourceType,jdbcType=VARCHAR},
-      icon = #{icon,jdbcType=VARCHAR}
+      source_type = #{sourceType,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

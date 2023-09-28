@@ -8,7 +8,9 @@ public class PromotionSaleLog {
 
     private Integer promotionSaleId;
 
-    private BigDecimal promotionType;
+    private String saleAction;
+
+    private Integer promotionType;
 
     private Integer discountType;
 
@@ -34,11 +36,19 @@ public class PromotionSaleLog {
         this.promotionSaleId = promotionSaleId;
     }
 
-    public BigDecimal getPromotionType() {
+    public String getSaleAction() {
+        return saleAction;
+    }
+
+    public void setSaleAction(String saleAction) {
+        this.saleAction = saleAction;
+    }
+
+    public Integer getPromotionType() {
         return promotionType;
     }
 
-    public void setPromotionType(BigDecimal promotionType) {
+    public void setPromotionType(Integer promotionType) {
         this.promotionType = promotionType;
     }
 

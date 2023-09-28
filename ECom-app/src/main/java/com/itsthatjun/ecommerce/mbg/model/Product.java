@@ -20,10 +20,6 @@ public class Product {
 
     private String sn;
 
-    private BigDecimal deleteStatus;
-
-    private BigDecimal publishStatus;
-
     private BigDecimal newStatus;
 
     private BigDecimal recommendStatus;
@@ -59,6 +55,10 @@ public class Product {
     private String detailDesc;
 
     private BigDecimal descriptionAlbum;
+
+    private Integer deleteStatus;
+
+    private Integer publishStatus;
 
     private Date createdAt;
 
@@ -126,22 +126,6 @@ public class Product {
 
     public void setSn(String sn) {
         this.sn = sn;
-    }
-
-    public BigDecimal getDeleteStatus() {
-        return deleteStatus;
-    }
-
-    public void setDeleteStatus(BigDecimal deleteStatus) {
-        this.deleteStatus = deleteStatus;
-    }
-
-    public BigDecimal getPublishStatus() {
-        return publishStatus;
-    }
-
-    public void setPublishStatus(BigDecimal publishStatus) {
-        this.publishStatus = publishStatus;
     }
 
     public BigDecimal getNewStatus() {
@@ -286,6 +270,22 @@ public class Product {
 
     public void setDescriptionAlbum(BigDecimal descriptionAlbum) {
         this.descriptionAlbum = descriptionAlbum;
+    }
+
+    public Integer getDeleteStatus() {
+        return deleteStatus;
+    }
+
+    public void setDeleteStatus(Integer deleteStatus) {
+        this.deleteStatus = deleteStatus;
+    }
+
+    public Integer getPublishStatus() {
+        return publishStatus;
+    }
+
+    public void setPublishStatus(Integer publishStatus) {
+        this.publishStatus = publishStatus;
     }
 
     public Date getCreatedAt() {

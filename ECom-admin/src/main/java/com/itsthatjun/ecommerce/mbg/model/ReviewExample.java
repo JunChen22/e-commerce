@@ -736,6 +736,66 @@ public class ReviewExample {
             return (Criteria) this;
         }
 
+        public Criteria andVerifiedIsNull() {
+            addCriterion("verified is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedIsNotNull() {
+            addCriterion("verified is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedEqualTo(Boolean value) {
+            addCriterion("verified =", value, "verified");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedNotEqualTo(Boolean value) {
+            addCriterion("verified <>", value, "verified");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedGreaterThan(Boolean value) {
+            addCriterion("verified >", value, "verified");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("verified >=", value, "verified");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedLessThan(Boolean value) {
+            addCriterion("verified <", value, "verified");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedLessThanOrEqualTo(Boolean value) {
+            addCriterion("verified <=", value, "verified");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedIn(List<Boolean> values) {
+            addCriterion("verified in", values, "verified");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedNotIn(List<Boolean> values) {
+            addCriterion("verified not in", values, "verified");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedBetween(Boolean value1, Boolean value2) {
+            addCriterion("verified between", value1, value2, "verified");
+            return (Criteria) this;
+        }
+
+        public Criteria andVerifiedNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("verified not between", value1, value2, "verified");
+            return (Criteria) this;
+        }
+
         public Criteria andContentIsNull() {
             addCriterion("content is null");
             return (Criteria) this;
@@ -803,66 +863,6 @@ public class ReviewExample {
 
         public Criteria andContentNotBetween(String value1, String value2) {
             addCriterion("content not between", value1, value2, "content");
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumIsNull() {
-            addCriterion("album is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumIsNotNull() {
-            addCriterion("album is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumEqualTo(BigDecimal value) {
-            addCriterion("album =", value, "album");
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumNotEqualTo(BigDecimal value) {
-            addCriterion("album <>", value, "album");
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumGreaterThan(BigDecimal value) {
-            addCriterion("album >", value, "album");
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("album >=", value, "album");
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumLessThan(BigDecimal value) {
-            addCriterion("album <", value, "album");
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("album <=", value, "album");
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumIn(List<BigDecimal> values) {
-            addCriterion("album in", values, "album");
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumNotIn(List<BigDecimal> values) {
-            addCriterion("album not in", values, "album");
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("album between", value1, value2, "album");
-            return (Criteria) this;
-        }
-
-        public Criteria andAlbumNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("album not between", value1, value2, "album");
             return (Criteria) this;
         }
     }

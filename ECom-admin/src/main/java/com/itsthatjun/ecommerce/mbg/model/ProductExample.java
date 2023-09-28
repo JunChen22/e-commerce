@@ -626,126 +626,6 @@ public class ProductExample {
             return (Criteria) this;
         }
 
-        public Criteria andDeleteStatusIsNull() {
-            addCriterion("delete_status is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeleteStatusIsNotNull() {
-            addCriterion("delete_status is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeleteStatusEqualTo(BigDecimal value) {
-            addCriterion("delete_status =", value, "deleteStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeleteStatusNotEqualTo(BigDecimal value) {
-            addCriterion("delete_status <>", value, "deleteStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeleteStatusGreaterThan(BigDecimal value) {
-            addCriterion("delete_status >", value, "deleteStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeleteStatusGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("delete_status >=", value, "deleteStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeleteStatusLessThan(BigDecimal value) {
-            addCriterion("delete_status <", value, "deleteStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeleteStatusLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("delete_status <=", value, "deleteStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeleteStatusIn(List<BigDecimal> values) {
-            addCriterion("delete_status in", values, "deleteStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeleteStatusNotIn(List<BigDecimal> values) {
-            addCriterion("delete_status not in", values, "deleteStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeleteStatusBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("delete_status between", value1, value2, "deleteStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andDeleteStatusNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("delete_status not between", value1, value2, "deleteStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andPublishStatusIsNull() {
-            addCriterion("publish_status is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPublishStatusIsNotNull() {
-            addCriterion("publish_status is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPublishStatusEqualTo(BigDecimal value) {
-            addCriterion("publish_status =", value, "publishStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andPublishStatusNotEqualTo(BigDecimal value) {
-            addCriterion("publish_status <>", value, "publishStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andPublishStatusGreaterThan(BigDecimal value) {
-            addCriterion("publish_status >", value, "publishStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andPublishStatusGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("publish_status >=", value, "publishStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andPublishStatusLessThan(BigDecimal value) {
-            addCriterion("publish_status <", value, "publishStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andPublishStatusLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("publish_status <=", value, "publishStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andPublishStatusIn(List<BigDecimal> values) {
-            addCriterion("publish_status in", values, "publishStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andPublishStatusNotIn(List<BigDecimal> values) {
-            addCriterion("publish_status not in", values, "publishStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andPublishStatusBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("publish_status between", value1, value2, "publishStatus");
-            return (Criteria) this;
-        }
-
-        public Criteria andPublishStatusNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("publish_status not between", value1, value2, "publishStatus");
-            return (Criteria) this;
-        }
-
         public Criteria andNewStatusIsNull() {
             addCriterion("new_status is null");
             return (Criteria) this;
@@ -1883,6 +1763,126 @@ public class ProductExample {
 
         public Criteria andDescriptionAlbumNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("description_album not between", value1, value2, "descriptionAlbum");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteStatusIsNull() {
+            addCriterion("delete_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteStatusIsNotNull() {
+            addCriterion("delete_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteStatusEqualTo(Integer value) {
+            addCriterion("delete_status =", value, "deleteStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteStatusNotEqualTo(Integer value) {
+            addCriterion("delete_status <>", value, "deleteStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteStatusGreaterThan(Integer value) {
+            addCriterion("delete_status >", value, "deleteStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("delete_status >=", value, "deleteStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteStatusLessThan(Integer value) {
+            addCriterion("delete_status <", value, "deleteStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("delete_status <=", value, "deleteStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteStatusIn(List<Integer> values) {
+            addCriterion("delete_status in", values, "deleteStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteStatusNotIn(List<Integer> values) {
+            addCriterion("delete_status not in", values, "deleteStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteStatusBetween(Integer value1, Integer value2) {
+            addCriterion("delete_status between", value1, value2, "deleteStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andDeleteStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("delete_status not between", value1, value2, "deleteStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStatusIsNull() {
+            addCriterion("publish_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStatusIsNotNull() {
+            addCriterion("publish_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStatusEqualTo(Integer value) {
+            addCriterion("publish_status =", value, "publishStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStatusNotEqualTo(Integer value) {
+            addCriterion("publish_status <>", value, "publishStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStatusGreaterThan(Integer value) {
+            addCriterion("publish_status >", value, "publishStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("publish_status >=", value, "publishStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStatusLessThan(Integer value) {
+            addCriterion("publish_status <", value, "publishStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("publish_status <=", value, "publishStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStatusIn(List<Integer> values) {
+            addCriterion("publish_status in", values, "publishStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStatusNotIn(List<Integer> values) {
+            addCriterion("publish_status not in", values, "publishStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStatusBetween(Integer value1, Integer value2) {
+            addCriterion("publish_status between", value1, value2, "publishStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("publish_status not between", value1, value2, "publishStatus");
             return (Criteria) this;
         }
 

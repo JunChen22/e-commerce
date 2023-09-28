@@ -10,8 +10,6 @@
     <result column="category_name" jdbcType="VARCHAR" property="categoryName" />
     <result column="attribute_category_id" jdbcType="NUMERIC" property="attributeCategoryId" />
     <result column="sn" jdbcType="VARCHAR" property="sn" />
-    <result column="delete_status" jdbcType="NUMERIC" property="deleteStatus" />
-    <result column="publish_status" jdbcType="NUMERIC" property="publishStatus" />
     <result column="new_status" jdbcType="NUMERIC" property="newStatus" />
     <result column="recommend_status" jdbcType="NUMERIC" property="recommendStatus" />
     <result column="verify_status" jdbcType="NUMERIC" property="verifyStatus" />
@@ -30,6 +28,8 @@
     <result column="detail_title" jdbcType="VARCHAR" property="detailTitle" />
     <result column="detail_desc" jdbcType="VARCHAR" property="detailDesc" />
     <result column="description_album" jdbcType="NUMERIC" property="descriptionAlbum" />
+    <result column="delete_status" jdbcType="INTEGER" property="deleteStatus" />
+    <result column="publish_status" jdbcType="INTEGER" property="publishStatus" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
     <result column="note" jdbcType="VARCHAR" property="note" />
   </resultMap>
@@ -93,9 +93,9 @@
   </sql>
   <sql id="Base_Column_List">
     id, brand_id, brand_name, name, category_id, category_name, attribute_category_id, 
-    sn, delete_status, publish_status, new_status, recommend_status, verify_status, sub_title, 
-    cover_picture, picture_album, description, original_price, on_sale_status, sale_price, 
-    stock, low_stock, unit_sold, weight, keywords, detail_title, detail_desc, description_album, 
+    sn, new_status, recommend_status, verify_status, sub_title, cover_picture, picture_album, 
+    description, original_price, on_sale_status, sale_price, stock, low_stock, unit_sold, 
+    weight, keywords, detail_title, detail_desc, description_album, delete_status, publish_status, 
     created_at, note
   </sql>
   <select id="selectByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.ProductExample" resultMap="BaseResultMap">
@@ -131,23 +131,23 @@
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.Product" useGeneratedKeys="true">
     insert into product (brand_id, brand_name, name, 
       category_id, category_name, attribute_category_id, 
-      sn, delete_status, publish_status, 
-      new_status, recommend_status, verify_status, 
-      sub_title, cover_picture, picture_album, 
-      description, original_price, on_sale_status, 
-      sale_price, stock, low_stock, 
-      unit_sold, weight, keywords, 
-      detail_title, detail_desc, description_album, 
+      sn, new_status, recommend_status, 
+      verify_status, sub_title, cover_picture, 
+      picture_album, description, original_price, 
+      on_sale_status, sale_price, stock, 
+      low_stock, unit_sold, weight, 
+      keywords, detail_title, detail_desc, 
+      description_album, delete_status, publish_status, 
       created_at, note)
     values (#{brandId,jdbcType=NUMERIC}, #{brandName,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{categoryId,jdbcType=NUMERIC}, #{categoryName,jdbcType=VARCHAR}, #{attributeCategoryId,jdbcType=NUMERIC}, 
-      #{sn,jdbcType=VARCHAR}, #{deleteStatus,jdbcType=NUMERIC}, #{publishStatus,jdbcType=NUMERIC}, 
-      #{newStatus,jdbcType=NUMERIC}, #{recommendStatus,jdbcType=NUMERIC}, #{verifyStatus,jdbcType=NUMERIC}, 
-      #{subTitle,jdbcType=VARCHAR}, #{coverPicture,jdbcType=VARCHAR}, #{pictureAlbum,jdbcType=NUMERIC}, 
-      #{description,jdbcType=VARCHAR}, #{originalPrice,jdbcType=NUMERIC}, #{onSaleStatus,jdbcType=INTEGER}, 
-      #{salePrice,jdbcType=NUMERIC}, #{stock,jdbcType=INTEGER}, #{lowStock,jdbcType=INTEGER}, 
-      #{unitSold,jdbcType=INTEGER}, #{weight,jdbcType=NUMERIC}, #{keywords,jdbcType=VARCHAR}, 
-      #{detailTitle,jdbcType=VARCHAR}, #{detailDesc,jdbcType=VARCHAR}, #{descriptionAlbum,jdbcType=NUMERIC}, 
+      #{sn,jdbcType=VARCHAR}, #{newStatus,jdbcType=NUMERIC}, #{recommendStatus,jdbcType=NUMERIC}, 
+      #{verifyStatus,jdbcType=NUMERIC}, #{subTitle,jdbcType=VARCHAR}, #{coverPicture,jdbcType=VARCHAR}, 
+      #{pictureAlbum,jdbcType=NUMERIC}, #{description,jdbcType=VARCHAR}, #{originalPrice,jdbcType=NUMERIC}, 
+      #{onSaleStatus,jdbcType=INTEGER}, #{salePrice,jdbcType=NUMERIC}, #{stock,jdbcType=INTEGER}, 
+      #{lowStock,jdbcType=INTEGER}, #{unitSold,jdbcType=INTEGER}, #{weight,jdbcType=NUMERIC}, 
+      #{keywords,jdbcType=VARCHAR}, #{detailTitle,jdbcType=VARCHAR}, #{detailDesc,jdbcType=VARCHAR}, 
+      #{descriptionAlbum,jdbcType=NUMERIC}, #{deleteStatus,jdbcType=INTEGER}, #{publishStatus,jdbcType=INTEGER}, 
       #{createdAt,jdbcType=TIMESTAMP}, #{note,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.Product" useGeneratedKeys="true">
@@ -173,12 +173,6 @@
       </if>
       <if test="sn != null">
         sn,
-      </if>
-      <if test="deleteStatus != null">
-        delete_status,
-      </if>
-      <if test="publishStatus != null">
-        publish_status,
       </if>
       <if test="newStatus != null">
         new_status,
@@ -234,6 +228,12 @@
       <if test="descriptionAlbum != null">
         description_album,
       </if>
+      <if test="deleteStatus != null">
+        delete_status,
+      </if>
+      <if test="publishStatus != null">
+        publish_status,
+      </if>
       <if test="createdAt != null">
         created_at,
       </if>
@@ -262,12 +262,6 @@
       </if>
       <if test="sn != null">
         #{sn,jdbcType=VARCHAR},
-      </if>
-      <if test="deleteStatus != null">
-        #{deleteStatus,jdbcType=NUMERIC},
-      </if>
-      <if test="publishStatus != null">
-        #{publishStatus,jdbcType=NUMERIC},
       </if>
       <if test="newStatus != null">
         #{newStatus,jdbcType=NUMERIC},
@@ -323,6 +317,12 @@
       <if test="descriptionAlbum != null">
         #{descriptionAlbum,jdbcType=NUMERIC},
       </if>
+      <if test="deleteStatus != null">
+        #{deleteStatus,jdbcType=INTEGER},
+      </if>
+      <if test="publishStatus != null">
+        #{publishStatus,jdbcType=INTEGER},
+      </if>
       <if test="createdAt != null">
         #{createdAt,jdbcType=TIMESTAMP},
       </if>
@@ -363,12 +363,6 @@
       </if>
       <if test="record.sn != null">
         sn = #{record.sn,jdbcType=VARCHAR},
-      </if>
-      <if test="record.deleteStatus != null">
-        delete_status = #{record.deleteStatus,jdbcType=NUMERIC},
-      </if>
-      <if test="record.publishStatus != null">
-        publish_status = #{record.publishStatus,jdbcType=NUMERIC},
       </if>
       <if test="record.newStatus != null">
         new_status = #{record.newStatus,jdbcType=NUMERIC},
@@ -424,6 +418,12 @@
       <if test="record.descriptionAlbum != null">
         description_album = #{record.descriptionAlbum,jdbcType=NUMERIC},
       </if>
+      <if test="record.deleteStatus != null">
+        delete_status = #{record.deleteStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.publishStatus != null">
+        publish_status = #{record.publishStatus,jdbcType=INTEGER},
+      </if>
       <if test="record.createdAt != null">
         created_at = #{record.createdAt,jdbcType=TIMESTAMP},
       </if>
@@ -445,8 +445,6 @@
       category_name = #{record.categoryName,jdbcType=VARCHAR},
       attribute_category_id = #{record.attributeCategoryId,jdbcType=NUMERIC},
       sn = #{record.sn,jdbcType=VARCHAR},
-      delete_status = #{record.deleteStatus,jdbcType=NUMERIC},
-      publish_status = #{record.publishStatus,jdbcType=NUMERIC},
       new_status = #{record.newStatus,jdbcType=NUMERIC},
       recommend_status = #{record.recommendStatus,jdbcType=NUMERIC},
       verify_status = #{record.verifyStatus,jdbcType=NUMERIC},
@@ -465,6 +463,8 @@
       detail_title = #{record.detailTitle,jdbcType=VARCHAR},
       detail_desc = #{record.detailDesc,jdbcType=VARCHAR},
       description_album = #{record.descriptionAlbum,jdbcType=NUMERIC},
+      delete_status = #{record.deleteStatus,jdbcType=INTEGER},
+      publish_status = #{record.publishStatus,jdbcType=INTEGER},
       created_at = #{record.createdAt,jdbcType=TIMESTAMP},
       note = #{record.note,jdbcType=VARCHAR}
     <if test="_parameter != null">
@@ -494,12 +494,6 @@
       </if>
       <if test="sn != null">
         sn = #{sn,jdbcType=VARCHAR},
-      </if>
-      <if test="deleteStatus != null">
-        delete_status = #{deleteStatus,jdbcType=NUMERIC},
-      </if>
-      <if test="publishStatus != null">
-        publish_status = #{publishStatus,jdbcType=NUMERIC},
       </if>
       <if test="newStatus != null">
         new_status = #{newStatus,jdbcType=NUMERIC},
@@ -555,6 +549,12 @@
       <if test="descriptionAlbum != null">
         description_album = #{descriptionAlbum,jdbcType=NUMERIC},
       </if>
+      <if test="deleteStatus != null">
+        delete_status = #{deleteStatus,jdbcType=INTEGER},
+      </if>
+      <if test="publishStatus != null">
+        publish_status = #{publishStatus,jdbcType=INTEGER},
+      </if>
       <if test="createdAt != null">
         created_at = #{createdAt,jdbcType=TIMESTAMP},
       </if>
@@ -573,8 +573,6 @@
       category_name = #{categoryName,jdbcType=VARCHAR},
       attribute_category_id = #{attributeCategoryId,jdbcType=NUMERIC},
       sn = #{sn,jdbcType=VARCHAR},
-      delete_status = #{deleteStatus,jdbcType=NUMERIC},
-      publish_status = #{publishStatus,jdbcType=NUMERIC},
       new_status = #{newStatus,jdbcType=NUMERIC},
       recommend_status = #{recommendStatus,jdbcType=NUMERIC},
       verify_status = #{verifyStatus,jdbcType=NUMERIC},
@@ -593,6 +591,8 @@
       detail_title = #{detailTitle,jdbcType=VARCHAR},
       detail_desc = #{detailDesc,jdbcType=VARCHAR},
       description_album = #{descriptionAlbum,jdbcType=NUMERIC},
+      delete_status = #{deleteStatus,jdbcType=INTEGER},
+      publish_status = #{publishStatus,jdbcType=INTEGER},
       created_at = #{createdAt,jdbcType=TIMESTAMP},
       note = #{note,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}

@@ -37,7 +37,7 @@ public class MemberServiceImpl implements MemberService {
         MemberExample example = new MemberExample();
         example.createCriteria().andUsernameEqualTo(username);
         List<Member> members = memberMapper.selectByExample(example);
-        members.get(0).setStatus("disable");
+        members.get(0).setStatus(0);
         memberMapper.updateByExampleSelective(members.get(0), example);
         return members.get(0);
     }
@@ -47,7 +47,7 @@ public class MemberServiceImpl implements MemberService {
         MemberExample example = new MemberExample();
         example.createCriteria().andUsernameEqualTo(username);
         List<Member> members = memberMapper.selectByExample(example);
-        members.get(0).setStatus("active");
+        members.get(0).setStatus(1);
         memberMapper.updateByExampleSelective(members.get(0), example);
         return members.get(0);
     }
