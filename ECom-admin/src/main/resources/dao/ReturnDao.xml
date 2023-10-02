@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itsthatjun.ecommerce.dao.OMS.ReturnDao">
+    <resultMap id="returnDetailMap" type="com.itsthatjun.ecommerce.dto.OMS.ReturnDetail" autoMapping="true">
+        <association property="returnRequest" javaType="com.itsthatjun.ecommerce.mbg.model.ReturnRequest">
+            <id property="id" column="id"/>
+            <result property="updatedAt" column="request_update"/>
+        </association>
+        <collection property="picturesList"
+                    ofType="com.itsthatjun.ecommerce.mbg.model.ReturnReasonPictures">
+            <result property="filename" column="filename"/>
+        </collection>
+        <collection property="logList"
+                    ofType="com.itsthatjun.ecommerce.mbg.model.ReturnLog">
+            <result property="action" column="action"/>
+            <result property="operator" column="last_updated_by" />
+            <result property="createdAt" column="last_update_time"/>
+        </collection>
+    </resultMap>
+
+    <select id="getDetail" resultMap="returnDetailMap">
+        SELECT
+        request.id,
+        order_id,
+        company_address_id,
+        order_sn,
+        member_id,
+        return_quantity,
+        return_name,
+        return_phone,
+        status,
+        handle_time,
+        asking_amount,
+        refunded_amount,
+        reason,
+        description,
+        handle_note,
+        handle_operator,
+        receive_operator,
+        receive_time,
+        receive_note,
+        request.created_at,
+        updated_at request_update,
+
+        picture.filename,
+
+        log.action,
+        log.operator last_update_time,
+        log.created_at last_updated_by
+        FROM return_request request
+        LEFT JOIN return_reason_pictures picture ON picture.return_request_id = request.id
+        LEFT JOIN return_log log ON log.return_request_id = request.id
+        WHERE request.orderSn = #{orderSn}
+    </select>
+</mapper>

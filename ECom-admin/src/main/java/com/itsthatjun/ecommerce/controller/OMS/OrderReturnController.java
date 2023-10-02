@@ -1,7 +1,7 @@
 package com.itsthatjun.ecommerce.controller.OMS;
 
-import com.itsthatjun.ecommerce.mbg.model.OrderReturnApply;
-import com.itsthatjun.ecommerce.mbg.model.Product;
+import com.itsthatjun.ecommerce.dto.OMS.ReturnDetail;
+import com.itsthatjun.ecommerce.mbg.model.ReturnRequest;
 import com.itsthatjun.ecommerce.service.OMS.implementation.ReturnOrderServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,32 +26,32 @@ public class OrderReturnController {
 
     @GetMapping("/AllOpening")
     @ApiOperation(value = "list all return request open waiting to be approved")
-    public List<OrderReturnApply> listAllOpening(){
+    public List<ReturnRequest> listAllOpening(){
         return returnOrderService.getAllOpening();
     }
 
     @GetMapping("/AllReturning")
     @ApiOperation(value = "List all returns that are on their way")
-    public List<OrderReturnApply> listReturning(){
+    public List<ReturnRequest> listReturning(){
         return returnOrderService.getAllReturning();
     }
 
     @GetMapping("/AllCompleted")
     @ApiOperation(value = "List ALl completed returns")
-    public List<OrderReturnApply> listAllCompleted(){
+    public List<ReturnRequest> listAllCompleted(){
         return returnOrderService.getAllCompleted();
     }
 
     @GetMapping("/AllRejected")
     @ApiOperation(value = "List All rejected returns requests")
-    public List<OrderReturnApply> listAllRejected(){
+    public List<ReturnRequest> listAllRejected(){
         return returnOrderService.getAllRejected();
     }
 
     @GetMapping("/{serialNumber}")
     @ApiOperation(value = "return a return request detail")
-    public OrderReturnApply getReturnRequest(@PathVariable String serialNumber){
-        return returnOrderService.getOrderReturnDetail(serialNumber);
+    public ReturnDetail getReturnRequest(@PathVariable String serialNumber){
+        return returnOrderService.getReturnDetail(serialNumber);
     }
 
     /* TODO: combine these two update/approve/rejected

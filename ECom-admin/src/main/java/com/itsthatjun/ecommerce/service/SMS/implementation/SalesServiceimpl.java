@@ -4,10 +4,13 @@ import com.itsthatjun.ecommerce.dto.SMS.OnSaleRequest;
 import com.itsthatjun.ecommerce.mbg.mapper.*;
 import com.itsthatjun.ecommerce.mbg.model.*;
 import com.itsthatjun.ecommerce.service.SMS.SalesService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,43 +18,42 @@ import java.util.stream.Collectors;
 @Service
 public class SalesServiceimpl implements SalesService{
 
+    private static final Logger LOG = LoggerFactory.getLogger(SalesServiceimpl.class);
+
     private final PromotionSaleMapper promotionSaleMapper;
 
-    private final PromotionSaleProductRelationMapper productRelationMapper;
-
-    private final ProductSkuStockMapper productSkuStockMapper;
+    private final PromotionSaleProductMapper promotionSaleProductMapper;
 
     private final PromotionSaleLogMapper promotionSaleLogMapper;
 
     private final ProductMapper productMapper;
 
+    private final ProductSkuMapper productSkuMapper;
+
     @Autowired
-    public SalesServiceimpl(PromotionSaleMapper promotionSaleMapper, PromotionSaleProductRelationMapper productRelationMapper,
-                            ProductSkuStockMapper productSkuStockMapper, PromotionSaleLogMapper promotionSaleLogMapper,
-                            ProductMapper productMapper) {
+    public SalesServiceimpl(PromotionSaleMapper promotionSaleMapper, PromotionSaleProductMapper promotionSaleProductMapper,
+                            PromotionSaleLogMapper promotionSaleLogMapper, ProductMapper productMapper, ProductSkuMapper productSkuMapper) {
         this.promotionSaleMapper = promotionSaleMapper;
-        this.productRelationMapper = productRelationMapper;
-        this.productSkuStockMapper = productSkuStockMapper;
+        this.promotionSaleProductMapper = promotionSaleProductMapper;
         this.promotionSaleLogMapper = promotionSaleLogMapper;
         this.productMapper = productMapper;
+        this.productSkuMapper = productSkuMapper;
     }
 
     @Override
     public List<PromotionSale> getAllPromotionalSale() {
         PromotionSaleExample saleExample = new PromotionSaleExample();
-        saleExample.createCriteria().andStatusEqualTo(1);  // default active sales
+        saleExample.createCriteria().andStatusEqualTo(1);  // default active sales TODO: reduce returning infos
         List<PromotionSale> result = promotionSaleMapper.selectByExample(saleExample);
-        return result.size() > 0 ? result : null;
+        return result;
     }
-
-    // 0-> not on sale; 1-> is on sale; 2-> flash sale/special sales/clarance/used item
 
     @Override
     public List<Product> getAllPromotionalSaleItems() {
         ProductExample productExample = new ProductExample();
         productExample.createCriteria().andOnSaleStatusEqualTo(1);
         List<Product> result = productMapper.selectByExample(productExample);
-        return result.size() > 0 ? result : null;
+        return result;
     }
 
     @Override
@@ -59,219 +61,371 @@ public class SalesServiceimpl implements SalesService{
         ProductExample productExample = new ProductExample();
         productExample.createCriteria().andOnSaleStatusEqualTo(2);
         List<Product> result = productMapper.selectByExample(productExample);
-        return result.size() > 0 ? result : null;
+        return result;
     }
 
-    private void create(PromotionSale newSale, int productId, List<String> skuCodes) {
+    @Override
+    public void updateSaleLimitPrice() {
+        // TODO: use it when receiving stock update from order event
+        //      might remove from sale if it reached limit and send update event.
+    }
 
-        Product product = productMapper.selectByPrimaryKey(productId);
-        product.setOnSaleStatus(1);
-        for (String skuCode : skuCodes) {
-            System.out.println(skuCode);
+    @Override
+    public void updateSaleTimeFramePrice() {
+        // TODO: could use @Scheduled  Spring Task to do so to check it every hour or so
+    }
 
-            // find the product and sku
-            ProductSkuStockExample skuStockExample = new ProductSkuStockExample();
-            skuStockExample.createCriteria().andProductIdEqualTo(productId).andSkuCodeEqualTo(skuCode);
-            ProductSkuStock productSkuStock = productSkuStockMapper.selectByExample(skuStockExample).get(0);
+    private boolean checkItemOnSale(List<PromotionSaleProduct> onSaleProduct) {
+        for (PromotionSaleProduct product : onSaleProduct) {
+            String skuCode = product.getProductSkuCode();
+            PromotionSaleProductExample promotionSaleProductExample = new PromotionSaleProductExample();
+            promotionSaleProductExample.createCriteria().andProductSkuCodeEqualTo(skuCode);
+            List<PromotionSaleProduct> productList = promotionSaleProductMapper.selectByExample(promotionSaleProductExample);
 
-            double price = productSkuStock.getPrice().doubleValue();
+            if (!productList.isEmpty()) {
+                LOG.info("Product sku %s on sale already, can not have multiple sale.", skuCode);
+                return true;
+            }
+        }
+        return false;
+    }
 
-            if (newSale.getDiscountType() == 0) {  // -- 0 -> by amount , 1->  by percent off
-                price = price - newSale.getAmount().doubleValue();
-            } else {
-                price = (100 - newSale.getAmount().doubleValue())/100 * price;
+    @Override
+    public PromotionSale createListSale(OnSaleRequest request, String operator) {
+
+        List<PromotionSaleProduct> promotionSaleProductList = request.getOnSaleProduct();
+        boolean itemAlreadyOnSale = checkItemOnSale(promotionSaleProductList);
+
+        if (itemAlreadyOnSale) return null;
+
+        PromotionSale newPromotionSale = request.getPromotionSale();
+        promotionSaleMapper.insert(newPromotionSale);
+
+        int newSaleId = newPromotionSale.getId();
+        int discountType = newPromotionSale.getDiscountType();
+        int promotionType = newPromotionSale.getPromotionType();
+        double discountAmount = newPromotionSale.getAmount().doubleValue();
+
+        List<ProductSku> affectedSku = new ArrayList<>();
+
+        // find and update sku and product price and status.
+        for (PromotionSaleProduct saleProduct : promotionSaleProductList) {
+
+            int skuId = saleProduct.getId();
+
+            ProductSku productSku = productSkuMapper.selectByPrimaryKey(skuId);
+            double currentSkuSale = productSku.getPrice().doubleValue();
+            if (discountType == 0) {// discount by amount
+                currentSkuSale = currentSkuSale  - discountAmount;
+            } else {   // discount  by percent
+                currentSkuSale = currentSkuSale - (discountAmount *  currentSkuSale / 100);
             }
 
-            if (product.getSalePrice().doubleValue() > price) product.setSalePrice(BigDecimal.valueOf(price));
+            productSku.setPromotionPrice(BigDecimal.valueOf(currentSkuSale));
 
-            System.out.println(price);
+            saleProduct.setPromotionSaleId(newSaleId);
+            saleProduct.setPromotionPrice(BigDecimal.valueOf(currentSkuSale));
 
-            productSkuStock.setPromotionPrice(BigDecimal.valueOf(price));
-            // TODO: need to check if it exist already
-            PromotionSaleProductRelation relation = new PromotionSaleProductRelation();
-            relation.setProductId(productId);
-            relation.setProductSkuCode(skuCode);
-            relation.setPromotionSaleId(newSale.getId());
-            relation.setPromotionPrice(BigDecimal.valueOf(price));
-            relation.setPromotionCount(20); // TODO: add limit(stock) per person or per set item limit for sale
-            relation.setPromotionLimit(3);
+            productSkuMapper.updateByPrimaryKey(productSku);
+            promotionSaleProductMapper.insert(saleProduct);
 
-            productMapper.updateByPrimaryKey(product);  // TODO: might cause error if product id don't exist
-            productRelationMapper.insert(relation);
-            productSkuStockMapper.updateByPrimaryKey(productSkuStock);
+            int productId = saleProduct.getProductId();
+            Product affectedProduct = productMapper.selectByPrimaryKey(productId);
+            double currentProductPrice = affectedProduct.getSalePrice().doubleValue();
+            affectedProduct.setOnSaleStatus(1);
+            affectedProduct.setSalePrice(BigDecimal.valueOf(Math.min(currentProductPrice, currentSkuSale)));
+            productMapper.updateByPrimaryKey(affectedProduct);
+
+            affectedSku.add(productSku);
         }
+
+        createSaleLog(newSaleId, promotionType, discountType, discountAmount, operator);
+
+        //sendOmsSaleUpdateMessage("saleupdatetoOMS-out-0", new OmsSaleOutEvent(OmsSaleOutEvent.Type.UPDATE_SALE_PRICE, affectedSku));
+        //sendPmsSaleUpdateMessage("saleupdatetoPms-out-0", new PmsSaleOutEvent(PmsSaleOutEvent.Type.UPDATE_SALE_PRICE, affectedSku));
+        return newPromotionSale;
     }
 
-    private PromotionSale createNewSale(OnSaleRequest request) {
-        PromotionSale newSale = new PromotionSale();
-        newSale.setName(request.getName());
-        newSale.setPromotionType(request.getPromotionType());
-        newSale.setDiscountType(request.getDiscountType());
-        newSale.setAmount(BigDecimal.valueOf(request.getAmount()));
-        newSale.setStatus(request.getStatus());
-        newSale.setStartTime(request.getStartTime());
-        newSale.setEndTime(request.getEndTime());
-        newSale.setCreatedAt(new Date());
-        return newSale;
-    }
-
-    //  -- discount on 0-> all, 1 -> specific brand,  2-> specific category , 3-> specific item
+    /*
     @Override
-    public List<Product> createList(OnSaleRequest request) {
-        // create promotion info
-        PromotionSale newSale = createNewSale(request);
+    public Mono<PromotionSale> createBrandSale(OnSaleRequest request, String operator) {
 
-        promotionSaleMapper.insert(newSale);
+        List<PromotionSaleProduct> promotionSaleProductList = request.getOnSaleProduct();
+        boolean itemAlreadyOnSale = checkItemOnSale(promotionSaleProductList);
 
-        for (Product product : request.getProduct()) {
-            System.out.println(product.getName() + " : "  + request.getProductIdToSkuCode().get(product.getId()));
-            create(newSale, product.getId(), request.getProductIdToSkuCode().get(product.getId()));
+        if (itemAlreadyOnSale) return null;
+
+        PromotionSale newPromotionSale = request.getPromotionSale();
+        promotionSaleMapper.insert(newPromotionSale);
+
+        int newSaleId = newPromotionSale.getId();
+        int discountType = newPromotionSale.getDiscountType();
+        int promotionType = newPromotionSale.getPromotionType();
+        double discountAmount = newPromotionSale.getAmount().doubleValue();
+
+        List<ProductSku> affectedSku = new ArrayList<>();
+
+        // find and update sku and product price and status.
+        for (PromotionSaleProduct saleProduct : promotionSaleProductList) {
+
+            int skuId = saleProduct.getId();
+
+            ProductSku productSku = productSkuMapper.selectByPrimaryKey(skuId);
+            double currentSkuSale = productSku.getPromotionPrice().doubleValue();
+            if (discountType == 0) {// discount by amount
+                currentSkuSale = currentSkuSale  - discountAmount;
+            } else {   // discount  by percent
+                currentSkuSale = currentSkuSale - (discountAmount *  currentSkuSale / 100);
+            }
+
+            productSku.setPromotionPrice(BigDecimal.valueOf(currentSkuSale));
+
+            promotionSaleProductMapper.updateByPrimaryKey(saleProduct);
+            productSkuMapper.updateByPrimaryKey(productSku);
+
+            int productId = saleProduct.getProductId();
+            // sale price and status to 1
+            Product affectedProduct = productMapper.selectByPrimaryKey(productId);
+            double currentProductPrice = affectedProduct.getSalePrice().doubleValue();
+            affectedProduct.setOnSaleStatus(1);
+            affectedProduct.setSalePrice(BigDecimal.valueOf(Math.min(currentProductPrice, currentSkuSale)));
+            productMapper.updateByPrimaryKey(affectedProduct);
+
+            affectedSku.add(productSku);
         }
-        return request.getProduct();
-    }
 
-    @Override
-    public List<Product> createBrandSale(OnSaleRequest request) {
+        createSaleLog(newSaleId, promotionType, discountType, discountAmount, operator);
 
-        // create promotion info
-        PromotionSale newSale = createNewSale(request);
-        promotionSaleMapper.insert(newSale);
-
-        // find product list by brand id
-        int brandId = request.getBrandId();
-
-        ProductExample productExample = new ProductExample();
-        productExample.createCriteria().andBrandIdEqualTo(brandId);
-        List<Product> productList =  productMapper.selectByExample(productExample);
-
-        // using product to find sku
-        for (Product product : productList) {
-
-            int productId = product.getId();
-
-            ProductSkuStockExample skuStockExample = new ProductSkuStockExample();
-            skuStockExample.createCriteria().andProductIdEqualTo(productId);
-            List<ProductSkuStock> productSkuStocks = productSkuStockMapper.selectByExample(skuStockExample);
-            List<String> skuCodeList = productSkuStocks.stream()
-                    .map(ProductSkuStock::getSkuCode)
-                    .collect(Collectors.toList());
-            create(newSale, productId, skuCodeList);
-        }
-        return productList;
-    }
-
-    @Override
-    public List<Product> createCategorySale(OnSaleRequest request) {
-
-        // create promotion info
-        PromotionSale newSale = createNewSale(request);
-        promotionSaleMapper.insert(newSale);
-
-        // find product list by brand id
-        int categoryId = request.getProductCategoryId();
-
-        ProductExample productExample = new ProductExample();
-        productExample.createCriteria().andCategoryIdEqualTo(categoryId);
-        List<Product> productList =  productMapper.selectByExample(productExample);
-
-        // using product to find sku
-        for (Product product : productList) {
-
-            int productId = product.getId();
-
-            ProductSkuStockExample skuStockExample = new ProductSkuStockExample();
-            skuStockExample.createCriteria().andProductIdEqualTo(productId);
-            List<ProductSkuStock> productSkuStocks = productSkuStockMapper.selectByExample(skuStockExample);
-            List<String> skuCodeList = productSkuStocks.stream()
-                    .map(ProductSkuStock::getSkuCode)
-                    .collect(Collectors.toList());
-            create(newSale, productId, skuCodeList);
-        }
-        return productList;
+        sendOmsSaleUpdateMessage("saleupdatetoOMS-out-0", new OmsSaleOutEvent(OmsSaleOutEvent.Type.UPDATE_SALE_PRICE, affectedSku));
+        sendPmsSaleUpdateMessage("saleupdatetoPms-out-0", new PmsSaleOutEvent(PmsSaleOutEvent.Type.UPDATE_SALE_PRICE, affectedSku));
+        return newPromotionSale;
     }
 
     @Override
-    public OnSaleRequest updateStatus(OnSaleRequest updateSaleRequest) {
+    public Mono<PromotionSale> createCategorySale(OnSaleRequest request , String operator) {
+        List<PromotionSaleProduct> promotionSaleProductList = request.getOnSaleProduct();
+        boolean itemAlreadyOnSale = checkItemOnSale(promotionSaleProductList);
+
+        if (itemAlreadyOnSale) return null;
+
+        PromotionSale newPromotionSale = request.getPromotionSale();
+        promotionSaleMapper.insert(newPromotionSale);
+
+        int newSaleId = newPromotionSale.getId();
+        int discountType = newPromotionSale.getDiscountType();
+        int promotionType = newPromotionSale.getPromotionType();
+        double discountAmount = newPromotionSale.getAmount().doubleValue();
+
+        List<ProductSku> affectedSku = new ArrayList<>();
+
+        // find and update sku and product price and status.
+        for (PromotionSaleProduct saleProduct : promotionSaleProductList) {
+
+            int skuId = saleProduct.getId();
+
+            ProductSku productSku = productSkuMapper.selectByPrimaryKey(skuId);
+            double currentSkuSale = productSku.getPromotionPrice().doubleValue();
+            if (discountType == 0) {// discount by amount
+                currentSkuSale = currentSkuSale  - discountAmount;
+            } else {   // discount  by percent
+                currentSkuSale = currentSkuSale - (discountAmount *  currentSkuSale / 100);
+            }
+
+            productSku.setPromotionPrice(BigDecimal.valueOf(currentSkuSale));
+
+            promotionSaleProductMapper.updateByPrimaryKey(saleProduct);
+            productSkuMapper.updateByPrimaryKey(productSku);
+
+            int productId = saleProduct.getProductId();
+            // sale price and status to 1
+            Product affectedProduct = productMapper.selectByPrimaryKey(productId);
+            double currentProductPrice = affectedProduct.getSalePrice().doubleValue();
+            affectedProduct.setOnSaleStatus(1);
+            affectedProduct.setSalePrice(BigDecimal.valueOf(Math.min(currentProductPrice, currentSkuSale)));
+            productMapper.updateByPrimaryKey(affectedProduct);
+
+            affectedSku.add(productSku);
+        }
+
+        createSaleLog(newSaleId, promotionType, discountType, discountAmount, operator);
+
+        sendOmsSaleUpdateMessage("saleupdatetoOMS-out-0", new OmsSaleOutEvent(OmsSaleOutEvent.Type.UPDATE_SALE_PRICE, affectedSku));
+        sendPmsSaleUpdateMessage("saleupdatetoPms-out-0", new PmsSaleOutEvent(PmsSaleOutEvent.Type.UPDATE_SALE_PRICE, affectedSku));
+        return newPromotionSale;
+    }
+     */
+
+    private void createSaleLog(int newSaleId, int promotionType, int discountType, double discountAmount, String operator) {
         PromotionSaleLog newLog = new PromotionSaleLog();
+        newLog.setPromotionSaleId(newSaleId);
+        newLog.setPromotionType(promotionType);
+        newLog.setDiscountType(discountType);
+        newLog.setAmount(BigDecimal.valueOf(discountAmount));
+        newLog.setOperateMan(operator);
+        newLog.setCreatedAt(new Date());
+        promotionSaleLogMapper.insert(newLog);
+    }
 
-        // update status
+    @Override
+    public PromotionSale updateSaleInfo(OnSaleRequest updateSaleRequest, String operator) {
+        PromotionSale updatedPromotionSale = updateSaleRequest.getPromotionSale();
+        updatedPromotionSale.setUpdatedAt(new Date());
 
-        // change price back to original price or apply the discount
-        //if updateSaleRequest.getStatus() == ACCTIVE //TODO: enum
-        if (updateSaleRequest.getStatus() == 0) {
+        promotionSaleMapper.updateByPrimaryKey(updatedPromotionSale);
 
+        // TODO:new logs
+        return updatedPromotionSale;
+    }
+
+    @Override
+    public PromotionSale updateSalePrice(OnSaleRequest updateSaleRequest, String operator) {
+        PromotionSale updatedSale = updateSaleRequest.getPromotionSale();
+        promotionSaleMapper.insert(updatedSale);
+
+        int saleId = updatedSale.getId();
+        int discountType = updatedSale.getDiscountType();
+        int promotionType = updatedSale.getPromotionType();
+        double discountAmount = updatedSale.getAmount().doubleValue();
+
+        List<ProductSku> affectedSku = new ArrayList<>();
+
+        PromotionSaleProductExample promotionSaleProductExample = new PromotionSaleProductExample();
+        promotionSaleProductExample.createCriteria().andPromotionSaleIdEqualTo(saleId);
+        List<PromotionSaleProduct> onsaleProdctList =  promotionSaleProductMapper.selectByExample(promotionSaleProductExample);
+
+        // find and update sku and product price and status.
+        for (PromotionSaleProduct saleProduct : onsaleProdctList) {
+
+            int skuId = saleProduct.getId();
+
+            ProductSku productSku = productSkuMapper.selectByPrimaryKey(skuId);
+            double currentSkuSale = productSku.getPrice().doubleValue();
+            if (discountType == 0) {// discount by amount
+                currentSkuSale = currentSkuSale  - discountAmount;
+            } else {   // discount  by percent
+                currentSkuSale = currentSkuSale - (discountAmount *  currentSkuSale / 100);
+            }
+
+            productSku.setPromotionPrice(BigDecimal.valueOf(currentSkuSale));
+            saleProduct.setPromotionPrice(BigDecimal.valueOf(currentSkuSale));
+
+            productSkuMapper.updateByPrimaryKey(productSku);
+            promotionSaleProductMapper.updateByPrimaryKey(saleProduct);
+
+            int productId = saleProduct.getProductId();
+            Product affectedProduct = productMapper.selectByPrimaryKey(productId);
+            double currentProductPrice = affectedProduct.getSalePrice().doubleValue();
+            affectedProduct.setOnSaleStatus(1);
+            affectedProduct.setSalePrice(BigDecimal.valueOf(Math.min(currentProductPrice, currentSkuSale)));
+            productMapper.updateByPrimaryKey(affectedProduct);
+
+            affectedSku.add(productSku);
+        }
+
+        createSaleLog(saleId, promotionType, discountType, discountAmount, operator);
+
+        //sendOmsSaleUpdateMessage("saleupdatetoOMS-out-0", new OmsSaleOutEvent(OmsSaleOutEvent.Type.UPDATE_SALE_PRICE, affectedSku));
+        //sendPmsSaleUpdateMessage("saleupdatetoPms-out-0", new PmsSaleOutEvent(PmsSaleOutEvent.Type.UPDATE_SALE_PRICE, affectedSku));
+        return updatedSale;
+    }
+
+    @Override
+    public PromotionSale updateSaleStatus(OnSaleRequest updateSaleRequest , String operator) {
+        int status = updateSaleRequest.getPromotionSale().getStatus();
+        PromotionSale updatedSale = updateSaleRequest.getPromotionSale();
+
+        if (status == 1) {
+            updateSalePrice(updateSaleRequest, operator);
         } else {
+            int updateSaleId = updatedSale.getId();
+            promotionSaleMapper.insert(updatedSale);
 
-            // change discount
+            List<ProductSku> affectedSku = new ArrayList<>();
+
+            PromotionSaleProductExample promotionSaleProductExample = new PromotionSaleProductExample();
+            promotionSaleProductExample.createCriteria().andPromotionSaleIdEqualTo(updateSaleId);
+            List<PromotionSaleProduct> onsaleProdctList =  promotionSaleProductMapper.selectByExample(promotionSaleProductExample);
+
+            // find and update sku and product price and status.
+            for (PromotionSaleProduct saleProduct : onsaleProdctList) {
+
+                int skuId = saleProduct.getId();
+
+                ProductSku productSku = productSkuMapper.selectByPrimaryKey(skuId);
+                double originalPrice = productSku.getPrice().doubleValue();
+
+                productSku.setPromotionPrice(BigDecimal.valueOf(originalPrice));
+                saleProduct.setPromotionPrice(BigDecimal.valueOf(originalPrice));
+
+                productSkuMapper.updateByPrimaryKey(productSku);
+                promotionSaleProductMapper.updateByPrimaryKey(saleProduct);
+
+                int productId = saleProduct.getProductId();
+                Product affectedProduct = productMapper.selectByPrimaryKey(productId);
+                double currentProductPrice = affectedProduct.getOriginalPrice().doubleValue();
+
+                affectedProduct.setOnSaleStatus(0);
+                affectedProduct.setSalePrice(BigDecimal.valueOf(currentProductPrice));
+
+                productMapper.updateByPrimaryKey(affectedProduct);
+
+                affectedSku.add(productSku);
+            }
+
+            int promotionType = updatedSale.getPromotionType();
+            int discountType = updatedSale.getDiscountType();
+
+            createSaleLog(updateSaleId, promotionType, discountType, 0, operator);
+
+            //sendOmsSaleUpdateMessage("saleupdatetoOMS-out-0", new OmsSaleOutEvent(OmsSaleOutEvent.Type.DELETE_SALE, affectedSku));
+            //sendPmsSaleUpdateMessage("saleupdatetoPms-out-0", new PmsSaleOutEvent(PmsSaleOutEvent.Type.DELETE_SALE, affectedSku));
         }
-        // TODO: could do it multiple ways, when getting prices, also need to check sale status to get the discount price
-        //       or change the price no matter what and need sale status.
-
-        return null;
+        return updatedSale;
     }
 
     @Override
-    public OnSaleRequest upateSaleDate(OnSaleRequest updateSaleRequest) {
+    public void delete(int promotionSaleId, String operator) {
 
-        // change date
+        PromotionSale toBeDeletSale = promotionSaleMapper.selectByPrimaryKey(promotionSaleId);
+        int promotionId = toBeDeletSale.getId();
+        List<ProductSku> affectedSku = new ArrayList<>();
 
-        // update prices if past expiration date
+        PromotionSaleProductExample promotionSaleProductExample = new PromotionSaleProductExample();
+        promotionSaleProductExample.createCriteria().andPromotionSaleIdEqualTo(promotionId);
+        List<PromotionSaleProduct> onsaleProdctList =  promotionSaleProductMapper.selectByExample(promotionSaleProductExample);
 
-        // TODO: need a scheduler or something to check sale dates
+        // find and update sku and product price and status.
+        for (PromotionSaleProduct saleProduct : onsaleProdctList) {
 
-        return null;
-    }
+            int skuId = saleProduct.getId();
 
-    @Override
-    public OnSaleRequest updateSaleAmount(OnSaleRequest updateSaleRequest) {
+            ProductSku productSku = productSkuMapper.selectByPrimaryKey(skuId);
+            double originalPrice = productSku.getPrice().doubleValue();
 
+            productSku.setPromotionPrice(BigDecimal.valueOf(originalPrice));
+            saleProduct.setPromotionPrice(BigDecimal.valueOf(originalPrice));
 
-        return null;
-    }
+            productSkuMapper.updateByPrimaryKey(productSku);
+            promotionSaleProductMapper.updateByPrimaryKey(saleProduct);
 
-    @Override
-    public OnSaleRequest updateSaleLimt(OnSaleRequest updateSaleRequest) {
+            int productId = saleProduct.getProductId();
+            Product affectedProduct = productMapper.selectByPrimaryKey(productId);
+            double currentProductPrice = affectedProduct.getOriginalPrice().doubleValue();
 
+            affectedProduct.setOnSaleStatus(0);
+            affectedProduct.setSalePrice(BigDecimal.valueOf(currentProductPrice));
 
-        return null;
-    }
+            productMapper.updateByPrimaryKey(affectedProduct);
 
-    // TODO: need something to update time to expire or disabled promotion
-
-    @Override       // flash sale vs promotion sale
-    public OnSaleRequest updateSaleType(OnSaleRequest updateSaleRequest) {
-        // TODO: might cause problem when changing the status
-        return null;
-    }
-
-    @Override
-    public void delete(int promotionSaleId) {
-        // TODO: might affect other promotion like all 10% off, need to set something like one promotion at a time.
-        PromotionSale foundSale = promotionSaleMapper.selectByPrimaryKey(promotionSaleId);
-
-        PromotionSaleProductRelationExample productRelationExample = new PromotionSaleProductRelationExample();
-        productRelationExample.createCriteria().andPromotionSaleIdEqualTo(foundSale.getId());
-        List<PromotionSaleProductRelation> affectedProducts = productRelationMapper.selectByExample(productRelationExample);
-
-        for (PromotionSaleProductRelation affectedProduct: affectedProducts) {
-
-            Product foundProduct = productMapper.selectByPrimaryKey(affectedProduct.getProductId());
-
-            double originalPrice = foundProduct.getOriginalPrice().doubleValue();
-
-            foundProduct.setOnSaleStatus(0);
-            foundProduct.setSalePrice(BigDecimal.valueOf(originalPrice));
-
-            ProductSkuStockExample skuStockExample = new ProductSkuStockExample();
-            skuStockExample.createCriteria().andSkuCodeEqualTo(affectedProduct.getProductSkuCode())
-                    .andProductIdEqualTo(foundProduct.getId());
-            ProductSkuStock foundSku = productSkuStockMapper.selectByExample(skuStockExample).get(0);
-            foundSku.setPromotionPrice(BigDecimal.valueOf(originalPrice));
-            productSkuStockMapper.updateByPrimaryKey(foundSku);
-
-            productMapper.updateByPrimaryKey(foundProduct);
-            productRelationMapper.deleteByPrimaryKey(affectedProduct.getId());
+            affectedSku.add(productSku);
         }
-        promotionSaleMapper.deleteByPrimaryKey(promotionSaleId);
+
+        int promotionType = toBeDeletSale.getPromotionType();
+        int discountType = toBeDeletSale.getDiscountType();
+
+        createSaleLog(promotionId, promotionType, discountType, 0, operator);
+
+        //sendOmsSaleUpdateMessage("saleupdatetoOMS-out-0", new OmsSaleOutEvent(OmsSaleOutEvent.Type.DELETE_SALE, affectedSku));
+        //sendPmsSaleUpdateMessage("saleupdatetoPms-out-0", new PmsSaleOutEvent(PmsSaleOutEvent.Type.DELETE_SALE, affectedSku));
     }
 }

@@ -4,6 +4,7 @@ import com.itsthatjun.ecommerce.dto.SMS.OnSaleRequest;
 import com.itsthatjun.ecommerce.mbg.model.Product;
 import com.itsthatjun.ecommerce.mbg.model.PromotionSale;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
 
 import java.util.List;
 
@@ -21,30 +22,32 @@ public interface SalesService {
     @ApiModelProperty(value = "get all sales items")
     List<Product> getAllFlashSaleItems();
 
-    @ApiModelProperty(value = "create sale on list of items")
-    List<Product> createList(OnSaleRequest request);
+    @ApiOperation(value = "create sale on list of items")
+    PromotionSale createListSale(OnSaleRequest request, String operator);
 
-    @ApiModelProperty(value = "create sales based on brand name")
-    List<Product> createBrandSale(OnSaleRequest request);
+    /* TODO: create sepearate sale creation, currently is passed in after they are searched.
+    @ApiOperation(value = "create sales based on brand name")
+    PromotionSale createBrandSale(OnSaleRequest request, String operator);
 
-    @ApiModelProperty(value = "create sales based on product category")
-    List<Product> createCategorySale(OnSaleRequest request);
+    @ApiOperation(value = "create sales based on product category")
+    PromotionSale createCategorySale(OnSaleRequest request, String operator);
+     */
 
-    @ApiModelProperty(value = "")
-    OnSaleRequest updateStatus(OnSaleRequest updateSaleRequest);
+    @ApiOperation(value = "Update price, revert back to original after sale limit is reached")
+    void updateSaleLimitPrice();
 
-    @ApiModelProperty(value = "")
-    OnSaleRequest upateSaleDate(OnSaleRequest updateSaleRequest);
+    @ApiOperation(value = "Update price, revert back to original price after time limit")
+    void updateSaleTimeFramePrice();
 
-    @ApiModelProperty(value = "")
-    OnSaleRequest updateSaleAmount(OnSaleRequest updateSaleRequest);
+    @ApiOperation(value = "Update info like name, sale type and time, non-price affecting")
+    PromotionSale updateSaleInfo(OnSaleRequest updateSaleRequest, String operator);
 
-    @ApiModelProperty(value = "")
-    OnSaleRequest updateSaleLimt(OnSaleRequest updateSaleRequest);
+    @ApiOperation(value = "Update sale discount percent or fixed amount. price affecting")
+    PromotionSale updateSalePrice(OnSaleRequest updateSaleRequest, String operator);
 
-    @ApiModelProperty(value = "update promotion sale to clarance sale vice versa")
-    OnSaleRequest updateSaleType(OnSaleRequest updateSaleRequest);
+    @ApiOperation(value = "Update sale to be online or off line, price affecting")
+    PromotionSale updateSaleStatus(OnSaleRequest updateSaleRequest, String operator);
 
-    @ApiModelProperty(value = "delete")
-    void delete(int promotionSaleId);
+    @ApiOperation(value = "delete")
+    void delete(int promotionSaleId, String operator);
 }

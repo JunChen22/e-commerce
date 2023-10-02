@@ -1,6 +1,9 @@
 package com.itsthatjun.ecommerce.service.OMS;
 
-import com.itsthatjun.ecommerce.mbg.model.OrderReturnApply;
+import com.itsthatjun.ecommerce.dto.OMS.ReturnDetail;
+import com.itsthatjun.ecommerce.dto.OMS.ReturnRequestDecision;
+import com.itsthatjun.ecommerce.mbg.model.ReturnRequest;
+import io.swagger.annotations.ApiOperation;
 
 import java.util.List;
 
@@ -8,24 +11,28 @@ public interface ReturnOrderService {
 
     // return status,  waiting to process 0 , returning(sending) 1, complete 2, rejected(not matching reason) 3
 
-    List<OrderReturnApply> getAllOpening();
+    @ApiOperation(value = "")
+    List<ReturnRequest> getAllOpening();
 
-    List<OrderReturnApply> getAllReturning();
+    @ApiOperation(value = "")
+    List<ReturnRequest> getAllReturning();
 
-    List<OrderReturnApply> getAllCompleted();
+    @ApiOperation(value = "")
+    List<ReturnRequest> getAllCompleted();
 
-    List<OrderReturnApply> getAllRejected();
+    @ApiOperation(value = "")
+    List<ReturnRequest> getAllRejected();
 
-    // get specific return
-    OrderReturnApply getOrderReturnDetail(String orderSn);
+    @ApiOperation(value = "")
+    ReturnDetail getReturnDetail(String orderSn);
 
-    // approve return request
-    OrderReturnApply approveReturnRequest(OrderReturnApply returnRequest);
+    @ApiOperation(value = "")
+    ReturnRequest approveReturnRequest(ReturnRequestDecision returnRequestDecision, String operator);
 
-    // reject return request
-    OrderReturnApply rejectReturnRequest(OrderReturnApply returnRequest);
+    @ApiOperation(value = "")
+    ReturnRequest rejectReturnRequest(ReturnRequestDecision returnRequestDecision, String reason, String operator);
 
-    // update
-    OrderReturnApply updateReturnOrderStatus(OrderReturnApply newReturnRequest);
+    @ApiOperation(value = "")
+    ReturnRequest completeReturnRequest(ReturnRequestDecision returnRequestDecision, String operator);
 
 }

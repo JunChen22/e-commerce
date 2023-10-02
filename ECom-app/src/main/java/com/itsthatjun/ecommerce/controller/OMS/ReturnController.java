@@ -11,12 +11,12 @@ import java.util.Map;
 @RestController
 @RequestMapping("/order/return")
 @Api(tags = "return related", description = "apply return and related api")
-public class OrderReturnController {
+public class ReturnController {
 
     private final ReturnOrderServiceImpl returnOrderService;
 
     @Autowired
-    public OrderReturnController(ReturnOrderServiceImpl returnOrderService) {
+    public ReturnController(ReturnOrderServiceImpl returnOrderService) {
         this.returnOrderService = returnOrderService;
     }
 

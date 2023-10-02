@@ -7,8 +7,11 @@ import com.itsthatjun.ecommerce.service.SMS.implementation.SalesServiceimpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.endpoint.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -43,10 +46,12 @@ public class PromotionController {
 
     @PostMapping("/createList")
     @ApiOperation("")
-    public List<Product> createList(@RequestBody OnSaleRequest request) {
-        return salesServiceimpl.createList(request);
+    public PromotionSale createList(@RequestBody OnSaleRequest request, HttpSession session) {
+        String operator = session.getAttribute("operator").toString();
+        return salesServiceimpl.createListSale(request, operator);
     }
 
+    /*
     @PostMapping("/createBrandSale")
     @ApiOperation("")
     public List<Product> createBrandSale(@RequestBody OnSaleRequest request) {
@@ -58,40 +63,29 @@ public class PromotionController {
     public List<Product> createCategorySale(@RequestBody OnSaleRequest request) {
         return salesServiceimpl.createCategorySale(request);
     }
-
-    @PostMapping("/updateStatus")
-    @ApiOperation("")
-    public OnSaleRequest updateStatus(@RequestBody OnSaleRequest request) {
-        return salesServiceimpl.updateStatus(request);
-    }
+     */
 
     @PostMapping("/updateSaleDate")
     @ApiOperation("")
-    public OnSaleRequest updateSaleDate(@RequestBody OnSaleRequest request) {
-        return salesServiceimpl.updateStatus(request);
+    public PromotionSale updateSaleInfo(@RequestBody OnSaleRequest request) {
+        return salesServiceimpl.updateSaleInfo(request, "admin");
     }
 
     @PostMapping("/updateSaleAmount")
     @ApiOperation("")
-    public OnSaleRequest updateSaleAmount(@RequestBody OnSaleRequest request) {
-        return salesServiceimpl.updateSaleAmount(request);
+    public PromotionSale updateSalePrice(@RequestBody OnSaleRequest request) {
+        return salesServiceimpl.updateSalePrice(request, "admin");
     }
 
-    @PostMapping("/updateSaleLimit")
+    @PostMapping("/updateStatus")
     @ApiOperation("")
-    public OnSaleRequest updateSaleLimit(@RequestBody OnSaleRequest request) {
-        return salesServiceimpl.updateSaleLimt(request);
-    }
-
-    @PostMapping("/updateSaltType")
-    @ApiOperation("")
-    public OnSaleRequest updateSaleType(@RequestBody OnSaleRequest request) {
-        return salesServiceimpl.updateSaleType(request);
+    public PromotionSale updateSaleStatus(@RequestBody OnSaleRequest request) {
+        return salesServiceimpl.updateSaleStatus(request, "admin");
     }
 
     @DeleteMapping("/delete/{promotionSaleId}")
     @ApiOperation("")
     public void delete(@PathVariable int promotionSaleId) {
-        salesServiceimpl.delete(promotionSaleId);
+        salesServiceimpl.delete(promotionSaleId, "admin");
     }
 }

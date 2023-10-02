@@ -1,68 +1,164 @@
 package com.itsthatjun.ecommerce.service.SMS.implementation;
 
-import com.itsthatjun.ecommerce.exceptions.PMS.ProductException;
 import com.itsthatjun.ecommerce.mbg.mapper.*;
 import com.itsthatjun.ecommerce.mbg.model.*;
+import com.itsthatjun.ecommerce.service.OMS.implementation.CartItemServiceImpl;
 import com.itsthatjun.ecommerce.service.SMS.CouponService;
+import com.itsthatjun.ecommerce.service.UMS.implementation.MemberServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Service
 public class CouponServiceImpl implements CouponService {
 
+    private static final Logger LOG = LoggerFactory.getLogger(CouponServiceImpl.class);
+
+    private final MemberServiceImpl memberService;
+
+    private final CartItemServiceImpl cartItemService;
+
     private final CouponMapper couponMapper;
+
     private final ProductMapper productMapper;
+
     private final CouponHistoryMapper couponHistoryMapper;
+
     private final CouponProductRelationMapper productRelationMapper;
-    private final ProductSkuStockMapper skuStockMapper;
+
+    private final ProductSkuMapper productSkuMapper;
+
+    private final CartItemMapper cartItemMapper;
 
     @Autowired
-    public CouponServiceImpl(CouponMapper couponMapper, ProductMapper productMapper, CouponHistoryMapper couponHistoryMapper,
-                             CouponProductRelationMapper productRelationMapper, ProductSkuStockMapper skuStockMapper) {
+    public CouponServiceImpl(MemberServiceImpl memberService, CartItemServiceImpl cartItemService, CouponMapper couponMapper, ProductMapper productMapper, CouponHistoryMapper couponHistoryMapper, CouponProductRelationMapper productRelationMapper, ProductSkuMapper productSkuMapper, CartItemMapper cartItemMapper) {
+        this.memberService = memberService;
+        this.cartItemService = cartItemService;
         this.couponMapper = couponMapper;
         this.productMapper = productMapper;
         this.couponHistoryMapper = couponHistoryMapper;
         this.productRelationMapper = productRelationMapper;
-        this.skuStockMapper = skuStockMapper;
+        this.productSkuMapper = productSkuMapper;
+        this.cartItemMapper = cartItemMapper;
     }
 
     @Override
-    public Coupon checkCoupon(String couponCode) {
+    public double checkDiscount(String couponCode) {
+        Member currentUser = memberService.getCurrentUser();
+        int userId = currentUser.getId();
+
+        Coupon foundCoupon = checkCoupon(couponCode);
+        if (foundCoupon == null) return 0;
+
+        List<CartItem> cartItemList = cartItemService.getUserCart();
+        if (cartItemList.isEmpty()) return 0;
+
+        Map<String, Integer> skuQuantity = new HashMap<>();
+        for (CartItem cartItem : cartItemList) {
+            int quantity = cartItem.getQuantity();
+            String skuCode = cartItem.getProductSku();
+            skuQuantity.put(skuCode, quantity);
+        }
+        return  getDiscountAmount(skuQuantity, foundCoupon);
+    }
+
+    private Coupon checkCoupon(String couponCode) {
         CouponExample couponExample = new CouponExample();
         couponExample.createCriteria().andCodeEqualTo(couponCode);
         List<Coupon> result = couponMapper.selectByExample(couponExample);
-        if (result.size() == 0)
+        if (result.isEmpty())
             return null;
-        System.out.println(result.get(0).getName());
         return result.get(0);
     }
 
-    // -- discount on 0-> all, 1 -> specific brand, 2-> specific item
-    @Override
-    public List<Coupon> getCouponForProduct(int productId) {
-        Product product = productMapper.selectByPrimaryKey(productId);
-        if (product == null)
-            throw new ProductException("Can't find product : " + productId);
+    private double getDiscountAmount(Map<String, Integer> skuQuantity, Coupon coupon) {
+        double totalDiscount = 0;
 
-        String productName = product.getName();
-        String brandName = product.getBrandName();
+        // check expiration
+        Date startDate = coupon.getStartTime();
+        Date endDate = coupon.getEndTime();
+        Date currentDate = new Date();
 
-        CouponExample example = new CouponExample();
-        // coupon that have product name, brand name, or all product in name
-        example.createCriteria().andNameLike("%" + productName + "%");
-        example.or().andNameLike("%" + brandName + "%");
-        example.or().andNameLike("%" + "all product" + "%");
-        example.or().andCouponTypeEqualTo(0);
-        return couponMapper.selectByExample(example);
+        if (!(currentDate.after(startDate) && currentDate.before(endDate))) {
+            return 0;
+        }
+
+        if (coupon.getStatus() == 0) return 0;  // not active coupon
+
+        // check usage limit
+        if (coupon.getCount() <= coupon.getUsedCount() && coupon.getUsedCount() >= coupon.getPublishCount()) {
+            LOG.info("Coupon expired.");
+            return 0;
+        }
+
+        // discount on 0-> all, 1 -> specific brand,  2-> specific category , 3-> specific item
+        if (coupon.getCouponType() == 0) {  // whole order discount
+            totalDiscount = wholeOrderDiscount(skuQuantity, coupon);
+            return totalDiscount;
+        }
+
+        // TODO:  create dao and use SQL for simpler method
+        // Find products affected by this coupon
+        CouponProductRelationExample productRelationExample = new CouponProductRelationExample();
+        productRelationExample.createCriteria().andCouponIdEqualTo(coupon.getId());
+        List<CouponProductRelation> itemAffectedByCouponList = productRelationMapper.selectByExample(productRelationExample);
+
+        for (String skuCode : skuQuantity.keySet()) {
+            String itemSKuCode = skuCode;
+            int quantityNeeded = skuQuantity.get(skuCode);
+
+            ProductSkuExample productSkuStockExample = new ProductSkuExample();
+            productSkuStockExample.createCriteria().andSkuCodeEqualTo(skuCode);
+            ProductSku productSkuStock = productSkuMapper.selectByExample(productSkuStockExample).get(0);
+
+            int itemId = productSkuStock.getProductId();
+
+            for (CouponProductRelation discountItem: itemAffectedByCouponList) {
+                if (discountItem.getProductSkuCode().equals(itemSKuCode)  && discountItem.getProductId() == itemId) {
+                    if (coupon.getDiscountType() == 0) {// discount by amount
+                        totalDiscount = totalDiscount + (coupon.getAmount().doubleValue() * quantityNeeded);
+                    } else {   // discount  by percent
+                        totalDiscount = totalDiscount + ((coupon.getAmount().doubleValue() * productSkuStock.getPromotionPrice().doubleValue()) / 100) * quantityNeeded;
+                    }
+                }
+            }
+        }
+        return totalDiscount;
+    }
+
+    private double wholeOrderDiscount(Map<String, Integer> skuQuantity, Coupon coupon) {
+        double totalDiscount = 0;
+        double totalPrice = 0;
+        for (String skuCode : skuQuantity.keySet()) {
+            int quantityNeeded = skuQuantity.get(skuCode);
+
+            ProductSkuExample productSkuStockExample = new ProductSkuExample();
+            productSkuStockExample.createCriteria().andSkuCodeEqualTo(skuCode);
+            ProductSku productSkuStock = productSkuMapper.selectByExample(productSkuStockExample).get(0);
+            totalPrice += productSkuStock.getPromotionPrice().doubleValue() * quantityNeeded;
+        }
+
+        if (coupon.getDiscountType() == 0) {// discount by amount
+            totalDiscount = coupon.getAmount().doubleValue();
+        } else {   // discount  by percent
+            totalDiscount =  ((coupon.getAmount().doubleValue() * totalPrice) / 100);
+        }
+        return totalDiscount;
     }
 
     @Override
-    public void updateUsedCoupon(String code, int orderId, int memberId) {
+    public void updateUsedCoupon(String code, int orderId) {
+        Member currentUser = memberService.getCurrentUser();
+        int userId = currentUser.getId();
+
         if (checkCoupon(code) == null) {
             return ;
         }
@@ -71,7 +167,7 @@ public class CouponServiceImpl implements CouponService {
         CouponExample couponExample = new CouponExample();
         couponExample.createCriteria().andCodeEqualTo(code);
         Coupon usedCoupon = couponMapper.selectByExample(couponExample).get(0);
-        int usedCount = usedCoupon.getUsedCount() - 1;
+        int usedCount = usedCoupon.getUsedCount() + 1;
         usedCoupon.setUsedCount(usedCount);
 
         couponMapper.updateByPrimaryKey(usedCoupon);
@@ -81,47 +177,8 @@ public class CouponServiceImpl implements CouponService {
         couponHistory.setOrderId(orderId);
         couponHistory.setCouponId(usedCoupon.getId());
         couponHistory.setCode(code);
-        couponHistory.setMemberId(memberId);
+        couponHistory.setMemberId(userId);
 
         couponHistoryMapper.insert(couponHistory);
-    }
-
-    @Override
-    public double getDiscountAmount(List<OrderItem> items, String couponCode) {
-
-        CouponExample couponExample = new CouponExample();
-        couponExample.createCriteria().andCodeEqualTo(couponCode);
-        Coupon coupon = couponMapper.selectByExample(couponExample).get(0);
-
-        double totalDiscount = 0;
-
-        if (coupon == null) return 0;
-
-        // TODO:  create dao and use SQL for simpler method
-        CouponProductRelationExample productRelationExample = new CouponProductRelationExample();
-        productRelationExample.createCriteria().andCouponIdEqualTo(coupon.getId());
-        List<CouponProductRelation> itemAffectedByCouponList = productRelationMapper.selectByExample(productRelationExample);
-
-        for (OrderItem item : items) {
-            String itemSKuCode = item.getProductSkuCode();
-            int itemId = item.getProductId();
-            for (CouponProductRelation discountItem: itemAffectedByCouponList) {
-                if (discountItem.getProductSkuCode().equals(itemSKuCode)  && discountItem.getProductId() == itemId) {
-                    ProductSkuStockExample skuStockExample = new ProductSkuStockExample();
-                    skuStockExample.createCriteria().andSkuCodeEqualTo(itemSKuCode).andProductIdEqualTo(itemId);
-                    ProductSkuStock productSku = skuStockMapper.selectByExample(skuStockExample).get(0);
-
-                    if (coupon.getDiscountType() == 0) {// discount by amount
-                        totalDiscount = totalDiscount + (coupon.getAmount().doubleValue() * item.getProductQuantity());
-                    } else {   // discount  by percent
-                        totalDiscount = totalDiscount + ((coupon.getAmount().doubleValue() * productSku.getPromotionPrice().doubleValue()) / 100) * item.getProductQuantity();
-                    }
-                }
-            }
-        }
-
-        // TODO: ensure coupon within expiration date and start date
-
-        return totalDiscount;
     }
 }

@@ -1,7 +1,7 @@
 package com.itsthatjun.ecommerce.dto.OMS;
 
+import com.itsthatjun.ecommerce.mbg.model.Address;
 import com.itsthatjun.ecommerce.mbg.model.CartItem;
-import com.itsthatjun.ecommerce.mbg.model.ReceiveAddress;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,7 +18,7 @@ public class ConfirmOrderResult {
     private List<CartItem> cartItemList;
 
     @ApiModelProperty("Member deliver address")
-    private ReceiveAddress address;
+    private Address address;
 
     @ApiModelProperty("coupon for discount")
     private String coupon;

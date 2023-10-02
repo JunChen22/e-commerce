@@ -1,26 +1,28 @@
 package com.itsthatjun.ecommerce.dto.OMS;
 
 import com.itsthatjun.ecommerce.mbg.model.*;
-import com.itsthatjun.ecommerce.mbg.model.ShoppingCart;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-
-import java.util.List;
+import java.util.Map;
 
 @Data
-@EqualsAndHashCode
 public class OrderParam {
 
-    @ApiModelProperty("item in shopping cart")
-    private List<CartItem> cartItemList;
+    @ApiModelProperty("item in shopping cart, sku code and quantity")
+    private Map<String, Integer> orderProductSku;
+
+    @ApiModelProperty("order amount calculated from cart")
+    private double amount;
 
     @ApiModelProperty("Member deliver address")
-    private ReceiveAddress address;
+    private Address address;
 
     @ApiModelProperty("coupon for discount")
     private String coupon;
 
-    //@ApiModelProperty("paypal, g pay, or finance. currently just paypal")
-    //private Integer payType;
+    @ApiModelProperty("coupon discount amount calculated from cart")
+    private double discountAmount;
+
+    @ApiModelProperty("paypal, g pay, or finance. currently just paypal")
+    private String payType;
 }

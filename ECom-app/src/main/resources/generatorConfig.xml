@@ -201,6 +201,12 @@
             <columnOverride column="id" javaType="java.lang.Integer" />
         </table>
 
+        <table tableName="order_change_history">
+            <generatedKey column="id" sqlStatement="JDBC" />
+            <columnOverride column="id" javaType="java.lang.Integer" />
+            <columnOverride column="order_id" javaType="java.lang.Integer" />
+        </table>
+
         <table tableName="return_request">
             <generatedKey column="id" sqlStatement="JDBC" />
             <columnOverride column="id" javaType="java.lang.Integer" />

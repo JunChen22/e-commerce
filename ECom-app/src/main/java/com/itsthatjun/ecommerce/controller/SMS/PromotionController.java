@@ -39,5 +39,4 @@ public class PromotionController {
     public List<Product> getAllFlashSaleItem() {
         return salesServiceimpl.getAllFlashSaleItems();
     }
-
 }

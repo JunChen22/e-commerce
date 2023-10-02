@@ -3,7 +3,7 @@ package com.itsthatjun.ecommerce.exceptions;
 
 import com.itsthatjun.ecommerce.exceptions.CMS.ArticleException;
 import com.itsthatjun.ecommerce.exceptions.OMS.OrderException;
-import com.itsthatjun.ecommerce.exceptions.OMS.OrderReturnApplyException;
+import com.itsthatjun.ecommerce.exceptions.OMS.ReturnRequestException;
 import com.itsthatjun.ecommerce.exceptions.PMS.ProductException;
 import com.itsthatjun.ecommerce.exceptions.UMS.MembersException;
 import org.springframework.http.HttpStatus;
@@ -30,7 +30,7 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<String> handleOrderReturnApplyException(OrderReturnApplyException ex) {
+    public ResponseEntity<String> handleOrderReturnApplyException(ReturnRequestException ex) {
         return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
