@@ -16,7 +16,6 @@ E-commerece
 The .env file stores login infos for easier change. Gets read in during run time by docker.
 
 ECom-app 
-├── component   
 ├── config                 - MyBatis configuration and other configuration.
 ├── controller              
 ├── domain (domain model)  - custom data object, provide more complex funtionality with custom DAO and xml. Internal use.
@@ -143,53 +142,53 @@ Other nesscary commands
 IntelliJ plugin
 - MyBatisCodeHelperPro 3.1.8 (highly needed when writing dao.xml)
 
-
 Redis wasn't being used yet.
 
+![alt text](./document/Monolith.png)
+
+Admin - administrative task and all the function app can do. With it's own database for admin information.  
+
+App - 5 major category/service and security. All write operations are send off to RabbitMQ so it can be processed asynchronously.
 
 Product management system(PMS) - manage their product catalog, including product data, pricing, and inventory.
 - product
 - brand
+- review
 
 Order management system(OMS) -  manage their order processing, inventory, shipping, and other fulfillment-related tasks.
 - order management
 - return/refund
-- shipping
+- shopping cart
 
 Sales management system(SMS) - manage their sales processes, including lead generation, customer relationship management, and sales analytics.
 - sales
- - promotion sales (time frame)
- - flash sales (by short time or by number of sales)
+- promotion sales (time frame)
+- flash sales (by short time or by number of sales)
 - coupon
 - view used coupon history
 
 Content management system(CMS) - create, manage, and publish digital content, such as text, images, and multimedia, on websites or other digital platforms.
 - misc things like
- - Contact US
- - Buyer's guide("article")
-  - product comparison
-  - guide on what to buy
- - about us
- - shipping and return
- - warranty
- - home page(words and pictures)
- - product comparison
- - FAQ
+- Contact US
+- Buyer's guide("article")
+- product comparison
+- guide on what to buy
+- about us
+- shipping and return
+- warranty
+- home page(words and pictures)
+- product comparison
+- FAQ
 
 User management system(UMS) - manage user accounts and permissions, including authentication, authorization, and access control.
 - User
-- admin
-
-
-
-
 
 
 ### Order process flow
 
 1. add product -> cart,cart items
 
-2. cart items -> checkout -> generate cconfirmed order
+2. cart items -> checkout -> generate order
 
 3. (will ask for login if your e-commerce requires, this ECom requires)
 

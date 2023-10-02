@@ -4,13 +4,12 @@
 ===================
 ===================
 
-
 Table "article" {
   "id" SERIAL [pk, increment]
   "title" VARCHAR(255) [not null]
   "body" TEXT [not null]
-  "created_at" timestamp [default: `CURRENT_TIMESTAMP`]
-  "updated_at" timestamp [default: NULL]
+  "created_at" TIMESTAMP [default: `CURRENT_TIMESTAMP`]
+  "updated_at" TIMESTAMP [default: NULL]
 }
 
 Table "article_QA" {
@@ -18,31 +17,25 @@ Table "article_QA" {
   "article_id" INT [not null]
   "question" TEXT [not null]
   "answer" TEXT [not null]
-  "created_at" timestamp [default: `CURRENT_TIMESTAMP`]
-  "updated_at" timestamp [default: NULL]
+  "created_at" TIMESTAMP [default: `CURRENT_TIMESTAMP`]
+  "updated_at" TIMESTAMP [default: NULL]
 }
 
 Table "article_image" {
   "id" SERIAL [pk, increment]
   "article_id" INT [not null]
   "filename" VARCHAR(255) [not null]
-  "created_at" timestamp [default: `CURRENT_TIMESTAMP`]
-  "updated_at" timestamp [default: NULL]
+  "created_at" TIMESTAMP [default: `CURRENT_TIMESTAMP`]
+  "updated_at" TIMESTAMP [default: NULL]
 }
 
 Table "article_video" {
   "id" SERIAL [pk, increment]
   "article_id" INT [not null]
   "url" VARCHAR(255) [not null]
-  "created_at" timestamp [default: `CURRENT_TIMESTAMP`]
-  "updated_at" timestamp [default: NULL]
+  "created_at" TIMESTAMP [default: `CURRENT_TIMESTAMP`]
+  "updated_at" TIMESTAMP [default: NULL]
 }
-
-Ref: "article"."id" < "article_image"."article_id"
-
-Ref: "article"."id" < "article_QA"."article_id"
-
-Ref: "article"."id" < "article_video"."article_id"
 
 ===================
 ===================
@@ -56,6 +49,14 @@ Table "brand" {
   "alphabet" TEXT
   "status" TEXT [default: "active"]
   "logo" TEXT
+}
+
+Table "brand_update_log" {
+  "id" SERIAL [pk, increment]
+  "brand_id" NUMERIC
+  "update_action" TEXT
+  "updated_at" TIMESTAMP [default: `CURRENT_TIMESTAMP`]
+  "operator" TEXT
 }
 
 Table "product_category" {
@@ -86,8 +87,6 @@ Table "product" {
   "category_name" TEXT
   "attribute_category_id" NUMERIC
   "sn" varchar(64)
-  "delete_status" NUMERIC [default: 0]
-  "publish_status" NUMERIC [default: 1]
   "new_status" NUMERIC
   "recommend_status" NUMERIC
   "verify_status" NUMERIC
@@ -95,32 +94,35 @@ Table "product" {
   "cover_picture" TEXT
   "picture_album" NUMERIC
   "description" TEXT
-  "original_price" "decimal(10, 2)"
-  "on_sale_status" NUMERIC
-  "sale_price" "decimal(10, 2)"
-  "stock" NUMERIC
-  "low_stock" NUMERIC
-  "unit_sold" NUMERIC
-  "weight" "decimal(10, 2)"
+  "original_price" decimal(10,2)
+  "on_sale_status" INTEGER
+  "sale_price" decimal(10,2)
+  "stock" INTEGER
+  "low_stock" INTEGER
+  "unit_sold" INTEGER
+  "weight" decimal(10,2)
   "keywords" TEXT
   "detail_title" TEXT
   "detail_desc" TEXT
   "description_album" NUMERIC
-  "created_at" timestamp [default: `CURRENT_TIMESTAMP`]
+  "delete_status" INTEGER [default: 0]
+  "publish_status" INTEGER [default: 1]
+  "created_at" TIMESTAMP [default: `CURRENT_TIMESTAMP`]
   "note" TEXT
 }
 
-Table "product_sku_stock" {
+Table "product_sku" {
   "id" SERIAL [pk, increment]
-  "product_id" NUMERIC
+  "product_id" INTEGER
   "sku_code" TEXT
   "picture" TEXT
   "price" NUMERIC
   "promotion_price" NUMERIC
-  "stock" NUMERIC
-  "low_stock" NUMERIC
-  "lock_stock" NUMERIC [default: 0]
-  "unit_sold" NUMERIC
+  "stock" INTEGER
+  "low_stock" INTEGER
+  "lock_stock" INTEGER [default: 0]
+  "unit_sold" INTEGER
+  "status" INTEGER [default: 1]
 }
 
 Table "product_attribute" {
@@ -139,7 +141,7 @@ Table "product_album" {
   "cover_pic" TEXT
   "pic_count" NUMERIC
   "description" TEXT
-  "created_at" timestamp [default: `CURRENT_TIMESTAMP`]
+  "created_at" TIMESTAMP [default: `CURRENT_TIMESTAMP`]
 }
 
 Table "product_pictures" {
@@ -147,7 +149,7 @@ Table "product_pictures" {
   "product_album_id" NUMERIC
   "product_id" NUMERIC
   "filename" VARCHAR(255)
-  "created_at" timestamp [default: `CURRENT_TIMESTAMP`]
+  "created_at" TIMESTAMP [default: `CURRENT_TIMESTAMP`]
 }
 
 Table "product_update_log" {
@@ -158,9 +160,10 @@ Table "product_update_log" {
   "sale_price_old" NUMERIC
   "sale_price_new" NUMERIC
   "operate_man" TEXT
-  "stock_old" NUMERIC
-  "stock_new" NUMERIC
-  "created_at" timestamp [default: `CURRENT_TIMESTAMP`]
+  "old_stock" NUMERIC
+  "added_stock" NUMERIC
+  "total_stock" NUMERIC
+  "created_at" TIMESTAMP [default: `CURRENT_TIMESTAMP`]
 }
 
 Table "review" {
@@ -170,58 +173,35 @@ Table "review" {
   "member_name" TEXT
   "member_icon" TEXT
   "star" NUMERIC
-  "created_at" timestamp [default: `CURRENT_TIMESTAMP`]
-  "updated_at" timestamp [default: NULL]
+  "created_at" TIMESTAMP [default: `CURRENT_TIMESTAMP`]
+  "updated_at" TIMESTAMP [default: NULL]
   "tittle" TEXT
   "likes" NUMERIC [default: 1]
+  "verified" boolean
   "content" TEXT
-  "album" NUMERIC
 }
 
 Table "review_album" {
   "id" SERIAL [pk, increment]
   "review_id" NUMERIC
   "pic_count" NUMERIC
-  "created_at" timestamp [default: `CURRENT_TIMESTAMP`]
+  "created_at" TIMESTAMP [default: `CURRENT_TIMESTAMP`]
 }
 
 Table "review_pictures" {
   "id" SERIAL [pk, increment]
   "review_album_id" NUMERIC
   "filename" VARCHAR(255)
-  "created_at" timestamp [default: `CURRENT_TIMESTAMP`]
+  "created_at" TIMESTAMP [default: `CURRENT_TIMESTAMP`]
 }
 
-
-Ref: "product"."brand_id" < "brand"."id"
-
-Ref: "review"."id" < "review_album"."review_id"
-
-Ref: "review_album"."id" < "review_pictures"."review_album_id"
-
-Ref: "product_album"."id" < "product_pictures"."product_album_id"
-
-
-Ref: "product"."id" < "product_update_log"."product_id"
-
-Ref: "product"."category_id" < "product_category"."id"
-
-
-
-Ref: "product"."id" < "product_sku_stock"."id"
-
-Ref: "product_sku_stock"."sku_code" < "product_attribute"."sku_code"
-
-Ref: "product_attribute_category"."id" < "product_attribute_type"."attribute_category_id"
-
-Ref: "product_attribute_type"."attribute_category_id" < "product_attribute"."attribute_type_id"
-
-Ref: "product"."attribute_category_id" < "product_attribute_category"."id"
-
-Ref: "product"."picture_album" < "product_album"."id"
-
-Ref: "product"."description_album" < "product_album"."id"
-
+Table "review_update_log" {
+  "id" SERIAL [pk, increment]
+  "review_id" NUMERIC
+  "update_action" TEXT
+  "updated_at" TIMESTAMP [default: `CURRENT_TIMESTAMP`]
+  "operator" TEXT
+}
 
 ===================
 ===================
@@ -229,12 +209,11 @@ Ref: "product"."description_album" < "product_album"."id"
 ===================
 ===================
 
-
 Table "shopping_cart" {
   "id" SERIAL [pk, increment]
   "member_id" bigint
-  "created_at" timestamp [default: `CURRENT_TIMESTAMP`]
-  "modify_date" timestamp [default: NULL]
+  "created_at" TIMESTAMP [default: `CURRENT_TIMESTAMP`]
+  "modify_date" TIMESTAMP [default: NULL]
 }
 
 Table "cart_item" {
@@ -245,9 +224,9 @@ Table "cart_item" {
   "product_sku" varchar(500)
   "product_pic" varchar(1000)
   "quantity" integer
-  "price" "numeric(10, 2)"
-  "created_at" timestamp [default: `CURRENT_TIMESTAMP`]
-  "modify_date" timestamp [default: NULL]
+  "price" numeric(10,2)
+  "created_at" TIMESTAMP [default: `CURRENT_TIMESTAMP`]
+  "modify_date" TIMESTAMP [default: NULL]
 }
 
 Table "orders" {
@@ -256,13 +235,12 @@ Table "orders" {
   "coupon_id" BIGINT
   "order_sn" VARCHAR(64)
   "member_email" VARCHAR(64)
-  "total_amount" "NUMERIC(10, 2)"
-  "promotion_info" VARCHAR(100)
-  "promotion_amount" "NUMERIC(10, 2)"
-  "coupon_amount" "NUMERIC(10, 2)"
-  "discount_amount" "NUMERIC(10, 2)"
-  "shipping_cost" "NUMERIC(10, 2)"
-  "pay_amount" "NUMERIC(10, 2)"
+  "total_amount" NUMERIC(10,2)
+  "promotion_amount" NUMERIC(10,2)
+  "coupon_amount" NUMERIC(10,2)
+  "discount_amount" NUMERIC(10,2)
+  "shipping_cost" NUMERIC(10,2)
+  "pay_amount" NUMERIC(10,2)
   "pay_type" INTEGER
   "source_type" INTEGER
   "status" INTEGER [default: 0]
@@ -274,13 +252,15 @@ Table "orders" {
   "receiver_city" VARCHAR(32)
   "receiver_state" VARCHAR(32)
   "receiver_zip_code" VARCHAR(32)
-  "payment_time" timestamp
-  "delivery_time" timestamp
-  "receive_time" timestamp [default: NULL]
+  "payment_id" VARCHAR(32)
+  "payer_id" VARCHAR(32)
+  "payment_time" TIMESTAMP
+  "delivery_time" TIMESTAMP
+  "receive_time" TIMESTAMP [default: NULL]
   "comment" varchar(200) [default: NULL]
   "admin_note" VARCHAR(500) [default: NULL]
-  "created_at" timestamp [default: `CURRENT_TIMESTAMP`]
-  "updated_at" timestamp [default: NULL]
+  "created_at" TIMESTAMP [default: `CURRENT_TIMESTAMP`]
+  "updated_at" TIMESTAMP [default: NULL]
 }
 
 Table "order_item" {
@@ -292,15 +272,24 @@ Table "order_item" {
   "product_name" VARCHAR(200) [default: NULL]
   "product_brand" VARCHAR(200) [default: NULL]
   "product_sn" VARCHAR(64) [default: NULL]
-  "product_price" "NUMERIC(10, 2)" [default: NULL]
+  "product_price" NUMERIC(10,2) [default: NULL]
   "product_quantity" INTEGER [default: NULL]
   "product_sku_id" BIGINT [default: NULL]
   "product_sku_code" VARCHAR(50) [default: NULL]
   "product_category_id" BIGINT [default: NULL]
   "promotion_name" VARCHAR(200) [default: NULL]
-  "promotion_amount" "NUMERIC(10, 2)" [default: NULL]
-  "coupon_amount" "NUMERIC(10, 2)" [default: NULL]
-  "real_amount" "NUMERIC(10, 2)" [default: NULL]
+  "promotion_amount" NUMERIC(10,2) [default: NULL]
+  "coupon_amount" NUMERIC(10,2) [default: NULL]
+  "real_amount" NUMERIC(10,2) [default: NULL]
+}
+
+Table "order_change_history" {
+  "id" SERIAL [pk, increment]
+  "order_id" bigint [default: NULL]
+  "change_operator" varchar(100)
+  "created_at" timestamp [default: NULL]
+  "order_status" int [default: NULL]
+  "note" varchar(500) [default: NULL]
 }
 
 Table "company_address" {
@@ -316,74 +305,56 @@ Table "company_address" {
   "detail_address" VARCHAR(200) [default: NULL]
 }
 
-
-Table "order_change_history" {
-  "id" SERIAL [pk, increment]
-  "order_id" bigint [default: NULL]
-  "change_operator" varchar(100)
-  "created_at" timestamp [default: NULL]
-  "order_status" int [default: NULL]
-  "note" varchar(500) [default: NULL]
-}
-
-
-Table "order_return_reason" {
-  "id" SERIAL [pk, increment]
-  "order_id" BIGINT [not null]
-  "reason" VARCHAR(100)
-  "description" VARCHAR(100)
-  "status" INT
-  "created_at" timestamp [default: `CURRENT_TIMESTAMP`]
-}
-
-Table "order_return_reason_pictures" {
-  "id" SERIAL [pk, increment]
-  "order_return_reason_id" BIGINT [not null]
-  "filename" VARCHAR(255)
-  "created_at" timestamp [default: `CURRENT_TIMESTAMP`]
-}
-
-Table "order_return_apply" {
+Table "return_request" {
   "id" SERIAL [pk, increment]
   "order_id" bigint
   "company_address_id" bigint
-  "product_id" bigint
   "order_sn" varchar(64)
   "member_id" bigint
-  "return_amount" "decimal(10, 2)"
+  "return_quantity" bigint
   "return_name" varchar(100)
   "return_phone" varchar(100)
   "status" int
   "handle_time" timestamp
-  "product_name" varchar(200)
-  "product_brand" varchar(200)
-  "product_sku_code" varchar(500)
-  "product_count" int
-  "product_price" "decimal(10, 2)"
+  "asking_amount" decimal(10,2)
+  "refunded_amount" decimal(10,2)
   "reason" varchar(200)
   "description" varchar(500)
-  "proof_pics" varchar(1000)
   "handle_note" varchar(500)
   "handle_operator" varchar(100)
   "receive_operator" varchar(100)
   "receive_time" timestamp
   "receive_note" varchar(500)
-  "created_at" timestamp [default: `CURRENT_TIMESTAMP`]
+  "created_at" TIMESTAMP [default: `CURRENT_TIMESTAMP`]
+  "updated_at" TIMESTAMP [default: `CURRENT_TIMESTAMP`]
 }
 
-Ref: "order_return_apply"."company_address_id" < "company_address"."id"
+Table "return_item" {
+  "id" SERIAL [pk, increment]
+  "return_request_id" bigint [not null]
+  "brand_id" bigint
+  "order_id" bigint
+  "order_sn" varchar(64)
+  "product_id" bigint
+  "product_sku" varchar(100)
+  "purchased_price" decimal(10,2)
+  "quantity" bigint
+}
 
+Table "return_reason_pictures" {
+  "id" SERIAL [pk, increment]
+  "return_request_id" bigint [not null]
+  "filename" VARCHAR(255)
+  "created_at" TIMESTAMP [default: `CURRENT_TIMESTAMP`]
+}
 
-
-Ref: "orders"."id" < "order_item"."order_id"
-
-Ref: "orders"."id" < "order_change_history"."order_id"
-
-Ref: "shopping_cart"."id" < "cart_item"."cart_id"
-
-Ref: "order_return_reason"."id" < "order_return_reason_pictures"."order_return_reason_id"
-
-Ref: "order_return_apply"."order_id" < "order_return_reason"."order_id"
+Table "return_log" {
+  "id" SERIAL [pk, increment]
+  "return_request_id" bigint
+  "action" varchar(100)
+  "operator" varchar(100)
+  "created_at" TIMESTAMP [default: `CURRENT_TIMESTAMP`]
+}
 
 ===================
 ===================
@@ -391,14 +362,12 @@ Ref: "order_return_apply"."order_id" < "order_return_reason"."order_id"
 ===================
 ===================
 
-
-
 Table "coupon" {
   "id" SERIAL [pk, increment]
   "coupon_type" integer [default: NULL]
   "name" varchar(100)
   "discount_type" integer [default: NULL]
-  "amount" "numeric(10, 2)" [default: NULL]
+  "amount" numeric(10,2) [default: NULL]
   "start_time" timestamp [default: NULL]
   "end_time" timestamp [default: NULL]
   "note" varchar(200) [default: NULL]
@@ -413,8 +382,8 @@ Table "coupon_product_relation" {
   "id" SERIAL [pk, increment]
   "coupon_id" integer
   "product_id" integer
-  "product_name" integer
-  "product_sn" integer
+  "product_name" varchar(100)
+  "product_sn" varchar(100)
   "product_sku_code" varchar(100)
 }
 
@@ -423,17 +392,9 @@ Table "coupon_history" {
   "coupon_id" bigint [not null]
   "member_id" bigint [not null]
   "order_id" bigint [not null]
-  "used_time" timestamp [default: `CURRENT_TIMESTAMP`]
+  "used_time" TIMESTAMP [default: `CURRENT_TIMESTAMP`]
   "code" varchar(64) [default: NULL]
 }
-
-Ref: "coupon"."id" < "coupon_history"."coupon_id"
-
-Ref: "coupon"."id" < "coupon_product_relation"."coupon_id"
-
-
-
-
 
 Table "promotion_sale" {
   "id" SERIAL [pk, increment]
@@ -442,38 +403,32 @@ Table "promotion_sale" {
   "discount_type" integer
   "amount" numeric
   "status" integer
-  "start_time" timestamp
-  "end_time" timestamp
-  "created_at" timestamp [default: `CURRENT_TIMESTAMP`]
-  "updated_at" timestamp
+  "start_time" TIMESTAMP
+  "end_time" TIMESTAMP
+  "created_at" TIMESTAMP [default: `CURRENT_TIMESTAMP`]
+  "updated_at" TIMESTAMP
 }
 
-Table "promotion_sale_product_relation" {
+Table "promotion_sale_product" {
   "id" SERIAL [pk, increment]
   "promotion_sale_id" bigint [not null]
   "product_id" bigint [not null]
   "product_sku_code" TEXT
-  "promotion_price" bigint [not null]
-  "promotion_count" bigint [not null]
-  "promotion_limit" bigint [not null]
+  "promotion_price" numeric [not null]
+  "promotion_limit_item" integer [not null]
+  "promotion_limit_per_user" integer [not null]
 }
 
 Table "promotion_sale_log" {
   "id" SERIAL [pk, increment]
   "promotion_sale_id" numeric
-  "promotion_type" numeric
+  "sale_action" TEXT
+  "promotion_type" integer
   "discount_type" integer
   "amount" numeric
   "operate_man" TEXT
-  "created_at" timestamp [default: `CURRENT_TIMESTAMP`]
+  "created_at" TIMESTAMP [default: `CURRENT_TIMESTAMP`]
 }
-
-
-
-Ref: "promotion_sale"."id" < "promotion_sale_product_relation"."promotion_sale_id"
-
-Ref: "promotion_sale"."id" < "promotion_sale_log"."promotion_sale_id"
-
 
 ===================
 ===================
@@ -481,25 +436,32 @@ Ref: "promotion_sale"."id" < "promotion_sale_log"."promotion_sale_id"
 ===================
 ===================
 
-
-
 Table "member" {
   "id" SERIAL [pk, increment]
   "username" TEXT
   "password" TEXT
+  "name" TEXT
   "phone_number" TEXT
-  "status" TEXT
-  "created_at" timestamp
-  "last_login" timestamp
+  "email" TEXT
+  "status" INTEGER [default: 1]
+  "delete_status" INTEGER [default: 0]
+  "created_at" TIMESTAMP
+  "last_login" TIMESTAMP
   "source_type" TEXT
-  "icon" TEXT
 }
 
-Table "receive_address" {
+Table "member_icon" {
   "id" SERIAL [pk, increment]
   "member_id" NUMERIC
+  "filename" TEXT
+}
+
+Table "address" {
+  "id" SERIAL [pk, increment]
+  "member_id" NUMERIC
+  "receiver_name" TEXT
   "phone_number" TEXT
-  "street" TEXT
+  "detail_address" TEXT
   "city" TEXT
   "state" TEXT
   "zip_code" TEXT
@@ -509,72 +471,7 @@ Table "receive_address" {
 Table "member_login_log" {
   "id" SERIAL [pk, increment]
   "member_id" NUMERIC
-  "login_time" timestamp
+  "login_time" TIMESTAMP
   "ip_address" TEXT
   "login_type" TEXT
 }
-
-Table "admin" {
-  "id" SERIAL [pk, increment]
-  "username" TEXT
-  "password" TEXT
-  "icon" TEXT
-  "email" TEXT
-  "name" TEXT
-  "created_at" timestamp
-  "last_login" timestamp
-  "status" TEXT
-}
-
-Table "admin_login_log" {
-  "id" SERIAL [pk, increment]
-  "admin_id" NUMERIC
-  "login_date" DATE
-  "login_time" VARCHAR(50)
-  "ip_address" VARCHAR(20)
-  "user_agent" INT
-}
-
-Table "roles" {
-  "id" SERIAL [pk, increment]
-  "name" TEXT
-  "description" TEXT
-  "created_at" timestamp
-  "status" TEXT
-}
-
-Table "permission" {
-  "id" SERIAL [pk, increment]
-  "parent_id" NUMERIC
-  "name" TEXT
-  "value" TEXT
-  "created_at" timestamp
-  "status" TEXT
-}
-
-Table "role_permission_relation" {
-  "id" SERIAL [pk, increment]
-  "role_id" NUMERIC
-  "permission_id" NUMERIC
-}
-
-Table "admin_role_relation" {
-  "id" SERIAL [pk, increment]
-  "admin_id" NUMERIC
-  "role_id" NUMERIC
-}
-
-
-Ref: "admin"."id" < "admin_role_relation"."admin_id"
-
-Ref: "admin_role_relation"."role_id" < "roles"."id"
-
-Ref: "roles"."id" < "role_permission_relation"."role_id"
-
-Ref: "role_permission_relation"."permission_id" < "permission"."id"
-
-Ref: "admin"."id" < "admin_login_log"."id"
-
-Ref: "member"."id" < "receive_address"."member_id"
-
-Ref: "member"."id" < "member_login_log"."member_id"
