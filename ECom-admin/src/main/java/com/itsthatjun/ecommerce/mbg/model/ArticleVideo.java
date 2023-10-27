@@ -1,8 +1,9 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ArticleVideo {
+public class ArticleVideo implements Serializable {
     private Integer id;
 
     private Integer articleId;
@@ -12,6 +13,8 @@ public class ArticleVideo {
     private Date createdAt;
 
     private Date updatedAt;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;

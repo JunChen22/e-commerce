@@ -1,8 +1,9 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class PromotionSaleProduct {
+public class PromotionSaleProduct implements Serializable {
     private Integer id;
 
     private Integer promotionSaleId;
@@ -16,6 +17,8 @@ public class PromotionSaleProduct {
     private Integer promotionLimitItem;
 
     private Integer promotionLimitPerUser;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;

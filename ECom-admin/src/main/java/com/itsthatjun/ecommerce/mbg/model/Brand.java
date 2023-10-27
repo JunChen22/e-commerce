@@ -1,6 +1,8 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
-public class Brand {
+import java.io.Serializable;
+
+public class Brand implements Serializable {
     private Integer id;
 
     private String name;
@@ -10,6 +12,8 @@ public class Brand {
     private String status;
 
     private String logo;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;

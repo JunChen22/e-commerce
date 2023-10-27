@@ -1,8 +1,9 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class ProductSku {
+public class ProductSku implements Serializable {
     private Integer id;
 
     private Integer productId;
@@ -24,6 +25,8 @@ public class ProductSku {
     private Integer unitSold;
 
     private Integer status;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;

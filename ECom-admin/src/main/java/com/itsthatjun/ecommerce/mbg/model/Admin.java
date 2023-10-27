@@ -1,8 +1,9 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Admin {
+public class Admin implements Serializable {
     private Integer id;
 
     private String username;
@@ -20,6 +21,8 @@ public class Admin {
     private Date lastLogin;
 
     private String status;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;

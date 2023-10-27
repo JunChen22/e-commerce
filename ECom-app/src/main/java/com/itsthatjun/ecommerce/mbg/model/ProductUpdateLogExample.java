@@ -466,76 +466,6 @@ public class ProductUpdateLogExample {
             return (Criteria) this;
         }
 
-        public Criteria andOperateManIsNull() {
-            addCriterion("operate_man is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperateManIsNotNull() {
-            addCriterion("operate_man is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperateManEqualTo(String value) {
-            addCriterion("operate_man =", value, "operateMan");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperateManNotEqualTo(String value) {
-            addCriterion("operate_man <>", value, "operateMan");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperateManGreaterThan(String value) {
-            addCriterion("operate_man >", value, "operateMan");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperateManGreaterThanOrEqualTo(String value) {
-            addCriterion("operate_man >=", value, "operateMan");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperateManLessThan(String value) {
-            addCriterion("operate_man <", value, "operateMan");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperateManLessThanOrEqualTo(String value) {
-            addCriterion("operate_man <=", value, "operateMan");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperateManLike(String value) {
-            addCriterion("operate_man like", value, "operateMan");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperateManNotLike(String value) {
-            addCriterion("operate_man not like", value, "operateMan");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperateManIn(List<String> values) {
-            addCriterion("operate_man in", values, "operateMan");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperateManNotIn(List<String> values) {
-            addCriterion("operate_man not in", values, "operateMan");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperateManBetween(String value1, String value2) {
-            addCriterion("operate_man between", value1, value2, "operateMan");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperateManNotBetween(String value1, String value2) {
-            addCriterion("operate_man not between", value1, value2, "operateMan");
-            return (Criteria) this;
-        }
-
         public Criteria andOldStockIsNull() {
             addCriterion("old_stock is null");
             return (Criteria) this;
@@ -546,52 +476,52 @@ public class ProductUpdateLogExample {
             return (Criteria) this;
         }
 
-        public Criteria andOldStockEqualTo(BigDecimal value) {
+        public Criteria andOldStockEqualTo(Integer value) {
             addCriterion("old_stock =", value, "oldStock");
             return (Criteria) this;
         }
 
-        public Criteria andOldStockNotEqualTo(BigDecimal value) {
+        public Criteria andOldStockNotEqualTo(Integer value) {
             addCriterion("old_stock <>", value, "oldStock");
             return (Criteria) this;
         }
 
-        public Criteria andOldStockGreaterThan(BigDecimal value) {
+        public Criteria andOldStockGreaterThan(Integer value) {
             addCriterion("old_stock >", value, "oldStock");
             return (Criteria) this;
         }
 
-        public Criteria andOldStockGreaterThanOrEqualTo(BigDecimal value) {
+        public Criteria andOldStockGreaterThanOrEqualTo(Integer value) {
             addCriterion("old_stock >=", value, "oldStock");
             return (Criteria) this;
         }
 
-        public Criteria andOldStockLessThan(BigDecimal value) {
+        public Criteria andOldStockLessThan(Integer value) {
             addCriterion("old_stock <", value, "oldStock");
             return (Criteria) this;
         }
 
-        public Criteria andOldStockLessThanOrEqualTo(BigDecimal value) {
+        public Criteria andOldStockLessThanOrEqualTo(Integer value) {
             addCriterion("old_stock <=", value, "oldStock");
             return (Criteria) this;
         }
 
-        public Criteria andOldStockIn(List<BigDecimal> values) {
+        public Criteria andOldStockIn(List<Integer> values) {
             addCriterion("old_stock in", values, "oldStock");
             return (Criteria) this;
         }
 
-        public Criteria andOldStockNotIn(List<BigDecimal> values) {
+        public Criteria andOldStockNotIn(List<Integer> values) {
             addCriterion("old_stock not in", values, "oldStock");
             return (Criteria) this;
         }
 
-        public Criteria andOldStockBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andOldStockBetween(Integer value1, Integer value2) {
             addCriterion("old_stock between", value1, value2, "oldStock");
             return (Criteria) this;
         }
 
-        public Criteria andOldStockNotBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andOldStockNotBetween(Integer value1, Integer value2) {
             addCriterion("old_stock not between", value1, value2, "oldStock");
             return (Criteria) this;
         }
@@ -606,52 +536,52 @@ public class ProductUpdateLogExample {
             return (Criteria) this;
         }
 
-        public Criteria andAddedStockEqualTo(BigDecimal value) {
+        public Criteria andAddedStockEqualTo(Integer value) {
             addCriterion("added_stock =", value, "addedStock");
             return (Criteria) this;
         }
 
-        public Criteria andAddedStockNotEqualTo(BigDecimal value) {
+        public Criteria andAddedStockNotEqualTo(Integer value) {
             addCriterion("added_stock <>", value, "addedStock");
             return (Criteria) this;
         }
 
-        public Criteria andAddedStockGreaterThan(BigDecimal value) {
+        public Criteria andAddedStockGreaterThan(Integer value) {
             addCriterion("added_stock >", value, "addedStock");
             return (Criteria) this;
         }
 
-        public Criteria andAddedStockGreaterThanOrEqualTo(BigDecimal value) {
+        public Criteria andAddedStockGreaterThanOrEqualTo(Integer value) {
             addCriterion("added_stock >=", value, "addedStock");
             return (Criteria) this;
         }
 
-        public Criteria andAddedStockLessThan(BigDecimal value) {
+        public Criteria andAddedStockLessThan(Integer value) {
             addCriterion("added_stock <", value, "addedStock");
             return (Criteria) this;
         }
 
-        public Criteria andAddedStockLessThanOrEqualTo(BigDecimal value) {
+        public Criteria andAddedStockLessThanOrEqualTo(Integer value) {
             addCriterion("added_stock <=", value, "addedStock");
             return (Criteria) this;
         }
 
-        public Criteria andAddedStockIn(List<BigDecimal> values) {
+        public Criteria andAddedStockIn(List<Integer> values) {
             addCriterion("added_stock in", values, "addedStock");
             return (Criteria) this;
         }
 
-        public Criteria andAddedStockNotIn(List<BigDecimal> values) {
+        public Criteria andAddedStockNotIn(List<Integer> values) {
             addCriterion("added_stock not in", values, "addedStock");
             return (Criteria) this;
         }
 
-        public Criteria andAddedStockBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andAddedStockBetween(Integer value1, Integer value2) {
             addCriterion("added_stock between", value1, value2, "addedStock");
             return (Criteria) this;
         }
 
-        public Criteria andAddedStockNotBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andAddedStockNotBetween(Integer value1, Integer value2) {
             addCriterion("added_stock not between", value1, value2, "addedStock");
             return (Criteria) this;
         }
@@ -666,53 +596,193 @@ public class ProductUpdateLogExample {
             return (Criteria) this;
         }
 
-        public Criteria andTotalStockEqualTo(BigDecimal value) {
+        public Criteria andTotalStockEqualTo(Integer value) {
             addCriterion("total_stock =", value, "totalStock");
             return (Criteria) this;
         }
 
-        public Criteria andTotalStockNotEqualTo(BigDecimal value) {
+        public Criteria andTotalStockNotEqualTo(Integer value) {
             addCriterion("total_stock <>", value, "totalStock");
             return (Criteria) this;
         }
 
-        public Criteria andTotalStockGreaterThan(BigDecimal value) {
+        public Criteria andTotalStockGreaterThan(Integer value) {
             addCriterion("total_stock >", value, "totalStock");
             return (Criteria) this;
         }
 
-        public Criteria andTotalStockGreaterThanOrEqualTo(BigDecimal value) {
+        public Criteria andTotalStockGreaterThanOrEqualTo(Integer value) {
             addCriterion("total_stock >=", value, "totalStock");
             return (Criteria) this;
         }
 
-        public Criteria andTotalStockLessThan(BigDecimal value) {
+        public Criteria andTotalStockLessThan(Integer value) {
             addCriterion("total_stock <", value, "totalStock");
             return (Criteria) this;
         }
 
-        public Criteria andTotalStockLessThanOrEqualTo(BigDecimal value) {
+        public Criteria andTotalStockLessThanOrEqualTo(Integer value) {
             addCriterion("total_stock <=", value, "totalStock");
             return (Criteria) this;
         }
 
-        public Criteria andTotalStockIn(List<BigDecimal> values) {
+        public Criteria andTotalStockIn(List<Integer> values) {
             addCriterion("total_stock in", values, "totalStock");
             return (Criteria) this;
         }
 
-        public Criteria andTotalStockNotIn(List<BigDecimal> values) {
+        public Criteria andTotalStockNotIn(List<Integer> values) {
             addCriterion("total_stock not in", values, "totalStock");
             return (Criteria) this;
         }
 
-        public Criteria andTotalStockBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andTotalStockBetween(Integer value1, Integer value2) {
             addCriterion("total_stock between", value1, value2, "totalStock");
             return (Criteria) this;
         }
 
-        public Criteria andTotalStockNotBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andTotalStockNotBetween(Integer value1, Integer value2) {
             addCriterion("total_stock not between", value1, value2, "totalStock");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateActionIsNull() {
+            addCriterion("update_action is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateActionIsNotNull() {
+            addCriterion("update_action is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateActionEqualTo(String value) {
+            addCriterion("update_action =", value, "updateAction");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateActionNotEqualTo(String value) {
+            addCriterion("update_action <>", value, "updateAction");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateActionGreaterThan(String value) {
+            addCriterion("update_action >", value, "updateAction");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateActionGreaterThanOrEqualTo(String value) {
+            addCriterion("update_action >=", value, "updateAction");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateActionLessThan(String value) {
+            addCriterion("update_action <", value, "updateAction");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateActionLessThanOrEqualTo(String value) {
+            addCriterion("update_action <=", value, "updateAction");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateActionLike(String value) {
+            addCriterion("update_action like", value, "updateAction");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateActionNotLike(String value) {
+            addCriterion("update_action not like", value, "updateAction");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateActionIn(List<String> values) {
+            addCriterion("update_action in", values, "updateAction");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateActionNotIn(List<String> values) {
+            addCriterion("update_action not in", values, "updateAction");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateActionBetween(String value1, String value2) {
+            addCriterion("update_action between", value1, value2, "updateAction");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateActionNotBetween(String value1, String value2) {
+            addCriterion("update_action not between", value1, value2, "updateAction");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorIsNull() {
+            addCriterion("operator is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorIsNotNull() {
+            addCriterion("operator is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorEqualTo(String value) {
+            addCriterion("operator =", value, "operator");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorNotEqualTo(String value) {
+            addCriterion("operator <>", value, "operator");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorGreaterThan(String value) {
+            addCriterion("operator >", value, "operator");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorGreaterThanOrEqualTo(String value) {
+            addCriterion("operator >=", value, "operator");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorLessThan(String value) {
+            addCriterion("operator <", value, "operator");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorLessThanOrEqualTo(String value) {
+            addCriterion("operator <=", value, "operator");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorLike(String value) {
+            addCriterion("operator like", value, "operator");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorNotLike(String value) {
+            addCriterion("operator not like", value, "operator");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorIn(List<String> values) {
+            addCriterion("operator in", values, "operator");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorNotIn(List<String> values) {
+            addCriterion("operator not in", values, "operator");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorBetween(String value1, String value2) {
+            addCriterion("operator between", value1, value2, "operator");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorNotBetween(String value1, String value2) {
+            addCriterion("operator not between", value1, value2, "operator");
             return (Criteria) this;
         }
 

@@ -305,6 +305,66 @@ public class ArticleExample {
             return (Criteria) this;
         }
 
+        public Criteria andPublishStatusIsNull() {
+            addCriterion("publish_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStatusIsNotNull() {
+            addCriterion("publish_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStatusEqualTo(Integer value) {
+            addCriterion("publish_status =", value, "publishStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStatusNotEqualTo(Integer value) {
+            addCriterion("publish_status <>", value, "publishStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStatusGreaterThan(Integer value) {
+            addCriterion("publish_status >", value, "publishStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("publish_status >=", value, "publishStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStatusLessThan(Integer value) {
+            addCriterion("publish_status <", value, "publishStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("publish_status <=", value, "publishStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStatusIn(List<Integer> values) {
+            addCriterion("publish_status in", values, "publishStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStatusNotIn(List<Integer> values) {
+            addCriterion("publish_status not in", values, "publishStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStatusBetween(Integer value1, Integer value2) {
+            addCriterion("publish_status between", value1, value2, "publishStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPublishStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("publish_status not between", value1, value2, "publishStatus");
+            return (Criteria) this;
+        }
+
         public Criteria andCreatedAtIsNull() {
             addCriterion("created_at is null");
             return (Criteria) this;

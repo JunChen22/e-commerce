@@ -5,6 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="body" jdbcType="VARCHAR" property="body" />
+    <result column="publish_status" jdbcType="INTEGER" property="publishStatus" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
     <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
   </resultMap>
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, title, body, created_at, updated_at
+    id, title, body, publish_status, created_at, updated_at
   </sql>
   <select id="selectByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.ArticleExample" resultMap="BaseResultMap">
     select
@@ -100,10 +101,10 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.Article" useGeneratedKeys="true">
-    insert into article (title, body, created_at, 
-      updated_at)
-    values (#{title,jdbcType=VARCHAR}, #{body,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, 
-      #{updatedAt,jdbcType=TIMESTAMP})
+    insert into article (title, body, publish_status, 
+      created_at, updated_at)
+    values (#{title,jdbcType=VARCHAR}, #{body,jdbcType=VARCHAR}, #{publishStatus,jdbcType=INTEGER}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.Article" useGeneratedKeys="true">
     insert into article
@@ -113,6 +114,9 @@
       </if>
       <if test="body != null">
         body,
+      </if>
+      <if test="publishStatus != null">
+        publish_status,
       </if>
       <if test="createdAt != null">
         created_at,
@@ -127,6 +131,9 @@
       </if>
       <if test="body != null">
         #{body,jdbcType=VARCHAR},
+      </if>
+      <if test="publishStatus != null">
+        #{publishStatus,jdbcType=INTEGER},
       </if>
       <if test="createdAt != null">
         #{createdAt,jdbcType=TIMESTAMP},
@@ -154,6 +161,9 @@
       <if test="record.body != null">
         body = #{record.body,jdbcType=VARCHAR},
       </if>
+      <if test="record.publishStatus != null">
+        publish_status = #{record.publishStatus,jdbcType=INTEGER},
+      </if>
       <if test="record.createdAt != null">
         created_at = #{record.createdAt,jdbcType=TIMESTAMP},
       </if>
@@ -170,6 +180,7 @@
     set id = #{record.id,jdbcType=INTEGER},
       title = #{record.title,jdbcType=VARCHAR},
       body = #{record.body,jdbcType=VARCHAR},
+      publish_status = #{record.publishStatus,jdbcType=INTEGER},
       created_at = #{record.createdAt,jdbcType=TIMESTAMP},
       updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -185,6 +196,9 @@
       <if test="body != null">
         body = #{body,jdbcType=VARCHAR},
       </if>
+      <if test="publishStatus != null">
+        publish_status = #{publishStatus,jdbcType=INTEGER},
+      </if>
       <if test="createdAt != null">
         created_at = #{createdAt,jdbcType=TIMESTAMP},
       </if>
@@ -198,6 +212,7 @@
     update article
     set title = #{title,jdbcType=VARCHAR},
       body = #{body,jdbcType=VARCHAR},
+      publish_status = #{publishStatus,jdbcType=INTEGER},
       created_at = #{createdAt,jdbcType=TIMESTAMP},
       updated_at = #{updatedAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}

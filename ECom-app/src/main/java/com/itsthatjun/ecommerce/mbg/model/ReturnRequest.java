@@ -1,9 +1,10 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class ReturnRequest {
+public class ReturnRequest implements Serializable {
     private Integer id;
 
     private Integer orderId;
@@ -45,6 +46,8 @@ public class ReturnRequest {
     private Date createdAt;
 
     private Date updatedAt;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;

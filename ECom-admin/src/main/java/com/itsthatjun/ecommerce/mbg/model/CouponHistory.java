@@ -1,8 +1,9 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class CouponHistory {
+public class CouponHistory implements Serializable {
     private Integer id;
 
     private Integer couponId;
@@ -14,6 +15,8 @@ public class CouponHistory {
     private Date usedTime;
 
     private String code;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;

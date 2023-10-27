@@ -1,8 +1,9 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class MemberLoginLog {
+public class MemberLoginLog implements Serializable {
     private Integer id;
 
     private Integer memberId;
@@ -12,6 +13,8 @@ public class MemberLoginLog {
     private String ipAddress;
 
     private String loginType;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;

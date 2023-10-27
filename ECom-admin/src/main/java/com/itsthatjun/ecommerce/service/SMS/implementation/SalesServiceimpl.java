@@ -261,7 +261,7 @@ public class SalesServiceimpl implements SalesService{
         newLog.setPromotionType(promotionType);
         newLog.setDiscountType(discountType);
         newLog.setAmount(BigDecimal.valueOf(discountAmount));
-        newLog.setOperateMan(operator);
+        newLog.setSaleAction(operator);
         newLog.setCreatedAt(new Date());
         promotionSaleLogMapper.insert(newLog);
     }

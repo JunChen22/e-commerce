@@ -1,9 +1,10 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class ReviewAlbum {
+public class ReviewAlbum implements Serializable {
     private Integer id;
 
     private Integer reviewId;
@@ -11,6 +12,8 @@ public class ReviewAlbum {
     private BigDecimal picCount;
 
     private Date createdAt;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;

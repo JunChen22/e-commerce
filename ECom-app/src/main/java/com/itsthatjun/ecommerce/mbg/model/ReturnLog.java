@@ -1,17 +1,20 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ReturnLog {
+public class ReturnLog implements Serializable {
     private Integer id;
 
     private Integer returnRequestId;
 
-    private String action;
+    private String updateAction;
 
     private String operator;
 
     private Date createdAt;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;
@@ -29,12 +32,12 @@ public class ReturnLog {
         this.returnRequestId = returnRequestId;
     }
 
-    public String getAction() {
-        return action;
+    public String getUpdateAction() {
+        return updateAction;
     }
 
-    public void setAction(String action) {
-        this.action = action;
+    public void setUpdateAction(String updateAction) {
+        this.updateAction = updateAction;
     }
 
     public String getOperator() {

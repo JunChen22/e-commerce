@@ -152,7 +152,7 @@ public class ReturnOrderServiceImpl implements ReturnOrderService {
         returnRequestMapper.updateByPrimaryKey(orderReturnRequest);
 
         ReturnLog returnUpdateLog = new ReturnLog();
-        returnUpdateLog.setAction("Approve return Request request");
+        returnUpdateLog.setUpdateAction("Approve return Request request");
         returnUpdateLog.setOperator(operator);
         returnUpdateLog.setCreatedAt(new Date());
         logMapper.insert(returnUpdateLog);
@@ -182,7 +182,7 @@ public class ReturnOrderServiceImpl implements ReturnOrderService {
         returnRequestMapper.updateByPrimaryKey(returnRequest);
 
         ReturnLog returnUpdateLog = new ReturnLog();
-        returnUpdateLog.setAction("Rejected return Request request");
+        returnUpdateLog.setUpdateAction("Rejected return Request request");
         returnUpdateLog.setOperator(operator);
         returnUpdateLog.setCreatedAt(new Date());
         logMapper.insert(returnUpdateLog);
@@ -210,7 +210,7 @@ public class ReturnOrderServiceImpl implements ReturnOrderService {
         returnRequestMapper.updateByPrimaryKey(returnRequest);
 
         ReturnLog returnUpdateLog = new ReturnLog();
-        returnUpdateLog.setAction("Rejected return Request request");
+        returnUpdateLog.setUpdateAction("Rejected return Request request");
         returnUpdateLog.setOperator(operator);
         returnUpdateLog.setCreatedAt(new Date());
         logMapper.insert(returnUpdateLog);

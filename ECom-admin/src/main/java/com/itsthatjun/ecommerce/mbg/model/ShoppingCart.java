@@ -1,8 +1,9 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ShoppingCart {
+public class ShoppingCart implements Serializable {
     private Integer id;
 
     private Integer memberId;
@@ -10,6 +11,8 @@ public class ShoppingCart {
     private Date createdAt;
 
     private Date modifyDate;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;

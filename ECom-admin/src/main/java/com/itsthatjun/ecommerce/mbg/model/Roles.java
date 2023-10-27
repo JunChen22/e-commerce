@@ -1,8 +1,9 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Roles {
+public class Roles implements Serializable {
     private Integer id;
 
     private String name;
@@ -12,6 +13,8 @@ public class Roles {
     private Date createdAt;
 
     private String status;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;

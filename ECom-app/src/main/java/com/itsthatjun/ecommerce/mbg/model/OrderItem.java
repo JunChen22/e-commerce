@@ -1,8 +1,9 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class OrderItem {
+public class OrderItem implements Serializable {
     private Integer id;
 
     private Integer orderId;
@@ -23,7 +24,7 @@ public class OrderItem {
 
     private Integer productQuantity;
 
-    private Long productSkuId;
+    private Integer productSkuId;
 
     private String productSkuCode;
 
@@ -36,6 +37,8 @@ public class OrderItem {
     private BigDecimal couponAmount;
 
     private BigDecimal realAmount;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;
@@ -117,11 +120,11 @@ public class OrderItem {
         this.productQuantity = productQuantity;
     }
 
-    public Long getProductSkuId() {
+    public Integer getProductSkuId() {
         return productSkuId;
     }
 
-    public void setProductSkuId(Long productSkuId) {
+    public void setProductSkuId(Integer productSkuId) {
         this.productSkuId = productSkuId;
     }
 

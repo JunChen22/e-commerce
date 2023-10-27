@@ -1,9 +1,10 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Permission {
+public class Permission implements Serializable {
     private Integer id;
 
     private BigDecimal parentId;
@@ -15,6 +16,8 @@ public class Permission {
     private Date createdAt;
 
     private String status;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;

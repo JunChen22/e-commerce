@@ -8,6 +8,8 @@
     <context id="PostgresContext" targetRuntime="MyBatis3" defaultModelType="flat">
         <!--newly generated mapper will update existing one-->
         <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
+        <!-- add serializable to all the generator model. for redis if needed.-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
         <!-- congifuration for generated code comments, default is false ,generic comment -->
         <commentGenerator>
             <property name="suppressAllComments" value="true"/>
@@ -43,6 +45,13 @@
             <generatedKey column="id" sqlStatement="JDBC" />
             <columnOverride column="id" javaType="java.lang.Integer" />
         </table>
+
+        <table tableName= "brand_update_log">
+            <generatedKey column="id" sqlStatement="JDBC" />
+            <columnOverride column="id" javaType="java.lang.Integer" />
+            <columnOverride column="brand_id" javaType="java.lang.Integer" />
+        </table>
+
         <table tableName= "product_category">
             <generatedKey column="id" sqlStatement="JDBC" />
             <columnOverride column="id" javaType="java.lang.Integer" />
@@ -70,25 +79,6 @@
             <columnOverride column="product_id" javaType="java.lang.Integer" />
         </table>
 
-        <table tableName= "review">
-            <generatedKey column="id" sqlStatement="JDBC" />
-            <columnOverride column="id" javaType="java.lang.Integer" />
-            <columnOverride column="product_id" javaType="java.lang.Integer" />
-            <columnOverride column="member_id" javaType="java.lang.Integer" />
-        </table>
-
-        <table tableName= "review_album">
-            <generatedKey column="id" sqlStatement="JDBC" />
-            <columnOverride column="id" javaType="java.lang.Integer" />
-            <columnOverride column="review_id" javaType="java.lang.Integer" />
-        </table>
-
-        <table tableName= "review_pictures">
-            <generatedKey column="id" sqlStatement="JDBC" />
-            <columnOverride column="id" javaType="java.lang.Integer" />
-            <columnOverride column="review_id" javaType="java.lang.Integer" />
-        </table>
-
         <table tableName= "product_update_log">
             <generatedKey column="id" sqlStatement="JDBC" />
             <columnOverride column="id" javaType="java.lang.Integer" />
@@ -114,6 +104,31 @@
             <columnOverride column="product_id" javaType="java.lang.Integer" />
         </table>
 
+        <table tableName= "review">
+            <generatedKey column="id" sqlStatement="JDBC" />
+            <columnOverride column="id" javaType="java.lang.Integer" />
+            <columnOverride column="product_id" javaType="java.lang.Integer" />
+            <columnOverride column="member_id" javaType="java.lang.Integer" />
+        </table>
+
+        <table tableName= "review_album">
+            <generatedKey column="id" sqlStatement="JDBC" />
+            <columnOverride column="id" javaType="java.lang.Integer" />
+            <columnOverride column="review_id" javaType="java.lang.Integer" />
+        </table>
+
+        <table tableName= "review_pictures">
+            <generatedKey column="id" sqlStatement="JDBC" />
+            <columnOverride column="id" javaType="java.lang.Integer" />
+            <columnOverride column="review_album_id" javaType="java.lang.Integer" />
+        </table>
+
+        <table tableName= "review_update_log">
+            <generatedKey column="id" sqlStatement="JDBC" />
+            <columnOverride column="id" javaType="java.lang.Integer" />
+            <columnOverride column="review_id" javaType="java.lang.Integer" />
+        </table>
+
         <!--  UMS -->
 
         <table tableName= "member">
@@ -126,6 +141,11 @@
             <columnOverride column="member_id" javaType="java.lang.Integer" />
         </table>
         <table tableName= "member_login_log">
+            <generatedKey column="id" sqlStatement="JDBC" />
+            <columnOverride column="id" javaType="java.lang.Integer" />
+            <columnOverride column="member_id" javaType="java.lang.Integer" />
+        </table>
+        <table tableName= "member_change_log">
             <generatedKey column="id" sqlStatement="JDBC" />
             <columnOverride column="id" javaType="java.lang.Integer" />
             <columnOverride column="member_id" javaType="java.lang.Integer" />
@@ -194,11 +214,7 @@
             <columnOverride column="id" javaType="java.lang.Integer" />
             <columnOverride column="order_id" javaType="java.lang.Integer" />
             <columnOverride column="product_id" javaType="java.lang.Integer" />
-        </table>
-
-        <table tableName="company_address">
-            <generatedKey column="id" sqlStatement="JDBC" />
-            <columnOverride column="id" javaType="java.lang.Integer" />
+            <columnOverride column="product_sku_id" javaType="java.lang.Integer" />
         </table>
 
         <table tableName="order_change_history">
@@ -206,6 +222,12 @@
             <columnOverride column="id" javaType="java.lang.Integer" />
             <columnOverride column="order_id" javaType="java.lang.Integer" />
         </table>
+
+        <table tableName="company_address">
+            <generatedKey column="id" sqlStatement="JDBC" />
+            <columnOverride column="id" javaType="java.lang.Integer" />
+        </table>
+
 
         <table tableName="return_request">
             <generatedKey column="id" sqlStatement="JDBC" />
@@ -239,10 +261,6 @@
             <columnOverride column="return_request_id" javaType="java.lang.Integer" />
         </table>
 
-
-
-
-
         <!--  SMS -->
         <table tableName="coupon">
             <generatedKey column="id" sqlStatement="JDBC" />
@@ -264,6 +282,12 @@
             <columnOverride column="order_id" javaType="java.lang.Integer" />
         </table>
 
+        <table tableName="coupon_change_log">
+            <generatedKey column="id" sqlStatement="JDBC" />
+            <columnOverride column="id" javaType="java.lang.Integer" />
+            <columnOverride column="coupon_id" javaType="java.lang.Integer" />
+        </table>
+
         <table tableName="promotion_sale">
             <generatedKey column="id" sqlStatement="JDBC" />
             <columnOverride column="id" javaType="java.lang.Integer" />
@@ -274,7 +298,6 @@
             <columnOverride column="id" javaType="java.lang.Integer" />
             <columnOverride column="promotion_sale_id" javaType="java.lang.Integer" />
             <columnOverride column="product_id" javaType="java.lang.Integer" />
-            <columnOverride column="product_sku_id" javaType="java.lang.Integer" />
         </table>
 
         <table tableName="promotion_sale_log">
@@ -282,7 +305,6 @@
             <columnOverride column="id" javaType="java.lang.Integer" />
             <columnOverride column="promotion_sale_id" javaType="java.lang.Integer" />
         </table>
-
 
 
         <!-- CMS -->
@@ -304,6 +326,12 @@
         </table>
 
         <table tableName="article_video">
+            <generatedKey column="id" sqlStatement="JDBC" />
+            <columnOverride column="id" javaType="java.lang.Integer" />
+            <columnOverride column="article_id" javaType="java.lang.Integer" />
+        </table>
+
+        <table tableName="article_change_log">
             <generatedKey column="id" sqlStatement="JDBC" />
             <columnOverride column="id" javaType="java.lang.Integer" />
             <columnOverride column="article_id" javaType="java.lang.Integer" />

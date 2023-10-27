@@ -1,13 +1,16 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class ProductAttributeCategory {
+public class ProductAttributeCategory implements Serializable {
     private Integer id;
 
     private String name;
 
     private BigDecimal attributeAmount;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;

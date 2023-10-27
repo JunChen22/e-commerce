@@ -225,73 +225,73 @@ public class ReturnLogExample {
             return (Criteria) this;
         }
 
-        public Criteria andActionIsNull() {
-            addCriterion("action is null");
+        public Criteria andUpdateActionIsNull() {
+            addCriterion("update_action is null");
             return (Criteria) this;
         }
 
-        public Criteria andActionIsNotNull() {
-            addCriterion("action is not null");
+        public Criteria andUpdateActionIsNotNull() {
+            addCriterion("update_action is not null");
             return (Criteria) this;
         }
 
-        public Criteria andActionEqualTo(String value) {
-            addCriterion("action =", value, "action");
+        public Criteria andUpdateActionEqualTo(String value) {
+            addCriterion("update_action =", value, "updateAction");
             return (Criteria) this;
         }
 
-        public Criteria andActionNotEqualTo(String value) {
-            addCriterion("action <>", value, "action");
+        public Criteria andUpdateActionNotEqualTo(String value) {
+            addCriterion("update_action <>", value, "updateAction");
             return (Criteria) this;
         }
 
-        public Criteria andActionGreaterThan(String value) {
-            addCriterion("action >", value, "action");
+        public Criteria andUpdateActionGreaterThan(String value) {
+            addCriterion("update_action >", value, "updateAction");
             return (Criteria) this;
         }
 
-        public Criteria andActionGreaterThanOrEqualTo(String value) {
-            addCriterion("action >=", value, "action");
+        public Criteria andUpdateActionGreaterThanOrEqualTo(String value) {
+            addCriterion("update_action >=", value, "updateAction");
             return (Criteria) this;
         }
 
-        public Criteria andActionLessThan(String value) {
-            addCriterion("action <", value, "action");
+        public Criteria andUpdateActionLessThan(String value) {
+            addCriterion("update_action <", value, "updateAction");
             return (Criteria) this;
         }
 
-        public Criteria andActionLessThanOrEqualTo(String value) {
-            addCriterion("action <=", value, "action");
+        public Criteria andUpdateActionLessThanOrEqualTo(String value) {
+            addCriterion("update_action <=", value, "updateAction");
             return (Criteria) this;
         }
 
-        public Criteria andActionLike(String value) {
-            addCriterion("action like", value, "action");
+        public Criteria andUpdateActionLike(String value) {
+            addCriterion("update_action like", value, "updateAction");
             return (Criteria) this;
         }
 
-        public Criteria andActionNotLike(String value) {
-            addCriterion("action not like", value, "action");
+        public Criteria andUpdateActionNotLike(String value) {
+            addCriterion("update_action not like", value, "updateAction");
             return (Criteria) this;
         }
 
-        public Criteria andActionIn(List<String> values) {
-            addCriterion("action in", values, "action");
+        public Criteria andUpdateActionIn(List<String> values) {
+            addCriterion("update_action in", values, "updateAction");
             return (Criteria) this;
         }
 
-        public Criteria andActionNotIn(List<String> values) {
-            addCriterion("action not in", values, "action");
+        public Criteria andUpdateActionNotIn(List<String> values) {
+            addCriterion("update_action not in", values, "updateAction");
             return (Criteria) this;
         }
 
-        public Criteria andActionBetween(String value1, String value2) {
-            addCriterion("action between", value1, value2, "action");
+        public Criteria andUpdateActionBetween(String value1, String value2) {
+            addCriterion("update_action between", value1, value2, "updateAction");
             return (Criteria) this;
         }
 
-        public Criteria andActionNotBetween(String value1, String value2) {
-            addCriterion("action not between", value1, value2, "action");
+        public Criteria andUpdateActionNotBetween(String value1, String value2) {
+            addCriterion("update_action not between", value1, value2, "updateAction");
             return (Criteria) this;
         }
 

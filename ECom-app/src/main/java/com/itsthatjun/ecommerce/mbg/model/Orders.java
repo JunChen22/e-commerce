@@ -1,9 +1,10 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Orders {
+public class Orders implements Serializable {
     private Integer id;
 
     private Integer memberId;
@@ -65,6 +66,8 @@ public class Orders {
     private Date createdAt;
 
     private Date updatedAt;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;

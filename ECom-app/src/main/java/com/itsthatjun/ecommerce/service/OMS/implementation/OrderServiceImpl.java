@@ -417,7 +417,7 @@ public class OrderServiceImpl implements OrderService {
         OrderChangeHistory changeLog = new OrderChangeHistory();
         changeLog.setOrderId(orderId);
         changeLog.setOrderStatus(status);
-        changeLog.setChangeOperator(operator);
+        changeLog.setOperator(operator);
         changeLog.setNote(note);
         changeLog.setCreatedAt(new Date());
         orderChangeHistoryMapper.insert(changeLog);

@@ -8,7 +8,7 @@
     <result column="promotion_type" jdbcType="INTEGER" property="promotionType" />
     <result column="discount_type" jdbcType="INTEGER" property="discountType" />
     <result column="amount" jdbcType="NUMERIC" property="amount" />
-    <result column="operate_man" jdbcType="VARCHAR" property="operateMan" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -70,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, promotion_sale_id, sale_action, promotion_type, discount_type, amount, operate_man, 
+    id, promotion_sale_id, sale_action, promotion_type, discount_type, amount, operator, 
     created_at
   </sql>
   <select id="selectByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.PromotionSaleLogExample" resultMap="BaseResultMap">
@@ -105,10 +105,10 @@
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.PromotionSaleLog" useGeneratedKeys="true">
     insert into promotion_sale_log (promotion_sale_id, sale_action, promotion_type, 
-      discount_type, amount, operate_man, 
+      discount_type, amount, operator, 
       created_at)
     values (#{promotionSaleId,jdbcType=NUMERIC}, #{saleAction,jdbcType=VARCHAR}, #{promotionType,jdbcType=INTEGER}, 
-      #{discountType,jdbcType=INTEGER}, #{amount,jdbcType=NUMERIC}, #{operateMan,jdbcType=VARCHAR}, 
+      #{discountType,jdbcType=INTEGER}, #{amount,jdbcType=NUMERIC}, #{operator,jdbcType=VARCHAR}, 
       #{createdAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.PromotionSaleLog" useGeneratedKeys="true">
@@ -129,8 +129,8 @@
       <if test="amount != null">
         amount,
       </if>
-      <if test="operateMan != null">
-        operate_man,
+      <if test="operator != null">
+        operator,
       </if>
       <if test="createdAt != null">
         created_at,
@@ -152,8 +152,8 @@
       <if test="amount != null">
         #{amount,jdbcType=NUMERIC},
       </if>
-      <if test="operateMan != null">
-        #{operateMan,jdbcType=VARCHAR},
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
       </if>
       <if test="createdAt != null">
         #{createdAt,jdbcType=TIMESTAMP},
@@ -187,8 +187,8 @@
       <if test="record.amount != null">
         amount = #{record.amount,jdbcType=NUMERIC},
       </if>
-      <if test="record.operateMan != null">
-        operate_man = #{record.operateMan,jdbcType=VARCHAR},
+      <if test="record.operator != null">
+        operator = #{record.operator,jdbcType=VARCHAR},
       </if>
       <if test="record.createdAt != null">
         created_at = #{record.createdAt,jdbcType=TIMESTAMP},
@@ -206,7 +206,7 @@
       promotion_type = #{record.promotionType,jdbcType=INTEGER},
       discount_type = #{record.discountType,jdbcType=INTEGER},
       amount = #{record.amount,jdbcType=NUMERIC},
-      operate_man = #{record.operateMan,jdbcType=VARCHAR},
+      operator = #{record.operator,jdbcType=VARCHAR},
       created_at = #{record.createdAt,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -230,8 +230,8 @@
       <if test="amount != null">
         amount = #{amount,jdbcType=NUMERIC},
       </if>
-      <if test="operateMan != null">
-        operate_man = #{operateMan,jdbcType=VARCHAR},
+      <if test="operator != null">
+        operator = #{operator,jdbcType=VARCHAR},
       </if>
       <if test="createdAt != null">
         created_at = #{createdAt,jdbcType=TIMESTAMP},
@@ -246,7 +246,7 @@
       promotion_type = #{promotionType,jdbcType=INTEGER},
       discount_type = #{discountType,jdbcType=INTEGER},
       amount = #{amount,jdbcType=NUMERIC},
-      operate_man = #{operateMan,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=VARCHAR},
       created_at = #{createdAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>

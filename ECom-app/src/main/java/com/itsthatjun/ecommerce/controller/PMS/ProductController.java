@@ -5,6 +5,7 @@ import com.itsthatjun.ecommerce.service.PMS.implementation.ProductServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,7 +14,6 @@ import java.util.List;
 @RequestMapping("/product")
 @Api(tags = "Product related")
 @CrossOrigin
-//@PreAuthorize("isAuthenticated()")
 public class ProductController {
 
     private final ProductServiceImpl productService;
@@ -24,8 +24,10 @@ public class ProductController {
     }
 
     @GetMapping("/listAll")
+    @Cacheable(value = "productsCache", key = "'listAllProducts'")
     @ApiOperation(value = "Get all product")
     public List<Product> listAllProduct(){
+        System.out.println("at get all product");
         List<Product> productList = productService.listAllProduct();
         return productList;
     }

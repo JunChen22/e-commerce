@@ -1,6 +1,8 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
-public class CouponProductRelation {
+import java.io.Serializable;
+
+public class CouponProductRelation implements Serializable {
     private Integer id;
 
     private Integer couponId;
@@ -12,6 +14,8 @@ public class CouponProductRelation {
     private String productSn;
 
     private String productSkuCode;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;

@@ -1,11 +1,15 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
-public class AdminRoleRelation {
+import java.io.Serializable;
+
+public class AdminRoleRelation implements Serializable {
     private Integer id;
 
     private Integer adminId;
 
     private Integer roleId;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;

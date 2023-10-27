@@ -225,133 +225,73 @@ public class OrderChangeHistoryExample {
             return (Criteria) this;
         }
 
-        public Criteria andChangeOperatorIsNull() {
-            addCriterion("change_operator is null");
+        public Criteria andUpdateActionIsNull() {
+            addCriterion("update_action is null");
             return (Criteria) this;
         }
 
-        public Criteria andChangeOperatorIsNotNull() {
-            addCriterion("change_operator is not null");
+        public Criteria andUpdateActionIsNotNull() {
+            addCriterion("update_action is not null");
             return (Criteria) this;
         }
 
-        public Criteria andChangeOperatorEqualTo(String value) {
-            addCriterion("change_operator =", value, "changeOperator");
+        public Criteria andUpdateActionEqualTo(String value) {
+            addCriterion("update_action =", value, "updateAction");
             return (Criteria) this;
         }
 
-        public Criteria andChangeOperatorNotEqualTo(String value) {
-            addCriterion("change_operator <>", value, "changeOperator");
+        public Criteria andUpdateActionNotEqualTo(String value) {
+            addCriterion("update_action <>", value, "updateAction");
             return (Criteria) this;
         }
 
-        public Criteria andChangeOperatorGreaterThan(String value) {
-            addCriterion("change_operator >", value, "changeOperator");
+        public Criteria andUpdateActionGreaterThan(String value) {
+            addCriterion("update_action >", value, "updateAction");
             return (Criteria) this;
         }
 
-        public Criteria andChangeOperatorGreaterThanOrEqualTo(String value) {
-            addCriterion("change_operator >=", value, "changeOperator");
+        public Criteria andUpdateActionGreaterThanOrEqualTo(String value) {
+            addCriterion("update_action >=", value, "updateAction");
             return (Criteria) this;
         }
 
-        public Criteria andChangeOperatorLessThan(String value) {
-            addCriterion("change_operator <", value, "changeOperator");
+        public Criteria andUpdateActionLessThan(String value) {
+            addCriterion("update_action <", value, "updateAction");
             return (Criteria) this;
         }
 
-        public Criteria andChangeOperatorLessThanOrEqualTo(String value) {
-            addCriterion("change_operator <=", value, "changeOperator");
+        public Criteria andUpdateActionLessThanOrEqualTo(String value) {
+            addCriterion("update_action <=", value, "updateAction");
             return (Criteria) this;
         }
 
-        public Criteria andChangeOperatorLike(String value) {
-            addCriterion("change_operator like", value, "changeOperator");
+        public Criteria andUpdateActionLike(String value) {
+            addCriterion("update_action like", value, "updateAction");
             return (Criteria) this;
         }
 
-        public Criteria andChangeOperatorNotLike(String value) {
-            addCriterion("change_operator not like", value, "changeOperator");
+        public Criteria andUpdateActionNotLike(String value) {
+            addCriterion("update_action not like", value, "updateAction");
             return (Criteria) this;
         }
 
-        public Criteria andChangeOperatorIn(List<String> values) {
-            addCriterion("change_operator in", values, "changeOperator");
+        public Criteria andUpdateActionIn(List<String> values) {
+            addCriterion("update_action in", values, "updateAction");
             return (Criteria) this;
         }
 
-        public Criteria andChangeOperatorNotIn(List<String> values) {
-            addCriterion("change_operator not in", values, "changeOperator");
+        public Criteria andUpdateActionNotIn(List<String> values) {
+            addCriterion("update_action not in", values, "updateAction");
             return (Criteria) this;
         }
 
-        public Criteria andChangeOperatorBetween(String value1, String value2) {
-            addCriterion("change_operator between", value1, value2, "changeOperator");
+        public Criteria andUpdateActionBetween(String value1, String value2) {
+            addCriterion("update_action between", value1, value2, "updateAction");
             return (Criteria) this;
         }
 
-        public Criteria andChangeOperatorNotBetween(String value1, String value2) {
-            addCriterion("change_operator not between", value1, value2, "changeOperator");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatedAtIsNull() {
-            addCriterion("created_at is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatedAtIsNotNull() {
-            addCriterion("created_at is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatedAtEqualTo(Date value) {
-            addCriterion("created_at =", value, "createdAt");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatedAtNotEqualTo(Date value) {
-            addCriterion("created_at <>", value, "createdAt");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatedAtGreaterThan(Date value) {
-            addCriterion("created_at >", value, "createdAt");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatedAtGreaterThanOrEqualTo(Date value) {
-            addCriterion("created_at >=", value, "createdAt");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatedAtLessThan(Date value) {
-            addCriterion("created_at <", value, "createdAt");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatedAtLessThanOrEqualTo(Date value) {
-            addCriterion("created_at <=", value, "createdAt");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatedAtIn(List<Date> values) {
-            addCriterion("created_at in", values, "createdAt");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatedAtNotIn(List<Date> values) {
-            addCriterion("created_at not in", values, "createdAt");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatedAtBetween(Date value1, Date value2) {
-            addCriterion("created_at between", value1, value2, "createdAt");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatedAtNotBetween(Date value1, Date value2) {
-            addCriterion("created_at not between", value1, value2, "createdAt");
+        public Criteria andUpdateActionNotBetween(String value1, String value2) {
+            addCriterion("update_action not between", value1, value2, "updateAction");
             return (Criteria) this;
         }
 
@@ -482,6 +422,136 @@ public class OrderChangeHistoryExample {
 
         public Criteria andNoteNotBetween(String value1, String value2) {
             addCriterion("note not between", value1, value2, "note");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorIsNull() {
+            addCriterion("operator is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorIsNotNull() {
+            addCriterion("operator is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorEqualTo(String value) {
+            addCriterion("operator =", value, "operator");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorNotEqualTo(String value) {
+            addCriterion("operator <>", value, "operator");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorGreaterThan(String value) {
+            addCriterion("operator >", value, "operator");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorGreaterThanOrEqualTo(String value) {
+            addCriterion("operator >=", value, "operator");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorLessThan(String value) {
+            addCriterion("operator <", value, "operator");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorLessThanOrEqualTo(String value) {
+            addCriterion("operator <=", value, "operator");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorLike(String value) {
+            addCriterion("operator like", value, "operator");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorNotLike(String value) {
+            addCriterion("operator not like", value, "operator");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorIn(List<String> values) {
+            addCriterion("operator in", values, "operator");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorNotIn(List<String> values) {
+            addCriterion("operator not in", values, "operator");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorBetween(String value1, String value2) {
+            addCriterion("operator between", value1, value2, "operator");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperatorNotBetween(String value1, String value2) {
+            addCriterion("operator not between", value1, value2, "operator");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedAtIsNull() {
+            addCriterion("created_at is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedAtIsNotNull() {
+            addCriterion("created_at is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedAtEqualTo(Date value) {
+            addCriterion("created_at =", value, "createdAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedAtNotEqualTo(Date value) {
+            addCriterion("created_at <>", value, "createdAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedAtGreaterThan(Date value) {
+            addCriterion("created_at >", value, "createdAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedAtGreaterThanOrEqualTo(Date value) {
+            addCriterion("created_at >=", value, "createdAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedAtLessThan(Date value) {
+            addCriterion("created_at <", value, "createdAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedAtLessThanOrEqualTo(Date value) {
+            addCriterion("created_at <=", value, "createdAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedAtIn(List<Date> values) {
+            addCriterion("created_at in", values, "createdAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedAtNotIn(List<Date> values) {
+            addCriterion("created_at not in", values, "createdAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedAtBetween(Date value1, Date value2) {
+            addCriterion("created_at between", value1, value2, "createdAt");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatedAtNotBetween(Date value1, Date value2) {
+            addCriterion("created_at not between", value1, value2, "createdAt");
             return (Criteria) this;
         }
     }

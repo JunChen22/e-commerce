@@ -1,8 +1,9 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class ProductCategory {
+public class ProductCategory implements Serializable {
     private Integer id;
 
     private String name;
@@ -10,6 +11,8 @@ public class ProductCategory {
     private BigDecimal parentId;
 
     private BigDecimal level;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;

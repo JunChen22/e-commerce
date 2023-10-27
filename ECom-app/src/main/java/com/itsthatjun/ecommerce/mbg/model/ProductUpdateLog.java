@@ -1,9 +1,10 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class ProductUpdateLog {
+public class ProductUpdateLog implements Serializable {
     private Integer id;
 
     private Integer productId;
@@ -16,15 +17,19 @@ public class ProductUpdateLog {
 
     private BigDecimal salePriceNew;
 
-    private String operateMan;
+    private Integer oldStock;
 
-    private BigDecimal oldStock;
+    private Integer addedStock;
 
-    private BigDecimal addedStock;
+    private Integer totalStock;
 
-    private BigDecimal totalStock;
+    private String updateAction;
+
+    private String operator;
 
     private Date createdAt;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;
@@ -74,36 +79,44 @@ public class ProductUpdateLog {
         this.salePriceNew = salePriceNew;
     }
 
-    public String getOperateMan() {
-        return operateMan;
-    }
-
-    public void setOperateMan(String operateMan) {
-        this.operateMan = operateMan;
-    }
-
-    public BigDecimal getOldStock() {
+    public Integer getOldStock() {
         return oldStock;
     }
 
-    public void setOldStock(BigDecimal oldStock) {
+    public void setOldStock(Integer oldStock) {
         this.oldStock = oldStock;
     }
 
-    public BigDecimal getAddedStock() {
+    public Integer getAddedStock() {
         return addedStock;
     }
 
-    public void setAddedStock(BigDecimal addedStock) {
+    public void setAddedStock(Integer addedStock) {
         this.addedStock = addedStock;
     }
 
-    public BigDecimal getTotalStock() {
+    public Integer getTotalStock() {
         return totalStock;
     }
 
-    public void setTotalStock(BigDecimal totalStock) {
+    public void setTotalStock(Integer totalStock) {
         this.totalStock = totalStock;
+    }
+
+    public String getUpdateAction() {
+        return updateAction;
+    }
+
+    public void setUpdateAction(String updateAction) {
+        this.updateAction = updateAction;
+    }
+
+    public String getOperator() {
+        return operator;
+    }
+
+    public void setOperator(String operator) {
+        this.operator = operator;
     }
 
     public Date getCreatedAt() {

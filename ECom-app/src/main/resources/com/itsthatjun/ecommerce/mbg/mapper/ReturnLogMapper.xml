@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.itsthatjun.ecommerce.mbg.model.ReturnLog">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="return_request_id" jdbcType="BIGINT" property="returnRequestId" />
-    <result column="action" jdbcType="VARCHAR" property="action" />
+    <result column="update_action" jdbcType="VARCHAR" property="updateAction" />
     <result column="operator" jdbcType="VARCHAR" property="operator" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
@@ -67,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, return_request_id, action, operator, created_at
+    id, return_request_id, update_action, operator, created_at
   </sql>
   <select id="selectByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.ReturnLogExample" resultMap="BaseResultMap">
     select
@@ -100,9 +100,9 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.ReturnLog" useGeneratedKeys="true">
-    insert into return_log (return_request_id, action, operator, 
+    insert into return_log (return_request_id, update_action, operator, 
       created_at)
-    values (#{returnRequestId,jdbcType=BIGINT}, #{action,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, 
+    values (#{returnRequestId,jdbcType=BIGINT}, #{updateAction,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, 
       #{createdAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.ReturnLog" useGeneratedKeys="true">
@@ -111,8 +111,8 @@
       <if test="returnRequestId != null">
         return_request_id,
       </if>
-      <if test="action != null">
-        action,
+      <if test="updateAction != null">
+        update_action,
       </if>
       <if test="operator != null">
         operator,
@@ -125,8 +125,8 @@
       <if test="returnRequestId != null">
         #{returnRequestId,jdbcType=BIGINT},
       </if>
-      <if test="action != null">
-        #{action,jdbcType=VARCHAR},
+      <if test="updateAction != null">
+        #{updateAction,jdbcType=VARCHAR},
       </if>
       <if test="operator != null">
         #{operator,jdbcType=VARCHAR},
@@ -151,8 +151,8 @@
       <if test="record.returnRequestId != null">
         return_request_id = #{record.returnRequestId,jdbcType=BIGINT},
       </if>
-      <if test="record.action != null">
-        action = #{record.action,jdbcType=VARCHAR},
+      <if test="record.updateAction != null">
+        update_action = #{record.updateAction,jdbcType=VARCHAR},
       </if>
       <if test="record.operator != null">
         operator = #{record.operator,jdbcType=VARCHAR},
@@ -169,7 +169,7 @@
     update return_log
     set id = #{record.id,jdbcType=INTEGER},
       return_request_id = #{record.returnRequestId,jdbcType=BIGINT},
-      action = #{record.action,jdbcType=VARCHAR},
+      update_action = #{record.updateAction,jdbcType=VARCHAR},
       operator = #{record.operator,jdbcType=VARCHAR},
       created_at = #{record.createdAt,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -182,8 +182,8 @@
       <if test="returnRequestId != null">
         return_request_id = #{returnRequestId,jdbcType=BIGINT},
       </if>
-      <if test="action != null">
-        action = #{action,jdbcType=VARCHAR},
+      <if test="updateAction != null">
+        update_action = #{updateAction,jdbcType=VARCHAR},
       </if>
       <if test="operator != null">
         operator = #{operator,jdbcType=VARCHAR},
@@ -197,7 +197,7 @@
   <update id="updateByPrimaryKey" parameterType="com.itsthatjun.ecommerce.mbg.model.ReturnLog">
     update return_log
     set return_request_id = #{returnRequestId,jdbcType=BIGINT},
-      action = #{action,jdbcType=VARCHAR},
+      update_action = #{updateAction,jdbcType=VARCHAR},
       operator = #{operator,jdbcType=VARCHAR},
       created_at = #{createdAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}

@@ -1,8 +1,9 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class ProductAttribute {
+public class ProductAttribute implements Serializable {
     private Integer id;
 
     private String skuCode;
@@ -14,6 +15,8 @@ public class ProductAttribute {
     private String attributeValue;
 
     private String attributeUnit;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;

@@ -1,9 +1,10 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class CartItem {
+public class CartItem implements Serializable {
     private Integer id;
 
     private Integer cartId;
@@ -23,6 +24,8 @@ public class CartItem {
     private Date createdAt;
 
     private Date modifyDate;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;

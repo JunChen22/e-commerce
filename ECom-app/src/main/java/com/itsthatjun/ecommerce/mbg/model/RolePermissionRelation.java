@@ -1,11 +1,15 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
-public class RolePermissionRelation {
+import java.io.Serializable;
+
+public class RolePermissionRelation implements Serializable {
     private Integer id;
 
     private Integer roleId;
 
     private Integer permissionId;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;

@@ -1,17 +1,22 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Article {
+public class Article implements Serializable {
     private Integer id;
 
     private String title;
 
     private String body;
 
+    private Integer publishStatus;
+
     private Date createdAt;
 
     private Date updatedAt;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;
@@ -35,6 +40,14 @@ public class Article {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public Integer getPublishStatus() {
+        return publishStatus;
+    }
+
+    public void setPublishStatus(Integer publishStatus) {
+        this.publishStatus = publishStatus;
     }
 
     public Date getCreatedAt() {

@@ -1,8 +1,9 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ProductPictures {
+public class ProductPictures implements Serializable {
     private Integer id;
 
     private Integer productAlbumId;
@@ -12,6 +13,8 @@ public class ProductPictures {
     private String filename;
 
     private Date createdAt;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;

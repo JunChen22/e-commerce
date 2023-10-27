@@ -1,8 +1,9 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class ReturnItem {
+public class ReturnItem implements Serializable {
     private Integer id;
 
     private Integer returnRequestId;
@@ -20,6 +21,8 @@ public class ReturnItem {
     private BigDecimal purchasedPrice;
 
     private Integer quantity;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;

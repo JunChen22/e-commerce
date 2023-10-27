@@ -1,6 +1,5 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -176,52 +175,52 @@ public class ReviewPicturesExample {
             return (Criteria) this;
         }
 
-        public Criteria andReviewAlbumIdEqualTo(BigDecimal value) {
+        public Criteria andReviewAlbumIdEqualTo(Integer value) {
             addCriterion("review_album_id =", value, "reviewAlbumId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewAlbumIdNotEqualTo(BigDecimal value) {
+        public Criteria andReviewAlbumIdNotEqualTo(Integer value) {
             addCriterion("review_album_id <>", value, "reviewAlbumId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewAlbumIdGreaterThan(BigDecimal value) {
+        public Criteria andReviewAlbumIdGreaterThan(Integer value) {
             addCriterion("review_album_id >", value, "reviewAlbumId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewAlbumIdGreaterThanOrEqualTo(BigDecimal value) {
+        public Criteria andReviewAlbumIdGreaterThanOrEqualTo(Integer value) {
             addCriterion("review_album_id >=", value, "reviewAlbumId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewAlbumIdLessThan(BigDecimal value) {
+        public Criteria andReviewAlbumIdLessThan(Integer value) {
             addCriterion("review_album_id <", value, "reviewAlbumId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewAlbumIdLessThanOrEqualTo(BigDecimal value) {
+        public Criteria andReviewAlbumIdLessThanOrEqualTo(Integer value) {
             addCriterion("review_album_id <=", value, "reviewAlbumId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewAlbumIdIn(List<BigDecimal> values) {
+        public Criteria andReviewAlbumIdIn(List<Integer> values) {
             addCriterion("review_album_id in", values, "reviewAlbumId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewAlbumIdNotIn(List<BigDecimal> values) {
+        public Criteria andReviewAlbumIdNotIn(List<Integer> values) {
             addCriterion("review_album_id not in", values, "reviewAlbumId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewAlbumIdBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andReviewAlbumIdBetween(Integer value1, Integer value2) {
             addCriterion("review_album_id between", value1, value2, "reviewAlbumId");
             return (Criteria) this;
         }
 
-        public Criteria andReviewAlbumIdNotBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andReviewAlbumIdNotBetween(Integer value1, Integer value2) {
             addCriterion("review_album_id not between", value1, value2, "reviewAlbumId");
             return (Criteria) this;
         }

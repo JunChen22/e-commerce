@@ -3,11 +3,12 @@
 <mapper namespace="com.itsthatjun.ecommerce.mbg.mapper.OrderChangeHistoryMapper">
   <resultMap id="BaseResultMap" type="com.itsthatjun.ecommerce.mbg.model.OrderChangeHistory">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="order_id" jdbcType="BIGINT" property="orderId" />
-    <result column="change_operator" jdbcType="VARCHAR" property="changeOperator" />
-    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="order_id" jdbcType="NUMERIC" property="orderId" />
+    <result column="update_action" jdbcType="VARCHAR" property="updateAction" />
     <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
     <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, order_id, change_operator, created_at, order_status, note
+    id, order_id, update_action, order_status, note, operator, created_at
   </sql>
   <select id="selectByExample" parameterType="com.itsthatjun.ecommerce.mbg.model.OrderChangeHistoryExample" resultMap="BaseResultMap">
     select
@@ -101,10 +102,12 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.OrderChangeHistory" useGeneratedKeys="true">
-    insert into order_change_history (order_id, change_operator, created_at, 
-      order_status, note)
-    values (#{orderId,jdbcType=BIGINT}, #{changeOperator,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, 
-      #{orderStatus,jdbcType=INTEGER}, #{note,jdbcType=VARCHAR})
+    insert into order_change_history (order_id, update_action, order_status, 
+      note, operator, created_at
+      )
+    values (#{orderId,jdbcType=NUMERIC}, #{updateAction,jdbcType=VARCHAR}, #{orderStatus,jdbcType=INTEGER}, 
+      #{note,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.itsthatjun.ecommerce.mbg.model.OrderChangeHistory" useGeneratedKeys="true">
     insert into order_change_history
@@ -112,11 +115,8 @@
       <if test="orderId != null">
         order_id,
       </if>
-      <if test="changeOperator != null">
-        change_operator,
-      </if>
-      <if test="createdAt != null">
-        created_at,
+      <if test="updateAction != null">
+        update_action,
       </if>
       <if test="orderStatus != null">
         order_status,
@@ -124,22 +124,31 @@
       <if test="note != null">
         note,
       </if>
+      <if test="operator != null">
+        operator,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="orderId != null">
-        #{orderId,jdbcType=BIGINT},
+        #{orderId,jdbcType=NUMERIC},
       </if>
-      <if test="changeOperator != null">
-        #{changeOperator,jdbcType=VARCHAR},
-      </if>
-      <if test="createdAt != null">
-        #{createdAt,jdbcType=TIMESTAMP},
+      <if test="updateAction != null">
+        #{updateAction,jdbcType=VARCHAR},
       </if>
       <if test="orderStatus != null">
         #{orderStatus,jdbcType=INTEGER},
       </if>
       <if test="note != null">
         #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -156,19 +165,22 @@
         id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.orderId != null">
-        order_id = #{record.orderId,jdbcType=BIGINT},
+        order_id = #{record.orderId,jdbcType=NUMERIC},
       </if>
-      <if test="record.changeOperator != null">
-        change_operator = #{record.changeOperator,jdbcType=VARCHAR},
-      </if>
-      <if test="record.createdAt != null">
-        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      <if test="record.updateAction != null">
+        update_action = #{record.updateAction,jdbcType=VARCHAR},
       </if>
       <if test="record.orderStatus != null">
         order_status = #{record.orderStatus,jdbcType=INTEGER},
       </if>
       <if test="record.note != null">
         note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operator != null">
+        operator = #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null">
@@ -178,11 +190,12 @@
   <update id="updateByExample" parameterType="map">
     update order_change_history
     set id = #{record.id,jdbcType=INTEGER},
-      order_id = #{record.orderId,jdbcType=BIGINT},
-      change_operator = #{record.changeOperator,jdbcType=VARCHAR},
-      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      order_id = #{record.orderId,jdbcType=NUMERIC},
+      update_action = #{record.updateAction,jdbcType=VARCHAR},
       order_status = #{record.orderStatus,jdbcType=INTEGER},
-      note = #{record.note,jdbcType=VARCHAR}
+      note = #{record.note,jdbcType=VARCHAR},
+      operator = #{record.operator,jdbcType=VARCHAR},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -191,13 +204,10 @@
     update order_change_history
     <set>
       <if test="orderId != null">
-        order_id = #{orderId,jdbcType=BIGINT},
+        order_id = #{orderId,jdbcType=NUMERIC},
       </if>
-      <if test="changeOperator != null">
-        change_operator = #{changeOperator,jdbcType=VARCHAR},
-      </if>
-      <if test="createdAt != null">
-        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      <if test="updateAction != null">
+        update_action = #{updateAction,jdbcType=VARCHAR},
       </if>
       <if test="orderStatus != null">
         order_status = #{orderStatus,jdbcType=INTEGER},
@@ -205,16 +215,23 @@
       <if test="note != null">
         note = #{note,jdbcType=VARCHAR},
       </if>
+      <if test="operator != null">
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.itsthatjun.ecommerce.mbg.model.OrderChangeHistory">
     update order_change_history
-    set order_id = #{orderId,jdbcType=BIGINT},
-      change_operator = #{changeOperator,jdbcType=VARCHAR},
-      created_at = #{createdAt,jdbcType=TIMESTAMP},
+    set order_id = #{orderId,jdbcType=NUMERIC},
+      update_action = #{updateAction,jdbcType=VARCHAR},
       order_status = #{orderStatus,jdbcType=INTEGER},
-      note = #{note,jdbcType=VARCHAR}
+      note = #{note,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

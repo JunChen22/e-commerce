@@ -1,6 +1,8 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
-public class CompanyAddress {
+import java.io.Serializable;
+
+public class CompanyAddress implements Serializable {
     private Integer id;
 
     private String addressName;
@@ -20,6 +22,8 @@ public class CompanyAddress {
     private String zipCode;
 
     private String detailAddress;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;

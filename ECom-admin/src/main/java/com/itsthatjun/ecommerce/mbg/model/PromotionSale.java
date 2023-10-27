@@ -1,9 +1,10 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class PromotionSale {
+public class PromotionSale implements Serializable {
     private Integer id;
 
     private String name;
@@ -23,6 +24,8 @@ public class PromotionSale {
     private Date createdAt;
 
     private Date updatedAt;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;
