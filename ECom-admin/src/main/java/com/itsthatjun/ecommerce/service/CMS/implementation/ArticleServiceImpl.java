@@ -53,7 +53,7 @@ public class ArticleServiceImpl implements ArticleService {
     public Articles createArticle(Articles article) {
         //TODO: optimize this
         Article exist = articleMapper.selectByPrimaryKey(article.getArticle().getId());
-        if(exist != null) {
+        if (exist != null) {
             System.out.println("existing id");
             // TODO: return exception tobe added in ECom-common
             return null;
@@ -63,24 +63,24 @@ public class ArticleServiceImpl implements ArticleService {
         article.getArticle().setCreatedAt(currentDate);
         articleMapper.insert(article.getArticle());
         int articleID = article.getArticle().getId();
-        if(!article.getQA().isEmpty()){
-            for(ArticleQa qa: article.getQA()) {
+        if (!article.getQA().isEmpty()) {
+            for (ArticleQa qa: article.getQA()) {
                 qa.setArticleId(articleID);
                 qa.setCreatedAt(currentDate);
                 qaMapper.insert(qa);
             }
         }
 
-        if(!article.getImages().isEmpty()){
-            for(ArticleImage image: article.getImages()) {
+        if (!article.getImages().isEmpty()) {
+            for (ArticleImage image: article.getImages()) {
                 image.setArticleId(articleID);
                 image.setCreatedAt(currentDate);
                 imageMapper.insert(image);
             }
         }
 
-        if(!article.getVideos().isEmpty()){
-            for(ArticleVideo video: article.getVideos()) {
+        if (!article.getVideos().isEmpty()) {
+            for (ArticleVideo video: article.getVideos()) {
                 video.setArticleId(articleID);
                 video.setCreatedAt(currentDate);
                 videoMapper.insert(video);
@@ -133,7 +133,7 @@ public class ArticleServiceImpl implements ArticleService {
         return qaList.size();
     }
 
-    private int updateImage(int articleId, List<ArticleImage> imageList){
+    private int updateImage(int articleId, List<ArticleImage> imageList) {
         for (ArticleImage image: imageList) {
             LocalDate localDate = LocalDate.now();
             java.sql.Date date = java.sql.Date.valueOf(localDate);

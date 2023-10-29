@@ -26,7 +26,7 @@ public class ProductController {
     @GetMapping("/listAll")
     @Cacheable(value = "productsCache", key = "'listAllProducts'")
     @ApiOperation(value = "Get all product")
-    public List<Product> listAllProduct(){
+    public List<Product> listAllProduct() {
         System.out.println("at get all product");
         List<Product> productList = productService.listAllProduct();
         return productList;
@@ -35,13 +35,13 @@ public class ProductController {
     @GetMapping("/list")
     @ApiOperation(value = "Get product with page and size")
     public List<Product> listAllProduct(@RequestParam(value = "page", defaultValue = "1") int pageNum,
-                                        @RequestParam(value = "size", defaultValue = "5") int pageSize){
+                                        @RequestParam(value = "size", defaultValue = "5") int pageSize) {
         return productService.listProduct(pageNum, pageSize);
     }
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Get product by id")
-    public Product listProduct(@PathVariable int id){
+    public Product listProduct(@PathVariable int id) {
         return productService.getProduct(id);
     }
 }

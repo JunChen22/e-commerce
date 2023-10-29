@@ -208,7 +208,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             Payment payment = paypalService.createPayment(orderTotal, "USD", PaypalPaymentMethod.paypal,
                     PaypalPaymentIntent.sale, "payment description", cancelUrl, successUrl, orderSn);
-            for(Links links : payment.getLinks()) {
+            for (Links links : payment.getLinks()) {
                 if (links.getRel().equals("approval_url")) {
                     String paymentURL = links.getHref();
                     String searchTerm = "token=";
@@ -472,7 +472,7 @@ public class OrderServiceImpl implements OrderService {
             example.createCriteria().andProductIdEqualTo(productId).andSkuCodeEqualTo(skuCode);
             ProductSku itemStock = stockMapper.selectByExample(example).get(0);
 
-            if (itemStock != null && itemStock.getStock() < (itemStock.getLockStock() + quantityNeeded)){
+            if (itemStock != null && itemStock.getStock() < (itemStock.getLockStock() + quantityNeeded)) {
                 return false;
             }
         }

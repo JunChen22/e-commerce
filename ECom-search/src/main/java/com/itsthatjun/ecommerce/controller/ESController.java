@@ -21,7 +21,7 @@ public class ESController {
 
     @PostMapping("/importAll")
     @ApiOperation(value = "import all product from DB to elastic search")
-    public String importAllList(){
+    public String importAllList() {
         int count = productService.importAll();
         return count + " items imported";
     }
@@ -40,14 +40,14 @@ public class ESController {
 
     @PostMapping("/create/{id}")
     @ApiOperation(value = "create product by id")
-    public String create(@PathVariable Long id){
+    public String create(@PathVariable Long id) {
         EsProduct esProduct = productService.create(id);
         return esProduct != null? "success" : "failed";
     }
 
     @DeleteMapping("/delete/{id}")
     @ApiOperation(value = "delete product by id")
-    public String delete(@PathVariable Long id){
+    public String delete(@PathVariable Long id) {
         productService.delete(id);
         return "deleted";
     }

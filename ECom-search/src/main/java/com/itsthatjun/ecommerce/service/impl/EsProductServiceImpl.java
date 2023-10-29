@@ -37,7 +37,7 @@ public class EsProductServiceImpl implements EsProductService {
         Iterable<EsProduct> esProductIterable = productRepository.saveAll(esProductList);
         Iterator<EsProduct> iterator = esProductIterable.iterator();
         int result = 0;
-        while(iterator.hasNext()){
+        while(iterator.hasNext()) {
             result++;
             iterator.next();
         }
@@ -48,7 +48,7 @@ public class EsProductServiceImpl implements EsProductService {
     public EsProduct create(Long id) {
         EsProduct result = null;
         List<EsProduct> productList = productDao.getAllEsProductList(id);
-        if(productList.size() > 0){
+        if (productList.size() > 0) {
             EsProduct newProduct = productList.get(0);
             result = productRepository.save(newProduct);
         }
@@ -62,9 +62,9 @@ public class EsProductServiceImpl implements EsProductService {
 
     @Override
     public void delete(List<Long> ids) {
-        if(!CollectionUtils.isEmpty(ids)){
+        if (!CollectionUtils.isEmpty(ids)) {
             List<EsProduct> esProductList = new ArrayList<>();
-            for(Long id: ids){
+            for (Long id: ids) {
                 EsProduct esproduct = new EsProduct();
                 esproduct.setId(id);
                 esProductList.add(esproduct);

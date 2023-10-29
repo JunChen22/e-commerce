@@ -24,14 +24,14 @@ public class PaypalConfig {
     private String mode;
 
     @Bean
-    public Map<String, String> paypalSdkConfig(){
+    public Map<String, String> paypalSdkConfig() {
         Map<String, String> sdkConfig = new HashMap<>();
         sdkConfig.put("mode", mode);
         return sdkConfig;
     }
 
     @Bean
-    public OAuthTokenCredential authTokenCredential(){
+    public OAuthTokenCredential authTokenCredential() {
         return new OAuthTokenCredential(clientId, clientSecret, paypalSdkConfig());
     }
 

@@ -26,7 +26,7 @@ public class ProductController {
 
     @GetMapping("/listAll")
     @ApiOperation(value = "Get all product")
-    public List<Product> listAllProduct(){
+    public List<Product> listAllProduct() {
         List<Product> productList = productService.listAllProduct();
         return productList;
     }
@@ -34,20 +34,20 @@ public class ProductController {
     @GetMapping("/list")
     @ApiOperation(value = "Get product with page and size")
     public List<Product> listAllProduct(@RequestParam(value = "page", defaultValue = "1") int pageNum,
-                                        @RequestParam(value = "size", defaultValue = "5") int pageSize){
+                                        @RequestParam(value = "size", defaultValue = "5") int pageSize) {
         return productService.listProduct(pageNum, pageSize);
     }
 
     @GetMapping("/{id}")
     @ApiOperation(value = "Get product by id")
-    public Product listProduct(@PathVariable int id){
+    public Product listProduct(@PathVariable int id) {
         return productService.getProduct(id);
     }
 
     @PostMapping("/create")
     @ApiOperation(value = "Create a product")
     //@PreAuthorize("hasAuthority('product:create')")
-    public Product createProduct(@RequestBody Product product){
+    public Product createProduct(@RequestBody Product product) {
         productService.createProduct(product);
         return product;
     }
@@ -55,7 +55,7 @@ public class ProductController {
     @PostMapping("/update")
     @ApiOperation(value = "Update a product")
     //@PreAuthorize("hasAuthority('product:update')")
-    public Product updateProduct(@RequestBody Product product){
+    public Product updateProduct(@RequestBody Product product) {
         productService.updateProduct(product);
         return product;
     }
@@ -63,7 +63,7 @@ public class ProductController {
     @DeleteMapping("/delete/{id}")
     @ApiOperation(value = "Delete a product")
     //@PreAuthorize("hasAuthority('product:delete')")
-    public String deleteProduct(@PathVariable int id){
+    public String deleteProduct(@PathVariable int id) {
         productService.deleteProduct(id);
         return "deleted";
     }

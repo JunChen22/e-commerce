@@ -33,7 +33,7 @@ public class CouponHistoryServiceImpl implements CouponHistoryService {
         List<Coupon> couponList = couponMapper.selectByExample(new CouponExample());  // getting all coupon types
         List<UsedCouponHistory> result = new ArrayList<>();
 
-        for(Coupon coupon : couponList) {
+        for (Coupon coupon : couponList) {
             CouponHistoryExample example = new CouponHistoryExample();
             example.createCriteria().andCouponIdEqualTo(coupon.getId());
             List<CouponHistory> couponHistoryList = couponHistoryMapper.selectByExample(example);
@@ -52,7 +52,7 @@ public class CouponHistoryServiceImpl implements CouponHistoryService {
         // TODO: fix the coupon history
         List<Coupon> couponList = couponMapper.selectByExample(new CouponExample());  // getting all coupon types
         List<UsedCouponHistory> result = new ArrayList<>();
-        for(Coupon coupon : couponList) {
+        for (Coupon coupon : couponList) {
             CouponHistoryExample example = new CouponHistoryExample();
             example.createCriteria().andCouponIdEqualTo(coupon.getId());
             example.createCriteria().andMemberIdEqualTo(id);

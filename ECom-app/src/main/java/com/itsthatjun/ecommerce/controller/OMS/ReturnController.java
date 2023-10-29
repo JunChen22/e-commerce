@@ -22,13 +22,13 @@ public class ReturnController {
 
     @PostMapping("/apply")
     @ApiOperation(value = "")
-    public Map<String, Object> applyForReturn(){
+    public Map<String, Object> applyForReturn() {
        return null;
     }
 
     @GetMapping("/status")
     @ApiOperation(value = "")
-    public Map<String, Object> generateOrder(){
+    public Map<String, Object> generateOrder() {
         return null;
     }
 }

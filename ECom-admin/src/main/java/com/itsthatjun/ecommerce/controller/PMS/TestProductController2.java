@@ -102,7 +102,7 @@ public class TestProductController2 {
             "              but only for the columns that are not null")
     public void updateByPrimaryKeySelective(@RequestBody Product product) {
         int result = productMapper.updateByPrimaryKey(product); // will find the product by the primary key, update if found.
-        if(result > 0) {
+        if (result > 0) {
             System.out.println("found and updated " + result + " products");
         } else {
             System.out.println("can not find any product with the primary key" + product.getId());
@@ -113,7 +113,7 @@ public class TestProductController2 {
     @ApiOperation(value = "Update the record identified by the primary key of the given object, updating all fields.")
     public void updateByPrimaryKey(@RequestBody Product product) {
         int result = productMapper.updateByPrimaryKey(product); // will find the product by the primary key, update if found.
-        if(result > 0) {
+        if (result > 0) {
             System.out.println("found and updated " + result + " products");
         } else {
             System.out.println("can not find any product with the primary key" + product.getId());

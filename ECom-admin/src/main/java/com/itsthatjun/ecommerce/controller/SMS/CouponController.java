@@ -51,7 +51,7 @@ public class CouponController {
     }
     @PostMapping("/update")
     @ApiOperation(value = "update a coupon")
-    public Coupon update(@RequestBody Coupon updateCoupon){
+    public Coupon update(@RequestBody Coupon updateCoupon) {
         couponService.updateCoupon(updateCoupon);
         return updateCoupon;
     }

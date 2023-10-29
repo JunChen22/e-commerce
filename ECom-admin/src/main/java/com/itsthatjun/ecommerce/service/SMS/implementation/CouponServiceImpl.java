@@ -30,7 +30,7 @@ public class CouponServiceImpl implements CouponService {
     @Override
     public Coupon createCoupon(Coupon newCoupon) {
         int result = couponMapper.insert(newCoupon);
-        if(result > 0) {
+        if (result > 0) {
             System.out.println("coupon added successfully");
         } else {
             System.out.println("unable to add coupon");

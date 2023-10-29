@@ -51,7 +51,7 @@ public class AdminServiceImpl implements UserDetailsService, AdminService {
         List<Admin> existing = adminMapper.selectByExample(example);
 
         //TODO: add role and permission, maybe in here or a separate controller/dao
-        if(!existing.isEmpty()){
+        if (!existing.isEmpty()) {
             System.out.println("existing account");
             return null; // TODO: make exception for existing account
         }
@@ -66,7 +66,7 @@ public class AdminServiceImpl implements UserDetailsService, AdminService {
         try{
             UserDetails userDetails = loadUserByUsername(username);
             // decode password to compare
-            if(!passwordEncoder().matches(password, userDetails.getPassword())){
+            if (!passwordEncoder().matches(password, userDetails.getPassword())) {
                 throw new BadCredentialsException("incorrect password");
             }
 
@@ -89,7 +89,7 @@ public class AdminServiceImpl implements UserDetailsService, AdminService {
         example.createCriteria().andUsernameEqualTo(username);
         List<Admin> AdminList = adminMapper.selectByExample(example);
 
-        if(AdminList != null && !AdminList.isEmpty()){
+        if (AdminList != null && !AdminList.isEmpty()) {
             return AdminList.get(0);
         }
         return null;
@@ -98,7 +98,7 @@ public class AdminServiceImpl implements UserDetailsService, AdminService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Admin admin = getAdminByUsername(username);
-        if(admin != null){
+        if (admin != null) {
 
             List<Permission> permissions = adminDao.getPermissionList(admin.getId());
             List<Roles> roles = adminDao.getRolesList(admin.getId());

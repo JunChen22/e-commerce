@@ -38,7 +38,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
         try {
             String authHeader = request.getHeader(header);
-            if(authHeader != null && authHeader.startsWith(tokenPrefix)) {
+            if (authHeader != null && authHeader.startsWith(tokenPrefix)) {
                 String jwt = getJWTFromRequest(request);
                 UserDetails userDetails = adminService.loadUserByUsername(jwtTokenUtil.getUsernameFromToken(jwt));
                 if (jwt != null && jwtTokenUtil.validateToken(jwt, userDetails)) {
@@ -55,9 +55,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private String getJWTFromRequest(HttpServletRequest request){
+    private String getJWTFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader(header);
-        if(!bearerToken.isEmpty() && bearerToken.startsWith(tokenPrefix)){
+        if (!bearerToken.isEmpty() && bearerToken.startsWith(tokenPrefix)) {
             return bearerToken.substring(tokenPrefix.length() + 1); // "bearer " length is 7
         }
         return null;

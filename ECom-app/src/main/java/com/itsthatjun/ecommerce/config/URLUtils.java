@@ -14,7 +14,7 @@ public class URLUtils {
             url.append(":").append(serverPort);
         }
         url.append(contextPath);
-        if(url.toString().endsWith("/")){
+        if (url.toString().endsWith("/")) {
             url.append("/");
         }
         return url.toString();

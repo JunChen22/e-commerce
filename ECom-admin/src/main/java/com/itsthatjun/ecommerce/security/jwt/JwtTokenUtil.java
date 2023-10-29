@@ -18,7 +18,7 @@ public class JwtTokenUtil {
     @Value("${jwt.expirationTimeMinute}")
     private int expiration;
 
-    public String generateToken(UserDetails userDetails){
+    public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("sub", userDetails.getUsername());
         claims.put("created", new Date());
@@ -29,7 +29,7 @@ public class JwtTokenUtil {
                 .compact();
     }
 
-    public boolean validateToken(String token, UserDetails userDetails){
+    public boolean validateToken(String token, UserDetails userDetails) {
         try {
             String tokenUsername = getUsernameFromToken(token);
             Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
@@ -48,17 +48,17 @@ public class JwtTokenUtil {
         return false;
     }
 
-    private boolean isTokenExpired(String token){
+    private boolean isTokenExpired(String token) {
         Claims claims= getClaimsFromToken(token);
         Date date = claims.getExpiration();
         return date.before(new Date());
     }
 
-    private Date generateExpirationDate(){
+    private Date generateExpirationDate() {
         return new Date(System.currentTimeMillis() + expiration * 1000 * 60);
     }
 
-    public String getUsernameFromToken(String token){
+    public String getUsernameFromToken(String token) {
         String username;
         try {
             Claims claims = getClaimsFromToken(token);
@@ -69,7 +69,7 @@ public class JwtTokenUtil {
         return username;
     }
 
-    private Claims getClaimsFromToken(String token){
+    private Claims getClaimsFromToken(String token) {
         Claims claims = null;
         try {
             claims = Jwts.parser()

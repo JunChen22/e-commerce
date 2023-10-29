@@ -26,45 +26,45 @@ public class OrderReturnController {
 
     @GetMapping("/AllOpening")
     @ApiOperation(value = "list all return request open waiting to be approved")
-    public List<ReturnRequest> listAllOpening(){
+    public List<ReturnRequest> listAllOpening() {
         return returnOrderService.getAllOpening();
     }
 
     @GetMapping("/AllReturning")
     @ApiOperation(value = "List all returns that are on their way")
-    public List<ReturnRequest> listReturning(){
+    public List<ReturnRequest> listReturning() {
         return returnOrderService.getAllReturning();
     }
 
     @GetMapping("/AllCompleted")
     @ApiOperation(value = "List ALl completed returns")
-    public List<ReturnRequest> listAllCompleted(){
+    public List<ReturnRequest> listAllCompleted() {
         return returnOrderService.getAllCompleted();
     }
 
     @GetMapping("/AllRejected")
     @ApiOperation(value = "List All rejected returns requests")
-    public List<ReturnRequest> listAllRejected(){
+    public List<ReturnRequest> listAllRejected() {
         return returnOrderService.getAllRejected();
     }
 
     @GetMapping("/{serialNumber}")
     @ApiOperation(value = "return a return request detail")
-    public ReturnDetail getReturnRequest(@PathVariable String serialNumber){
+    public ReturnDetail getReturnRequest(@PathVariable String serialNumber) {
         return returnOrderService.getReturnDetail(serialNumber);
     }
 
     /* TODO: combine these two update/approve/rejected
     @PostMapping("/")
     @ApiOperation(value = "")
-    public OrderReturnApply approvereturn(){
+    public OrderReturnApply approvereturn() {
         // returnOrderService.approveReturnRequest()
         // returnOrderService.rejectReturnRequest()
     }
 
     @PostMapping("/update")
     @ApiOperation(value = "")
-    public OrderReturnApply updateReturnOrderStatus(@RequestBody OrderReturnApply returnRequest){
+    public OrderReturnApply updateReturnOrderStatus(@RequestBody OrderReturnApply returnRequest) {
         return returnOrderService.updateReturnOrderStatus(returnRequest);
     }
     */
