@@ -3,10 +3,12 @@ package com.itsthatjun.ecommerce.dto.OMS;
 import com.itsthatjun.ecommerce.mbg.model.*;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import java.io.Serializable;
 import java.util.Map;
 
 @Data
-public class OrderParam {
+public class OrderParam implements Serializable {
 
     @ApiModelProperty("item in shopping cart, sku code and quantity")
     private Map<String, Integer> orderProductSku;
@@ -24,5 +26,5 @@ public class OrderParam {
     private double discountAmount;
 
     @ApiModelProperty("paypal, g pay, or finance. currently just paypal")
-    private String payType;
+    private int payType;
 }

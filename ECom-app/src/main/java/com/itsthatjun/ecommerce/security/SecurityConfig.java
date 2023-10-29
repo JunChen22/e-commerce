@@ -8,6 +8,7 @@ import com.itsthatjun.ecommerce.service.UMS.implementation.MemberServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -40,14 +41,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity
                 .csrf().disable()
                 .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/actuator", "index", "/css/*", "/js/*","/swagger-resources/**","/v2/api-docs/**").permitAll()
-                .antMatchers("/brand/**","/product/**","/user/**","/article/**").permitAll()
-                .antMatchers("/reviews/getAllProductReview/**").permitAll()
-                //.antMatchers("/**").permitAll()  // TODO: for testing purposes. All endpoints are open. Remove when needed.
-                .antMatchers("/order/success**", "/order/cancel**").permitAll() // TODO: remove this when using a front that store the jwt token
+                .antMatchers(HttpMethod.GET, "/article/all", "/article/{articleId}").permitAll()
+                .antMatchers(HttpMethod.GET, "/brand/listAll", "/brand/list", "/brand/product/{brandId}", "/brand/{brandId}").permitAll()
+                .antMatchers(HttpMethod.GET, "/product/listAll", "/product/{id}", "/product/list").permitAll()
+                .antMatchers(HttpMethod.GET, "/review/detail/{reviewId}", "/review/getAllProductReview/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/sale/AllPromotionSale", "/sale/AllPromotionSaleItem", "/sale/AllFlashSaleItem").permitAll()
+                .antMatchers(HttpMethod.GET,"/order/payment/**").permitAll() // remove it when you have frontend that store the jwt
+                .antMatchers("/swagger-ui.html",
+                        "/swagger-resources/**",
+                        "/swagger-ui/**",
+                        "/v3/api-docs/**",
+                        "/swagger**",
+                        "/v2/api**",
+                        "/webjars/**").permitAll()
+                .antMatchers("/", "/user/login", "/user/register").permitAll()
+                .antMatchers("/**").permitAll()
                 .anyRequest()
                 .authenticated();
 

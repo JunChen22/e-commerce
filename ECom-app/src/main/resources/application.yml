@@ -18,8 +18,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost/springecommerece # need to change localhost for docker-compose
-    #url: jdbc:postgresql://db:5432/springecommerece
+    url: jdbc:postgresql://localhost/springecommerece
     username: postgres
     password: password
     driverClassName: org.postgresql.Driver
@@ -49,10 +48,12 @@ mybatis:
 
 redis:
   key:
-    prefix:
-      authCode: "authCode:"
-    expire:
-      authCode: 120
+    orderId: oms
+  database: ECom
+  prefix:
+    authCode: "authCode:"
+  expire:
+    authCode: 120
 
 jwt:
   HEADER_STRING: Authorization
@@ -60,13 +61,50 @@ jwt:
   secretKey: JunChen522
   expirationTimeMinute: 150
 
-
 paypal:
-  mode: sandbox
+  mode: YOUR_PAYPAL_MODE
   client:
-    id:
-    secret:
+    id: YOUR_PAYPAL_CLIENT_ID
+    secret: YOUR_PAYPAL_CLIENT_SECRET
 
+
+
+#    TRACE: The lowest level of logging that provides the most detailed information about what is happening in the application.
+#    DEBUG: A level higher than TRACE that provides information about application flow and internal state.
+#    INFO: A level higher than DEBUG that provides information about what the application is doing and its status.
+#    WARN: A level higher than INFO that indicates potentially harmful situations.
+#    ERROR: The highest level of logging that indicates errors that may cause the application to malfunction or fail.
+
+logging:
+  level:
+    #root: ERROR
+    root: INFO
+    org.springframework.security: DEBUG
+    org.springframework.web.server.adapter.HttpWebHandlerAdapter: TRACE
+    com.itsthatjun.ecommerce: DEBUG
+
+
+queue:
+  OMS:
+    order: order
+    orderComplete: orderComplete
+    orderDelayedCancel: orderDelayedCancel
+    cart: cart
+    return: return
+    returnDelayedRejection: returnDelayedRejection
+  PMS:
+    review: review
+  UMS:
+    user: user
+
+
+spring.rabbitmq:
+  host: localhost
+  port: 5672
+  virtual-host: /
+  username: guest
+  password: guest
+  publisher-confirms: true
 
 ---
 
@@ -84,6 +122,5 @@ spring:
     port: 6379
   rabbitmq:
     host: rabbitmq
-    port: 5672
-    virtual-host: /
-    addresses: rabbitmq:5672
+
+spring.rabbitmq.host: rabbitmq

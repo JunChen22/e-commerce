@@ -14,7 +14,7 @@ public interface CartItemService {
     List<CartItem> addAllItem(List<CartItem> itemList);
 
     @ApiModelProperty(value = "get user's shopping cart")
-    List<CartItem> getUserCart();
+    List<CartItem> getUserCart(int userId);
 
     @ApiModelProperty(value = "update a item quantity in shopping cart")
     List<CartItem> updateQuantity(int cartItemId, int quantity);
@@ -23,5 +23,5 @@ public interface CartItemService {
     void deleteCartItem(int cartItemId);
 
     @ApiModelProperty(value = "clear shopping cart")
-    void clearCartItem();
+    void clearCartItem(int useId);
 }

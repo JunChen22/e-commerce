@@ -35,6 +35,20 @@ public class UserController {
     @PostMapping("/login")
     @ApiOperation(value = "Login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request){
+
+        System.out.println("im at log in");
+        System.out.println("im at log in");
+        System.out.println("im at log in");
+        System.out.println("im at log in");
+        System.out.println("im at log in");
+        System.out.println("im at log in");
+
+
+        System.out.println(request);
+        System.out.println(request);
+        System.out.println(request);
+        System.out.println(request);
+        System.out.println(request);
         String token = memberService.login(request.getUsername(), request.getPassword());
         if(token.isEmpty()){
             return new ResponseEntity<>(new LoginResponse(false, token), HttpStatus.NOT_FOUND);

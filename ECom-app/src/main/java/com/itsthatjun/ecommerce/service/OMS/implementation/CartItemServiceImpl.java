@@ -64,11 +64,9 @@ public class CartItemServiceImpl implements CartItemService {
     }
 
     @Override
-    public List<CartItem> getUserCart() {
-        Member currUser = memberService.getCurrentUser();
-
+    public List<CartItem> getUserCart(int userId) {
         ShoppingCartExample shoppingCartExample = new ShoppingCartExample();
-        shoppingCartExample.createCriteria().andMemberIdEqualTo(currUser.getId());
+        shoppingCartExample.createCriteria().andMemberIdEqualTo(userId);
         ShoppingCart cart = shoppingCartMapper.selectByExample(shoppingCartExample).size() > 0 ?
                 shoppingCartMapper.selectByExample(shoppingCartExample).get(0) : null;
         if (cart == null) throw new RuntimeException("error getting user shopping cart");
@@ -113,11 +111,9 @@ public class CartItemServiceImpl implements CartItemService {
     }
 
     @Override
-    public void clearCartItem() {
-        Member currUser = memberService.getCurrentUser();
-
+    public void clearCartItem(int userId) {
         ShoppingCartExample shoppingCartExample = new ShoppingCartExample();
-        shoppingCartExample.createCriteria().andMemberIdEqualTo(currUser.getId());
+        shoppingCartExample.createCriteria().andMemberIdEqualTo(userId);
         ShoppingCart cart = shoppingCartMapper.selectByExample(shoppingCartExample).get(0);
 
         CartItemExample example = new CartItemExample();

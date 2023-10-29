@@ -92,13 +92,10 @@ public class MemberServiceImpl implements MemberService , UserDetailsService {
     public Member getMemberByUserName(String username) {
         MemberExample example = new MemberExample();
         example.createCriteria().andUsernameEqualTo(username);
-
         List<Member> memberList = memberMapper.selectByExample(example);
 
-        if(memberList != null && !memberList.isEmpty()){
-            return memberList.get(0);
-        }
-        return null;
+        if (memberList.isEmpty()) return null;
+        return memberList.get(0);
     }
 
     @Override

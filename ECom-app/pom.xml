@@ -94,7 +94,6 @@
             <version>2.3.1</version>
         </dependency>
 
-
         <!-- third party payment processor -->
         <dependency>
             <groupId>com.paypal.sdk</groupId>

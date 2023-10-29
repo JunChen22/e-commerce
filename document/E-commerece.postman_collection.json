@@ -56,477 +56,117 @@
 					"name": "OMS",
 					"item": [
 						{
-							"name": "Order - Generate confirme order from shopping cart",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImNyZWF0ZWQiOjE2ODY3OTAyMzIwMDksImV4cCI6MTY4Njc5MTEzMn0.eXzk8YEXuIZFeYPnbkRlmyudwtt5JcwPoKRDXP0TX5DjolBcFGiHIHeYejXSOY-FDMHe7gx2DCoPuNr1ivuiog",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "[\n    {\n        \"productId\": 2,\n        \"productName\": \"note 10\",\n        \"productSku\": \"Size: 256 gb, Color: black\",\n        \"productPic\": \"https://example.com/product1.jpg\",\n        \"quantity\": 1,\n        \"price\": 999.00\n    },\n    {\n        \"productId\": 1,\n        \"productName\": \"Iphone-10\",\n        \"productSku\": \"Size: 256 gb, Color: Red\",\n        \"productPic\": \"https://example.com/product1.jpg\",\n        \"quantity\": 2,\n        \"price\": 999.00\n    }\n]",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:8080/order/generateConfirmOrder?coupon=15OFF",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"order",
-										"generateConfirmOrder"
-									],
-									"query": [
-										{
-											"key": "coupon",
-											"value": "15OFF"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Order - Generate acutal transaction order",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImNyZWF0ZWQiOjE2ODczODQxOTA1NDEsImV4cCI6MTY4NzM5MzE5MH0.g63rIf47Uhv7hyMEPDSPRzJqd8mJwAp7urcIMyhYjXd51ILIB_bzFkTfR1pmF3KXopzWSTEXFtMgtIRPSoAZdw",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"cartItemList\": [\n        {\n            \"productId\": 1,\n            \"productName\": \"iPhone 12\",\n            \"productSku\": \"IP12-WHITE\",\n            \"quantity\": 1\n        },\n        {\n            \"productId\": 2,\n            \"productName\": \"iPhone SE\",\n            \"productSku\": \"IPSE-BLUE\",\n            \"quantity\": 10\n        },\n        {\n            \"productId\": 3,\n            \"productName\": \"Pixel 5\",\n            \"productSku\": \"PX5\",\n            \"quantity\": 1\n        }\n    ],\n    \"address\": {\n        \"receiverName\" : \"Jun\",\n        \"phoneNumber\": \"212-212-2222\",\n        \"detailAddress\": \"1 1st street 2nd ave\",\n        \"city\": \"Chicago\",\n        \"state\": \"Illinois\",\n        \"zipCode\": \"60007\",\n        \"note\": \"\"\n    },\n    \"coupon\": \"50OFFAPPLE\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:8080/order/generateOrder",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"order",
-										"generateOrder"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Order - List all order",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImNyZWF0ZWQiOjE2ODcyMTMzNTEwNTIsImV4cCI6MTY4NzIxNDI1MX0.zlpVlAGHIH7jSAKayMfgf1UNV2IdS_cRI-jGK2nPvIO57MdxKnbkCq5NymigM_3DPOf_cZzNaxTBc3mVwA-j3Q",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/order/list",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"order",
-										"list"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Order - Get Order detail",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMiIsImNyZWF0ZWQiOjE2ODY1OTEwODc1NzgsImV4cCI6MTY4NjU5MTk4N30.CoqulUU2NBavCxrOjkm9fRDzFsvpM9EmeyBrZ8qWoJ0LgTIO1Y5GCQgZqirvG1YE2vtEegT6PpBlTITditd5Qg",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/order/detail/1",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"order",
-										"detail",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Order - payment success",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMiIsImNyZWF0ZWQiOjE2ODY1OTEwODc1NzgsImV4cCI6MTY4NjU5MTk4N30.CoqulUU2NBavCxrOjkm9fRDzFsvpM9EmeyBrZ8qWoJ0LgTIO1Y5GCQgZqirvG1YE2vtEegT6PpBlTITditd5Qg",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/order/",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"order",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Order - payment fail",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMiIsImNyZWF0ZWQiOjE2ODY1OTEwODc1NzgsImV4cCI6MTY4NjU5MTk4N30.CoqulUU2NBavCxrOjkm9fRDzFsvpM9EmeyBrZ8qWoJ0LgTIO1Y5GCQgZqirvG1YE2vtEegT6PpBlTITditd5Qg",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/order/",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"order",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Order - cancel order",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMiIsImNyZWF0ZWQiOjE2ODY1OTEwODc1NzgsImV4cCI6MTY4NjU5MTk4N30.CoqulUU2NBavCxrOjkm9fRDzFsvpM9EmeyBrZ8qWoJ0LgTIO1Y5GCQgZqirvG1YE2vtEegT6PpBlTITditd5Qg",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/order/cancelOrder",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"order",
-										"cancelOrder"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "OrderReturn -apply for return",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/order/return/apply",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"order",
-										"return",
-										"apply"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "OrderReturn - Get return status",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/order/return/status",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"order",
-										"return",
-										"status"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Shopping cart - list user cart",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImNyZWF0ZWQiOjE2ODczODM5MjAzMjEsImV4cCI6MTY4NzM5MjkyMH0.YJpxc6MWNyTQm3QJ5kyn433qXAzr0M8YH7alxZEXozOyEODRo9urnryYR8PwPp0jSL8Hm_w5jq5_vE1XFZmzDw",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/cart/list",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"cart",
-										"list"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Shopping cart - add",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImNyZWF0ZWQiOjE2ODczNTcyNTkwMDUsImV4cCI6MTY4NzM2NjI1OX0.ts35dqU8SEbLqoxQ7aiDHbJgLOA-QZhLW1PMQ_mxtW472IGRyZEuEUj71CXg6FxkdHemqLHmX3d5hvswCjuWOA",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"productId\": 6,\n    \"productName\": \"t-shirt\",\n    \"productSku\": \"Size: XXL, Color: White\",\n    \"productPic\": \"https://example.com/product3.jpg\",\n    \"quantity\": 1,\n    \"price\": 20.00\n}\n\n\n",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:8080/cart/add",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"cart",
-										"add"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Shopping cart - add All",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImNyZWF0ZWQiOjE2ODczODM5MjAzMjEsImV4cCI6MTY4NzM5MjkyMH0.YJpxc6MWNyTQm3QJ5kyn433qXAzr0M8YH7alxZEXozOyEODRo9urnryYR8PwPp0jSL8Hm_w5jq5_vE1XFZmzDw",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "[\n    {\n        \"productId\": 1,\n        \"productName\": \"iPhone 12\",\n        \"productSku\": \"IP12-WHITE\",\n        \"quantity\": 1\n    },\n    {\n        \"productId\": 2,\n        \"productName\": \"iPhone SE\",\n        \"productSku\": \"IPSE-BLUE\",\n        \"quantity\": 10\n    },\n    {\n        \"productId\": 3,\n        \"productName\": \"Pixel 5\",\n        \"productSku\": \"PX5\",\n        \"quantity\": 1\n    }\n]",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:8080/cart/add/all",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"cart",
-										"add",
-										"all"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Shopping cart - update",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImNyZWF0ZWQiOjE2ODY3NTQ3MzUxMDMsImV4cCI6MTY4Njc1NTYzNX0.yqsxKtsZzQV8WAEYBZRzYdkNjEHoBb1FAsNXrxA8hVId0w14LZxOMa7qxJCQGmqBO6X6-aOez2XHmcIrtZNr6Q",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/cart/update/quantity?cartItemId=1&quantity=2",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"cart",
-										"update",
-										"quantity"
-									],
-									"query": [
-										{
-											"key": "cartItemId",
-											"value": "1"
+							"name": "order",
+							"item": [
+								{
+									"name": "Order - Generate acutal transaction order",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"orderProductSku\": {\n        \"IP12-RED-128\": 1,\n        \"IPSE-BLUE-64\": 2,\n        \"GS21\": 3\n    },\n    \"payType\": 1,\n    \"coupon\": \"10OFF\",\n    \"discountAmount\": 10,\n    \"amount\": 5099.94,\n    \"address\": {\n        \"receiverName\": \"John\",\n        \"phoneNumber\": \"212-121-1212\",\n        \"detailAddress\": \"123 Main St\",\n        \"city\": \"Cityville\",\n        \"state\": \"CA\",\n        \"zipCode\": \"12345\",\n        \"note\": \"\"\n    }\n}\n\n\n\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
 										},
-										{
-											"key": "quantity",
-											"value": "2"
+										"url": {
+											"raw": "localhost:8080/order/generateOrder",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"order",
+												"generateOrder"
+											]
 										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Shopping cart - delete a item",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImNyZWF0ZWQiOjE2ODY3NTM0OTYwMjIsImV4cCI6MTY4Njc1NDM5Nn0.V8INBoZsj2LZf7-1zRuDmtKdRZznomxXwCB8EPUb7cCt7qerOIAQ9-D4CLKo395ouyz8UfilDDHkZvYrkYzzvw",
-											"type": "string"
-										}
-									]
+									},
+									"response": []
 								},
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/cart/delete/7",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"cart",
-										"delete",
-										"7"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Shopping cart - clear cart",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImNyZWF0ZWQiOjE2ODczNTcyNTkwMDUsImV4cCI6MTY4NzM2NjI1OX0.ts35dqU8SEbLqoxQ7aiDHbJgLOA-QZhLW1PMQ_mxtW472IGRyZEuEUj71CXg6FxkdHemqLHmX3d5hvswCjuWOA",
-											"type": "string"
+								{
+									"name": "Order - List all order",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/order/list",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"order",
+												"list"
+											]
 										}
-									]
+									},
+									"response": []
 								},
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/cart/clear",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"cart",
-										"clear"
-									]
+								{
+									"name": "Order - Get payment link",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/order/payment/getPaymentLink/2023102530101000003",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"order",
+												"payment",
+												"getPaymentLink",
+												"2023102530101000003"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Order - Get Order detail",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/order/detail/20231013s",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"order",
+												"detail",
+												"20231013s"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Order - cancel order",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/order/cancelOrder/MD1014",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"order",
+												"cancelOrder",
+												"MD1014"
+											]
+										}
+									},
+									"response": []
 								}
-							},
-							"response": []
+							]
 						}
 					]
 				},
@@ -1003,99 +643,6 @@
 							"port": "8080",
 							"path": [
 								"actuator"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Paypal - payment success",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImNyZWF0ZWQiOjE2ODczODQxOTA1NDEsImV4cCI6MTY4NzM5MzE5MH0.g63rIf47Uhv7hyMEPDSPRzJqd8mJwAp7urcIMyhYjXd51ILIB_bzFkTfR1pmF3KXopzWSTEXFtMgtIRPSoAZdw",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "paymentId",
-								"value": "PAYID-MSD4WIY82883406XJ140011M",
-								"type": "text",
-								"disabled": true
-							},
-							{
-								"key": "PayerID",
-								"value": "PQVC7TMEZCCWC",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8080/order/success?paymentId=PAYID-MSJXZ2Q5W852541KW191251L&token=EC-3BF22818JX9320631&PayerID=PQVC7TMEZCCWC",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"order",
-								"success"
-							],
-							"query": [
-								{
-									"key": "paymentId",
-									"value": "PAYID-MSJXZ2Q5W852541KW191251L"
-								},
-								{
-									"key": "token",
-									"value": "EC-3BF22818JX9320631"
-								},
-								{
-									"key": "PayerID",
-									"value": "PQVC7TMEZCCWC"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Paypal - payment fail",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImNyZWF0ZWQiOjE2ODczNTcyNTkwMDUsImV4cCI6MTY4NzM2NjI1OX0.ts35dqU8SEbLqoxQ7aiDHbJgLOA-QZhLW1PMQ_mxtW472IGRyZEuEUj71CXg6FxkdHemqLHmX3d5hvswCjuWOA",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/order/cancel?token=EC-0X488249LR493431T",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"order",
-								"cancel"
-							],
-							"query": [
-								{
-									"key": "token",
-									"value": "EC-0X488249LR493431T"
-								}
 							]
 						}
 					},
@@ -3136,477 +2683,117 @@
 					"name": "OMS",
 					"item": [
 						{
-							"name": "Order - Generate confirme order from shopping cart",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImNyZWF0ZWQiOjE2ODY3OTAyMzIwMDksImV4cCI6MTY4Njc5MTEzMn0.eXzk8YEXuIZFeYPnbkRlmyudwtt5JcwPoKRDXP0TX5DjolBcFGiHIHeYejXSOY-FDMHe7gx2DCoPuNr1ivuiog",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "[\n    {\n        \"productId\": 2,\n        \"productName\": \"note 10\",\n        \"productSku\": \"Size: 256 gb, Color: black\",\n        \"productPic\": \"https://example.com/product1.jpg\",\n        \"quantity\": 1,\n        \"price\": 999.00\n    },\n    {\n        \"productId\": 1,\n        \"productName\": \"Iphone-10\",\n        \"productSku\": \"Size: 256 gb, Color: Red\",\n        \"productPic\": \"https://example.com/product1.jpg\",\n        \"quantity\": 2,\n        \"price\": 999.00\n    }\n]",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:80/order/generateConfirmOrder?coupon=15OFF",
-									"host": [
-										"localhost"
-									],
-									"port": "80",
-									"path": [
-										"order",
-										"generateConfirmOrder"
-									],
-									"query": [
-										{
-											"key": "coupon",
-											"value": "15OFF"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Order - Generate acutal transaction order",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImNyZWF0ZWQiOjE2ODczODQxOTA1NDEsImV4cCI6MTY4NzM5MzE5MH0.g63rIf47Uhv7hyMEPDSPRzJqd8mJwAp7urcIMyhYjXd51ILIB_bzFkTfR1pmF3KXopzWSTEXFtMgtIRPSoAZdw",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"cartItemList\": [\n        {\n            \"productId\": 1,\n            \"productName\": \"iPhone 12\",\n            \"productSku\": \"IP12-WHITE\",\n            \"quantity\": 1\n        },\n        {\n            \"productId\": 2,\n            \"productName\": \"iPhone SE\",\n            \"productSku\": \"IPSE-BLUE\",\n            \"quantity\": 10\n        },\n        {\n            \"productId\": 3,\n            \"productName\": \"Pixel 5\",\n            \"productSku\": \"PX5\",\n            \"quantity\": 1\n        }\n    ],\n    \"address\": {\n        \"receiverName\" : \"Jun\",\n        \"phoneNumber\": \"212-212-2222\",\n        \"detailAddress\": \"1 1st street 2nd ave\",\n        \"city\": \"Chicago\",\n        \"state\": \"Illinois\",\n        \"zipCode\": \"60007\",\n        \"note\": \"\"\n    },\n    \"coupon\": \"50OFFAPPLE\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:80/order/generateOrder",
-									"host": [
-										"localhost"
-									],
-									"port": "80",
-									"path": [
-										"order",
-										"generateOrder"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Order - List all order",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImNyZWF0ZWQiOjE2ODcyMTMzNTEwNTIsImV4cCI6MTY4NzIxNDI1MX0.zlpVlAGHIH7jSAKayMfgf1UNV2IdS_cRI-jGK2nPvIO57MdxKnbkCq5NymigM_3DPOf_cZzNaxTBc3mVwA-j3Q",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:80/order/list",
-									"host": [
-										"localhost"
-									],
-									"port": "80",
-									"path": [
-										"order",
-										"list"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Order - Get Order detail",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMiIsImNyZWF0ZWQiOjE2ODY1OTEwODc1NzgsImV4cCI6MTY4NjU5MTk4N30.CoqulUU2NBavCxrOjkm9fRDzFsvpM9EmeyBrZ8qWoJ0LgTIO1Y5GCQgZqirvG1YE2vtEegT6PpBlTITditd5Qg",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:80/order/detail/1",
-									"host": [
-										"localhost"
-									],
-									"port": "80",
-									"path": [
-										"order",
-										"detail",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Order - payment success",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMiIsImNyZWF0ZWQiOjE2ODY1OTEwODc1NzgsImV4cCI6MTY4NjU5MTk4N30.CoqulUU2NBavCxrOjkm9fRDzFsvpM9EmeyBrZ8qWoJ0LgTIO1Y5GCQgZqirvG1YE2vtEegT6PpBlTITditd5Qg",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:80/order/",
-									"host": [
-										"localhost"
-									],
-									"port": "80",
-									"path": [
-										"order",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Order - payment fail",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMiIsImNyZWF0ZWQiOjE2ODY1OTEwODc1NzgsImV4cCI6MTY4NjU5MTk4N30.CoqulUU2NBavCxrOjkm9fRDzFsvpM9EmeyBrZ8qWoJ0LgTIO1Y5GCQgZqirvG1YE2vtEegT6PpBlTITditd5Qg",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:80/order/",
-									"host": [
-										"localhost"
-									],
-									"port": "80",
-									"path": [
-										"order",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Order - cancel order",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMiIsImNyZWF0ZWQiOjE2ODY1OTEwODc1NzgsImV4cCI6MTY4NjU5MTk4N30.CoqulUU2NBavCxrOjkm9fRDzFsvpM9EmeyBrZ8qWoJ0LgTIO1Y5GCQgZqirvG1YE2vtEegT6PpBlTITditd5Qg",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:80/order/cancelOrder",
-									"host": [
-										"localhost"
-									],
-									"port": "80",
-									"path": [
-										"order",
-										"cancelOrder"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "OrderReturn -apply for return",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "localhost:80/order/return/apply",
-									"host": [
-										"localhost"
-									],
-									"port": "80",
-									"path": [
-										"order",
-										"return",
-										"apply"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "OrderReturn - Get return status",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:80/order/return/status",
-									"host": [
-										"localhost"
-									],
-									"port": "80",
-									"path": [
-										"order",
-										"return",
-										"status"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Shopping cart - list user cart",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImNyZWF0ZWQiOjE2ODczODM5MjAzMjEsImV4cCI6MTY4NzM5MjkyMH0.YJpxc6MWNyTQm3QJ5kyn433qXAzr0M8YH7alxZEXozOyEODRo9urnryYR8PwPp0jSL8Hm_w5jq5_vE1XFZmzDw",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:80/cart/list",
-									"host": [
-										"localhost"
-									],
-									"port": "80",
-									"path": [
-										"cart",
-										"list"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Shopping cart - add",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImNyZWF0ZWQiOjE2ODczNTcyNTkwMDUsImV4cCI6MTY4NzM2NjI1OX0.ts35dqU8SEbLqoxQ7aiDHbJgLOA-QZhLW1PMQ_mxtW472IGRyZEuEUj71CXg6FxkdHemqLHmX3d5hvswCjuWOA",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"productId\": 6,\n    \"productName\": \"t-shirt\",\n    \"productSku\": \"Size: XXL, Color: White\",\n    \"productPic\": \"https://example.com/product3.jpg\",\n    \"quantity\": 1,\n    \"price\": 20.00\n}\n\n\n",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:80/cart/add",
-									"host": [
-										"localhost"
-									],
-									"port": "80",
-									"path": [
-										"cart",
-										"add"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Shopping cart - add All",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImNyZWF0ZWQiOjE2ODczODM5MjAzMjEsImV4cCI6MTY4NzM5MjkyMH0.YJpxc6MWNyTQm3QJ5kyn433qXAzr0M8YH7alxZEXozOyEODRo9urnryYR8PwPp0jSL8Hm_w5jq5_vE1XFZmzDw",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "[\n    {\n        \"productId\": 1,\n        \"productName\": \"iPhone 12\",\n        \"productSku\": \"IP12-WHITE\",\n        \"quantity\": 1\n    },\n    {\n        \"productId\": 2,\n        \"productName\": \"iPhone SE\",\n        \"productSku\": \"IPSE-BLUE\",\n        \"quantity\": 10\n    },\n    {\n        \"productId\": 3,\n        \"productName\": \"Pixel 5\",\n        \"productSku\": \"PX5\",\n        \"quantity\": 1\n    }\n]",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "localhost:80/cart/add/all",
-									"host": [
-										"localhost"
-									],
-									"port": "80",
-									"path": [
-										"cart",
-										"add",
-										"all"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Shopping cart - update",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImNyZWF0ZWQiOjE2ODY3NTQ3MzUxMDMsImV4cCI6MTY4Njc1NTYzNX0.yqsxKtsZzQV8WAEYBZRzYdkNjEHoBb1FAsNXrxA8hVId0w14LZxOMa7qxJCQGmqBO6X6-aOez2XHmcIrtZNr6Q",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "localhost:80/cart/update/quantity?cartItemId=1&quantity=2",
-									"host": [
-										"localhost"
-									],
-									"port": "80",
-									"path": [
-										"cart",
-										"update",
-										"quantity"
-									],
-									"query": [
-										{
-											"key": "cartItemId",
-											"value": "1"
+							"name": "order",
+							"item": [
+								{
+									"name": "Order - Generate acutal transaction order",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"orderProductSku\": {\n        \"IP12-RED-128\": 1,\n        \"IPSE-BLUE-64\": 2,\n        \"GS21\": 3\n    },\n    \"payType\": 1,\n    \"coupon\": \"10OFF\",\n    \"discountAmount\": 10,\n    \"amount\": 5099.94,\n    \"address\": {\n        \"receiverName\": \"John\",\n        \"phoneNumber\": \"212-121-1212\",\n        \"detailAddress\": \"123 Main St\",\n        \"city\": \"Cityville\",\n        \"state\": \"CA\",\n        \"zipCode\": \"12345\",\n        \"note\": \"\"\n    }\n}\n\n\n\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
 										},
-										{
-											"key": "quantity",
-											"value": "2"
+										"url": {
+											"raw": "localhost:80/order/generateOrder",
+											"host": [
+												"localhost"
+											],
+											"port": "80",
+											"path": [
+												"order",
+												"generateOrder"
+											]
 										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Shopping cart - delete a item",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImNyZWF0ZWQiOjE2ODY3NTM0OTYwMjIsImV4cCI6MTY4Njc1NDM5Nn0.V8INBoZsj2LZf7-1zRuDmtKdRZznomxXwCB8EPUb7cCt7qerOIAQ9-D4CLKo395ouyz8UfilDDHkZvYrkYzzvw",
-											"type": "string"
-										}
-									]
+									},
+									"response": []
 								},
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "localhost:80/cart/delete/7",
-									"host": [
-										"localhost"
-									],
-									"port": "80",
-									"path": [
-										"cart",
-										"delete",
-										"7"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Shopping cart - clear cart",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImNyZWF0ZWQiOjE2ODczNTcyNTkwMDUsImV4cCI6MTY4NzM2NjI1OX0.ts35dqU8SEbLqoxQ7aiDHbJgLOA-QZhLW1PMQ_mxtW472IGRyZEuEUj71CXg6FxkdHemqLHmX3d5hvswCjuWOA",
-											"type": "string"
+								{
+									"name": "Order - List all order",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:80/order/list",
+											"host": [
+												"localhost"
+											],
+											"port": "80",
+											"path": [
+												"order",
+												"list"
+											]
 										}
-									]
+									},
+									"response": []
 								},
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "localhost:80/cart/clear",
-									"host": [
-										"localhost"
-									],
-									"port": "80",
-									"path": [
-										"cart",
-										"clear"
-									]
+								{
+									"name": "Order - Get payment link",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:80/order/payment/getPaymentLink/2023102530101000003",
+											"host": [
+												"localhost"
+											],
+											"port": "80",
+											"path": [
+												"order",
+												"payment",
+												"getPaymentLink",
+												"2023102530101000003"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Order - Get Order detail",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:80/order/detail/20231013s",
+											"host": [
+												"localhost"
+											],
+											"port": "80",
+											"path": [
+												"order",
+												"detail",
+												"20231013s"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Order - cancel order",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "localhost:80/order/cancelOrder/MD1014",
+											"host": [
+												"localhost"
+											],
+											"port": "80",
+											"path": [
+												"order",
+												"cancelOrder",
+												"MD1014"
+											]
+										}
+									},
+									"response": []
 								}
-							},
-							"response": []
+							]
 						}
 					]
 				},
@@ -4087,99 +3274,36 @@
 						}
 					},
 					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImNyZWF0ZWQiOjE2OTg2MDQ5MjQwNDgsImV4cCI6MTY5ODYxMzkyNH0.6rtLZrH_RDuzn0g7Q3fh5sHYvR1qVG0-PCltIB_3hhMhMpdiwEnMc2fhRKP7houG4BmGfrhC-021BmkmzHNf-A",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				},
 				{
-					"name": "Paypal - payment success",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImNyZWF0ZWQiOjE2ODczODQxOTA1NDEsImV4cCI6MTY4NzM5MzE5MH0.g63rIf47Uhv7hyMEPDSPRzJqd8mJwAp7urcIMyhYjXd51ILIB_bzFkTfR1pmF3KXopzWSTEXFtMgtIRPSoAZdw",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "paymentId",
-								"value": "PAYID-MSD4WIY82883406XJ140011M",
-								"type": "text",
-								"disabled": true
-							},
-							{
-								"key": "PayerID",
-								"value": "PQVC7TMEZCCWC",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "http://localhost:80/order/success?paymentId=PAYID-MSJXZ2Q5W852541KW191251L&token=EC-3BF22818JX9320631&PayerID=PQVC7TMEZCCWC",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "80",
-							"path": [
-								"order",
-								"success"
-							],
-							"query": [
-								{
-									"key": "paymentId",
-									"value": "PAYID-MSJXZ2Q5W852541KW191251L"
-								},
-								{
-									"key": "token",
-									"value": "EC-3BF22818JX9320631"
-								},
-								{
-									"key": "PayerID",
-									"value": "PQVC7TMEZCCWC"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Paypal - payment fail",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImNyZWF0ZWQiOjE2ODczNTcyNTkwMDUsImV4cCI6MTY4NzM2NjI1OX0.ts35dqU8SEbLqoxQ7aiDHbJgLOA-QZhLW1PMQ_mxtW472IGRyZEuEUj71CXg6FxkdHemqLHmX3d5hvswCjuWOA",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:80/order/cancel?token=EC-0X488249LR493431T",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "80",
-							"path": [
-								"order",
-								"cancel"
-							],
-							"query": [
-								{
-									"key": "token",
-									"value": "EC-0X488249LR493431T"
-								}
-							]
-						}
-					},
-					"response": []
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		},

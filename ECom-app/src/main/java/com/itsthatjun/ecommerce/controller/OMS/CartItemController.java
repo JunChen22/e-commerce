@@ -37,7 +37,8 @@ public class CartItemController {
     @ApiOperation("list current user's shopping cart")
     @GetMapping(value = "/list")
     public List<CartItem> list() {
-        return cartItemService.getUserCart();
+        //return cartItemService.getUserCart();
+        return new ArrayList<>();
     }
 
     @ApiOperation("update shopping cart item quantity")
@@ -55,6 +56,6 @@ public class CartItemController {
     @ApiOperation("clear user shopping cart")
     @DeleteMapping(value = "/clear")
     public void clear() {
-        cartItemService.clearCartItem();
+        // cartItemService.clearCartItem();
     }
 }

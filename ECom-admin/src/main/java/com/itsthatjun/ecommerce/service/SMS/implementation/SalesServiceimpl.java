@@ -148,7 +148,7 @@ public class SalesServiceimpl implements SalesService{
 
     /*
     @Override
-    public Mono<PromotionSale> createBrandSale(OnSaleRequest request, String operator) {
+    public PromotionSale createBrandSale(OnSaleRequest request, String operator) {
 
         List<PromotionSaleProduct> promotionSaleProductList = request.getOnSaleProduct();
         boolean itemAlreadyOnSale = checkItemOnSale(promotionSaleProductList);
@@ -202,7 +202,7 @@ public class SalesServiceimpl implements SalesService{
     }
 
     @Override
-    public Mono<PromotionSale> createCategorySale(OnSaleRequest request , String operator) {
+    public PromotionSale createCategorySale(OnSaleRequest request , String operator) {
         List<PromotionSaleProduct> promotionSaleProductList = request.getOnSaleProduct();
         boolean itemAlreadyOnSale = checkItemOnSale(promotionSaleProductList);
 

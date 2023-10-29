@@ -60,6 +60,15 @@ jwt:
   secretKey: JunChen522
   expirationTimeMinute: 15
 
+
+
+spring.rabbitmq:
+  host: localhost
+  port: 5672
+  username: guest
+  password: guest
+  publisher-confirms: true
+
 ---
 
 spring.config.activate.on-profile: docker
@@ -74,3 +83,5 @@ spring:
   redis:
     host: redis
     port: 6379
+
+spring.rabbitmq.host: rabbitmq

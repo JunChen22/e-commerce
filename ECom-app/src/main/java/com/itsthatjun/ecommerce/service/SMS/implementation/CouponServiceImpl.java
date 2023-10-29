@@ -4,25 +4,20 @@ import com.itsthatjun.ecommerce.mbg.mapper.*;
 import com.itsthatjun.ecommerce.mbg.model.*;
 import com.itsthatjun.ecommerce.service.OMS.implementation.CartItemServiceImpl;
 import com.itsthatjun.ecommerce.service.SMS.CouponService;
-import com.itsthatjun.ecommerce.service.UMS.implementation.MemberServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 @Service
 public class CouponServiceImpl implements CouponService {
 
     private static final Logger LOG = LoggerFactory.getLogger(CouponServiceImpl.class);
-
-    private final MemberServiceImpl memberService;
 
     private final CartItemServiceImpl cartItemService;
 
@@ -39,8 +34,9 @@ public class CouponServiceImpl implements CouponService {
     private final CartItemMapper cartItemMapper;
 
     @Autowired
-    public CouponServiceImpl(MemberServiceImpl memberService, CartItemServiceImpl cartItemService, CouponMapper couponMapper, ProductMapper productMapper, CouponHistoryMapper couponHistoryMapper, CouponProductRelationMapper productRelationMapper, ProductSkuMapper productSkuMapper, CartItemMapper cartItemMapper) {
-        this.memberService = memberService;
+    public CouponServiceImpl(CartItemServiceImpl cartItemService, CouponMapper couponMapper, ProductMapper productMapper,
+                             CouponHistoryMapper couponHistoryMapper, CouponProductRelationMapper productRelationMapper,
+                             ProductSkuMapper productSkuMapper, CartItemMapper cartItemMapper) {
         this.cartItemService = cartItemService;
         this.couponMapper = couponMapper;
         this.productMapper = productMapper;
@@ -51,14 +47,11 @@ public class CouponServiceImpl implements CouponService {
     }
 
     @Override
-    public double checkDiscount(String couponCode) {
-        Member currentUser = memberService.getCurrentUser();
-        int userId = currentUser.getId();
-
+    public double checkDiscount(String couponCode, int userId) {
         Coupon foundCoupon = checkCoupon(couponCode);
         if (foundCoupon == null) return 0;
 
-        List<CartItem> cartItemList = cartItemService.getUserCart();
+        List<CartItem> cartItemList = cartItemService.getUserCart(userId);
         if (cartItemList.isEmpty()) return 0;
 
         Map<String, Integer> skuQuantity = new HashMap<>();
@@ -67,7 +60,7 @@ public class CouponServiceImpl implements CouponService {
             String skuCode = cartItem.getProductSku();
             skuQuantity.put(skuCode, quantity);
         }
-        return  getDiscountAmount(skuQuantity, foundCoupon);
+        return getDiscountAmount(skuQuantity, foundCoupon);
     }
 
     private Coupon checkCoupon(String couponCode) {
@@ -155,10 +148,7 @@ public class CouponServiceImpl implements CouponService {
     }
 
     @Override
-    public void updateUsedCoupon(String code, int orderId) {
-        Member currentUser = memberService.getCurrentUser();
-        int userId = currentUser.getId();
-
+    public void updateUsedCoupon(String code, int orderId, int userId) {
         if (checkCoupon(code) == null) {
             return ;
         }

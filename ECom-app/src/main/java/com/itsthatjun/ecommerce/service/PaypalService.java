@@ -5,6 +5,7 @@ import com.itsthatjun.ecommerce.config.PaypalPaymentMethod;
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,8 @@ public class PaypalService {
             PaypalPaymentIntent intent,
             String description,
             String cancelUrl,
-            String successUrl) throws PayPalRESTException {
+            String successUrl,
+            String orderSn) throws PayPalRESTException {
         Amount amount = new Amount();
         amount.setCurrency(currency);
         total = new BigDecimal(total).setScale(2, RoundingMode.HALF_UP).doubleValue();
@@ -35,6 +37,7 @@ public class PaypalService {
         Transaction transaction = new Transaction();
         transaction.setDescription(description);
         transaction.setAmount(amount);
+        transaction.setCustom(orderSn);     // order serial number
 
         List<Transaction> transactions = new ArrayList<>();
         transactions.add(transaction);
@@ -57,10 +60,10 @@ public class PaypalService {
         return payment.create(apiContext);
     }
 
-    // The actual transaction part, even though the GUI payment is complete, but they
-    // just return PAYID , PayerID and token. These are saying the buyer and paypal are
-    // agreed to pay the set amount. You take these "receipt" to PayPal and cash out.
-    public Payment executePayment(String paymentId, String payerId) throws PayPalRESTException{
+    @ApiOperation(value = "The actual transaction part, even though the GUI payment is complete, but they"
+            + "just return PaymentId , PayerID and token. These are saying the buyer and PayPal are"
+            + "agreed to pay the set amount. You take these \"receipt\" to PayPal and cash out.")
+    public Payment executePayment(String paymentId, String payerId) throws PayPalRESTException {
         Payment payment = new Payment();
         payment.setId(paymentId);
         PaymentExecution paymentExecute = new PaymentExecution();
