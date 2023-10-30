@@ -22,7 +22,7 @@ public class OrderController {
 
     private static final Logger LOG = LoggerFactory.getLogger(OrderController.class);
 
-    public static final String PAYPAL_SUCCESS_URL = "order/success";
+    public static final String PAYPAL_SUCCESS_URL = "order/payment/success";
 
     private final OrderServiceImpl orderService;
 
@@ -66,11 +66,11 @@ public class OrderController {
     @ApiOperation(value = "Generate order based on shopping cart, actual transaction")
     public Orders generateOrder(@RequestBody OrderParam orderParam, HttpServletRequest request) {
         String requestUrl = URLUtils.getBaseURl(request);
-        String paymentSuccessLink = requestUrl + PAYPAL_SUCCESS_URL;
+        String paymentSuccessLink = requestUrl + "/" + PAYPAL_SUCCESS_URL;
         String paymentFailLink = requestUrl + "/";
 
-        //int userId = memberService.getCurrentUser().getId();
-        int userId = 2;
+        int userId = memberService.getCurrentUser().getId();
+
         orderMessageService.sendOrderGenerateMessage(orderParam, paymentSuccessLink, paymentFailLink, userId);
         return new Orders();
     }

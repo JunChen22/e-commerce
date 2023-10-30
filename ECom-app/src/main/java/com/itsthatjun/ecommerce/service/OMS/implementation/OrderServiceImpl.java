@@ -313,6 +313,7 @@ public class OrderServiceImpl implements OrderService {
         } catch (PayPalRESTException e) {
             LOG.error(e.getMessage());
         }
+        // TODO: will cause a loop when try to pay more than once
         throw new OrderException("Error payment after success URL");
     }
 

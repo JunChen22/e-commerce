@@ -23,7 +23,6 @@ public class ReviewServiceImpl implements ReviewService {
     public List<Review> listProductAllReview(int productId) {
         ReviewExample example = new ReviewExample();
         example.createCriteria().andProductIdEqualTo(productId);
-
         List<Review> productReviews = reviewMapper.selectByExample(example);
         return productReviews;
     }

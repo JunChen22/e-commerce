@@ -5,11 +5,12 @@ import com.itsthatjun.ecommerce.mbg.model.ReturnRequest;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
 @Data
-public class ReturnParam {
+public class ReturnParam implements Serializable {
 
     @ApiModelProperty("")
     private ReturnRequest returnRequest;
