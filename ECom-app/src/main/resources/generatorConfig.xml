@@ -114,6 +114,7 @@
         <table tableName= "review_album">
             <generatedKey column="id" sqlStatement="JDBC" />
             <columnOverride column="id" javaType="java.lang.Integer" />
+            <columnOverride column="pic_count" javaType="java.lang.Integer" />
             <columnOverride column="review_id" javaType="java.lang.Integer" />
         </table>
 

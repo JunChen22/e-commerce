@@ -1,12 +1,13 @@
 package com.itsthatjun.ecommerce.controller.PMS;
 
+import com.itsthatjun.ecommerce.dto.PMS.ProductReview;
 import com.itsthatjun.ecommerce.mbg.model.Review;
+import com.itsthatjun.ecommerce.service.Messaging.ReviewMessageService;
 import com.itsthatjun.ecommerce.service.PMS.implementation.ReviewServiceImpl;
+import com.itsthatjun.ecommerce.service.UMS.implementation.MemberServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,36 +19,51 @@ public class ReviewController {
 
     private final ReviewServiceImpl reviewService;
 
+    private final MemberServiceImpl memberService;
+
+    private final ReviewMessageService messageService;
+
     @Autowired
-    public ReviewController(ReviewServiceImpl reviewService) {
+    public ReviewController(ReviewServiceImpl reviewService, MemberServiceImpl memberService, ReviewMessageService messageService) {
         this.reviewService = reviewService;
+        this.memberService = memberService;
+        this.messageService = messageService;
+    }
+
+    @GetMapping("/detail/{reviewId}")
+    @ApiOperation(value = "get detail of a review")
+    public ProductReview getDetailReview(@PathVariable int reviewId) {
+        return reviewService.getDetailReview(reviewId);
     }
 
     @GetMapping("/getAllProductReview/{productId}")
     @ApiOperation(value = "get all reviews for a product")
-    public List<Review> getProductReviews(@PathVariable int productId) {
+    public List<ProductReview> getProductReviews(@PathVariable int productId) {
         return reviewService.listProductAllReview(productId);
     }
 
     @PostMapping("/create")
     @ApiOperation(value = "create review for a product")
-    public Review createProductReview(@RequestBody Review review) {
-        // TODO: review created time did not create automatically
-        reviewService.createReview(review);
-        return review;
+    public ProductReview createProductReview(@RequestBody ProductReview newReview) {
+        int userId = memberService.getCurrentUser().getId();
+        messageService.sendReviewCreateMessage(newReview, userId);
+        return newReview;
     }
 
     @PostMapping("/update")
     @ApiOperation(value = "update a review")
-    public Review updateProductReviews(@RequestBody Review updatedreview) {
-        reviewService.updateReview(updatedreview);
-        return updatedreview;
+    public ProductReview updateProductReviews(@RequestBody ProductReview productReview) {
+        int userId = memberService.getCurrentUser().getId();
+        messageService.sendReviewUpdateMessage(productReview, userId);
+        return productReview;
     }
 
     @DeleteMapping("/delete/{reviewId}")
     @ApiOperation(value = "Get product with page and size")
-    public void deleteProductReviews(@PathVariable int reviewId, @AuthenticationPrincipal UserDetails userDetails) {
-        System.out.println(userDetails.getUsername());
-        reviewService.deleteReview(reviewId);
+    public void deleteProductReviews(@PathVariable int reviewId) {
+        int userId = memberService.getCurrentUser().getId();
+        Review review = new Review();
+        review.setId(reviewId);
+        messageService.sendReviewDeleteMessage(review, userId);
     }
 }

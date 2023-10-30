@@ -1,16 +1,28 @@
 package com.itsthatjun.ecommerce.service.PMS;
 
+import com.itsthatjun.ecommerce.dto.PMS.ProductReview;
 import com.itsthatjun.ecommerce.mbg.model.Review;
+import com.itsthatjun.ecommerce.mbg.model.ReviewPictures;
+import io.swagger.annotations.ApiOperation;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
 public interface ReviewService {
 
-    List<Review> listProductAllReview(int productId);
+    @ApiOperation(value = "")
+    ProductReview getDetailReview(int reviewId);
 
-    int createReview( Review review);
+    @ApiOperation(value = "")
+    List<ProductReview> listProductAllReview(int productId);
 
-    int updateReview(Review updatedReview);
+    @ApiOperation(value = "")
+    Review createReview(Review newReview, List<ReviewPictures> picturesList, int userId);
 
-    int deleteReview(int reviewId);
+    @ApiOperation(value = "")
+    Review updateReview(Review updatedReview, List<ReviewPictures> picturesList, int userId);
+
+    @ApiOperation(value = "")
+    void deleteReview(int reviewId, int userId);
 }

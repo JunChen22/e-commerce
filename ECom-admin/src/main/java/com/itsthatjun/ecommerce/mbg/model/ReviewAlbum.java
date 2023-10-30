@@ -1,7 +1,6 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class ReviewAlbum implements Serializable {
@@ -9,7 +8,7 @@ public class ReviewAlbum implements Serializable {
 
     private Integer reviewId;
 
-    private BigDecimal picCount;
+    private Integer picCount;
 
     private Date createdAt;
 
@@ -31,11 +30,11 @@ public class ReviewAlbum implements Serializable {
         this.reviewId = reviewId;
     }
 
-    public BigDecimal getPicCount() {
+    public Integer getPicCount() {
         return picCount;
     }
 
-    public void setPicCount(BigDecimal picCount) {
+    public void setPicCount(Integer picCount) {
         this.picCount = picCount;
     }
 

@@ -167,6 +167,230 @@
 									"response": []
 								}
 							]
+						},
+						{
+							"name": "return order",
+							"item": [
+								{
+									"name": "OrderReturn -apply for return",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"returnRequest\": {\n    \"orderSn\": \"2023102520101000002\",\n    \"returnQuantity\": 1,\n    \"returnName\": \"John Doe\",\n    \"returnPhone\": \"123-456-7890\",\n    \"askingAmount\": 449.99,\n    \"reason\": \"Product damaged\",\n    \"description\": \"Received damaged goods\"\n  },\n  \"skuQuantity\": {\n    \"IPSE-BLUE-64\": 1\n  },\n  \"picturesList\": [\n  ]\n}\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/order/return/apply",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"order",
+												"return",
+												"apply"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "OrderReturn -apply for return Copy",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"returnRequest\": {\n    \"orderSn\": \"2023102530101000003\",\n    \"returnQuantity\": 2,\n    \"returnName\": \"John Doe\",\n    \"returnPhone\": \"123-456-7890\",\n    \"askingAmount\": 142.98,\n    \"reason\": \"Product damaged\",\n    \"description\": \"Received damaged goods\"\n  },\n  \"skuQuantity\": {\n    \"NAM270-90\": 1,\n    \"TKAM\": 1\n  },\n  \"picturesList\": [\n  ]\n}\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/order/return/apply",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"order",
+												"return",
+												"apply"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "OrderReturn - Get return status",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/order/return/status/2023102520101000001",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"order",
+												"return",
+												"status",
+												"2023102520101000001"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "OrderReturn - Cancel return apply",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/order/return/cancel",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"order",
+												"return",
+												"cancel"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "cart",
+							"item": [
+								{
+									"name": "Shopping cart - list user cart",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/cart/list",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"cart",
+												"list"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Shopping cart - add",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"productName\": \"Calvin Klein Logo T-Shirt\",\n    \"productSku\": \"CKLTS-L\",\n    \"quantity\": 12\n}\n\n\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/cart/add",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"cart",
+												"add"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Shopping cart - update",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"cartId\": 2,\n    \"productSku\": \"TKAM\",\n    \"quantity\": 69\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/cart/update/quantity",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"cart",
+												"update",
+												"quantity"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Shopping cart - delete a item",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/cart/delete/1",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"cart",
+												"delete",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Shopping cart - clear cart",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/cart/clear",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"cart",
+												"clear"
+											]
+										}
+									},
+									"response": []
+								}
+							]
 						}
 					]
 				},
@@ -174,140 +398,131 @@
 					"name": "PMS",
 					"item": [
 						{
-							"name": "Review - Get all reviews of a product",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/reviews/getAllProductReview/1",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"reviews",
-										"getAllProductReview",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Review - Get All reviews by User",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/reviews/getAllReviewByUser/1",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"reviews",
-										"getAllReviewByUser",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Review - Create a review",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImNyZWF0ZWQiOjE2ODY1MDkzNDY1MjgsImV4cCI6MTY4NjUxMDI0Nn0.B93EomYFXSmZ-Dw0g82IbAo_JMtyMsVcrawjaPYdlcRfNCGSG78mYcuKWBVkZ2iSmIPzqY7HD4z-yx-xN3hKJg",
-											"type": "string"
+							"name": "Review",
+							"item": [
+								{
+									"name": "Review - Get all reviews of a product",
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/review/getAllProductReview/1",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"review",
+												"getAllProductReview",
+												"1"
+											]
 										}
-									]
+									},
+									"response": []
 								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n   \"productId\": 1,\n   \"memberId\": 12,\n   \"memberName\": \"test1\",\n   \"star\": 1,\n   \"tittle\": \"item arrive late\",\n   \"content\": \"late\",\n   \"pictures\": \"something.jpg\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
+								{
+									"name": "Review - Get  detail of a review",
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/review/detail/1",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"review",
+												"detail",
+												"1"
+											]
 										}
-									}
+									},
+									"response": []
 								},
-								"url": {
-									"raw": "localhost:8080/reviews/create",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"reviews",
-										"create"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Review - Update a review",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"id\": 9,\n    \"productId\": 4,\n    \"memberId\": 1,\n    \"memberName\": \"test1\",\n    \"star\": 5,\n    \"tittle\": \"item arrive late\",\n    \"content\": \"changed my mind\",\n    \"pictures\": \"something.jpg\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
+								{
+									"name": "Review - Create a review",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"review\": {\n    \"productId\": 1,\n    \"memberName\": \"John Doe\",\n    \"memberIcon\": \"https://example.com/johndoe.jpg\",\n    \"star\": 4.5,\n    \"createdAt\": \"2023-10-08T10:00:00Z\",\n    \"updatedAt\": \"2023-10-08T12:00:00Z\",\n    \"title\": \"Great Product\",\n    \"likes\": 25.0,\n    \"verified\": true,\n    \"content\": \"I really love this product. It works great!\"\n  },\n  \"picturesList\": [\n    {\n      \"id\": 1,\n      \"reviewAlbumId\": 1,\n      \"filename\": \"picture1.jpg\",\n      \"createdAt\": \"2023-10-08T10:30:00Z\"\n    },\n    {\n      \"id\": 2,\n      \"reviewAlbumId\": 1,\n      \"filename\": \"picture2.jpg\",\n      \"createdAt\": \"2023-10-08T11:00:00Z\"\n    }\n  ]\n}\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/review/create",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"review",
+												"create"
+											]
 										}
-									}
+									},
+									"response": []
 								},
-								"url": {
-									"raw": "localhost:8080/reviews/update",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"reviews",
-										"update"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Review - Delete a review",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMiIsImNyZWF0ZWQiOjE2ODY1MTIxNDI3MTQsImV4cCI6MTY4NjUxMzA0Mn0.p2InzGCGFasDjouMc3d_ZtqfQfnsYfTnMQNiekOg5Q6WEtlgNR3WNedZfiKuTq-lDolGii8p_fQ24QXXYe5ymQ",
-											"type": "string"
+								{
+									"name": "Review - Update a review",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"review\": {\n    \"id\" : 12,\n    \"productId\": 1,\n    \"memberName\": \"John Doe\",\n    \"memberIcon\": \"https://example.com/johndoe.jpg\",\n    \"star\": 4.5,\n    \"createdAt\": \"2023-10-08T10:00:00Z\",\n    \"updatedAt\": \"2023-10-08T12:00:00Z\",\n    \"title\": \"Great Product\",\n    \"likes\": 25.0,\n    \"verified\": true,\n    \"content\": \"I really love this product. It works great!\"\n  },\n  \"picturesList\": [\n    {\n      \"id\": 1,\n      \"reviewAlbumId\": 1,\n      \"filename\": \"picture1.jpg\",\n      \"createdAt\": \"2023-10-08T10:30:00Z\"\n    },\n    {\n      \"id\": 2,\n      \"reviewAlbumId\": 1,\n      \"filename\": \"picture2.jpg\",\n      \"createdAt\": \"2023-10-08T11:00:00Z\"\n    }\n  ]\n}\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:8080/review/update",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"review",
+												"update"
+											]
 										}
-									]
+									},
+									"response": []
 								},
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "localhost:8080/reviews/delete/9",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"reviews",
-										"delete",
-										"9"
-									]
+								{
+									"name": "Review - Delete a review",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "localhost:8080/review/delete/11",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"review",
+												"delete",
+												"11"
+											]
+										}
+									},
+									"response": []
 								}
-							},
-							"response": []
+							]
 						},
 						{
 							"name": "Product - Get All",
@@ -570,13 +785,16 @@
 					"name": "UMS",
 					"item": [
 						{
-							"name": "Member - Login",
+							"name": "Get Info",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
 							"request": {
-								"method": "POST",
+								"method": "GET",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"username\" :\"user1\",\n\t\"password\": \"password\"\n}",
+									"raw": "{\n\t\"username\" : \"user5\",\n\t\"password\": \"password\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -584,21 +802,21 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8080/user/login",
+									"raw": "localhost:8080/user/getInfo",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
 										"user",
-										"login"
+										"getInfo"
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "Member - Register",
+							"name": "Register",
 							"request": {
 								"method": "POST",
 								"header": [],
@@ -620,6 +838,118 @@
 									"path": [
 										"user",
 										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Passoword",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\" : \"user5\",\n\t\"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/user/updatePassword",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"updatePassword"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update info",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\" : \"user5\",\n\t\"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/user/updateInfo",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"updateInfo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update address",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\" : \"user5\",\n\t\"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/user/updateAddress",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"updateAddress"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete account",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\" : \"user5\",\n\t\"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/user/deleteAccount",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"deleteAccount"
 									]
 								}
 							},
@@ -2692,7 +3022,7 @@
 										"header": [],
 										"body": {
 											"mode": "raw",
-											"raw": "{\n    \"orderProductSku\": {\n        \"IP12-RED-128\": 1,\n        \"IPSE-BLUE-64\": 2,\n        \"GS21\": 3\n    },\n    \"payType\": 1,\n    \"coupon\": \"10OFF\",\n    \"discountAmount\": 10,\n    \"amount\": 5099.94,\n    \"address\": {\n        \"receiverName\": \"John\",\n        \"phoneNumber\": \"212-121-1212\",\n        \"detailAddress\": \"123 Main St\",\n        \"city\": \"Cityville\",\n        \"state\": \"CA\",\n        \"zipCode\": \"12345\",\n        \"note\": \"\"\n    }\n}\n\n\n\n",
+											"raw": "{\n    \"orderProductSku\": {\n        \"IP12-RED-128\": 1,\n        \"IPSE-BLUE-64\": 2,\n        \"GS21\": 3\n    },\n    \"payType\": 1,\n    \"coupon\": \"10OFF\",\n    \"discountAmount\": 10,\n    \"amount\": 5099.94,\n    \"address\": {\n        \"receiverName\": \"John\",\n        \"phoneNumber\": \"212-121-1212\",\n        \"detailAddress\": \"123 Main St\",\n        \"city\": \"Cityville\",\n        \"state\": \"CA\",\n        \"zipCode\": \"12345\",\n        \"note\": \"\"\n    }\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -2794,6 +3124,230 @@
 									"response": []
 								}
 							]
+						},
+						{
+							"name": "return order",
+							"item": [
+								{
+									"name": "OrderReturn -apply for return",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"returnRequest\": {\n    \"orderSn\": \"2023103010101000001\",\n    \"returnQuantity\": 1,\n    \"returnName\": \"John Doe\",\n    \"returnPhone\": \"123-456-7890\",\n    \"askingAmount\": 449.99,\n    \"reason\": \"Product damaged\",\n    \"description\": \"Received damaged goods\"\n  },\n  \"skuQuantity\": {\n    \"IPSE-BLUE-64\": 1\n  },\n  \"picturesList\": [\n  ]\n}\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:80/order/return/apply",
+											"host": [
+												"localhost"
+											],
+											"port": "80",
+											"path": [
+												"order",
+												"return",
+												"apply"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "OrderReturn -apply for return Copy",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"returnRequest\": {\n    \"orderSn\": \"2023102530101000003\",\n    \"returnQuantity\": 2,\n    \"returnName\": \"John Doe\",\n    \"returnPhone\": \"123-456-7890\",\n    \"askingAmount\": 142.98,\n    \"reason\": \"Product damaged\",\n    \"description\": \"Received damaged goods\"\n  },\n  \"skuQuantity\": {\n    \"NAM270-90\": 1,\n    \"TKAM\": 1\n  },\n  \"picturesList\": [\n  ]\n}\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:80/order/return/apply",
+											"host": [
+												"localhost"
+											],
+											"port": "80",
+											"path": [
+												"order",
+												"return",
+												"apply"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "OrderReturn - Get return status",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:80/order/return/status/2023102520101000001",
+											"host": [
+												"localhost"
+											],
+											"port": "80",
+											"path": [
+												"order",
+												"return",
+												"status",
+												"2023102520101000001"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "OrderReturn - Cancel return apply",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "localhost:80/order/return/cancel",
+											"host": [
+												"localhost"
+											],
+											"port": "80",
+											"path": [
+												"order",
+												"return",
+												"cancel"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "cart",
+							"item": [
+								{
+									"name": "Shopping cart - list user cart",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:80/cart/list",
+											"host": [
+												"localhost"
+											],
+											"port": "80",
+											"path": [
+												"cart",
+												"list"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Shopping cart - add",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"productName\": \"Calvin Klein Logo T-Shirt\",\n    \"productSku\": \"CKLTS-L\",\n    \"quantity\": 12\n}\n\n\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:80/cart/add",
+											"host": [
+												"localhost"
+											],
+											"port": "80",
+											"path": [
+												"cart",
+												"add"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Shopping cart - update",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"cartId\": 2,\n    \"productSku\": \"TKAM\",\n    \"quantity\": 69\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:80/cart/update/quantity",
+											"host": [
+												"localhost"
+											],
+											"port": "80",
+											"path": [
+												"cart",
+												"update",
+												"quantity"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Shopping cart - delete a item",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "localhost:80/cart/delete/1",
+											"host": [
+												"localhost"
+											],
+											"port": "80",
+											"path": [
+												"cart",
+												"delete",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Shopping cart - clear cart",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "localhost:80/cart/clear",
+											"host": [
+												"localhost"
+											],
+											"port": "80",
+											"path": [
+												"cart",
+												"clear"
+											]
+										}
+									},
+									"response": []
+								}
+							]
 						}
 					]
 				},
@@ -2801,140 +3355,131 @@
 					"name": "PMS",
 					"item": [
 						{
-							"name": "Review - Get all reviews of a product",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:80/reviews/getAllProductReview/1",
-									"host": [
-										"localhost"
-									],
-									"port": "80",
-									"path": [
-										"reviews",
-										"getAllProductReview",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Review - Get All reviews by User",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "localhost:80/reviews/getAllReviewByUser/1",
-									"host": [
-										"localhost"
-									],
-									"port": "80",
-									"path": [
-										"reviews",
-										"getAllReviewByUser",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Review - Create a review",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImNyZWF0ZWQiOjE2ODY1MDkzNDY1MjgsImV4cCI6MTY4NjUxMDI0Nn0.B93EomYFXSmZ-Dw0g82IbAo_JMtyMsVcrawjaPYdlcRfNCGSG78mYcuKWBVkZ2iSmIPzqY7HD4z-yx-xN3hKJg",
-											"type": "string"
+							"name": "Review",
+							"item": [
+								{
+									"name": "Review - Get all reviews of a product",
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:80/review/getAllProductReview/1",
+											"host": [
+												"localhost"
+											],
+											"port": "80",
+											"path": [
+												"review",
+												"getAllProductReview",
+												"1"
+											]
 										}
-									]
+									},
+									"response": []
 								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n   \"productId\": 1,\n   \"memberId\": 12,\n   \"memberName\": \"test1\",\n   \"star\": 1,\n   \"tittle\": \"item arrive late\",\n   \"content\": \"late\",\n   \"pictures\": \"something.jpg\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
+								{
+									"name": "Review - Get  detail of a review",
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "localhost:80/review/detail/1",
+											"host": [
+												"localhost"
+											],
+											"port": "80",
+											"path": [
+												"review",
+												"detail",
+												"1"
+											]
 										}
-									}
+									},
+									"response": []
 								},
-								"url": {
-									"raw": "localhost:80/reviews/create",
-									"host": [
-										"localhost"
-									],
-									"port": "80",
-									"path": [
-										"reviews",
-										"create"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Review - Update a review",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"id\": 9,\n    \"productId\": 4,\n    \"memberId\": 1,\n    \"memberName\": \"test1\",\n    \"star\": 5,\n    \"tittle\": \"item arrive late\",\n    \"content\": \"changed my mind\",\n    \"pictures\": \"something.jpg\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
+								{
+									"name": "Review - Create a review",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"review\": {\n    \"productId\": 1,\n    \"memberName\": \"John Doe\",\n    \"memberIcon\": \"https://example.com/johndoe.jpg\",\n    \"star\": 4.5,\n    \"createdAt\": \"2023-10-08T10:00:00Z\",\n    \"updatedAt\": \"2023-10-08T12:00:00Z\",\n    \"title\": \"Great Product\",\n    \"likes\": 25.0,\n    \"verified\": true,\n    \"content\": \"I really love this product. It works great!\"\n  },\n  \"picturesList\": [\n    {\n      \"id\": 1,\n      \"reviewAlbumId\": 1,\n      \"filename\": \"picture1.jpg\",\n      \"createdAt\": \"2023-10-08T10:30:00Z\"\n    },\n    {\n      \"id\": 2,\n      \"reviewAlbumId\": 1,\n      \"filename\": \"picture2.jpg\",\n      \"createdAt\": \"2023-10-08T11:00:00Z\"\n    }\n  ]\n}\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:80/review/create",
+											"host": [
+												"localhost"
+											],
+											"port": "80",
+											"path": [
+												"review",
+												"create"
+											]
 										}
-									}
+									},
+									"response": []
 								},
-								"url": {
-									"raw": "localhost:80/reviews/update",
-									"host": [
-										"localhost"
-									],
-									"port": "80",
-									"path": [
-										"reviews",
-										"update"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Review - Delete a review",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMiIsImNyZWF0ZWQiOjE2ODY1MTIxNDI3MTQsImV4cCI6MTY4NjUxMzA0Mn0.p2InzGCGFasDjouMc3d_ZtqfQfnsYfTnMQNiekOg5Q6WEtlgNR3WNedZfiKuTq-lDolGii8p_fQ24QXXYe5ymQ",
-											"type": "string"
+								{
+									"name": "Review - Update a review",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"review\": {\n    \"id\" : 12,\n    \"productId\": 1,\n    \"memberName\": \"John Doe\",\n    \"memberIcon\": \"https://example.com/johndoe.jpg\",\n    \"star\": 4.5,\n    \"createdAt\": \"2023-10-08T10:00:00Z\",\n    \"updatedAt\": \"2023-10-08T12:00:00Z\",\n    \"title\": \"Great Product\",\n    \"likes\": 25.0,\n    \"verified\": true,\n    \"content\": \"I really love this product. It works great!\"\n  },\n  \"picturesList\": [\n    {\n      \"id\": 1,\n      \"reviewAlbumId\": 1,\n      \"filename\": \"picture1.jpg\",\n      \"createdAt\": \"2023-10-08T10:30:00Z\"\n    },\n    {\n      \"id\": 2,\n      \"reviewAlbumId\": 1,\n      \"filename\": \"picture2.jpg\",\n      \"createdAt\": \"2023-10-08T11:00:00Z\"\n    }\n  ]\n}\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:80/review/update",
+											"host": [
+												"localhost"
+											],
+											"port": "80",
+											"path": [
+												"review",
+												"update"
+											]
 										}
-									]
+									},
+									"response": []
 								},
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "localhost:80/reviews/delete/9",
-									"host": [
-										"localhost"
-									],
-									"port": "80",
-									"path": [
-										"reviews",
-										"delete",
-										"9"
-									]
+								{
+									"name": "Review - Delete a review",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "localhost:80/review/delete/11",
+											"host": [
+												"localhost"
+											],
+											"port": "80",
+											"path": [
+												"review",
+												"delete",
+												"11"
+											]
+										}
+									},
+									"response": []
 								}
-							},
-							"response": []
+							]
 						},
 						{
 							"name": "Product - Get All",
@@ -3197,13 +3742,16 @@
 					"name": "UMS",
 					"item": [
 						{
-							"name": "Member - Login",
+							"name": "Get Info",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
 							"request": {
-								"method": "POST",
+								"method": "GET",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"username\" :\"user1\",\n\t\"password\": \"password\"\n}",
+									"raw": "{\n\t\"username\" : \"user5\",\n\t\"password\": \"password\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3211,21 +3759,21 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:80/user/login",
+									"raw": "localhost:80/user/getInfo",
 									"host": [
 										"localhost"
 									],
 									"port": "80",
 									"path": [
 										"user",
-										"login"
+										"getInfo"
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "Member - Register",
+							"name": "Register",
 							"request": {
 								"method": "POST",
 								"header": [],
@@ -3247,6 +3795,117 @@
 									"path": [
 										"user",
 										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Passoword",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\" : \"user5\",\n\t\"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:80/user/updatePassword",
+									"host": [
+										"localhost"
+									],
+									"port": "80",
+									"path": [
+										"user",
+										"updatePassword"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update info",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\" : \"user5\",\n\t\"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:80/user/updateInfo",
+									"host": [
+										"localhost"
+									],
+									"port": "80",
+									"path": [
+										"user",
+										"updateInfo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update address",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\" : \"user5\",\n\t\"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:80/user/updateAddress",
+									"host": [
+										"localhost"
+									],
+									"port": "80",
+									"path": [
+										"user",
+										"updateAddress"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete account",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\" : \"user5\",\n\t\"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:80user/deleteAccount",
+									"host": [
+										"localhost"
+									],
+									"port": "80user",
+									"path": [
+										"deleteAccount"
 									]
 								}
 							},
@@ -3281,7 +3940,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsImNyZWF0ZWQiOjE2OTg2MDQ5MjQwNDgsImV4cCI6MTY5ODYxMzkyNH0.6rtLZrH_RDuzn0g7Q3fh5sHYvR1qVG0-PCltIB_3hhMhMpdiwEnMc2fhRKP7houG4BmGfrhC-021BmkmzHNf-A",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMyIsImNyZWF0ZWQiOjE2OTg2MzQ1MDQ0NjYsImV4cCI6MTY5ODY0MzUwNH0.5Ehjnsbqnp-tbhOvjS9mfMlVSAQb8KMm7d2454qBX2F54_bME1y-N5-ebCK385GI4PR_0B8UhErmq67Prx1PUw",
 						"type": "string"
 					}
 				]

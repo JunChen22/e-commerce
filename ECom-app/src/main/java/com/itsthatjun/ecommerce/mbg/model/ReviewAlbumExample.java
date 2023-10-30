@@ -1,6 +1,5 @@
 package com.itsthatjun.ecommerce.mbg.model;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -236,52 +235,52 @@ public class ReviewAlbumExample {
             return (Criteria) this;
         }
 
-        public Criteria andPicCountEqualTo(BigDecimal value) {
+        public Criteria andPicCountEqualTo(Integer value) {
             addCriterion("pic_count =", value, "picCount");
             return (Criteria) this;
         }
 
-        public Criteria andPicCountNotEqualTo(BigDecimal value) {
+        public Criteria andPicCountNotEqualTo(Integer value) {
             addCriterion("pic_count <>", value, "picCount");
             return (Criteria) this;
         }
 
-        public Criteria andPicCountGreaterThan(BigDecimal value) {
+        public Criteria andPicCountGreaterThan(Integer value) {
             addCriterion("pic_count >", value, "picCount");
             return (Criteria) this;
         }
 
-        public Criteria andPicCountGreaterThanOrEqualTo(BigDecimal value) {
+        public Criteria andPicCountGreaterThanOrEqualTo(Integer value) {
             addCriterion("pic_count >=", value, "picCount");
             return (Criteria) this;
         }
 
-        public Criteria andPicCountLessThan(BigDecimal value) {
+        public Criteria andPicCountLessThan(Integer value) {
             addCriterion("pic_count <", value, "picCount");
             return (Criteria) this;
         }
 
-        public Criteria andPicCountLessThanOrEqualTo(BigDecimal value) {
+        public Criteria andPicCountLessThanOrEqualTo(Integer value) {
             addCriterion("pic_count <=", value, "picCount");
             return (Criteria) this;
         }
 
-        public Criteria andPicCountIn(List<BigDecimal> values) {
+        public Criteria andPicCountIn(List<Integer> values) {
             addCriterion("pic_count in", values, "picCount");
             return (Criteria) this;
         }
 
-        public Criteria andPicCountNotIn(List<BigDecimal> values) {
+        public Criteria andPicCountNotIn(List<Integer> values) {
             addCriterion("pic_count not in", values, "picCount");
             return (Criteria) this;
         }
 
-        public Criteria andPicCountBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andPicCountBetween(Integer value1, Integer value2) {
             addCriterion("pic_count between", value1, value2, "picCount");
             return (Criteria) this;
         }
 
-        public Criteria andPicCountNotBetween(BigDecimal value1, BigDecimal value2) {
+        public Criteria andPicCountNotBetween(Integer value1, Integer value2) {
             addCriterion("pic_count not between", value1, value2, "picCount");
             return (Criteria) this;
         }

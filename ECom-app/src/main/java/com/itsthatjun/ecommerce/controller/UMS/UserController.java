@@ -1,18 +1,13 @@
 package com.itsthatjun.ecommerce.controller.UMS;
 
-import com.itsthatjun.ecommerce.mbg.model.Member;
-import com.itsthatjun.ecommerce.security.LoginRequest;
-import com.itsthatjun.ecommerce.security.LoginResponse;
+import com.itsthatjun.ecommerce.dto.UMS.MemberDetail;
+import com.itsthatjun.ecommerce.mbg.model.Address;
+import com.itsthatjun.ecommerce.service.Messaging.UserMessageService;
 import com.itsthatjun.ecommerce.service.UMS.implementation.MemberServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
@@ -21,33 +16,56 @@ public class UserController {
 
     private final MemberServiceImpl memberService;
 
+    private final UserMessageService messageService;
+
     @Autowired
-    public UserController(MemberServiceImpl memberService) {
+    public UserController(MemberServiceImpl memberService, UserMessageService messageService) {
         this.memberService = memberService;
+        this.messageService = messageService;
     }
 
-    // retrieve user Order
-
-    // retrieve user data
-
-    // update user account
-
-    @PostMapping("/login")
-    @ApiOperation(value = "Login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
-        String token = memberService.login(request.getUsername(), request.getPassword());
-        if (token.isEmpty()) {
-            return new ResponseEntity<>(new LoginResponse(false, token), HttpStatus.NOT_FOUND);
-        }
-        return ResponseEntity.ok(new LoginResponse(true, token));
+    @GetMapping("/getInfo")
+    @ApiOperation(value = "")
+    public MemberDetail getInfo() {
+        int userId = memberService.getCurrentUser().getId();
+        return memberService.getInfo(userId);
     }
 
     @PostMapping("/register")
     @ApiOperation(value = "Register")
-    public ResponseEntity<?> register(@RequestBody Member member) {
-        memberService.register(member);
-        return null;
+    public MemberDetail register(@RequestBody MemberDetail newMemberDetail) {
+        messageService.sendUserNewMessage(newMemberDetail);
+        return newMemberDetail;
     }
 
-    // delete user
+    @PostMapping("/updatePassword")
+    @ApiOperation(value = "")
+    public String updatePassword(@RequestBody String newPassword) {
+        int userId = memberService.getCurrentUser().getId();
+        messageService.sendUserNewPassWordMessage(newPassword, userId);
+        return newPassword;
+    }
+
+    @PostMapping("/updateInfo")
+    @ApiOperation(value = "password, name, icon")
+    public MemberDetail updateInfo(@RequestBody MemberDetail memberDetail) {
+        int userId = memberService.getCurrentUser().getId();
+        messageService.sendUserUpdateInfoMessage(memberDetail, userId);
+        return memberDetail;
+    }
+
+    @PostMapping("/updateAddress")
+    @ApiOperation(value = "")
+    public Address updateAddress(@RequestBody Address newAddress) {
+        int userId = memberService.getCurrentUser().getId();
+        messageService.sendUserUpdateAddressMessage(newAddress, userId);
+        return newAddress;
+    }
+
+    @PostMapping("/deleteAccount")
+    @ApiOperation(value = "")
+    public void deleteAccount() {
+        int userId = memberService.getCurrentUser().getId();
+        messageService.sendUserDeleteAccountMessage(userId);
+    }
 }

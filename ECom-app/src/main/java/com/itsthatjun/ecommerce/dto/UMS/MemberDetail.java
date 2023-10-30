@@ -1,14 +1,18 @@
 package com.itsthatjun.ecommerce.dto.UMS;
 
+import com.itsthatjun.ecommerce.mbg.model.Address;
 import com.itsthatjun.ecommerce.mbg.model.Member;
-import com.itsthatjun.ecommerce.mbg.model.Orders;
-import com.itsthatjun.ecommerce.mbg.model.Review;
+import com.itsthatjun.ecommerce.mbg.model.MemberIcon;
+import com.itsthatjun.ecommerce.mbg.model.MemberLoginLog;
+import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class MemberDetail {
-
+@Data
+public class MemberDetail implements Serializable {
     Member member;
-    List<Review> commentList;
-    List<Orders> ordersList;
+    Address address;
+    MemberIcon icon;
+    List<MemberLoginLog> loginLogList;
 }

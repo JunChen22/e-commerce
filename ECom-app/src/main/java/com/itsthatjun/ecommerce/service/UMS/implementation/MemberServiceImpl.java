@@ -1,15 +1,14 @@
 package com.itsthatjun.ecommerce.service.UMS.implementation;
 
+import com.itsthatjun.ecommerce.dto.UMS.MemberDetail;
+import com.itsthatjun.ecommerce.mbg.mapper.AddressMapper;
+import com.itsthatjun.ecommerce.mbg.mapper.MemberChangeLogMapper;
 import com.itsthatjun.ecommerce.mbg.mapper.MemberMapper;
 import com.itsthatjun.ecommerce.mbg.model.*;
 import com.itsthatjun.ecommerce.security.CustomUserDetail;
-import com.itsthatjun.ecommerce.security.jwt.JwtTokenUtil;
 import com.itsthatjun.ecommerce.service.UMS.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +18,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -28,12 +26,15 @@ public class MemberServiceImpl implements MemberService , UserDetailsService {
 
     private final MemberMapper memberMapper;
 
-    private final JwtTokenUtil jwtTokenUtil;
+    private final AddressMapper addressMapper;
+
+    private final MemberChangeLogMapper logMapper;
 
     @Autowired
-    public MemberServiceImpl(MemberMapper memberMapper, JwtTokenUtil jwtTokenUtil) {
+    public MemberServiceImpl(MemberMapper memberMapper, AddressMapper addressMapper, MemberChangeLogMapper logMapper) {
         this.memberMapper = memberMapper;
-        this.jwtTokenUtil = jwtTokenUtil;
+        this.addressMapper = addressMapper;
+        this.logMapper = logMapper;
     }
 
     @Override
@@ -49,53 +50,103 @@ public class MemberServiceImpl implements MemberService , UserDetailsService {
     }
 
     @Override
-    public String login(String username, String password) {
-        String token = "";
-        try{
-            UserDetails userDetails = loadUserByUsername(username);
-            // decode password to compare
-            if (!passwordEncoder().matches(password, userDetails.getPassword())) {
-                throw new BadCredentialsException("incorrect password");
-            }
+    public MemberDetail register(MemberDetail memberDetail) {
+        Member newMember = memberDetail.getMember();
+        Address address = memberDetail.getAddress();
 
-            // Authorities shouldn't be giving during validation
-            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                    userDetails, null, Collections.emptyList());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-
-            token = jwtTokenUtil.generateToken(userDetails);
-        } catch (AuthenticationException e) {
-            // TODO: add a login error exception
-            System.out.println("login error");
-        }
-        return token;
-    }
-
-    @Override
-    public String register(Member newMember) {
-        newMember.setCreatedAt(new Date());
-        newMember.setStatus(1);
+        String newUserName = newMember.getUsername();
         MemberExample example = new MemberExample();
-        example.createCriteria().andUsernameEqualTo(newMember.getUsername());
+        example.createCriteria().andUsernameEqualTo(newUserName);
         List<Member> existing = memberMapper.selectByExample(example);
 
         if (!existing.isEmpty()) {
             System.out.println("existing account");
             return null; // TODO: make exception for existing account
         }
-        newMember.setPassword(passwordEncoder().encode(newMember.getPassword()));
+
+        String passWord = newMember.getPassword();
+        newMember.setPassword(passwordEncoder().encode(passWord));
+
+        newMember.setCreatedAt(new Date());
+        newMember.setStatus(1);
         memberMapper.insert(newMember);
-        return "Member successfully added";
+
+        int newMemberId = newMember.getId();
+
+        address.setMemberId(newMemberId);
+        addressMapper.insert(address);
+
+        createUpdateLog(newMemberId, "create account", "user");
+        return memberDetail;
     }
 
     @Override
-    public Member getMemberByUserName(String username) {
-        MemberExample example = new MemberExample();
-        example.createCriteria().andUsernameEqualTo(username);
-        List<Member> memberList = memberMapper.selectByExample(example);
+    public MemberDetail getInfo(int userId) {
+        MemberDetail memberDetail = new MemberDetail();
+        Member member = memberMapper.selectByPrimaryKey(userId);
+        memberDetail.setMember(member);
 
-        if (memberList.isEmpty()) return null;
-        return memberList.get(0);
+        AddressExample addressExample = new AddressExample();
+        addressExample.createCriteria().andMemberIdEqualTo(userId);
+        List<Address> addressList = addressMapper.selectByExample(addressExample);
+
+        if (!addressList.isEmpty()) memberDetail.setAddress(addressList.get(0));
+
+        return memberDetail;
+    }
+
+    @Override
+    public Member updatePassword(int userId, String newPassword) {
+        Member member = memberMapper.selectByPrimaryKey(userId);
+        String currentPassword = member.getPassword();
+        String newEncodedPassword = passwordEncoder().encode(newPassword);
+
+        if (passwordEncoder().matches(newPassword, currentPassword)) return member; // TODO: send reminder, same password
+
+        member.setPassword(newEncodedPassword);
+        memberMapper.updateByPrimaryKey(member);
+
+        createUpdateLog(member.getId(), "update account password", "user");
+        return member;
+    }
+
+    @Override
+    public Member updateInfo(MemberDetail memberDetail) {
+        int userId = memberDetail.getMember().getId();
+        Member member = memberMapper.selectByPrimaryKey(userId);
+
+        Member updateMember = memberDetail.getMember();
+
+        memberMapper.updateByPrimaryKey(updateMember);
+        createUpdateLog(member.getId(), "update account information", "user");
+        return updateMember;
+    }
+
+    @Override
+    public Address updateAddress(int userId, Address newAddress) {
+        newAddress.setMemberId(userId);
+        addressMapper.updateByPrimaryKeySelective(newAddress);
+        createUpdateLog(userId, "update account address", "user");
+        return newAddress;
+    }
+
+    @Override
+    public void deleteAccount(int userId) {
+        Member member = memberMapper.selectByPrimaryKey(userId);
+        member.setDeleteStatus(1);
+        member.setStatus(0);
+
+        memberMapper.updateByPrimaryKey(member);
+        createUpdateLog(member.getId(), "delete account", "user");
+    }
+
+    private void createUpdateLog(int userId, String updateAction, String operator) {
+        MemberChangeLog changeLog = new MemberChangeLog();
+        changeLog.setMemberId(userId);
+        changeLog.setUpdateAction(updateAction);
+        changeLog.setOperator(operator);
+        changeLog.setCreatedAt(new Date());
+        logMapper.insert(changeLog);
     }
 
     @Override
@@ -106,6 +157,15 @@ public class MemberServiceImpl implements MemberService , UserDetailsService {
         }
         //TODO: wasn't invoked when entering wrong username
         throw new UsernameNotFoundException("Username not found");
+    }
+
+    private Member getMemberByUserName(String username) {
+        MemberExample example = new MemberExample();
+        example.createCriteria().andUsernameEqualTo(username);
+        List<Member> memberList = memberMapper.selectByExample(example);
+
+        if (memberList.isEmpty()) return null;
+        return memberList.get(0);
     }
 
     @Override

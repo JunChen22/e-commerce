@@ -1,6 +1,6 @@
 package com.itsthatjun.ecommerce.dto.event.ums;
 
-import com.itsthatjun.ecommerce.dto.MemberDetail;
+import com.itsthatjun.ecommerce.dto.UMS.MemberDetail;
 import lombok.Getter;
 
 import java.io.Serializable;
