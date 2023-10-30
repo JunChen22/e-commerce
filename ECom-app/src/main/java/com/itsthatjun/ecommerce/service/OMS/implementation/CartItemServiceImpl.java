@@ -1,6 +1,7 @@
 package com.itsthatjun.ecommerce.service.OMS.implementation;
 
 import com.itsthatjun.ecommerce.mbg.mapper.CartItemMapper;
+import com.itsthatjun.ecommerce.mbg.mapper.ProductSkuMapper;
 import com.itsthatjun.ecommerce.mbg.mapper.ShoppingCartMapper;
 import com.itsthatjun.ecommerce.mbg.model.*;
 import com.itsthatjun.ecommerce.service.OMS.CartItemService;
@@ -8,116 +9,133 @@ import com.itsthatjun.ecommerce.service.UMS.implementation.MemberServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class CartItemServiceImpl implements CartItemService {
 
+    private final ProductSkuMapper skuMapper;
+
     private final ShoppingCartMapper shoppingCartMapper;
 
     private final CartItemMapper cartItemMapper;
 
-    private final MemberServiceImpl memberService;
 
     @Autowired
-    public CartItemServiceImpl(ShoppingCartMapper shoppingCartMapper, CartItemMapper cartItemMapper, MemberServiceImpl memberService) {
+    public CartItemServiceImpl(ProductSkuMapper skuMapper, ShoppingCartMapper shoppingCartMapper, CartItemMapper cartItemMapper, MemberServiceImpl memberService) {
+        this.skuMapper = skuMapper;
         this.shoppingCartMapper = shoppingCartMapper;
         this.cartItemMapper = cartItemMapper;
-        this.memberService = memberService;
-    }
-
-    @Override
-    public List<CartItem> addItem(CartItem item) {
-        Member currUser = memberService.getCurrentUser();
-
-        ShoppingCartExample shoppingCartExample = new ShoppingCartExample();
-        shoppingCartExample.createCriteria().andMemberIdEqualTo(currUser.getId());
-        List<ShoppingCart> shoppingCarts = shoppingCartMapper.selectByExample(shoppingCartExample);
-
-        // doesn't have shopping cart in database yet
-        if (shoppingCarts == null) {
-            ShoppingCart newCart = new ShoppingCart();
-            newCart.setMemberId(currUser.getId());
-            shoppingCartMapper.insert(newCart);
-        }
-
-        ShoppingCart currShopingCart = shoppingCartMapper.selectByExample(shoppingCartExample).get(0);
-
-        // TODO: if exist then increase quantity but sku might be different
-
-        item.setCartId(currShopingCart.getId());
-        cartItemMapper.insert(item);
-
-        CartItemExample cartItemExample = new CartItemExample();
-        cartItemExample.createCriteria().andCartIdEqualTo(currShopingCart.getId());
-        List<CartItem> itemList = cartItemMapper.selectByExample(cartItemExample);
-
-        return itemList;
-    }
-
-    @Override
-    public List<CartItem> addAllItem(List<CartItem> itemList) {
-        for (CartItem item : itemList) {
-            addItem(item);
-        }
-        return itemList;
     }
 
     @Override
     public List<CartItem> getUserCart(int userId) {
         ShoppingCartExample shoppingCartExample = new ShoppingCartExample();
         shoppingCartExample.createCriteria().andMemberIdEqualTo(userId);
-        ShoppingCart cart = shoppingCartMapper.selectByExample(shoppingCartExample).size() > 0 ?
-                shoppingCartMapper.selectByExample(shoppingCartExample).get(0) : null;
-        if (cart == null) throw new RuntimeException("error getting user shopping cart");
+        List<ShoppingCart> shoppingCarts = shoppingCartMapper.selectByExample(shoppingCartExample);
 
+        ShoppingCart cart = shoppingCarts.get(0);
         CartItemExample example = new CartItemExample();
-        example.createCriteria().andCartIdEqualTo(cart.getId());
-        List<CartItem> shoppingCartItemList = cartItemMapper.selectByExample(example);
-
-        return shoppingCartItemList;
-    }
-
-    @Override
-    public List<CartItem> updateQuantity(int cartItemId, int quantity) {
-        Member currUser = memberService.getCurrentUser();
-
-        ShoppingCartExample shoppingCartExample = new ShoppingCartExample();
-        shoppingCartExample.createCriteria().andMemberIdEqualTo(currUser.getId());
-        ShoppingCart cart = shoppingCartMapper.selectByExample(shoppingCartExample).get(0);
-
-        CartItemExample example = new CartItemExample();
-        example.createCriteria().andCartIdEqualTo(cart.getId()).andIdEqualTo(cartItemId);
-        CartItem updated = cartItemMapper.selectByPrimaryKey(cartItemId);
-        updated.setQuantity(quantity);
-        cartItemMapper.updateByExampleSelective(updated, example);
-
-        example.clear();
         example.createCriteria().andCartIdEqualTo(cart.getId());
         return cartItemMapper.selectByExample(example);
     }
 
     @Override
-    public void deleteCartItem(int cartItemId) {
-        Member currUser = memberService.getCurrentUser();
+    public List<CartItem> addItem(CartItem newItem, int userId) {
+        ShoppingCart currentShoppingCart  = getCurrentCart(userId);
 
-        ShoppingCartExample shoppingCartExample = new ShoppingCartExample();
-        shoppingCartExample.createCriteria().andMemberIdEqualTo(currUser.getId());
-        ShoppingCart cart = shoppingCartMapper.selectByExample(shoppingCartExample).get(0);
+        CartItemExample cartItemExample = new CartItemExample();
+        cartItemExample.createCriteria().andCartIdEqualTo(currentShoppingCart.getId());
+        List<CartItem> currentCartItems = cartItemMapper.selectByExample(cartItemExample);
+        String productSkuCode = newItem.getProductSku();
+        boolean existingInCart = false;
+
+        for (CartItem item : currentCartItems) {
+            if (item.getProductSku().equals(productSkuCode)) {
+                int currentQuantity = item.getQuantity();
+                item.setQuantity(currentQuantity + newItem.getQuantity());
+                item.setModifyDate(new Date());
+                cartItemMapper.updateByPrimaryKeySelective(item);
+                existingInCart = true;
+                break;
+            }
+        }
+
+        if (!existingInCart) {
+            ProductSkuExample skuExample = new ProductSkuExample();
+            skuExample.createCriteria().andSkuCodeEqualTo(productSkuCode);
+            List<ProductSku> skuList = skuMapper.selectByExample(skuExample);
+
+            if (skuList.isEmpty()) throw new RuntimeException("Sku code error, does not exist: " + productSkuCode);
+
+            ProductSku sku = skuList.get(0);
+
+            newItem.setCartId(currentShoppingCart.getId());
+            newItem.setProductId(sku.getProductId());
+            newItem.setPrice(sku.getPrice());
+            newItem.setProductPic(sku.getPicture());
+            newItem.setCreatedAt(new Date());
+            cartItemMapper.insert(newItem);
+        }
+
+        // check quantity and price
+        currentCartItems = cartItemMapper.selectByExample(cartItemExample);
+        return currentCartItems;
+    }
+
+    @Override
+    public List<CartItem> updateQuantity(int cartItemId, int newQuantity, int userId) {
+        ShoppingCart cart = getCurrentCart(userId);
+        CartItem currentCartItem = cartItemMapper.selectByPrimaryKey(cartItemId);
+
+        if (currentCartItem == null) throw new RuntimeException("cart item does not exist"); // TODO: need to change error when they are thrown it will cause a loop need someone to catch it
+
+        currentCartItem.setQuantity(newQuantity);
+        cartItemMapper.updateByPrimaryKey(currentCartItem);
+
+        CartItemExample cartItemExample = new CartItemExample();
+        cartItemExample.createCriteria().andCartIdEqualTo(cart.getId());
+        List<CartItem> updatedCart = cartItemMapper.selectByExample(cartItemExample);
+        return updatedCart;
+    }
+
+    @Override
+    public void deleteCartItem(int cartItemId, int userId) {
+        ShoppingCart cart = getCurrentCart(userId);
 
         CartItemExample example = new CartItemExample();
         example.createCriteria().andCartIdEqualTo(cart.getId()).andIdEqualTo(cartItemId);
+        List<CartItem> cartItemList = cartItemMapper.selectByExample(example);
+
+        if (cartItemList.isEmpty()) throw new RuntimeException("Item does not exist");
+
         cartItemMapper.deleteByExample(example);
     }
 
     @Override
     public void clearCartItem(int userId) {
-        ShoppingCartExample shoppingCartExample = new ShoppingCartExample();
-        shoppingCartExample.createCriteria().andMemberIdEqualTo(userId);
-        ShoppingCart cart = shoppingCartMapper.selectByExample(shoppingCartExample).get(0);
+        ShoppingCart cart = getCurrentCart(userId);
 
         CartItemExample example = new CartItemExample();
         example.createCriteria().andCartIdEqualTo(cart.getId());
         cartItemMapper.deleteByExample(example);
+    }
+
+    private ShoppingCart getCurrentCart (int userId) {
+        ShoppingCartExample shoppingCartExample = new ShoppingCartExample();
+        shoppingCartExample.createCriteria().andMemberIdEqualTo(userId);
+        List<ShoppingCart> shoppingCarts = shoppingCartMapper.selectByExample(shoppingCartExample);
+        ShoppingCart currentShoppingCart;
+        // doesn't have shopping cart in database yet
+        if (shoppingCarts.isEmpty()) {
+            ShoppingCart newCart = new ShoppingCart();
+            newCart.setMemberId(userId);
+            shoppingCartMapper.insert(newCart);
+            currentShoppingCart = newCart;
+        } else {
+            currentShoppingCart = shoppingCarts.get(0);
+        }
+        return currentShoppingCart;
     }
 }

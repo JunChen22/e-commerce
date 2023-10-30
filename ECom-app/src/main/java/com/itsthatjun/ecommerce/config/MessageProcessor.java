@@ -1,11 +1,14 @@
 package com.itsthatjun.ecommerce.config;
 
 import com.itsthatjun.ecommerce.dto.ReturnParam;
+import com.itsthatjun.ecommerce.dto.event.oms.OmsCartEvent;
 import com.itsthatjun.ecommerce.dto.event.oms.OmsCompletionEvent;
 import com.itsthatjun.ecommerce.dto.event.oms.OmsOrderEvent;
 import com.itsthatjun.ecommerce.dto.event.oms.OmsReturnEvent;
+import com.itsthatjun.ecommerce.mbg.model.CartItem;
 import com.itsthatjun.ecommerce.mbg.model.ReturnReasonPictures;
 import com.itsthatjun.ecommerce.mbg.model.ReturnRequest;
+import com.itsthatjun.ecommerce.service.OMS.implementation.CartItemServiceImpl;
 import com.itsthatjun.ecommerce.service.OMS.implementation.OrderServiceImpl;
 import com.itsthatjun.ecommerce.service.OMS.implementation.ReturnOrderServiceImpl;
 import org.slf4j.Logger;
@@ -26,10 +29,13 @@ public class MessageProcessor {
 
     private final ReturnOrderServiceImpl returnOrderService;
 
+    private final CartItemServiceImpl cartItemService;
+
     @Autowired
-    public MessageProcessor(OrderServiceImpl orderService, ReturnOrderServiceImpl returnOrderService) {
+    public MessageProcessor(OrderServiceImpl orderService, ReturnOrderServiceImpl returnOrderService, CartItemServiceImpl cartItemService) {
         this.orderService = orderService;
         this.returnOrderService = returnOrderService;
+        this.cartItemService = cartItemService;
     }
 
     @RabbitListener(queues = "order")
@@ -38,14 +44,11 @@ public class MessageProcessor {
 
         switch (event.getEventType()) {
             case GENERATE_ORDER:
-                System.out.println("at generating order");
-                System.out.println(event);
                 orderService.generateOrder(event.getOrderParam(), event.getSuccessUrl(), event.getCancelUrl(), event.getUserId());
                 break;
 
             case CANCEL_ORDER:
                 String orderSn = event.getOrderSn();
-                System.out.println("at cancel order");
                 //orderService.cancelOrder(orderSn, event.getUserId());
                 break;
 
@@ -109,6 +112,42 @@ public class MessageProcessor {
 
             default:
                 String errorMessage = "Incorrect event type:" + event.getEventType() + ", expected APPLY, UPDATE, CANCEL and REJECT event";
+                LOG.warn(errorMessage);
+                throw new RuntimeException(errorMessage);
+        }
+    }
+
+    @RabbitListener(queues = "cart")
+    public void cartMessageProcessor(OmsCartEvent event) {
+        LOG.info("Process message created at {}...", event.getEventCreatedAt());
+
+        CartItem cartItem = event.getCartItem();
+        int userId = event.getUserId();
+        int cartItemId;
+
+        switch (event.getEventType()) {
+            case ADD_ONE:
+                cartItemService.addItem(cartItem, userId);
+                break;
+
+            case UPDATE:
+                int quantity = cartItem.getQuantity();
+                cartItemId = cartItem.getCartId();
+                cartItemService.updateQuantity(cartItemId, quantity, userId);
+                break;
+
+            case DELETE:
+                cartItemId = cartItem.getCartId();
+                cartItemService.deleteCartItem(cartItemId, userId);
+                break;
+
+            case CLEAR:
+                cartItemService.clearCartItem(userId);
+                break;
+
+            default:
+                String errorMessage = "Incorrect event type:" + event.getEventType() + ", expected ADD_ONE, ADD_ALL, " +
+                        "UPDATE, DELETE, and CLEAR event";
                 LOG.warn(errorMessage);
                 throw new RuntimeException(errorMessage);
         }
