@@ -7,15 +7,15 @@ RDMS turned into e-commerce.
 
 ``` lua
 E-commerece 
-├── E-commerece-admin    -- the admin(owner) used to manage the e-commerece and users
-├── E-commerece-app      -- main application, process the requests.
-├── E-commerece-search   -- searching related module, in-memory imported in data for fast search
-├── E-commerece-common   -- shared common module     -- not being used, idk why intelliJ kept giving me problem when separated.
-├── E-commerece-mbg      -- shared mybatist module   -- not being used, idk why intelliJ kept giving me problem when separated.
-└── E-commerece-security -- shared security module   -- not being used, idk why intelliJ kept giving me problem when separated.
+├── admin    -- the admin(owner) used to manage the e-commerece and users
+├── app      -- main application, process the requests.
+├── search   -- searching related module, in-memory imported in data for fast search
+├── common   -- shared common module     -- not being used, idk why intelliJ kept giving me problem when separated.
+├── mbg      -- shared mybatist module   -- not being used, idk why intelliJ kept giving me problem when separated.
+└── security -- shared security module   -- not being used, idk why intelliJ kept giving me problem when separated.
 The .env file stores login infos for easier change. Gets read in during run time by docker.
 
-ECom-app 
+app 
 ├── config                 - MyBatis configuration and other configuration.
 ├── controller              
 ├── domain (domain model)  - custom data object, provide more complex funtionality with custom DAO and xml. Internal use.
@@ -32,9 +32,9 @@ ECom-app
     ├── application.yml
     └── generatorConfig.xml - MyBatisGenerator setting.
 
-ECom-admin is similar structure and provide similar basic functions. But ECom-admin provides more unique ones.
+admin is similar structure and provide similar basic functions. But ECom-admin provides more unique ones.
 Will have role and permission based.
-ECom-admin 
+admin 
 ├── config                 - MyBatis configuration and other configuration.
 ├── controller              
 ├── dao                    - custom data access object(DAO) interface to interact with Postgres. Definitition impltemented in resources.
@@ -50,8 +50,8 @@ ECom-admin
     ├── application.yml
     └── generatorConfig.xml - MyBatisGenerator setting.
 
-ECom-search is more of a standalone part of the E-commerece
-ECom-search
+search is more of a standalone part of the E-commerece
+search
 ├── config                 - MyBatis configuration and other configuration.
 ├── controller              
 ├── dao                    - custom data access object(DAO) interface to interact with Postgres. Definitition impltemented in resources.

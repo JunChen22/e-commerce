@@ -5,11 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.itsthatjun.ecommerce</groupId>
-        <artifactId>spring-ecommerce</artifactId>
+        <artifactId>e-commerce</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>ECom-admin</artifactId>
+    <artifactId>admin</artifactId>
+    <description>Demo project for Spring Boot</description>
     <packaging>jar</packaging>
 
     <dependencies>
